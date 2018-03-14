@@ -3,9 +3,9 @@ Aeris
 
 # Local installation
 
- - clone this repository
+ - clone this git repository
  - add a `aeris.local` mapping to your /etc/hosts file
- - launche the containers:
+ - install `docker` and `docker-compose`, then launche the containers:
 
 ```bash
 $ docker-compose up

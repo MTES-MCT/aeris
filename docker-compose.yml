@@ -16,7 +16,7 @@ services:
         ports:
             - "9000:9000"
         volumes:
-            - ./code:/var/www/symfony:cached
+            - ./app:/var/www/symfony:cached
             - ./logs/symfony:/var/www/symfony/var/logs:cached
         links:
             - db
