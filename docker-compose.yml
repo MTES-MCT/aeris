@@ -1,14 +1,16 @@
 version: '2'
 services:
     db:
-        image: mysql
+        # https://hub.docker.com/_/postgres/
+        image: postgres:9.6
         ports:
-            - "3306:3306"
+          - "5432:5432"
+        volumes:
+           - /var/lib/postgresql/data
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: symfony
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: symfony
+            POSTGRES_DB: aeris
+            POSTGRES_USER: symfony
+            POSTGRES_PASSWORD: symfony
     php:
         build: ./containers/php-fpm
         ports:
@@ -21,7 +23,7 @@ services:
     nginx:
         build: ./containers/nginx
         ports:
-            - "81:80"
+            - "80:80"
         links:
             - php
         volumes_from:
