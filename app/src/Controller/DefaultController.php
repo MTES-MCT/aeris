@@ -4,21 +4,22 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller {
-
-    public function index(){
+class DefaultController extends Controller
+{
+    public function index()
+    {
         /*
-CREATE TABLE public.test
-(
-  plop integer
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE public.test
-  OWNER TO symfony;
-insert into test (plop) values (42);
-insert into test (plop) values (23);
+        CREATE TABLE public.test
+        (
+        plop integer
+        )
+        WITH (
+        OIDS=FALSE
+        );
+        ALTER TABLE public.test
+        OWNER TO symfony;
+        insert into test (plop) values (42);
+        insert into test (plop) values (23);
         */
         $sql = "select plop from test;";
 
