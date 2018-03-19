@@ -11,5 +11,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production"
+    },
+    "dependencies": {
+        "template.data.gouv.fr": "https://github.com/etalab/template.data.gouv.fr.git"
     }
 }

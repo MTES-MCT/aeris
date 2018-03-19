@@ -5135,6 +5135,10 @@ tar@^2.0.0, tar@^2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
+"template.data.gouv.fr@https://github.com/etalab/template.data.gouv.fr.git":
+  version "1.0.0"
+  resolved "https://github.com/etalab/template.data.gouv.fr.git#ffd31c8a31e2f28b0ed1126d3c606ac2ee2328f6"
+
 thunky@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/thunky/-/thunky-1.0.2.tgz#a862e018e3fb1ea2ec3fce5d55605cf57f247371"

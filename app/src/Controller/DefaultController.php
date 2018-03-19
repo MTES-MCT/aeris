@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function index()
+    public function hello()
     {
         /*
         CREATE TABLE public.test
@@ -33,4 +33,8 @@ class DefaultController extends Controller
         return $this->render("hello.html.twig");
     }
 
+    public function index()
+    {
+        return $this->render("index.html.twig");
+    }
 } 
