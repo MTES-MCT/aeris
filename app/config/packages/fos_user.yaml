@@ -1,0 +1,15 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: "noreply@keiruaprod.fr"
+        sender_name: "No Reply"
+    registration:
+        confirmation:
+            enabled: false
+    resetting:
+        email:
+            from_email:
+                address:        resetting@example.com
+                sender_name:    Demo Resetting

@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.0.8",
         "ext-iconv": "*",
+        "friendsofsymfony/user-bundle": "dev-master",
         "squizlabs/php_codesniffer": "*",
         "symfony/asset": "^3.4",
         "symfony/console": "^3.4",
