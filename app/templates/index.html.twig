@@ -1,39 +1,34 @@
 {% extends "base.html.twig" %}
 {% block body%}
-{#
-  <nav class="nav">
-    <div class="nav__container">
-      <a class="nav__link" href="index.html">
-        <img class="nav__logo" src="images/logo_site.svg" alt="Accueil de template.data.gouv.fr" />
-      </a>
-      <ul class="nav__links">
-        <li><a href="#typography">Typographie</a></li>
-        <li><a href="#colors">Couleurs</a></li>
-        <li><a href="#form">Form</a></li>
-        <li><a href="#documentation">Documentation</a></li>
-      </ul>
-    </div>
-  </nav>
-  #}
+  <div class="nav__container">
+    <a class="nav__link" href="/">
+      <img class="nav__logo" src="{{ asset('build/static/images/logo-betagouv.png') }}" alt="Accueil d'Aeris">
+    </a><div class="logo-title">Aeris</div>
+
+    <ul class="nav__links">
+      <li><a href="#aeris-what">C'est quoi ?</a></li>
+      <li><a href="#aeris-about">A propos</a></li>
+    </ul>
+  </div>
 
   <div class="hero">
     <div class="hero__container cheminee">
       <h1 class="hero__white-background">Aeris</h1>
-      <p class="hero__white-background">Rejets dans l'air des ICPE</p>
+      <p class="hero__white-background">Suivre les rejets dans l'air des ICPE</p>
     </div>
   </div>
 
-  <section class="section-dark">
+  <section class="section-dark" id="aeris-what">
     <div class="container">
       <h2 class="section__title">Aeris, c'est quoi ?</h2>
       <div class="row">
-        <p class="column">Aeris vise à faciliter la déclaration et harmoniser le suivi des rejets dans l'air des installations classées pour la protection de l'environnement.</p>
+        <p class="column">Aeris vise à <strong>faciliter la déclaration</strong> et <strong>harmoniser le suivi</strong> des rejets dans l'air des installations classées pour la protection de l'environnement.</p>
         <p class="column">Industriels, inspecteurs, vous souhaitez participer à l'élaboration du service ? Laissez-nous vos coordonnées pour rester informé !</p>
       </div>
     </div>
   </section>
 
-  <section>
+  <section id="aeris-about">
     <div class="container">
     <article>
       <h2 class="section__title">A propos</h2>
@@ -49,9 +44,10 @@
 
 
 
-      {#
+      
 <footer class="footer">
   <div class="container">
+    {#
     <div class="footer__logo">
       <img src="images/etalab.svg" alt="Logo Etalab">
       <ul class="footer__social">
@@ -68,7 +64,7 @@
       <li><a href="https://www.data.gouv.fr/api">API</a></li>
     </ul>
   <ul class="footer__links"></ul>
+        #}
 </div>
 </footer>
-        #}
 {% endblock%}

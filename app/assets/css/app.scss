@@ -3,6 +3,11 @@
     background-size: cover;
     background-color: transparent;
     background-position: 50% 50%;
-    background-image: url("//build/images/cheminee.jpg");
+    background-image: url(images/cheminee.jpg);
     background-attachment: fixed;
+    min-height: calc(-80px + 80vh) !important;
+}
+
+.logo-title {
+    font-size:2em;
 }

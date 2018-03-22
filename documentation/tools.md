@@ -9,7 +9,14 @@ We use PHP7 and [composer](getcomposer.org) for dependency management.
 We use [Encore](http://symfony.com/doc/current/frontend.html) for dependency management and building JS/CSS. It requires node and yarn. See app/webpack.config.js
 
 ```bash
-$ ./node_modules/.bin/encore
+$ yarn run encore
+```
+
+You can build the assets for dev and production with the following parameters:
+
+```bash
+$ yarn run encore dev --watch
+$ yarn run encore sproduction
 ```
 
 ## CSS
