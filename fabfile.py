@@ -33,7 +33,7 @@ def upload_code(deployment_directory):
         local_dir='./app/*',
         remote_dir=deployment_directory,
         default_opts='-zcrSLh --stats',
-        exclude=('.git', 'var')
+        exclude=('.git', 'app/var', 'app/node_modules')
     )
 
 def enable_project(env_name, deployment_directory):
