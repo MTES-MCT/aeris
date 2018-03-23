@@ -13,3 +13,34 @@ fos_user:
             from_email:
                 address:        resetting@example.com
                 sender_name:    Demo Resetting
+
+#services:
+#    fos_user.command.activate_user:
+#        class: FOS\UserBundle\Command\ActivateUserCommand
+#        tags:
+#            - { name: console.command }
+#
+#    fos_user.command.change_password:
+#        class: FOS\UserBundle\Command\ChangePasswordCommand
+#        tags:
+#            - { name: console.command }
+#
+#    fos_user.command.create_user:
+#        class: FOS\UserBundle\Command\CreateUserCommand
+#        tags:
+#            - { name: console.command }
+#
+#    fos_user.command.deactivate_user:
+#        class: FOS\UserBundle\Command\DeactivateUserCommand
+#        tags:
+#            - { name: console.command }
+#
+#    fos_user.command.demote_user:
+#        class: FOS\UserBundle\Command\DemoteUserCommand
+#        tags:
+#            - { name: console.command }
+#
+#    fos_user.command.promote_user:
+#        class: FOS\UserBundle\Command\PromoteUserCommand
+#        tags:
+#            - { name: console.command }#
