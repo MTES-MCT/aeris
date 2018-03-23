@@ -32,7 +32,7 @@ def upload_code(deployment_directory):
     rsync_project(
         local_dir='./app/*',
         remote_dir=deployment_directory,
-        default_opts='-zcrSLh --stats',
+        default_opts='-azcrSh --stats',
         exclude=('.git', 'app/var', 'app/node_modules')
     )
 
