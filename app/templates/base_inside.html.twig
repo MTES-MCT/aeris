@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Aeris{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Aeris{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    {% block stylesheets %}{% endblock %}
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  </head>
+  <body>
+  <section class="navigation">
+    <div class="container">
+      
         {% include 'menu.html.twig' %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+  </section>
+  
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+  </body>
 </html>
+
+
