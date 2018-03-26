@@ -15,4 +15,9 @@ class UserController extends Controller
     {
         return $this->render("inside/declaration.html.twig");
     }
+
+    public function cr()
+    {
+        return $this->render("inside/cr.html");
+    }
 } 
