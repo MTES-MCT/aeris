@@ -18,6 +18,16 @@ class UserController extends Controller
 
     public function cr()
     {
-        return $this->render("inside/cr.html");
+        $period = new \DatePeriod(
+             new \DateTime('2018-03-01'),
+             new \DateInterval('P1D'),
+             new \DateTime('2018-03-31')
+        );
+
+        $dates = [];
+        foreach ($period as $key => $value) {
+            $dates[] = $value->format('Y-m-d');       
+        }
+        return $this->render("inside/cr.html.twig", ['dateList' => $dates]);
     }
 } 

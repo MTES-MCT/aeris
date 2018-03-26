@@ -132,12 +132,14 @@ h3 {
           <td>Unité</td>
           <td colspan="2">mg/Nm<sup>3</sup></td>
         </tr>
+        {% for item in dateList %}
         <tr>
-          <td>01/02/2018</td>
+          <td>{{ item }}</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>lorem ipsum</td>
         </tr>
+        {% endfor %}
         <tr class="vle">
           <td>VLE</td>
           <td>&nbsp;</td>
