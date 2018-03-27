@@ -1,4 +1,4 @@
-.cheminee {
+.cheminee, .cheminee-fade {
     background-repeat: no-repeat;
     background-size: cover;
     background-color: transparent;
@@ -10,4 +10,13 @@
 
 .logo-title {
     font-size:2em;
+}
+
+.login-container {
+    background-color: yellow;
+    width:50%;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 3px;
 }
