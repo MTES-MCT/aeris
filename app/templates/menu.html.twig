@@ -5,10 +5,43 @@
 
   <div class="navbar-menu">
       <div class="navbar-end">
-          <div class="navbar-item"><a href="{{ path('route_declaration') }}">Déclarer</a></div>
-          <div class="navbar-item"><a href="{{ path('route_dashboard') }}">Tableau de bord</a></div>
-          <div class="navbar-item"><a href="{{ path('route_history') }}">Historique</a></div>
-          <div class="navbar-item"><a href="{{ path('fos_user_security_logout') }}">Me déconnecter</a></div>
+          <div class="navbar-item">
+            <a href="{{ path('route_declaration') }}">
+              <i class="fas fa-comment"></i> Déclarer</a>
+          </div>
+          <div class="navbar-item">
+            <a href="{{ path('route_dashboard') }}">
+              <i class="fas fa-chart-line"></i> Tableau de bord</a>
+          </div>
+          <div class="navbar-item">
+            <a href="{{ path('route_history') }}">
+              <i class="fas fa-calendar-alt"></i> Historique
+            </a>
+          </div>
+          <div class="navbar-item">
+            <a href="{{ path('fos_user_security_logout') }}">
+              <i class="fas fa-sign-out-alt"></i> Me déconnecter
+            </a>
+          </div>
+{#
+          <div class="navbar-item">
+            <div class="dropdown">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <i class="fas fa-user"></i>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <i class="fas fa-sign-out-alt"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+#}
       </div>
   </div>
 </nav>
+
+
+
