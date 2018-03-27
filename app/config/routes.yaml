@@ -1,6 +1,6 @@
 route_index:
     path: /
-    defaults: { _controller: 'App\Controller\DefaultController::index' }
+    defaults: { _controller: 'App\Controller\StaticController::homepage' }
 
 route_dashboard:
     path: /tableau-de-bord
