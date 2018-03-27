@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IncinerateurRepository")
@@ -27,6 +28,12 @@ class Incinerateur
      * @ORM\Column(type="integer")
      */
     private $nbLignes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="incinerateurs")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $owner;
 
     /**
      * @return int
@@ -86,5 +93,15 @@ class Incinerateur
         $this->nbLignes = $nbLignes;
 
         return $this;
+    }
+
+    public function getOwner(): User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(User $user)
+    {
+        $this->user = $user;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Incinerateur;
 
 /**
  * @ORM\Entity
@@ -17,6 +18,11 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Incinerateur", mappedBy="owner")
+     */
+    private $incinerateurs;
 
     public function __construct()
     {
