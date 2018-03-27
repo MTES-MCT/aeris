@@ -20,9 +20,9 @@
             {% if is_granted('ROLE_USER') %}
             <a href="{{ path('route_dashboard')}}"><button class="button">Accéder à mon espace</button></a>
             {% else %}
-            <a href="{{ path('fos_user_security_login')}}">Accéder à mon espace</a>
+            <a href="{{ path('fos_user_security_login')}}"><button class="button">Accéder à mon espace</button></a>
+            {% endif %}
           </li>
-          {% endif %}
           
         </ul>
       </div>
