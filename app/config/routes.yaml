@@ -10,6 +10,10 @@ route_declaration:
     path: /declaration
     defaults: { _controller: 'App\Controller\UserController::declaration' }
 
+route_history:
+    path: /historique
+    defaults: { _controller: 'App\Controller\UserController::historique' }
+
 route_cr:
     path: /compte-rendu
     defaults: { _controller: 'App\Controller\UserController::cr' }
