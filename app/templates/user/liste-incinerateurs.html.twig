@@ -2,16 +2,26 @@
 {% block body %}
   <section class="section">
     <div class="container">
-      <h2>Liste des incinerateurs</h2>
-        <ul>            
-        {% for incinerateur in incinerateurs %}
-            <li>
-                <a href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">{{ incinerateur.name }}</a>
-            </li>
-        {% else %}
-            <p>Pas d'incinérateurs !</p>
-        {% endfor %}
-        </ul>
+      <h2>Les incinérateurs</h2>
+
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Incinérateur</th>
+              <th>Lien</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for incinerateur in incinerateurs %}
+            <tr>
+              <th><a href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">{{ incinerateur.name }}</a></th>
+              <td>
+                <a class="button" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
     </div>
   </section>
 {% endblock %}

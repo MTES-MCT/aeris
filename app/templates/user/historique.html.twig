@@ -2,9 +2,26 @@
 {% block body %}
   <section class="section">
     <div class="container">
-      <h2>Historique de <strong>{{incinerateur.name}}</strong></h2>
+      <h2>Historique de déclarations de <strong>{{incinerateur.name}}</strong></h2>
 
-      <a href="{{ path('route_cr') }}">compte rendu</a>
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Déclaration</th>
+              <th>Lien</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>
+                <a href="{{ path('route_cr') }}">compte rendu</a>
+              </th>
+              <td>
+                <a href="{{ path('route_cr') }}">compte rendu</a>
+              </td>
+            </tr>
+          </tbody>
+      </table>
     </div>
   </section>
 {% endblock %}
