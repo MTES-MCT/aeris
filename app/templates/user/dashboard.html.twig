@@ -4,6 +4,7 @@
     <div class="container">
       <h2>Dashboard</h2>
       <p>Bienvenue <strong>{{ app.user.username }} </strong></p>
+      {{ app.user.incinerateurs | length }}
     </div>
   </section>
 {% endblock %}

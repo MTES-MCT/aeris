@@ -28,4 +28,21 @@ class User extends BaseUser
     {
         parent::__construct();
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return []Incinerateur
+     */
+    public function getIncinerateurs()
+    {
+        return $this->incinerateurs;
+    }
 }
