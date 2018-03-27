@@ -4,7 +4,19 @@
     <div class="container">
       <h2>Dashboard</h2>
       <p>Bienvenue <strong>{{ app.user.username }} </strong></p>
-      {{ app.user.incinerateurs | length }}
+      {% if is_granted('ROLE_PROPRIETAIRE') %}
+        <ul>            
+        {% for incinerateur in app.user.incinerateurs %}
+            <li>
+                {{ incinerateur.name }}
+            </li>
+        {% else %}
+            <p>Pas d'incinéraeur associé</p>
+        {% endfor %}
+        </ul>
+      {% endif %}
+
+      <h1>TODO: Rien n'est fait ici</h1>
     </div>
   </section>
 {% endblock %}

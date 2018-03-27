@@ -1,0 +1,17 @@
+{% extends "common/base_inside.html.twig" %}
+{% block body %}
+  <section class="section">
+    <div class="container">
+      <h2>Liste des incinerateurs</h2>
+        <ul>            
+        {% for incinerateur in incinerateurs %}
+            <li>
+                <a href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">{{ incinerateur.name }}</a>
+            </li>
+        {% else %}
+            <p>Pas d'incinérateurs !</p>
+        {% endfor %}
+        </ul>
+    </div>
+  </section>
+{% endblock %}

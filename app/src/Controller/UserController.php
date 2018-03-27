@@ -3,9 +3,21 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Incinerateur;
 
 class UserController extends Controller
 {
+    public function liste_incinerateurs()
+    {
+        $incinerateurs = $this->getDoctrine()
+            ->getRepository(Incinerateur::class)
+            ->findAll();
+
+        return $this->render("user/liste-incinerateurs.html.twig", [
+            'incinerateurs' =>  $incinerateurs
+        ]);
+    }
+
     public function dashboard()
     {
         return $this->render("user/dashboard.html.twig");
@@ -16,9 +28,21 @@ class UserController extends Controller
         return $this->render("user/declaration.html.twig");
     }
 
-    public function historique()
+    public function historique($incinerateurId)
     {
-        return $this->render("user/historique.html.twig");
+        $incinerateur = $this->getDoctrine()
+            ->getRepository(Incinerateur::class)
+            ->find($incinerateurId);
+
+        if (!$incinerateur) {
+            throw $this->createNotFoundException(
+                "Pas d'incinerateur pour l' id ".$incinerateurId
+            );
+        }
+
+        return $this->render("user/historique.html.twig", [
+            'incinerateur' =>  $incinerateur
+        ]);
     }
 
     public function cr()
