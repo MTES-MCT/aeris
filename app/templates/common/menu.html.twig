@@ -22,13 +22,15 @@
               <i class="fas fa-comment"></i> Déclarer
             </a>
           </div>
-          {#
+          
+            {% if app.user.incinerateurs != null %}
           <div class="navbar-item">
-            <a href="{{ path('route_history') }}">
+            <a href="{{ path('route_history', {incinerateurId: app.user.incinerateurs[0].id }) }}">
               <i class="fas fa-calendar-alt"></i> Historique
             </a>
           </div>
-          #}
+            {% endif %}
+
           {% endif %}
 
           <div class="navbar-item">
