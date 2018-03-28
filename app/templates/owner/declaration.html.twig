@@ -6,7 +6,10 @@
 
         <h1>Effectuer une déclaration</h1>
 
-        
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+            <input type="submit" />
+        {{ form_end(form) }}
     </div>
   </section>
 {% endblock %}

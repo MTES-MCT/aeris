@@ -35,4 +35,64 @@ class DeclarationIncinerateur
     {
         $this->createdAt = new \DateTime();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param mixed $creationDate
+     *
+     * @return self
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIncinerateur()
+    {
+        return $this->incinerateur;
+    }
+
+    /**
+     * @param mixed $incinerateur
+     *
+     * @return self
+     */
+    public function setIncinerateur($incinerateur)
+    {
+        $this->incinerateur = $incinerateur;
+
+        return $this;
+    }
 }

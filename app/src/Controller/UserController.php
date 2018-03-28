@@ -7,15 +7,6 @@ use App\Entity\Incinerateur;
 
 class UserController extends Controller
 {
-    private function getMainIncinerateur(){
-        $user = $this->get('security.context')->getToken()->getUser();
-        $incinerateurs = $user->getIncinerateurs();
-        if(!empty($incinerateurs)) {
-            return $incinerateurs[0];
-        }
-        return null;
-    }
-
     public function liste_incinerateurs()
     {
         $incinerateurs = $this->getDoctrine()

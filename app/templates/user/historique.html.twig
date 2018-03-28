@@ -12,6 +12,16 @@
             </tr>
           </thead>
           <tbody>
+            {% for declaration in incinerateur.declarationsIncinerateur  %}
+            <tr>
+              <th>
+                {{ declaration.id }}
+              </th>
+              <td>
+                <a class="button">Telecharger le fichier</a>
+              </td>
+            </tr>
+            {% endfor  %}
             <tr>
               <th>
                 <a href="{{ path('route_cr') }}">compte rendu</a>

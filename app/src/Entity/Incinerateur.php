@@ -109,4 +109,12 @@ class Incinerateur
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDeclarationsIncinerateur()
+    {
+        return $this->declarationsIncinerateur;
+    }
 }
