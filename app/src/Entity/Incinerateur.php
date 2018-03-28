@@ -36,6 +36,11 @@ class Incinerateur
     private $owner;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DeclarationIncinerateur", mappedBy="incinerateur")
+     */
+    private $declarationsIncinerateur;
+
+    /**
      * @return int
      */
     public function getId()
