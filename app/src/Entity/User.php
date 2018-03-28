@@ -29,7 +29,6 @@ class User extends BaseUser
         parent::__construct();
     }
 
-
     /**
      * @return mixed
      */
