@@ -30,9 +30,9 @@ digraph G {
         DeclarationGeneraleLigne [label = "{DeclarationGeneraleLigne|+ nbHeuresFonctionnementTh\n+ nbHeuresFonctionnementReel}"]
         DeclarationQALAST [label = "{DeclarationQALAST|+ numeroLigne\n+ dateDernierQAL2\n+ dateDernierAST}"]
 
-        TypeMesure [label = "{TypeMesure|index\nnom\nunite\ndescription}"]
-        Mesure [label = "{Mesure|+ date\n+valeur\n+commentaire\n+MesureType}"]
-        MesureFour [label = "{MesureFour|+ date\n+numeroFour\n+valeur\n+commentaire\n+MesureType}"]
+        TypeMesure [label = "{TypeMesure|nom\nunite\ndescription}"]
+        Mesure [label = "{Mesure|+ date\n+valeur\n+commentaire\n+typeMesure}"]
+        MesureFour [label = "{MesureFour|+ date\n+numeroFour\n+valeur\n+commentaire\n+typeMesure}"]
 
         MesureDioxine [label = "{MesureDioxine|+numeroLigne\n+ dateDebut\n+dateFin\n+disponibiliteLigne\n+disponibiliteAnalyseur\n+nomLaboratoire\n+Concentration\n+commentaire\n}"]
 
@@ -70,6 +70,11 @@ digraph G {
         NoteMesureFlux -> Mesure
         NoteMesureConcentration -> Mesure
         NoteTemperature -> MesureFour
+
+        TypeMesure -> MesureFour
+        TypeMesure -> Mesure
+        TypeCompteur -> CompteurDispositif
+        TypeCompteur -> CompteurParamètre
         
         edge [
                 arrowhead = "diamond"
