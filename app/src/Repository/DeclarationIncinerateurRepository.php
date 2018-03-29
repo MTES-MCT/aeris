@@ -18,7 +18,6 @@ class DeclarationIncinerateurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, DeclarationIncinerateur::class);
     }
-
     /*
     public function findBySomething($value)
     {
