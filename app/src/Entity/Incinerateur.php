@@ -41,6 +41,11 @@ class Incinerateur
     private $declarationsIncinerateur;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Ligne", mappedBy="incinerateur")
+     */
+    private $lignes;
+
+    /**
      * @return int
      */
     public function getId()
