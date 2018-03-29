@@ -7,6 +7,7 @@ use App\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IncinerateurRepository")
+ * @ORM\Table(name="incinerateur")
  */
 class Incinerateur
 {
@@ -41,7 +42,7 @@ class Incinerateur
     private $declarationsIncinerateur;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ligne", mappedBy="incinerateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\IncinerateurLigne", mappedBy="incinerateur")
      */
     private $lignes;
 
@@ -121,5 +122,25 @@ class Incinerateur
     public function getDeclarationsIncinerateur()
     {
         return $this->declarationsIncinerateur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLignes()
+    {
+        return $this->lignes;
+    }
+
+    /**
+     * @param mixed $lignes
+     *
+     * @return self
+     */
+    public function setLignes($lignes)
+    {
+        $this->lignes = $lignes;
+
+        return $this;
     }
 }

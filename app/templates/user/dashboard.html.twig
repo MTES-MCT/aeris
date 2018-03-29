@@ -8,7 +8,11 @@
         <ul>            
         {% for incinerateur in app.user.incinerateurs %}
             <li>
-                {{ incinerateur.name }}
+                <p><strong>{{ incinerateur.name }}</strong>, possède
+                {{ incinerateur.nbLignes }} lignes</p>
+                {% for ligne in incinerateur.lignes %}
+                  la ligne n°{{ ligne.numero }} a {{ ligne.nbFours }} fours<br/>
+                {% endfor %}
             </li>
         {% else %}
             <p>Pas d'incinéraeur associé</p>

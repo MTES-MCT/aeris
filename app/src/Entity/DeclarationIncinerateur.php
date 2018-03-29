@@ -9,6 +9,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeclarationIncinerateurRepository")
  * @ORM\HasLifecycleCallbacks()
+* @ORM\Table(name="declaration_incinerateur")
  */
 class DeclarationIncinerateur
 {
