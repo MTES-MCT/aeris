@@ -1,0 +1,71 @@
+/* 
+Generate png with. Requires graphviz
+$ dot -Tpng domain.dot -o domain.png
+*/
+digraph G {
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+
+        node [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+                shape = "record"
+        ]
+
+        edge [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+        ]
+
+        Utilisateur []
+        Usine [label = "{Usine|+ nbLignes}"]
+        Ligne [label = "{Ligne|+ nbFours}"]
+        Declaration [label = "{Declaration|+ fichier\n+usine\n+commentaire}"]
+        DeclarationDioxine []
+        DeclarationRejets []
+
+        TypeMesure [label = "{TypeMesure|index\nnom\nunite\ndescription}"]
+        Mesure [label = "{Mesure|+ date\n+valeur\n+commentaire\n+MesureType}"]
+        MesureFour [label = "{MesureFour|+ date\n+numeroFour\n+valeur\n+commentaire\n+MesureType}"]
+
+        NoteMesureFlux [label="Flux: 1 ou 2 mesure par composant
+\l - Poussières,CO,COT,Hcl,HF,SO2,Nox,NH3: 
+\l  - F journalier, kg/j
+\l  - F horaire max, kg/h
+\l - Débit des fumées journalier converti en débit horaire moyen, Nm3/h
+\l"]
+
+        NoteMesureConcentration [label="
+\lConcentration: 2 ou 3 mesures par composant
+\l - Poussière,COT,HCl,HF,SO2,NOX,NH3: 
+\l  - C moyenne journalière
+\l  - C 30 minutes max
+\l - CO:
+\l  - C moyenne journalière
+\l  - Mesures sur 30 minutes
+\l  - Mesures sur 10 minutes
+\l"]
+
+        NoteTemperature [label="Temperature: 2 mesure par four
+\l - temperature moyenne 30mn minimum
+\l - temperature moyenne journaliere
+\l"]
+        NoteMesureFlux -> Mesure
+        NoteMesureConcentration -> Mesure
+        NoteTemperature -> MesureFour
+        
+        edge [
+                arrowhead = "diamond"
+                headlabel = "0..*"
+        ]
+
+        Ligne ->  Usine -> Utilisateur
+
+        DeclarationRejets -> Declaration
+        DeclarationDioxine -> Declaration
+        Declaration ->  Utilisateur
+
+        Compteur -> DeclarationRejets
+        Mesure -> DeclarationRejets
+        MesureFour -> DeclarationRejets
+}
