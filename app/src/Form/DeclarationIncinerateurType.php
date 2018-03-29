@@ -14,9 +14,9 @@ class DeclarationIncinerateurType extends AbstractType
     {
         $builder
             ->add('comment')
-            ->add('declarationFile', VichFileType::class, [
+            /*->add('declarationFile', VichFileType::class, [
                 'required' => true
-            ]);
+            ]);*/
         ;
     }
 

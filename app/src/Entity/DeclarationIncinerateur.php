@@ -20,9 +20,9 @@ class DeclarationIncinerateur
     private $id;
 
     /**
-     * @ORM\Column(name="creationDate", type="datetime", nullable=false)
+     * @ORM\Column(name="createdAt", type="datetime", nullable=false)
      */
-    private $creationDate;
+    private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Incinerateur", inversedBy="declarationsIncinerateur")

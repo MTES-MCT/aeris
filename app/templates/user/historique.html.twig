@@ -8,6 +8,7 @@
           <thead>
             <tr>
               <th>Déclaration</th>
+              <th>Commentaire</th>
               <th>Lien</th>
             </tr>
           </thead>
@@ -18,20 +19,17 @@
                 {{ declaration.id }}
               </th>
               <td>
+                {{ declaration.comment }}
+              </td>
+              <td>
                 <a class="button">Telecharger le fichier</a>
               </td>
             </tr>
             {% endfor  %}
-            <tr>
-              <th>
-                <a href="{{ path('route_cr') }}">compte rendu</a>
-              </th>
-              <td>
-                <a href="{{ path('route_cr') }}">compte rendu</a>
-              </td>
-            </tr>
           </tbody>
       </table>
+      <h2>compte rendu test</h2>
+      <a href="{{ path('route_cr') }}">accéder</a>
     </div>
   </section>
 {% endblock %}
