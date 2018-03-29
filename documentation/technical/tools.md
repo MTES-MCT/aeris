@@ -4,6 +4,13 @@
 
 We use PHP7 and [composer](getcomposer.org) for dependency management.
 
+Some of the notable components include:
+
+ - Symfony
+ - FOSUserBundle for user login
+ - VichUploader for file upload
+ - Doctrine and Doctrine Migrations for database management
+
 ## JS
 
 We use [Encore](http://symfony.com/doc/current/frontend.html) for dependency management and building JS/CSS. It requires node and yarn. See app/webpack.config.js
