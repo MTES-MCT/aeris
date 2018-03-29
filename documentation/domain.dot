@@ -15,18 +15,26 @@ digraph G {
         edge [
                 fontname = "Bitstream Vera Sans"
                 fontsize = 8
+                style="filled"
         ]
 
-        Utilisateur []
-        Usine [label = "{Usine|+ nbLignes}"]
+        Utilisateur [label = "{Utilisateur|+ roles}"]
+        Usine [label = "{Usine|+ nbLignes\n+numS3IC}"]
         Ligne [label = "{Ligne|+ nbFours}"]
         Declaration [label = "{Declaration|+ fichier\n+usine\n+commentaire}"]
         DeclarationDioxine []
         DeclarationRejets []
 
+        DeclarationDechets [label = "{DeclarationDechets|+Quantité totale de déchets incinérée\ndont déchets non dangereux\ndont déchets ménagers (OM)\ndont refus de tri\ndont déchets d’activité économique (DAE)\ndont DASRI\ndont déchets dangereux
+}"]
+        DeclarationGeneraleLigne [label = "{DeclarationGeneraleLigne|+ nbHeuresFonctionnementTh\n+ nbHeuresFonctionnementReel}"]
+        DeclarationQALAST [label = "{DeclarationQALAST|+ numeroLigne\n+ dateDernierQAL2\n+ dateDernierAST}"]
+
         TypeMesure [label = "{TypeMesure|index\nnom\nunite\ndescription}"]
         Mesure [label = "{Mesure|+ date\n+valeur\n+commentaire\n+MesureType}"]
         MesureFour [label = "{MesureFour|+ date\n+numeroFour\n+valeur\n+commentaire\n+MesureType}"]
+
+        MesureDioxine [label = "{MesureDioxine|+numeroLigne\n+ dateDebut\n+dateFin\n+disponibiliteLigne\n+disponibiliteAnalyseur\n+nomLaboratoire\n+Concentration\n+commentaire\n}"]
 
         NoteMesureFlux [label="Flux: 1 ou 2 mesure par composant
 \l - Poussières,CO,COT,Hcl,HF,SO2,Nox,NH3: 
@@ -50,6 +58,15 @@ digraph G {
 \l - temperature moyenne 30mn minimum
 \l - temperature moyenne journaliere
 \l"]
+
+        CompteurParamètre [label = "{CompteurParamètre|+ typeCompteur\n+valeur\n+commentaire}"]
+        CompteurDispositif [label = "{CompteurDispositif|+ typeDispositif\n+ nomDispositif\n+valeur\n+commentaire}"]
+        TypeCompteur [label = "{TypeCompteur}"]
+
+        edge [
+                style = "dashed"
+        ]
+
         NoteMesureFlux -> Mesure
         NoteMesureConcentration -> Mesure
         NoteTemperature -> MesureFour
@@ -57,15 +74,24 @@ digraph G {
         edge [
                 arrowhead = "diamond"
                 headlabel = "0..*"
+                style="filled"
         ]
 
         Ligne ->  Usine -> Utilisateur
-
-        DeclarationRejets -> Declaration
-        DeclarationDioxine -> Declaration
         Declaration ->  Utilisateur
 
-        Compteur -> DeclarationRejets
+        // Declaration générales
+        DeclarationGeneraleLigne -> Declaration
+        DeclarationDechets -> Declaration
+        DeclarationQALAST -> Declaration
+        
+        // Declaration des dioxines
+        MesureDioxine -> DeclarationDioxine -> Declaration
+
+        // Declaration des rejets
+        DeclarationRejets -> Declaration
+        CompteurParamètre -> DeclarationRejets
+        CompteurDispositif -> DeclarationRejets
         Mesure -> DeclarationRejets
         MesureFour -> DeclarationRejets
 }
