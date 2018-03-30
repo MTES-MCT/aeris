@@ -4,7 +4,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
+use App\Entity\MesureDioxine;
 use App\Form\DeclarationIncinerateurType;
+use App\Form\MesureDioxineType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -27,9 +29,14 @@ class OwnerController extends AerisController
     public function declaration()
     {
         $formFactory = $this->get('form.factory');
-        $formBuilder = $formFactory->createBuilder(DeclarationIncinerateurType::class
+        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
         );
-        $form = $formBuilder->getForm();
+        $form = $formBuilderDeclarationIncinerateur->getForm();
+
+
+        $formBuilderMesureDioxine = $formFactory->createBuilder(MesureDioxineType::class
+        );
+        $formMesureDioxine = $formBuilderMesureDioxine->getForm();
 
         $request = Request::createFromGlobals();
 
@@ -53,7 +60,8 @@ class OwnerController extends AerisController
         }
 
         return $this->render("owner/declaration.html.twig", [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_mesure_dioxine' =>  $formMesureDioxine->createView()
         ]);
     }
 } 

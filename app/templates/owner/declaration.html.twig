@@ -6,6 +6,12 @@
 
         <h1>Effectuer une déclaration</h1>
 
+        <h2>Mesure de dioxines</h2>
+        {{ form_start(form_mesure_dioxine) }}
+        {{ form_widget(form_mesure_dioxine) }}
+        {{ form_end(form_mesure_dioxine) }}
+
+        <h2>Déclaration générale</h2>
         {{ form_start(form) }}
         {{ form_widget(form) }}
             <input type="submit" />
