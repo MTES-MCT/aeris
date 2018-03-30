@@ -5,7 +5,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
 use App\Entity\MesureDioxine;
+use App\Entity\DeclarationDechets;
 use App\Form\DeclarationIncinerateurType;
+use App\Form\DeclarationDechetsType;
 use App\Form\MesureDioxineType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -31,6 +33,7 @@ class OwnerController extends AerisController
         $mainIncinerateur = $this->getMainIncinerateur();
 
         $formFactory = $this->get('form.factory');
+
         $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
         );
         $form = $formBuilderDeclarationIncinerateur->getForm();
@@ -39,6 +42,12 @@ class OwnerController extends AerisController
         $formBuilderMesureDioxine = $formFactory->createBuilder(MesureDioxineType::class
         );
         $formMesureDioxine = $formBuilderMesureDioxine->getForm();
+
+
+        $formBuilderDeclarationDechets = $formFactory->createBuilder(DeclarationDechetsType::class
+        );
+        $formDeclarationDechets = $formBuilderDeclarationDechets->getForm();
+
 
         $request = Request::createFromGlobals();
 
@@ -64,7 +73,8 @@ class OwnerController extends AerisController
         return $this->render("owner/declaration.html.twig", [
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView(),
-            'form_mesure_dioxine' =>  $formMesureDioxine->createView()
+            'form_mesure_dioxine' =>  $formMesureDioxine->createView(),
+            'form_declaration_dechets' =>  $formDeclarationDechets->createView()
         ]);
     }
 } 

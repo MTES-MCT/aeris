@@ -27,7 +27,7 @@ digraph G {
 
         DeclarationDechets [label = "{DeclarationDechets|+Quantité totale de déchets incinérée\ndont déchets non dangereux\ndont déchets ménagers (OM)\ndont refus de tri\ndont déchets d’activité économique (DAE)\ndont DASRI\ndont déchets dangereux
 }"]
-        DeclarationGeneraleLigne [label = "{DeclarationGeneraleLigne|+ nbHeuresFonctionnementTh\n+ nbHeuresFonctionnementReel}"]
+        DeclarationFonctionnementLigne [label = "{DeclarationFonctionnementLigne|+ nbHeuresFonctionnementTh\n+ nbHeuresFonctionnementReel}"]
         DeclarationQAL_AST [label = "{DeclarationQAL_AST|+ numeroLigne\n+ dateDernierQAL2\n+ dateDernierAST}"]
 
         TypeMesure [label = "{TypeMesure|nom\nunite\ndescription}"]
@@ -88,7 +88,7 @@ digraph G {
         Declaration ->  Utilisateur
 
         // Declaration générales
-        DeclarationGeneraleLigne -> Declaration
+        DeclarationFonctionnementLigne -> Declaration
         DeclarationDechets -> Declaration
         DeclarationQAL_AST -> Declaration
         
