@@ -32,7 +32,7 @@ digraph G {
 
         TypeMesure [label = "{TypeMesure|nom\nunite\ndescription}"]
         Mesure [label = "{Mesure|+ date\n+valeur\n+commentaire\n+typeMesure}"]
-        MesureFour [label = "{MesureFour|+ date\n+numeroFour\n+valeur\n+commentaire\n+typeMesure}"]
+        MesureFour [label = "{MesureFour|+ date\n+numeroLigne\n+nomFour(string)\n+valeur\n+commentaire\n+typeMesure}"]
 
         MesureDioxine [label = "{MesureDioxine|+numeroLigne\n+ dateDebut\n+dateFin\n+disponibiliteLigne\n+disponibiliteAnalyseur\n+nomLaboratoire\n+Concentration\n+commentaire\n}"]
 
@@ -43,6 +43,7 @@ digraph G {
 \l - Débit des fumées journalier converti en débit horaire moyen, Nm3/h
 \l"]
 
+        NotePasDansMVP [label = "Pas dans MVP"]
         NoteMesureConcentration [label="
 \lConcentration: 2 ou 3 mesures par composant
 \l - Poussière,COT,HCl,HF,SO2,NOX,NH3: 
@@ -70,6 +71,7 @@ digraph G {
         NoteMesureFlux -> Mesure
         NoteMesureConcentration -> Mesure
         NoteTemperature -> MesureFour
+        NotePasDansMVP -> DeclarationQAL_AST
 
         TypeMesure -> MesureFour
         TypeMesure -> Mesure
