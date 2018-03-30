@@ -1,17 +1,57 @@
 {% extends "common/base_inside.html.twig" %}
+{% block stylesheets %}
+{% endblock %}
 {% block body %}
   <section class="section">
     <div class="container">
+        <h2 class="title is-2">Effectuer une déclaration</h2>
+        
         <a class="button is-primary" href="{{ path('route_download_template') }}">Télécharger un modèle de déclaration</a>
+<article class="message is-info">
+  <div class="message-body">
+    -> ce formulaire va être découpé en plusieurs fichiers
+  </div>
+</article>
 
-        <h1>Effectuer une déclaration</h1>
+        <h3 class="title is-3">Mesure de dioxines</h3>
 
-        <h2>Mesure de dioxines</h2>
+<article class="message is-info">
+  <div class="message-body">
+    -> un formulaire par ligne existante dans l'incinérateur
+  </div>
+</article>
+
         {{ form_start(form_mesure_dioxine) }}
+        {{ form_errors(form_mesure_dioxine) }}
         {{ form_widget(form_mesure_dioxine) }}
         {{ form_end(form_mesure_dioxine) }}
 
-        <h2>Déclaration générale</h2>
+        <h3 class="title is-3">Déclaration déchets</h3>
+
+        <h3 class="title is-3">Déclaration rejets dans l'air</h3>
+<article class="message is-info">
+  <div class="message-body">
+    Chaque ligne est séparée en 2 catégories 
+    <ul>
+        <li> - mesures de flux et concentration</li>
+        <li> - mesures de température</li>
+    </ul>
+    Pour chacune de ces catégories, on peut télécharget un fichier CSV de modèle, que l'on upload pour déclarer ses relevés
+  </div>
+</article>
+<article class="message is-danger">
+  <div class="message-body">
+    -> Et le compteur paramètre ? Et le compteur dispositif ? 
+  </div>
+</article>
+        <h3 class="title is-3">Déclaration fonctionnement des lignes</h3>
+<article class="message is-info">
+  <div class="message-body">
+    -> un formulaire par ligne existante dans l'incinérateur
+  </div>
+</article>
+
+        <h3 class="title is-3">Déclaration générale</h3>
         {{ form_start(form) }}
         {{ form_widget(form) }}
             <input type="submit" />

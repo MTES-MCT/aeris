@@ -1,6 +1,8 @@
 ## Doctrine & forms
 
-Some useful links include:
+Some useful links include
+
+### Doctrine
 
  - [Doctrine's mapping reference](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/basic-mapping.html). Here is a short list of the common ones:
 
@@ -17,5 +19,10 @@ Some useful links include:
     - text: Type that maps a SQL CLOB to a PHP string.
 
  - [Doctrine's annotation reference](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html)
- - [Symfony's forms type list](https://symfony.com/doc/current/reference/forms/types.html)
  - [Working with associations](https://symfony.com/doc/current/doctrine/associations.html)
+
+### Forms
+
+ - [Forms](https://symfony.com/doc/current/components/form.html)
+ - [Symfony's forms type list](https://symfony.com/doc/current/reference/forms/types.html)
+ - [Form rendering](https://symfony.com/doc/current/form/rendering.html)

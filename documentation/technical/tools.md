@@ -28,6 +28,8 @@ $ yarn run encore sproduction
 
 ## CSS
 
+We use [etalab's template](https://github.com/etalab/template.data.gouv.fr) on the homepage and [Bulma](https://bulma.io/documentation/overview/start/) inside the application
+
 ## Python
 
 fabric is used for [deployment](deployment.md), see the dedicated documentation.

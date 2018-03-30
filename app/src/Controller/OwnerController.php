@@ -28,6 +28,8 @@ class OwnerController extends AerisController
 
     public function declaration()
     {
+        $mainIncinerateur = $this->getMainIncinerateur();
+
         $formFactory = $this->get('form.factory');
         $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
         );
@@ -43,7 +45,7 @@ class OwnerController extends AerisController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $mainIncinerateur = $this->getMainIncinerateur();
+            
             $declaration = $form->getData();
 
             $declaration->setIncinerateur($mainIncinerateur);
@@ -60,6 +62,7 @@ class OwnerController extends AerisController
         }
 
         return $this->render("owner/declaration.html.twig", [
+            'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView(),
             'form_mesure_dioxine' =>  $formMesureDioxine->createView()
         ]);
