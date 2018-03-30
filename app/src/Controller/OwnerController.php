@@ -7,8 +7,10 @@ use App\Entity\Incinerateur;
 use App\Entity\MesureDioxine;
 use App\Entity\DeclarationDechets;
 use App\Form\DeclarationIncinerateurType;
+use App\Form\DeclarationFonctionnementLigneType;
 use App\Form\DeclarationDechetsType;
 use App\Form\MesureDioxineType;
+use App\Form\DeclarationFonctionnementLigne;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -37,6 +39,10 @@ class OwnerController extends AerisController
         $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
         );
         $form = $formBuilderDeclarationIncinerateur->getForm();
+
+        $formBuilderDeclarationFonctionnementLigne = $formFactory->createBuilder(DeclarationFonctionnementLigneType::class
+        );
+        $formDeclarationFonctionnementLigne = $formBuilderDeclarationFonctionnementLigne->getForm();
 
 
         $formBuilderMesureDioxine = $formFactory->createBuilder(MesureDioxineType::class
@@ -74,7 +80,8 @@ class OwnerController extends AerisController
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView(),
             'form_mesure_dioxine' =>  $formMesureDioxine->createView(),
-            'form_declaration_dechets' =>  $formDeclarationDechets->createView()
+            'form_declaration_dechets' =>  $formDeclarationDechets->createView(),
+            'form_declaration_fonctionnement_ligne' =>  $formDeclarationFonctionnementLigne->createView()
         ]);
     }
 } 

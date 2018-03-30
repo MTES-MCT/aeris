@@ -42,17 +42,19 @@
         <h3 class="title is-3">Déclaration rejets dans l'air</h3>
 <article class="message is-info">
   <div class="message-body">
-    Chaque ligne est séparée en 2 catégories 
+    Chaque ligne est séparée en 5 catégories 
     <ul>
-        <li> - mesures de flux et concentration</li>
+        <li> - mesures de flux </li>
+        <li> - mesures de concentration</li>
         <li> - mesures de température</li>
+        <li> - compteurs par paramètres</li>
+        <li> - compteurs de dépassement par dispositif</li>
     </ul>
-    Pour chacune de ces catégories, on peut télécharget un fichier CSV de modèle, que l'on upload pour déclarer ses relevés
-  </div>
-</article>
-<article class="message is-danger">
-  <div class="message-body">
-    -> Et le compteur paramètre ? Et le compteur dispositif ? 
+    <p>Pour chacune de ces catégories (sauf les dépassement par dispositif), on peut télécharger un fichier CSV de modèle, que l'on upload pour déclarer ses relevés
+    </p>
+    <p>
+      Pour les dépassement par dispositifs, on propose un formulaire web où on peut ajouter les dépassements, cf modèle sur Trello. Si pas de dépassement, proposer une case à cocher "Je certifie qu'il n'y a pas de dépassement"
+    </p>
   </div>
 </article>
         <h3 class="title is-3">Déclaration fonctionnement des lignes</h3>
@@ -61,6 +63,10 @@
     -> un formulaire par ligne existante dans l'incinérateur
   </div>
 </article>
+        {{ form_start(form_declaration_fonctionnement_ligne) }}
+        {{ form_errors(form_declaration_fonctionnement_ligne) }}
+        {{ form_widget(form_declaration_fonctionnement_ligne) }}
+        {{ form_end(form_declaration_fonctionnement_ligne) }}
 
         <h3 class="title is-3">Déclaration générale</h3>
         {{ form_start(form) }}
