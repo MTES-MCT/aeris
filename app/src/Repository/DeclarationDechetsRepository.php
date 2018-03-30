@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\DeclarationDechets;
+use App\Entity\Declaration\DeclarationDechets;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

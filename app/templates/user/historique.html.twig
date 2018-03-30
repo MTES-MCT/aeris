@@ -16,7 +16,7 @@
             {% for declaration in incinerateur.declarationsIncinerateur  %}
             <tr>
               <th>
-                {{ declaration.id }}
+                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
               </th>
               <td>
                 {{ declaration.comment }}
@@ -29,7 +29,7 @@
           </tbody>
       </table>
       <h2>compte rendu test</h2>
-      <a href="{{ path('route_cr') }}">accéder</a>
+      <a href="{{ path('route_cr_sample') }}">accéder</a>
     </div>
   </section>
 {% endblock %}

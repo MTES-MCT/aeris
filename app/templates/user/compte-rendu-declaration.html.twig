@@ -1,0 +1,46 @@
+{% extends "common/base_inside.html.twig" %}
+
+{% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+    </style>
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container">
+    <h2 class="title is-2">Déclaration</h2>
+
+    <div class="recap-declaration-dechets">
+        <h3 class="title is-3">Déchets</h3>
+        <ul>
+            <li>
+            {{ declaration.declarationDechets.qtiteIncinereeTotale }} T de déchets incinérés, dont:
+
+            <ul>
+                <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDasri }}T DASRI</li>
+                <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDangereux }}T de déchets dangereux</li>
+                <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereux }}T de déchets non dangereux, dont
+                    <ul>
+                        <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers }}T de déchets ménagers
+                        </li>
+                        <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri }}T de refus de tri
+                        </li>
+                        <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae }}T de déchets DAE non dangereux</li>
+                    </ul>
+                </li>
+            </ul>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    </div>
+  </section>
+{% endblock %}

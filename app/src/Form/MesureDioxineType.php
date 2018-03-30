@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\MesureDioxine;
+use App\Entity\Declaration\MesureDioxine;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

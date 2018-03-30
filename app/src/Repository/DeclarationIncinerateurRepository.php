@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationIncinerateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

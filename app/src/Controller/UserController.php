@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
+use App\Entity\Declaration\DeclarationIncinerateur;
 
 class UserController extends Controller
 {
@@ -45,7 +46,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function cr()
+    public function cr($declarationId)
+    {
+        $declaration = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class)
+            ->find($declarationId);
+
+        if (!$declaration) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
+
+        return $this->render("user/compte-rendu-declaration.html.twig", [
+            'declaration' => $declaration
+        ]);
+    }
+
+    public function crSample()
     {
         $period = new \DatePeriod(
              new \DateTime('2018-03-01'),
@@ -62,7 +80,7 @@ class UserController extends Controller
         $counterList = [ 'Poussières', 'CO', 'COT', 'HCl',  'HF', 'SO2', 'NOX', 'NH3', 'Total' ];
         $concentrationList = [ 'Poussières', 'COT', 'HCl',  'HF', 'SO2', 'NOX', 'NH3', 'Total' ];
 
-        return $this->render("user/compte-rendu.html.twig", [
+        return $this->render("user/compte-rendu-sample.html.twig", [
             'dateList' => $dates,
             'fluxCriterions' => $fluxCriterions,
             'counterList' => $counterList,

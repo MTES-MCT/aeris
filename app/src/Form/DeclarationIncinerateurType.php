@@ -2,23 +2,23 @@
 
 namespace App\Form;
 
-use App\Entity\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\declarationDechets;
+use App\Form\DeclarationDechetsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
-
-
 
 class DeclarationIncinerateurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('declarationDechets', 
+                DeclarationDechetsType::class
+            )
             ->add('comment')
-            /*->add('declarationFile', VichFileType::class, [
-                'required' => true
-            ]);*/
         ;
     }
 

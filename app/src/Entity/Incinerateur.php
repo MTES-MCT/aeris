@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
-
+use App\Entity\Declaration\DeclarationIncinerateur;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IncinerateurRepository")
  * @ORM\Table(name="incinerateur")
@@ -37,7 +37,7 @@ class Incinerateur
     private $owner;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\DeclarationIncinerateur", mappedBy="incinerateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\DeclarationIncinerateur", mappedBy="incinerateur")
      */
     private $declarationsIncinerateur;
 

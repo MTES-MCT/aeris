@@ -19,7 +19,7 @@ Some useful links include
     - text: Type that maps a SQL CLOB to a PHP string.
 
  - [Doctrine's annotation reference](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/annotations-reference.html)
- - [Working with associations](https://symfony.com/doc/current/doctrine/associations.html)
+ - [Working with associations](https://symfony.com/doc/current/doctrine/associations.html) and [Association Mapping reference](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html)
 
 ### Forms
 

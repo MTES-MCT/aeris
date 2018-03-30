@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\DeclarationDechets;
+use App\Entity\Declaration\DeclarationDechets;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

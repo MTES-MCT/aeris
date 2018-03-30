@@ -30,7 +30,45 @@ class OwnerController extends AerisController
         
     }
 
+
     public function declaration()
+    {
+        $mainIncinerateur = $this->getMainIncinerateur();
+
+        $formFactory = $this->get('form.factory');
+
+        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
+        );
+        $form = $formBuilderDeclarationIncinerateur->getForm();
+
+        $request = Request::createFromGlobals();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $declaration = $form->getData();
+
+            $declaration->setIncinerateur($mainIncinerateur);
+            $declaration->getDeclarationDechets()->setDeclarationIncinerateur($declaration);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($declaration);
+            $entityManager->flush();
+
+            $response = new RedirectResponse($this->generateUrl('route_history', [
+                'incinerateurId' => $mainIncinerateur->getId()
+            ]));
+            $response->prepare($request);
+
+            return $response->send();
+        }
+
+        return $this->render("owner/declaration.html.twig", [
+            'mainIncinerateur' => $mainIncinerateur,
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function declarationPOC()
     {
         $mainIncinerateur = $this->getMainIncinerateur();
 

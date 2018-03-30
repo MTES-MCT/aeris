@@ -18,9 +18,13 @@ route_history:
     path: /historique/{incinerateurId}
     defaults: { _controller: 'App\Controller\UserController::historique' }
 
-route_cr:
-    path: /compte-rendu
+route_cr_declaration:
+    path: /compte-rendu-declaration/{declarationId}
     defaults: { _controller: 'App\Controller\UserController::cr' }
+
+route_cr_sample:
+    path: /compte-rendu
+    defaults: { _controller: 'App\Controller\UserController::crSample' }
 
 route_liste_incinerateurs:
     path: /liste-incinerateurs

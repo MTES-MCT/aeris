@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Declaration;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Entity\Incinerateur;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeclarationIncinerateurRepository")
@@ -53,6 +54,11 @@ class DeclarationIncinerateur
      * @var File
      */
     private $declarationFile;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Declaration\DeclarationDechets", mappedBy="declarationIncinerateur", cascade={"persist"})
+     */
+    private $declarationDechets;
 
     /**
      * @ORM\PrePersist
@@ -179,5 +185,27 @@ class DeclarationIncinerateur
     public function getDeclarationFile(): ?File
     {
         return $this->imageFile;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getDeclarationDechets()
+    {
+        return $this->declarationDechets;
+    }
+
+    /**
+     * @param mixed $declarationDechets
+     *
+     * @return self
+     */
+    public function setDeclarationDechets($declarationDechets)
+    {
+        $this->declarationDechets = $declarationDechets;
+
+        return $this;
     }
 }
