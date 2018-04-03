@@ -1,5 +1,5 @@
 /* 
-Generate png with. Requires graphviz
+You can generate a png with graphviz using:
 $ dot -Tpng domain.dot -o domain.png
 */
 digraph G {
