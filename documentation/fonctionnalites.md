@@ -1,4 +1,4 @@
-# Fonctionnalites
+# Fonctionnalites
 
 Ce qu'on cherche à avoir pour le MVP
 

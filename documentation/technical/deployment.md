@@ -21,28 +21,28 @@ The prod environment is, well, the production app.
 Two environments, `staging` and `prod`, are hosted on the same machine for now.
 The `staging` environment is for 
 
-/var/www
-├── aeris-prod -> /home/deploy/prod/releases/deploy-1521128368
-└── aeris-staging -> /home/deploy/staging/releases/deploy-1521128490
-/home/deploy
-├── prod
-│   └── same structure as staging 
-└── staging
-    ├── releases 
-    │   ├── deploy-1521128488
-    │   └── deploy-1521128490
-    │       ├── bin
-    │       ├── composer.json
-    │       ├── composer.lock
-    │       ├── config
-    │       ├── public
-    │       ├── src
-    │       ├── symfony.lock
-    │       ├── templates
-    │       ├── var
-    │       └── vendor
-    └── shared
-        └── env
+    /var/www
+    ├── aeris-prod -> /home/deploy/prod/releases/deploy-1521128368
+    └── aeris-staging -> /home/deploy/staging/releases/deploy-1521128490
+    /home/deploy
+    ├── prod
+    │   └── same structure as staging 
+    └── staging
+        ├── releases 
+        │   ├── deploy-1521128488
+        │   └── deploy-1521128490
+        │       ├── bin
+        │       ├── composer.json
+        │       ├── composer.lock
+        │       ├── config
+        │       ├── public
+        │       ├── src
+        │       ├── symfony.lock
+        │       ├── templates
+        │       ├── var
+        │       └── vendor
+        └── shared
+            └── env
 
 The idea is as follow:
 
