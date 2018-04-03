@@ -8,6 +8,7 @@
           <thead>
             <tr>
               <th>Déclaration</th>
+              <th>Date</th>
               <th>Commentaire</th>
               <th>Lien</th>
             </tr>
@@ -18,6 +19,9 @@
               <th>
                 <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
               </th>
+              <td>
+                {{ declaration.createdAt|date('d/m/Y') }}
+              </td>
               <td>
                 {{ declaration.comment }}
               </td>

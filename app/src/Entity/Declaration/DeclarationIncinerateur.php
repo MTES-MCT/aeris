@@ -91,21 +91,9 @@ class DeclarationIncinerateur
     /**
      * @return mixed
      */
-    public function getCreationDate()
+    public function getCreatedAt()
     {
-        return $this->creationDate;
-    }
-
-    /**
-     * @param mixed $creationDate
-     *
-     * @return self
-     */
-    public function setCreationDate($creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
+        return $this->createdAt;
     }
 
     /**
