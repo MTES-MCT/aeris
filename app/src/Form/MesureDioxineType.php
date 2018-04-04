@@ -8,14 +8,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MesureDioxineType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numeroLigne')
-            ->add('nomLaboratoire')
+            ->add('nomLaboratoire', TextType::class)
             ->add('dateDebut', DateType::class, ['widget' => 'single_text'])
             ->add('dateFin', DateType::class, ['widget' => 'single_text'])
             ->add('disponibiliteLigne', PercentType::class)

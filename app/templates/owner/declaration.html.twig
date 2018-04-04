@@ -39,15 +39,9 @@
 
         <h3 class="title is-3">Declaration dioxines</h3>
         {% for mesureDioxine in form.mesuresDioxine %}
-            <h4 class="title is-4">Ligne</h4>
-            
-
+            <h4 class="title is-4">Ligne </h4>
             <table class="table">
               <tbody>
-                <tr>
-                  <td>Numero ligne</td>
-                  <td>{{ form_widget(mesureDioxine.numeroLigne) }}</td>
-                </tr>
                 <tr>
                   <td>Nom du laboratoire</td>
                   <td>{{ form_widget(mesureDioxine.nomLaboratoire) }}</td>
@@ -79,11 +73,13 @@
               </tbody>
             </table>
 
-            {{ form_widget(mesureDioxine) }}
         {% endfor %}
 
-        {{ form_end(form) }}
+        <h3 class="title is-3">Remarques</h3>
+        {{ form_widget(form.comment) }}<br/>
+
         <input type="submit" value="Déclarer !" class="button is-primary"/>
+        {{ form_end(form) }}
     </div>
   </section>
 {% endblock %}

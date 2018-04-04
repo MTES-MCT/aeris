@@ -31,15 +31,23 @@ class OwnerController extends AerisController
         
     }
 
-
-    public function declaration()
-    {
+    private function createDeclaration(){
         $mainIncinerateur = $this->getMainIncinerateur();
         $declarationIncinerateur = new DeclarationIncinerateur();
 
         foreach($mainIncinerateur->getLignes() as $currLine) {
-            $declarationIncinerateur->addMesuresDioxines(new MesureDioxine());
+            $mesureDioxine = new MesureDioxine();
+            $mesureDioxine->setLigne($currLine);
+            $declarationIncinerateur->addMesuresDioxines($mesureDioxine);
         }
+
+        return $declarationIncinerateur;
+    }
+
+    public function declaration()
+    {
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationIncinerateur = $this->createDeclaration();
 
         $formFactory = $this->get('form.factory');
 
@@ -57,7 +65,6 @@ class OwnerController extends AerisController
             $declaration = $form->getData();
 
             $declaration->setIncinerateur($mainIncinerateur);
-            //$declaration->getDeclarationDechets()->setDeclarationIncinerateur($declaration);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($declaration);
             $entityManager->flush();

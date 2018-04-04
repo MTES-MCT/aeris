@@ -17,9 +17,9 @@ class MesureDioxine
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncinerateurLigne")
      */
-    private $numeroLigne;
+    private $ligne;
 
     /**
      * @ORM\Column(name="dateDebut", type="date", nullable=false)
@@ -85,19 +85,19 @@ class MesureDioxine
     /**
      * @return mixed
      */
-    public function getNumeroLigne()
+    public function getLigne()
     {
-        return $this->numeroLigne;
+        return $this->ligne;
     }
 
     /**
-     * @param mixed $numeroLigne
+     * @param mixed $ligne
      *
      * @return self
      */
-    public function setNumeroLigne($numeroLigne)
+    public function setLigne($ligne)
     {
-        $this->numeroLigne = $numeroLigne;
+        $this->ligne = $ligne;
 
         return $this;
     }
