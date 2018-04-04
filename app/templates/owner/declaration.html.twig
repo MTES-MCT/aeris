@@ -40,6 +40,45 @@
         <h3 class="title is-3">Declaration dioxines</h3>
         {% for mesureDioxine in form.mesuresDioxine %}
             <h4 class="title is-4">Ligne</h4>
+            
+
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Numero ligne</td>
+                  <td>{{ form_widget(mesureDioxine.numeroLigne) }}</td>
+                </tr>
+                <tr>
+                  <td>Nom du laboratoire</td>
+                  <td>{{ form_widget(mesureDioxine.nomLaboratoire) }}</td>
+                </tr>
+                <tr>
+                  <td>Date de début des mesures</td>
+                  <td>{{ form_widget(mesureDioxine.dateDebut) }}</td>
+                </tr>
+                <tr>
+                  <td>Date de fin des mesures</td>
+                  <td>{{ form_widget(mesureDioxine.dateFin) }}</td>
+                </tr>
+                <tr>
+                  <td>Disponibilité de la ligne sur la période (%) </td>
+                  <td>{{ form_widget(mesureDioxine.disponibiliteLigne) }}</td>
+                </tr>
+                <tr>
+                  <td>Disponibilité de l'analyseur sur la période (%) </td>
+                  <td>{{ form_widget(mesureDioxine.disponibiliteAnalyseur) }}</td>
+                </tr>
+                <tr>
+                  <td>Concentration en dioxines </td>
+                  <td>{{ form_widget(mesureDioxine.concentration) }}</td>
+                </tr>
+                <tr>
+                  <td>Remarques</td>
+                  <td>{{ form_widget(mesureDioxine.commentaire) }}</td>
+                </tr>
+              </tbody>
+            </table>
+
             {{ form_widget(mesureDioxine) }}
         {% endfor %}
 
