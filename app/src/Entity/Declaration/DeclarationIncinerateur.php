@@ -186,8 +186,6 @@ class DeclarationIncinerateur
         return $this->imageFile;
     }
 
-
-
     /**
      * @return mixed
      */
@@ -204,6 +202,7 @@ class DeclarationIncinerateur
     public function setDeclarationDechets($declarationDechets)
     {
         $this->declarationDechets = $declarationDechets;
+        $this->declarationDechets->setDeclarationIncinerateur($this);
 
         return $this;
     }

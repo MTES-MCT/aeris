@@ -54,7 +54,7 @@ class OwnerController extends AerisController
             $declaration = $form->getData();
 
             $declaration->setIncinerateur($mainIncinerateur);
-            $declaration->getDeclarationDechets()->setDeclarationIncinerateur($declaration);
+            //$declaration->getDeclarationDechets()->setDeclarationIncinerateur($declaration);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($declaration);
             $entityManager->flush();
