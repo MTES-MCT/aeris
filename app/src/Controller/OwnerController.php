@@ -36,7 +36,10 @@ class OwnerController extends AerisController
     {
         $mainIncinerateur = $this->getMainIncinerateur();
         $declarationIncinerateur = new DeclarationIncinerateur();
-        $declarationIncinerateur->addMesuresDioxines(new MesureDioxine());
+
+        foreach($mainIncinerateur->getLignes() as $currLine) {
+            $declarationIncinerateur->addMesuresDioxines(new MesureDioxine());
+        }
 
         $formFactory = $this->get('form.factory');
 
