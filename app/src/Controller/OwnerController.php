@@ -4,8 +4,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
-use App\Entity\MesureDioxine;
-use App\Entity\DeclarationDechets;
+use App\Entity\Declaration\DeclarationDechets;
+use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\MesureDioxine;
 use App\Form\DeclarationIncinerateurType;
 use App\Form\DeclarationFonctionnementLigneType;
 use App\Form\DeclarationDechetsType;
@@ -34,10 +35,14 @@ class OwnerController extends AerisController
     public function declaration()
     {
         $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationIncinerateur = new DeclarationIncinerateur();
+        $declarationIncinerateur->addMesuresDioxines(new MesureDioxine());
 
         $formFactory = $this->get('form.factory');
 
-        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
+        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(
+            DeclarationIncinerateurType::class,
+            $declarationIncinerateur
         );
         $form = $formBuilderDeclarationIncinerateur->getForm();
 
