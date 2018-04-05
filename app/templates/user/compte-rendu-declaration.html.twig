@@ -15,8 +15,9 @@
     <div class="container">
     <h2 class="title is-2">Déclaration du {{ declaration.createdAt|date('d/m/Y') }} </h2>
 
-
     <div class="recap-declaration-dechets">
+        {% if declaration.declarationDechets %}
+
         <h3 class="title is-3">Déchets</h3>
         <ul>
             <li>
@@ -37,7 +38,9 @@
             </ul>
             </li>
         </ul>
+        {% endif %}
 
+        {% if not declaration.mesuresDioxine is empty %}
         <h3 class="title is-3">Declaration dioxines</h3>
         {% for mesureDioxine in declaration.mesuresDioxine %}
             {% if mesureDioxine.ligne %}
@@ -79,8 +82,9 @@
               </tbody>
             </table>
 
-        {%endfor%}
+        {% endfor %}
     </div>
+    {% endif %}
 
     </div>
   </section>
