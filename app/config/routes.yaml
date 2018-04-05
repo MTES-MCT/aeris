@@ -6,6 +6,14 @@ route_dashboard:
     path: /tableau-de-bord
     defaults: { _controller: 'App\Controller\UserController::dashboard' }
 
+route_dashboard_owner:
+    path: /tableau-de-bord-incinerateur
+    defaults: { _controller: 'App\Controller\OwnerController::dashboard' }
+
+route_dashboard_inspecteur:
+    path: /tableau-de-bord-inspecteur
+    defaults: { _controller: 'App\Controller\InspecteurController::dashboard_inspecteur' }
+
 route_declaration:
     path: /declaration
     defaults: { _controller: 'App\Controller\OwnerController::declaration' }
@@ -16,19 +24,19 @@ route_download_template:
 
 route_history:
     path: /historique/{incinerateurId}
-    defaults: { _controller: 'App\Controller\UserController::historique' }
+    defaults: { _controller: 'App\Controller\IncinerateurController::historique' }
 
 route_cr_declaration:
     path: /compte-rendu-declaration/{declarationId}
-    defaults: { _controller: 'App\Controller\UserController::cr' }
+    defaults: { _controller: 'App\Controller\IncinerateurController::cr' }
 
 route_cr_sample:
     path: /compte-rendu
-    defaults: { _controller: 'App\Controller\UserController::crSample' }
+    defaults: { _controller: 'App\Controller\IncinerateurController::crSample' }
 
 route_liste_incinerateurs:
     path: /liste-incinerateurs
-    defaults: { _controller: 'App\Controller\UserController::liste_incinerateurs' }
+    defaults: { _controller: 'App\Controller\InspecteurController::liste_incinerateurs' }
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

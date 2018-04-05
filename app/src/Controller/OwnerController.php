@@ -26,11 +26,6 @@ class OwnerController extends AerisController
         return $this->downloadFileByPath($path, $filename);
     }
 
-    public function soumettreDeclaration()
-    {
-        
-    }
-
     private function createDeclaration(){
         $mainIncinerateur = $this->getMainIncinerateur();
         $declarationIncinerateur = new DeclarationIncinerateur();
@@ -136,5 +131,9 @@ class OwnerController extends AerisController
             'form_declaration_dechets' =>  $formDeclarationDechets->createView(),
             'form_declaration_fonctionnement_ligne' =>  $formDeclarationFonctionnementLigne->createView()
         ]);
+    }
+
+    public function dashboard(){
+        return $this->render("owner/dashboard.html.twig");
     }
 } 
