@@ -15,6 +15,7 @@
     <div class="container">
     <h2 class="title is-2">Déclaration du {{ declaration.createdAt|date('d/m/Y') }} </h2>
 
+
     <div class="recap-declaration-dechets">
         <h3 class="title is-3">Déchets</h3>
         <ul>
@@ -36,6 +37,49 @@
             </ul>
             </li>
         </ul>
+
+        <h3 class="title is-3">Declaration dioxines</h3>
+        {% for mesureDioxine in declaration.mesuresDioxine %}
+            {% if mesureDioxine.ligne %}
+            <h4 class="title is-4">Ligne n° {{ mesureDioxine.ligne.numero }}</h4>
+            {% else %}
+            <h4 class="title is-4">ligne</h4>
+            {% endif %}
+
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Nom du laboratoire</td>
+                  <td>{{ mesureDioxine.nomLaboratoire }}</td>
+                </tr>
+                <tr>
+                  <td>Date de début des mesures</td>
+                  <td>{{ mesureDioxine.dateDebut|date("d/m/Y") }}</td>
+                </tr>
+                <tr>
+                  <td>Date de fin des mesures</td>
+                  <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
+                </tr>
+                <tr>
+                  <td>Disponibilité de la ligne sur la période (%) </td>
+                  <td>{{ mesureDioxine.disponibiliteLigne }}</td>
+                </tr>
+                <tr>
+                  <td>Disponibilité de l'analyseur sur la période (%) </td>
+                  <td>{{ mesureDioxine.disponibiliteAnalyseur }}</td>
+                </tr>
+                <tr>
+                  <td>Concentration en dioxines </td>
+                  <td>{{ mesureDioxine.concentration }}</td>
+                </tr>
+                <tr>
+                  <td>Remarques</td>
+                  <td>{{ mesureDioxine.commentaire }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        {%endfor%}
     </div>
 
     </div>

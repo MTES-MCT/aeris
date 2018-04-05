@@ -36,6 +36,11 @@ class IncinerateurLigne
     private $nbFours;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\MesureDioxine", mappedBy="ligne")
+     */
+    private $mesuresDioxine;
+
+    /**
      * @return mixed
      */
     public function getId()
