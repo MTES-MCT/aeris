@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "bulma": "^0.6.2",
+        "chartjs": "^0.3.24",
         "template.data.gouv.fr": "https://github.com/etalab/template.data.gouv.fr.git"
     }
 }

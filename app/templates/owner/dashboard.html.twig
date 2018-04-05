@@ -1,4 +1,6 @@
 {% extends "common/base_inside.html.twig" %}
+
+
 {% block body %}
   <section class="section">
     <div class="container">
@@ -22,6 +24,73 @@
         </ul>
 
       <h1>TODO: ajout de graphes</h1>
+  <div id="container" style="width: 75%;">
+    <canvas id="canvas"></canvas>
+  </div>
+
+<script src="{{ asset('build/app.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.5/chartjs-plugin-annotation.js"></script>
+<script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
+
+<script>
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: ['Jan.', 'Fev.', 'Mar.'],
+      datasets: [{
+        label: 'Ligne 1',
+        backgroundColor: color('rgba(255, 99, 132, 0.2)').alpha(0.5).rgbString(),
+        borderColor: 'rgba(255, 99, 132, 0.2)',
+        borderWidth: 1,
+        data: [
+          1,2,3
+        ]
+      }]
+
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('canvas').getContext('2d');
+      window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Declarations de dioxines'
+          },
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero:true
+                  }
+              }]
+          },
+          annotation: {
+            annotations: [
+              {
+                type: "line",
+                mode: "horizontal",
+                scaleID: "y-axis-0",
+                value: 2.0,
+                borderColor: "red",
+                label: {
+                  content: "Seuil : 2.0",
+                  enabled: true,
+                  position: "top"
+                }
+              }
+            ]
+          }
+        }
+      });
+    };
+
+  </script>
     </div>
   </section>
 {% endblock %}
