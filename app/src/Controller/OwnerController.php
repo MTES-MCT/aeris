@@ -135,12 +135,40 @@ class OwnerController extends AerisController
     }
 
     public function dashboard(){
-        $incinerateur = $this->getMainIncinerateur();
-
-        foreach ($incinerateur->getDeclarationsIncinerateur() as $declaration) {
-            
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $dioxines = [];
+        foreach($mainIncinerateur->getLignes() as $currLine) {
+            $dioxines[$currLine->getNumero()] = [];
         }
 
-        return $this->render("owner/dashboard.html.twig");
+
+        foreach ($mainIncinerateur->getDeclarationsIncinerateur() as $declaration) {
+
+           $declarationsDioxines = $declaration->getMesuresDioxine();
+           if ($declarationsDioxines) {
+            foreach ($declarationsDioxines as $currDeclarationDioxines) {
+                $ligne = $currDeclarationDioxines->getLigne();
+                if ($ligne != null) {
+                    $result = [
+                        'numeroLigne' =>  $ligne->getNumero(),
+                        'debut' => $currDeclarationDioxines->getDateDebut(),
+                        'fin' => $currDeclarationDioxines->getDateFin(),
+                        'disponibiliteLigne' =>  $currDeclarationDioxines->getDisponibiliteLigne(),
+                        'disponibiliteAnalyseur' =>  $currDeclarationDioxines->getDisponibiliteAnalyseur(),
+                        'concentration' =>  $currDeclarationDioxines->getConcentration(),
+                    ];
+                    array_push($dioxines[$ligne->getNumero()], $result);
+                }
+            }
+           }
+        }
+
+
+
+
+        return $this->render("owner/dashboard.html.twig", [
+            'dioxines' => $dioxines,
+            'mainIncinerateur' =>  $mainIncinerateur
+        ]);
     }
 } 

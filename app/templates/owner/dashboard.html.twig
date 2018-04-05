@@ -3,6 +3,9 @@
   <section class="section">
     <div class="container">
       <h2>Dashboard</h2>
+
+      {{ dump(dioxines) }}
+      {{ dump(mainIncinerateur) }}
       <p>Bienvenue <strong>{{ app.user.username }} </strong></p>
         <ul>            
         {% for incinerateur in app.user.incinerateurs %}
