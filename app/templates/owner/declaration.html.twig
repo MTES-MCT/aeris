@@ -13,6 +13,7 @@
     <div class="container">
         <h2 class="title is-2">Effectuer une déclaration</h2>
 
+
         {{ form_start(form) }}
         <h3 class="title is-3">Volume de déchets incinérés</h3>
         <div class="recap-declaration-dechets">
@@ -39,7 +40,8 @@
 
         <h3 class="title is-3">Declaration dioxines</h3>
         {% for mesureDioxine in form.mesuresDioxine %}
-            <h4 class="title is-4">Ligne </h4>
+
+            <h4 class="title is-4">Ligne n°{{ mesureDioxine.vars['value'].ligne.numero }}</h4>
             <table class="table">
               <tbody>
                 <tr>

@@ -59,6 +59,15 @@
     "doctrine/orm": {
         "version": "v2.5.14"
     },
+    "easycorp/easy-log-handler": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
+        }
+    },
     "egulias/email-validator": {
         "version": "2.1.3"
     },
@@ -70,6 +79,9 @@
     },
     "jms/metadata": {
         "version": "1.6.0"
+    },
+    "monolog/monolog": {
+        "version": "1.23.0"
     },
     "ocramius/package-versions": {
         "version": "1.2.0"
@@ -121,6 +133,18 @@
     },
     "symfony/debug": {
         "version": "v3.4.6"
+    },
+    "symfony/debug-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "71d29aaf710fd59cd3abff2b1ade907ed73103c6"
+        }
+    },
+    "symfony/debug-pack": {
+        "version": "v1.0.5"
     },
     "symfony/dependency-injection": {
         "version": "v3.4.6"
@@ -183,6 +207,18 @@
             "branch": "master",
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
+    "symfony/monolog-bridge": {
+        "version": "v3.4.7"
+    },
+    "symfony/monolog-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.1",
+            "ref": "371d1a2b69984710646b09a1182ef1d4308c904f"
         }
     },
     "symfony/options-resolver": {
