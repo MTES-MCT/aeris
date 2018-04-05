@@ -6,22 +6,7 @@ route_dashboard:
     path: /tableau-de-bord
     defaults: { _controller: 'App\Controller\UserController::dashboard' }
 
-route_dashboard_owner:
-    path: /tableau-de-bord-incinerateur
-    defaults: { _controller: 'App\Controller\OwnerController::dashboard' }
-
-route_dashboard_inspecteur:
-    path: /tableau-de-bord-inspecteur
-    defaults: { _controller: 'App\Controller\InspecteurController::dashboard_inspecteur' }
-
-route_declaration:
-    path: /declaration
-    defaults: { _controller: 'App\Controller\OwnerController::declaration' }
-
-route_download_template:
-    path: /telecharger-modele
-    defaults: { _controller: 'App\Controller\OwnerController::downloadDeclarationTemplate' }
-
+### Incinérateur
 route_history:
     path: /historique/{incinerateurId}
     defaults: { _controller: 'App\Controller\IncinerateurController::historique' }
@@ -34,9 +19,30 @@ route_cr_sample:
     path: /compte-rendu
     defaults: { _controller: 'App\Controller\IncinerateurController::crSample' }
 
+
+### Owner
+route_dashboard_owner:
+    path: /tableau-de-bord-incinerateur
+    defaults: { _controller: 'App\Controller\OwnerController::dashboard' }
+
+route_declaration:
+    path: /declaration
+    defaults: { _controller: 'App\Controller\OwnerController::declaration' }
+
+route_download_template:
+    path: /telecharger-modele
+    defaults: { _controller: 'App\Controller\OwnerController::downloadDeclarationTemplate' }
+
+### Inspecteur
+
+route_dashboard_inspecteur:
+    path: /tableau-de-bord-inspecteur
+    defaults: { _controller: 'App\Controller\InspecteurController::dashboard_inspecteur' }
+
 route_liste_incinerateurs:
     path: /liste-incinerateurs
     defaults: { _controller: 'App\Controller\InspecteurController::liste_incinerateurs' }
 
+### Login
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

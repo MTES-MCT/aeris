@@ -17,7 +17,7 @@ class MesureDioxine
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\IncinerateurLigne")
+     * @ORM\ManyToOne(targetEntity="App\Entity\IncinerateurLigne", inversedBy="mesuresDioxine")
      */
     private $ligne;
 

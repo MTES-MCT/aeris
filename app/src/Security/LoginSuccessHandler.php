@@ -26,7 +26,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 
         foreach($token_name->getRoles() as $role) {
             if($role->getRole() == 'ROLE_INSPECTEUR') {
-                $redirection = $this->router->generate('route_dashboard');
+                $redirection = $this->router->generate('route_dashboard_inspecteur');
             }
         }
 

@@ -8,15 +8,6 @@ use App\Entity\Declaration\DeclarationIncinerateur;
 
 class IncinerateurController extends Controller
 {
-    public function dashboard()
-    {
-        $authChecker = $this->get('security.authorization_checker'); 
-        if ($authChecker->isGranted('ROLE_INSPECTEUR')) {
-            $this->redirect($this->generateUrl("route_dashboard_inspecteur"));
-        }
-        $this->redirect($this->generateUrl("route_dashboard_owner"));
-    }
-
     public function historique($incinerateurId)
     {
         $incinerateur = $this->getDoctrine()

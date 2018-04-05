@@ -41,6 +41,7 @@ class OwnerController extends AerisController
 
     public function declaration()
     {
+        // This method (especially, others are no better) is terrible and should be split ASAP
         $mainIncinerateur = $this->getMainIncinerateur();
         $declarationIncinerateur = $this->createDeclaration();
 
@@ -134,6 +135,12 @@ class OwnerController extends AerisController
     }
 
     public function dashboard(){
+        $incinerateur = $this->getMainIncinerateur();
+
+        foreach ($incinerateur->getDeclarationsIncinerateur() as $declaration) {
+            
+        }
+
         return $this->render("owner/dashboard.html.twig");
     }
 } 
