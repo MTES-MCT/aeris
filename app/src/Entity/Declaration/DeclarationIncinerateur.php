@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use App\Entity\Incinerateur;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeclarationIncinerateurRepository")
@@ -59,6 +61,15 @@ class DeclarationIncinerateur
      * @ORM\OneToOne(targetEntity="App\Entity\Declaration\DeclarationDechets", mappedBy="declarationIncinerateur", cascade={"persist"})
      */
     private $declarationDechets;
+ 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\MesureDioxine", mappedBy="declarationIncinerateur", cascade={"persist"})
+     */
+    private $mesuresDioxine;
+
+    public function __construct(){
+        $this->mesuresDioxine = new ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist
@@ -175,8 +186,6 @@ class DeclarationIncinerateur
         return $this->imageFile;
     }
 
-
-
     /**
      * @return mixed
      */
@@ -193,7 +202,38 @@ class DeclarationIncinerateur
     public function setDeclarationDechets($declarationDechets)
     {
         $this->declarationDechets = $declarationDechets;
+        $this->declarationDechets->setDeclarationIncinerateur($this);
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMesuresDioxine()
+    {
+        return $this->mesuresDioxine;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function setMesuresDioxine($mesures)
+    {
+        $this->mesuresDioxine = $mesures;
+        return $this;
+    }
+
+
+    /**
+     * @param mixed $mesuresDioxine
+     *
+     * @return self
+     */
+    public function addMesuresDioxines($mesureDioxine)
+    {
+        $this->mesuresDioxine[] = $mesureDioxine;
+        $mesureDioxine->setDeclarationIncinerateur($this);
         return $this;
     }
 }

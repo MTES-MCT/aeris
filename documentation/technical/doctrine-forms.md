@@ -26,3 +26,4 @@ Some useful links include
  - [Forms](https://symfony.com/doc/current/components/form.html)
  - [Symfony's forms type list](https://symfony.com/doc/current/reference/forms/types.html)
  - [Form rendering](https://symfony.com/doc/current/form/rendering.html)
+ - [Form collection](https://symfony.com/doc/current/form/form_collections.html), necessary for us when creating dynamic forms in the declaration system. 

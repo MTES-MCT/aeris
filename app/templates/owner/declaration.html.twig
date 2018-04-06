@@ -1,29 +1,86 @@
 {% extends "common/base_inside.html.twig" %}
 {% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+    </style>
 {% endblock %}
 {% block body %}
   <section class="section">
     <div class="container">
         <h2 class="title is-2">Effectuer une déclaration</h2>
 
-        <h3 class="title is-3">Volume de déchets incinérés</h3>
 
-        <article class="message is-info">
-          <div class="message-body">
-            -> Faire ressortir la hiérarchie d'information
-          </div>
-        </article>
-        {#
-            {{ form_start(form_declaration_dechets) }}
-            {{ form_errors(form_declaration_dechets) }}
-            {{ form_widget(form_declaration_dechets) }}
-            {{ form_end(form_declaration_dechets) }}
-        #}
-
-        <h3 class="title is-3">Conclusion</h4>
         {{ form_start(form) }}
-        {{ form_widget(form) }}
-            <input type="submit" />
+        <h3 class="title is-3">Volume de déchets incinérés</h3>
+        <div class="recap-declaration-dechets">
+            <ul>
+                <li>
+                {{ form_widget(form.declarationDechets.qtiteIncinereeTotale) }} T de déchets incinérés, dont:
+
+                <ul>
+                    <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsDasri) }}T DASRI</li>
+                    <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsDangereux) }}T de déchets dangereux</li>
+                    <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereux) }}T de déchets non dangereux, dont
+                        <ul>
+                            <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers) }}T de déchets ménagers
+                            </li>
+                            <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri) }}T de refus de tri
+                            </li>
+                            <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae) }}T de déchets DAE non dangereux</li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h3 class="title is-3">Declaration dioxines</h3>
+        {% for mesureDioxine in form.mesuresDioxine %}
+
+            <h4 class="title is-4">Ligne n°{{ mesureDioxine.vars['value'].ligne.numero }}</h4>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Nom du laboratoire</td>
+                  <td>{{ form_widget(mesureDioxine.nomLaboratoire) }}</td>
+                </tr>
+                <tr>
+                  <td>Date de début des mesures</td>
+                  <td>{{ form_widget(mesureDioxine.dateDebut) }}</td>
+                </tr>
+                <tr>
+                  <td>Date de fin des mesures</td>
+                  <td>{{ form_widget(mesureDioxine.dateFin) }}</td>
+                </tr>
+                <tr>
+                  <td>Disponibilité de la ligne sur la période (%) </td>
+                  <td>{{ form_widget(mesureDioxine.disponibiliteLigne) }}</td>
+                </tr>
+                <tr>
+                  <td>Disponibilité de l'analyseur sur la période (%) </td>
+                  <td>{{ form_widget(mesureDioxine.disponibiliteAnalyseur) }}</td>
+                </tr>
+                <tr>
+                  <td>Concentration en dioxines </td>
+                  <td>{{ form_widget(mesureDioxine.concentration) }}</td>
+                </tr>
+                <tr>
+                  <td>Remarques</td>
+                  <td>{{ form_widget(mesureDioxine.commentaire) }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+        {% endfor %}
+
+        <h3 class="title is-3">Remarques</h3>
+        {{ form_widget(form.comment) }}<br/>
+
+        <input type="submit" value="Déclarer !" class="button is-primary"/>
         {{ form_end(form) }}
     </div>
   </section>

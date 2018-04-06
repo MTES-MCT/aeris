@@ -17,7 +17,7 @@ security:
                 check_path: /login_check
                 always_use_default_target_path: false
                 success_handler: "app.security.login_success_handler"
-
+            logout_on_user_change: true
             logout:       true
             anonymous:    true
  
