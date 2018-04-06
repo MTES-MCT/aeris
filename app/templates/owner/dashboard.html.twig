@@ -7,23 +7,28 @@
       <h2>Dashboard</h2>
       <p>Bienvenue <strong>{{ app.user.username }} </strong></p>
         <ul>            
-        {% for incinerateur in app.user.incinerateurs %}
+        {% if mainIncinerateur %}
             <li>
-                <p><strong>{{ incinerateur.name }}</strong>, possède
-                {{ incinerateur.nbLignes }} lignes</p>
-                {% for ligne in incinerateur.lignes %}
+                <p><strong>{{ mainIncinerateur.name }}</strong>, possède
+                {{ mainIncinerateur.nbLignes }} lignes</p>
+                {% for ligne in mainIncinerateur.lignes %}
                   la ligne n°{{ ligne.numero }} a {{ ligne.nbFours }} fours<br/>
                 {% endfor %}
             </li>
         {% else %}
             <p>Pas d'incinéraeur associé</p>
-        {% endfor %}
+        {% endif %}
         </ul>
 
       <h1>TODO: ajout de graphes</h1>
-  <div id="container" style="width: 75%;">
-    <canvas id="canvas"></canvas>
-  </div>
+
+    {% for ligne in mainIncinerateur.lignes %}
+      <div style="width: 75%;">
+        <canvas id="canvas_dioxine_{{ligne.numero}}"></canvas>
+      </div>              
+
+    {% endfor %}
+
 
 <script src="{{ asset('build/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
@@ -32,24 +37,22 @@
 
 <script>
     var dashboardData = {{ output|json_encode()|raw }}
-
-    var color = Chart.helpers.color;
-    var barChartData = {
-      // labels: ['Jan.', 'Fev.', 'Mar.'],
-      labels: dashboardData.months,
-      datasets: [{
-        label: 'Ligne 1',
-        backgroundColor: color('rgba(255, 99, 132, 0.2)').alpha(0.5).rgbString(),
-        borderColor: 'rgba(255, 99, 132, 0.2)',
-        borderWidth: 1,
-        //data: [  1,2,3]
-        data: dashboardData.lines[1]
-      }]
-
-    };
-
+    
     window.onload = function() {
-      var ctx = document.getElementById('canvas').getContext('2d');
+      var color = Chart.helpers.color;
+      var barChartData = {
+        labels: dashboardData.months,
+        datasets: [{
+          label: 'Ligne 1',
+          backgroundColor: color('rgba(255, 99, 132, 0.2)').alpha(0.5).rgbString(),
+          borderColor: 'rgba(255, 99, 132, 0.2)',
+          borderWidth: 1,
+          data: dashboardData.lines[1]
+        }]
+
+      };
+
+      var ctx = document.getElementById('canvas_dioxine_1').getContext('2d');
       window.myBar = new Chart(ctx, {
         type: 'bar',
         data: barChartData,
@@ -58,10 +61,10 @@
           legend: {
             position: 'top',
           },
-          title: {
+          /*title: {
             display: true,
             text: 'Declarations de dioxines'
-          },
+          },*/
           scales: {
               yAxes: [{
                   ticks: {
