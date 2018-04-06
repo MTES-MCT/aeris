@@ -32,12 +32,12 @@ class MesureDioxine
     private $dateFin;
     
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", precision=0, scale=0)
      */
     private $disponibiliteLigne; 
     
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", precision=0, scale=0)
      */
     private $disponibiliteAnalyseur;
     
@@ -47,7 +47,7 @@ class MesureDioxine
     private $nomLaboratoire;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", precision=0, scale=0)
      */
     private $concentration;
 

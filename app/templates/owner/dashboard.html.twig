@@ -5,9 +5,6 @@
   <section class="section">
     <div class="container">
       <h2>Dashboard</h2>
-
-      {{ dump(dioxines) }}
-      {{ dump(mainIncinerateur) }}
       <p>Bienvenue <strong>{{ app.user.username }} </strong></p>
         <ul>            
         {% for incinerateur in app.user.incinerateurs %}
@@ -34,17 +31,19 @@
 <script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
 
 <script>
+    var dashboardData = {{ output|json_encode()|raw }}
+
     var color = Chart.helpers.color;
     var barChartData = {
-      labels: ['Jan.', 'Fev.', 'Mar.'],
+      // labels: ['Jan.', 'Fev.', 'Mar.'],
+      labels: dashboardData.months,
       datasets: [{
         label: 'Ligne 1',
         backgroundColor: color('rgba(255, 99, 132, 0.2)').alpha(0.5).rgbString(),
         borderColor: 'rgba(255, 99, 132, 0.2)',
         borderWidth: 1,
-        data: [
-          1,2,3
-        ]
+        //data: [  1,2,3]
+        data: dashboardData.lines[1]
       }]
 
     };
@@ -76,10 +75,10 @@
                 type: "line",
                 mode: "horizontal",
                 scaleID: "y-axis-0",
-                value: 2.0,
+                value: 0.1,
                 borderColor: "red",
                 label: {
-                  content: "Seuil : 2.0",
+                  content: "Seuil : 0.1 ng/m^3",
                   enabled: true,
                   position: "top"
                 }
