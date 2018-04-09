@@ -14,8 +14,8 @@
         </a><div class="logo-title">Aeris</div>
 
         <ul class="nav__links">
-          <li><a href="{{ path('route_index')}}#aeris-what">C'est quoi ?</a></li>
-          <li><a href="{{ path('route_index')}}#aeris-about">A propos</a></li>
+          <li><a href="{{ path('route_index')}}#aeris-quoi">C'est quoi ?</a></li>
+          <li><a href="{{ path('route_index')}}#aeris-apropos">A propos</a></li>
           <li>
             {% if is_granted('ROLE_USER') %}
             <a href="{{ path('route_dashboard')}}"><button class="button">Accéder à mon espace</button></a>
@@ -29,5 +29,10 @@
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('build/app.js') }}"></script>
+        
+        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.1/jquery.fancybox.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.1/jquery.fancybox.min.js"></script>
     </body>
 </html>
