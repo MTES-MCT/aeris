@@ -33,7 +33,7 @@ def upload_code(deployment_directory):
         local_dir='./app/*',
         remote_dir=deployment_directory,
         default_opts='-azcrSh --stats',
-        exclude=('.git', 'app/var', 'app/node_modules')
+        exclude=['.git', 'var', 'node_modules', 'vendor']
     )
 
 def enable_project(env_name, deployment_directory):
@@ -41,9 +41,13 @@ def enable_project(env_name, deployment_directory):
     run('cp /home/deploy/%s/shared/env %s/.env' % (env_name, deployment_directory)) 
     # warmup cache
     with cd(deployment_directory):
+        run('composer install')
+        run('composer dump-autoload')
+        run('npm install')
+        run('bin/console cache:clear --env=dev')
+        run('bin/console cache:clear --env=prod')
         run('bin/console cache:warmup --env=dev >> /dev/null')
         run('bin/console cache:warmup --env=prod >> /dev/null')
-    # dump autoload
 
     # Create symlink
     run('ln -sfn %s /var/www/aeris-%s' % (deployment_directory, env_name))

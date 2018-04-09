@@ -176,12 +176,12 @@ class DeclarationIncinerateur
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
      */
-    public function setDeclarationFile(?File $declarationFile = null): void
+    public function setDeclarationFile(File $declarationFile = null)
     {
         $this->imageFile = $declarationFile;
     }
 
-    public function getDeclarationFile(): ?File
+    public function getDeclarationFile()
     {
         return $this->imageFile;
     }
