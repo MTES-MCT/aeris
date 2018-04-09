@@ -17,12 +17,25 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class InspecteurController extends AerisController
 {
+    private function isInspecteur(){
+        $authChecker = $this->get('security.authorization_checker'); 
+        return $authChecker->isGranted('ROLE_INSPECTEUR');
+    }
+
     public function dashboard_inspecteur(){
+        if (!$this->isInspecteur()) {
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+
         return $this->render("inspecteur/dashboard.html.twig");
     }
 
     public function liste_incinerateurs()
     {
+        if (!$this->isInspecteur()) {
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+
         $incinerateurs = $this->getDoctrine()
             ->getRepository(Incinerateur::class)
             ->findAll();

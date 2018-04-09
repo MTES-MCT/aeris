@@ -15,9 +15,9 @@ route_cr_declaration:
     path: /compte-rendu-declaration/{declarationId}
     defaults: { _controller: 'App\Controller\IncinerateurController::cr' }
 
-route_cr_sample:
-    path: /compte-rendu
-    defaults: { _controller: 'App\Controller\IncinerateurController::crSample' }
+#route_cr_sample:
+#    path: /compte-rendu
+#    defaults: { _controller: 'App\Controller\IncinerateurController::crSample' }
 
 
 ### Owner

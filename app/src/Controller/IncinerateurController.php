@@ -8,6 +8,18 @@ use App\Entity\Declaration\DeclarationIncinerateur;
 
 class IncinerateurController extends Controller
 {
+    private function canAccessIncinerateur($incinerateur){
+        $authChecker = $this->get('security.authorization_checker'); 
+        if ($authChecker->isGranted('ROLE_INSPECTEUR')) {
+            return true;
+        }
+        if($authChecker->isGranted('ROLE_PROPRIETAIRE')) {
+            $mainIncinerateur = $this->getMainIncinerateur();
+            return $mainIncinerateur->getId() == $incinerateur->getId();
+        }
+        return false;
+    }
+
     public function historique($incinerateurId)
     {
         $incinerateur = $this->getDoctrine()
@@ -18,6 +30,9 @@ class IncinerateurController extends Controller
             throw $this->createNotFoundException(
                 "Pas d'incinerateur pour l' id ".$incinerateurId
             );
+        }
+        if(!$this->canAccessIncinerateur($incinerateur)) {
+            return $this->redirect($this->generateUrl("route_index"));
         }
 
         return $this->render("user/historique.html.twig", [
@@ -36,12 +51,15 @@ class IncinerateurController extends Controller
                 "Pas de declaration pour l' id ".$declarationId
             );
         }
+        if(!$this->canAccessIncinerateur($declaration->getIncinerateur())) {
+            return $this->redirect($this->generateUrl("route_index"));
+        }
 
         return $this->render("user/compte-rendu-declaration.html.twig", [
             'declaration' => $declaration
         ]);
     }
-
+/*
     public function crSample()
     {
         $period = new \DatePeriod(
@@ -65,5 +83,5 @@ class IncinerateurController extends Controller
             'counterList' => $counterList,
             'concentrationList' => $concentrationList,
         ]);
-    }
+    }*/
 } 

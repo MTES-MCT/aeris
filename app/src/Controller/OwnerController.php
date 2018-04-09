@@ -17,6 +17,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OwnerController extends AerisController
 {
+    private function isOwner(){
+        $authChecker = $this->get('security.authorization_checker'); 
+        return $authChecker->isGranted('ROLE_PROPRIETAIRE');
+    }
+
     public function downloadDeclarationTemplate()
     {
         $filename = 'modele-declaration.xls';
@@ -26,21 +31,11 @@ class OwnerController extends AerisController
         return $this->downloadFileByPath($path, $filename);
     }
 
-    private function createDeclaration(){
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationIncinerateur = new DeclarationIncinerateur();
-
-        foreach($mainIncinerateur->getLignes() as $currLine) {
-            $mesureDioxine = new MesureDioxine();
-            $mesureDioxine->setLigne($currLine);
-            $declarationIncinerateur->addMesuresDioxines($mesureDioxine);
-        }
-
-        return $declarationIncinerateur;
-    }
-
     public function declaration()
     {
+        if(!$this->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
         // This method (especially, others are no better) is terrible and should be split ASAP
         $mainIncinerateur = $this->getMainIncinerateur();
         $declarationIncinerateur = $this->createDeclaration();
@@ -79,63 +74,12 @@ class OwnerController extends AerisController
         ]);
     }
 
-    public function declarationPOC()
-    {
-        $mainIncinerateur = $this->getMainIncinerateur();
-
-        $formFactory = $this->get('form.factory');
-
-        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
-        );
-        $form = $formBuilderDeclarationIncinerateur->getForm();
-
-        $formBuilderDeclarationFonctionnementLigne = $formFactory->createBuilder(DeclarationFonctionnementLigneType::class
-        );
-        $formDeclarationFonctionnementLigne = $formBuilderDeclarationFonctionnementLigne->getForm();
-
-
-        $formBuilderMesureDioxine = $formFactory->createBuilder(MesureDioxineType::class
-        );
-        $formMesureDioxine = $formBuilderMesureDioxine->getForm();
-
-
-        $formBuilderDeclarationDechets = $formFactory->createBuilder(DeclarationDechetsType::class
-        );
-        $formDeclarationDechets = $formBuilderDeclarationDechets->getForm();
-
-
-        $request = Request::createFromGlobals();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $declaration = $form->getData();
-
-            $declaration->setIncinerateur($mainIncinerateur);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($declaration);
-            $entityManager->flush();
-
-            $response = new RedirectResponse($this->generateUrl('route_history', [
-                'incinerateurId' => $mainIncinerateur->getId()
-            ]));
-            $response->prepare($request);
-
-            return $response->send();
-        }
-
-        return $this->render("owner/declaration.html.twig", [
-            'mainIncinerateur' => $mainIncinerateur,
-            'form' => $form->createView(),
-            'form_mesure_dioxine' =>  $formMesureDioxine->createView(),
-            'form_declaration_dechets' =>  $formDeclarationDechets->createView(),
-            'form_declaration_fonctionnement_ligne' =>  $formDeclarationFonctionnementLigne->createView()
-        ]);
-    }
-
     public function dashboard()
     {
+        if(!$this->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+
         $mainIncinerateur = $this->getMainIncinerateur();
         $dioxines = [];
         $listOfMonths = $this->createListOfMonths();
@@ -192,6 +136,19 @@ class OwnerController extends AerisController
         ]);
     }
 
+    private function createDeclaration(){
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationIncinerateur = new DeclarationIncinerateur();
+
+        foreach($mainIncinerateur->getLignes() as $currLine) {
+            $mesureDioxine = new MesureDioxine();
+            $mesureDioxine->setLigne($currLine);
+            $declarationIncinerateur->addMesuresDioxines($mesureDioxine);
+        }
+
+        return $declarationIncinerateur;
+    }
+
     private function createListOfMonths(){
         $period = new \DatePeriod(
              new \DateTime('-6 months'),
@@ -199,10 +156,63 @@ class OwnerController extends AerisController
              new \DateTime()
         );
 
-        /*
-        foreach($period as $date) {
-            echo $date->format("M Y")."\n";
-        }*/
         return $period;
     }
+
+/*
+    public function declarationPOC()
+    {
+        $mainIncinerateur = $this->getMainIncinerateur();
+
+        $formFactory = $this->get('form.factory');
+
+        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(DeclarationIncinerateurType::class
+        );
+        $form = $formBuilderDeclarationIncinerateur->getForm();
+
+        $formBuilderDeclarationFonctionnementLigne = $formFactory->createBuilder(DeclarationFonctionnementLigneType::class
+        );
+        $formDeclarationFonctionnementLigne = $formBuilderDeclarationFonctionnementLigne->getForm();
+
+
+        $formBuilderMesureDioxine = $formFactory->createBuilder(MesureDioxineType::class
+        );
+        $formMesureDioxine = $formBuilderMesureDioxine->getForm();
+
+
+        $formBuilderDeclarationDechets = $formFactory->createBuilder(DeclarationDechetsType::class
+        );
+        $formDeclarationDechets = $formBuilderDeclarationDechets->getForm();
+
+
+        $request = Request::createFromGlobals();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $declaration = $form->getData();
+
+            $declaration->setIncinerateur($mainIncinerateur);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($declaration);
+            $entityManager->flush();
+
+            $response = new RedirectResponse($this->generateUrl('route_history', [
+                'incinerateurId' => $mainIncinerateur->getId()
+            ]));
+            $response->prepare($request);
+
+            return $response->send();
+        }
+
+        return $this->render("owner/declaration.html.twig", [
+            'mainIncinerateur' => $mainIncinerateur,
+            'form' => $form->createView(),
+            'form_mesure_dioxine' =>  $formMesureDioxine->createView(),
+            'form_declaration_dechets' =>  $formDeclarationDechets->createView(),
+            'form_declaration_fonctionnement_ligne' =>  $formDeclarationFonctionnementLigne->createView()
+        ]);
+    }
+*/
 } 
