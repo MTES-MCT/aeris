@@ -38,6 +38,29 @@
             </ul>
         </div>
 
+
+
+        <h3 class="title is-3">Declaration générale de fonctionnement</h3>
+        {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
+
+            <h4 class="title is-4">Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}</h4>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Nombre d'heures de fonctionnement théorique</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                </tr>
+                <tr>
+                  <td>Nombre d'heures de fonctionnement réel</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                </tr>
+              </tbody>
+            </table>
+        {% endfor %}
+
+
         <h3 class="title is-3">Declaration dioxines</h3>
         {% for mesureDioxine in form.mesuresDioxine %}
 
@@ -47,30 +70,37 @@
                 <tr>
                   <td>Nom du laboratoire</td>
                   <td>{{ form_widget(mesureDioxine.nomLaboratoire) }}</td>
+                  <td>{{ form_errors(mesureDioxine.nomLaboratoire) }}</td>
                 </tr>
                 <tr>
                   <td>Date de début des mesures</td>
                   <td>{{ form_widget(mesureDioxine.dateDebut) }}</td>
+                  <td>{{ form_errors(mesureDioxine.dateDebut) }}</td>
                 </tr>
                 <tr>
                   <td>Date de fin des mesures</td>
                   <td>{{ form_widget(mesureDioxine.dateFin) }}</td>
+                  <td>{{ form_errors(mesureDioxine.dateFin) }}</td>
                 </tr>
                 <tr>
                   <td>Disponibilité de la ligne sur la période (%) </td>
                   <td>{{ form_widget(mesureDioxine.disponibiliteLigne) }}</td>
+                  <td>{{ form_errors(mesureDioxine.disponibiliteLigne) }}</td>
                 </tr>
                 <tr>
                   <td>Disponibilité de l'analyseur sur la période (%) </td>
                   <td>{{ form_widget(mesureDioxine.disponibiliteAnalyseur) }}</td>
+                  <td>{{ form_errors(mesureDioxine.disponibiliteAnalyseur) }}</td>
                 </tr>
                 <tr>
                   <td>Concentration en dioxines </td>
                   <td>{{ form_widget(mesureDioxine.concentration) }}</td>
+                  <td>{{ form_errors(mesureDioxine.concentration) }}</td>
                 </tr>
                 <tr>
                   <td>Remarques</td>
                   <td>{{ form_widget(mesureDioxine.commentaire) }}</td>
+                  <td>{{ form_errors(mesureDioxine.commentaire) }}</td>
                 </tr>
               </tbody>
             </table>

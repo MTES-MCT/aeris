@@ -7,6 +7,7 @@ use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\MesureDioxine;
 use App\Form\DeclarationDechetsType;
 use App\Form\MesureDioxineType;
+use App\Form\DeclarationFonctionnementLigneType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,6 +24,10 @@ class DeclarationIncinerateurType extends AbstractType
             )
            ->add('mesuresDioxine', CollectionType::class, [
                 'entry_type' => MesureDioxineType::class,
+                'entry_options' => array('label' => false),
+            ])
+           ->add('declarationsFonctionnementLigne', CollectionType::class, [
+                'entry_type' => DeclarationFonctionnementLigneType::class,
                 'entry_options' => array('label' => false),
             ])
             ->add('comment')

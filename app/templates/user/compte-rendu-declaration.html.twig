@@ -17,74 +17,99 @@
 
     <div class="recap-declaration-dechets">
         {% if declaration.declarationDechets %}
+          <h3 class="title is-3">Déchets</h3>
+          <ul>
+              <li>
+              {{ declaration.declarationDechets.qtiteIncinereeTotale }} T de déchets incinérés, dont:
 
-        <h3 class="title is-3">Déchets</h3>
-        <ul>
-            <li>
-            {{ declaration.declarationDechets.qtiteIncinereeTotale }} T de déchets incinérés, dont:
+              <ul>
+                  <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDasri }}T DASRI</li>
+                  <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDangereux }}T de déchets dangereux</li>
+                  <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereux }}T de déchets non dangereux, dont
+                      <ul>
+                          <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers }}T de déchets ménagers
+                          </li>
+                          <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri }}T de refus de tri
+                          </li>
+                          <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae }}T de déchets DAE non dangereux</li>
+                      </ul>
+                  </li>
+              </ul>
+              </li>
+          </ul>
+        {% endif %}
 
-            <ul>
-                <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDasri }}T DASRI</li>
-                <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDangereux }}T de déchets dangereux</li>
-                <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereux }}T de déchets non dangereux, dont
-                    <ul>
-                        <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers }}T de déchets ménagers
-                        </li>
-                        <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri }}T de refus de tri
-                        </li>
-                        <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae }}T de déchets DAE non dangereux</li>
-                    </ul>
-                </li>
-            </ul>
-            </li>
-        </ul>
+
+        {% if not declaration.declarationsFonctionnementLigne is empty %}
+          <h3 class="title is-3">Declaration générale de fonctionnement</h3>
+          {% for declarationLigne in declaration.declarationsFonctionnementLigne %}
+              {% if declarationLigne.ligne %}
+              <h4 class="title is-4">Ligne n° {{ declarationLigne.ligne.numero }}</h4>
+              {% else %}
+              <h4 class="title is-4">ligne</h4>
+              {% endif %}
+
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Nombre d'heures de fonctionnement théorique</td>
+                    <td>{{ declarationLigne.nbHeuresFonctionnementTh }}</td>
+                  </tr>
+                  <tr>
+                    <td>Nombre d'heures de fonctionnement réel</td>
+                    <td>{{ declarationLigne.nbHeuresFonctionnementReel }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+          {% endfor %}
         {% endif %}
 
         {% if not declaration.mesuresDioxine is empty %}
-        <h3 class="title is-3">Declaration dioxines</h3>
-        {% for mesureDioxine in declaration.mesuresDioxine %}
-            {% if mesureDioxine.ligne %}
-            <h4 class="title is-4">Ligne n° {{ mesureDioxine.ligne.numero }}</h4>
-            {% else %}
-            <h4 class="title is-4">ligne</h4>
-            {% endif %}
+          <h3 class="title is-3">Declaration dioxines</h3>
+          {% for mesureDioxine in declaration.mesuresDioxine %}
+              {% if mesureDioxine.ligne %}
+              <h4 class="title is-4">Ligne n° {{ mesureDioxine.ligne.numero }}</h4>
+              {% else %}
+              <h4 class="title is-4">ligne</h4>
+              {% endif %}
 
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Nom du laboratoire</td>
-                  <td>{{ mesureDioxine.nomLaboratoire }}</td>
-                </tr>
-                <tr>
-                  <td>Date de début des mesures</td>
-                  <td>{{ mesureDioxine.dateDebut|date("d/m/Y") }}</td>
-                </tr>
-                <tr>
-                  <td>Date de fin des mesures</td>
-                  <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
-                </tr>
-                <tr>
-                  <td>Disponibilité de la ligne sur la période (%) </td>
-                  <td>{{ mesureDioxine.disponibiliteLigne }}</td>
-                </tr>
-                <tr>
-                  <td>Disponibilité de l'analyseur sur la période (%) </td>
-                  <td>{{ mesureDioxine.disponibiliteAnalyseur }}</td>
-                </tr>
-                <tr>
-                  <td>Concentration en dioxines </td>
-                  <td>{{ mesureDioxine.concentration }}</td>
-                </tr>
-                <tr>
-                  <td>Remarques</td>
-                  <td>{{ mesureDioxine.commentaire }}</td>
-                </tr>
-              </tbody>
-            </table>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Nom du laboratoire</td>
+                    <td>{{ mesureDioxine.nomLaboratoire }}</td>
+                  </tr>
+                  <tr>
+                    <td>Date de début des mesures</td>
+                    <td>{{ mesureDioxine.dateDebut|date("d/m/Y") }}</td>
+                  </tr>
+                  <tr>
+                    <td>Date de fin des mesures</td>
+                    <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
+                  </tr>
+                  <tr>
+                    <td>Disponibilité de la ligne sur la période (%) </td>
+                    <td>{{ mesureDioxine.disponibiliteLigne }}</td>
+                  </tr>
+                  <tr>
+                    <td>Disponibilité de l'analyseur sur la période (%) </td>
+                    <td>{{ mesureDioxine.disponibiliteAnalyseur }}</td>
+                  </tr>
+                  <tr>
+                    <td>Concentration en dioxines </td>
+                    <td>{{ mesureDioxine.concentration }}</td>
+                  </tr>
+                  <tr>
+                    <td>Remarques</td>
+                    <td>{{ mesureDioxine.commentaire }}</td>
+                  </tr>
+                </tbody>
+              </table>
 
-        {% endfor %}
+          {% endfor %}
+        {% endif %}
     </div>
-    {% endif %}
 
     </div>
   </section>

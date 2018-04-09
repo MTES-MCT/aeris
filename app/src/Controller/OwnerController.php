@@ -6,12 +6,12 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationFonctionnementLigne;
 use App\Entity\Declaration\MesureDioxine;
 use App\Form\DeclarationIncinerateurType;
 use App\Form\DeclarationFonctionnementLigneType;
 use App\Form\DeclarationDechetsType;
 use App\Form\MesureDioxineType;
-use App\Form\DeclarationFonctionnementLigne;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -144,6 +144,10 @@ class OwnerController extends AerisController
             $mesureDioxine = new MesureDioxine();
             $mesureDioxine->setLigne($currLine);
             $declarationIncinerateur->addMesuresDioxines($mesureDioxine);
+
+            $fonctionnementLigne = new DeclarationFonctionnementLigne();
+            $fonctionnementLigne->setLigne($currLine);
+            $declarationIncinerateur->addDeclarationFonctionnementLigne($fonctionnementLigne);
         }
 
         return $declarationIncinerateur;

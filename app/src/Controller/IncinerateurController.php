@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationIncinerateur;
 
-class IncinerateurController extends Controller
+class IncinerateurController extends AerisController
 {
     private function canAccessIncinerateur($incinerateur){
         $authChecker = $this->get('security.authorization_checker'); 
