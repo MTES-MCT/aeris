@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use App\Form\Type\FloatType;
 
 class MesureDioxineType extends AbstractType
 {
@@ -19,7 +20,7 @@ class MesureDioxineType extends AbstractType
             ->add('nomLaboratoire', TextType::class)
             ->add('dateDebut', DateType::class, ['widget' => 'single_text'])
             ->add('dateFin', DateType::class, ['widget' => 'single_text'])
-            ->add('disponibiliteLigne', NumberType::class)
+            ->add('disponibiliteLigne', FloatType::class)
             ->add('disponibiliteAnalyseur', NumberType::class)
             ->add('concentration')
             ->add('commentaire')

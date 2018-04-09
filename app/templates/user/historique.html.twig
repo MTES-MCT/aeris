@@ -2,6 +2,12 @@
 {% block body %}
   <section class="section">
     <div class="container">
+      {% for declarationId in app.flashes('declaration') %}
+          <div class="notification is-success">
+Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href="{{ path('route_cr_declaration', {declarationId: declarationId}) }}">ici</a>.
+          </div>
+      {% endfor %}
+
       <h2>Historique de déclarations de <strong>{{incinerateur.name}}</strong></h2>
 
       <table class="table">

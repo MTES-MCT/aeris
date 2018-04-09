@@ -65,6 +65,11 @@ class OwnerController extends AerisController
             ]));
             $response->prepare($request);
 
+            $this->addFlash(
+                'declaration',
+                $declaration->getId()
+            );
+
             return $response->send();
         }
 

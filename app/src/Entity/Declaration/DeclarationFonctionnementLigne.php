@@ -37,6 +37,8 @@ class DeclarationFonctionnementLigne
      */
     private $ligne;
 
+
+
     /**
      * @param mixed $id
      *

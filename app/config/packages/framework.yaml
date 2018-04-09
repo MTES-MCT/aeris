@@ -30,3 +30,6 @@ framework:
         #app: cache.adapter.apcu
     templating:
         engines: ['twig']
+        form:
+            resources:
+                - ':form:float_widget.html.php'
