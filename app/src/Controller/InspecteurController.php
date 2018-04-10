@@ -40,7 +40,7 @@ class InspecteurController extends AerisController
             ->getRepository(Incinerateur::class)
             ->findAll();
 
-        return $this->render("user/liste-incinerateurs.html.twig", [
+        return $this->render("inspecteur/liste-incinerateurs.html.twig", [
             'incinerateurs' =>  $incinerateurs
         ]);
     }
