@@ -42,10 +42,11 @@ def enable_project(env_name, deployment_directory):
     # warmup cache
     with cd(deployment_directory):
         run('composer install')
-        run('composer dump-autoload')
+        run('composer dump-autoload --optimize')
         run('npm install')
         run('bin/console cache:clear --env=dev')
         run('bin/console cache:clear --env=prod')
+        run('bin/console doctrine:migrations:migrate --no-interaction')
         run('bin/console cache:warmup --env=dev >> /dev/null')
         run('bin/console cache:warmup --env=prod >> /dev/null')
 
