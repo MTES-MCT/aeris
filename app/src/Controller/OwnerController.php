@@ -86,59 +86,11 @@ class OwnerController extends AerisController
         }
 
         $mainIncinerateur = $this->getMainIncinerateur();
-        $dioxines = [];
-        $listOfMonths = $this->createListOfMonths();
-        $output = [
-            'months' =>  [],
-            'lines' => []
-        ];
+        $dashboardData = $this->getIncinerateurDashboardData($mainIncinerateur);
 
-        foreach($mainIncinerateur->getLignes() as $currLine) {
-            $output['lines'][$currLine->getNumero()] = [];
-            $dioxines[$currLine->getNumero()] = [];
-        }
-
-        foreach($listOfMonths as $date) {
-            $currDate = $date->format("M Y");
-            $output['months'][] = $currDate;
-
-            foreach($mainIncinerateur->getLignes() as $currLine) {
-                $output['lines'][$currLine->getNumero()][] = 0;
-            }
-        }
-
-        foreach ($mainIncinerateur->getDeclarationsIncinerateur() as $declaration) {
-
-           $declarationsDioxines = $declaration->getMesuresDioxine();
-           if ($declarationsDioxines) {
-            foreach ($declarationsDioxines as $currDeclarationDioxines) {
-                $ligne = $currDeclarationDioxines->getLigne();
-                if ($ligne != null) {
-                    $result = [
-                        'numeroLigne' =>  $ligne->getNumero(),
-                        'debut' => $currDeclarationDioxines->getDateDebut(),
-                        'fin' => $currDeclarationDioxines->getDateFin(),
-                        'disponibiliteLigne' =>  $currDeclarationDioxines->getDisponibiliteLigne(),
-                        'disponibiliteAnalyseur' =>  $currDeclarationDioxines->getDisponibiliteAnalyseur(),
-                        'concentration' =>  $currDeclarationDioxines->getConcentration(),
-                    ];
-
-                    $month = $currDeclarationDioxines->getDateDebut()->format('M Y');
-                    $monthIndex = array_search($month, $output['months']);
-                    if($monthIndex !== NULL) {
-                        $output['lines'][$ligne->getNumero()][$monthIndex] = $currDeclarationDioxines->getConcentration();
-                    }
-                    array_push($dioxines[$ligne->getNumero()], $result);
-                }
-            }
-           }
-        }
-
-        return $this->render("owner/dashboard.html.twig", [
-            'output' => $output,
-            'dioxines' => $dioxines,
+        return $this->render("owner/dashboard-exploitant.html.twig", array_merge([
             'mainIncinerateur' =>  $mainIncinerateur
-        ]);
+        ], $dashboardData));
     }
 
     private function createDeclaration(){
@@ -156,16 +108,6 @@ class OwnerController extends AerisController
         }
 
         return $declarationIncinerateur;
-    }
-
-    private function createListOfMonths(){
-        $period = new \DatePeriod(
-             new \DateTime('-6 months'),
-             new \DateInterval('P1M'),
-             new \DateTime()
-        );
-
-        return $period;
     }
 
 /*

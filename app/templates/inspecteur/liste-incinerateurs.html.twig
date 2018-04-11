@@ -14,7 +14,7 @@
           <tbody>
             {% for incinerateur in incinerateurs %}
             <tr>
-              <th><a href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">{{ incinerateur.name }}</a></th>
+              <th><a href="{{ path('route_dashboard_incinerateur', {incinerateurId: incinerateur.id }) }}">{{ incinerateur.name }}</a></th>
               <td>
                 <a class="button" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder</a>
               </td>

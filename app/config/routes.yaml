@@ -19,10 +19,9 @@ route_cr_declaration:
 #    path: /compte-rendu
 #    defaults: { _controller: 'App\Controller\IncinerateurController::crSample' }
 
-
 ### Owner
 route_dashboard_owner:
-    path: /tableau-de-bord-incinerateur
+    path: /tableau-de-bord-exploitant
     defaults: { _controller: 'App\Controller\OwnerController::dashboard' }
 
 route_declaration:
@@ -42,6 +41,10 @@ route_dashboard_inspecteur:
 route_liste_incinerateurs:
     path: /liste-incinerateurs
     defaults: { _controller: 'App\Controller\InspecteurController::liste_incinerateurs' }
+
+route_dashboard_incinerateur:
+    path: /tableau-de-bord-incinerateur/{incinerateurId}
+    defaults: { _controller: 'App\Controller\InspecteurController::dashboard_incinerateur' }
 
 ### Login
 fos_user:

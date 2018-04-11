@@ -1,0 +1,12 @@
+{% extends "common/base_inside.html.twig" %}
+{% block body %}
+  <section class="section">
+    <div class="container">
+       <a class="button is-primary" style="float:right" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder à l'historique de {{ incinerateur.name }}</a>
+      <h2 class="title is-2">Tableau de bord</h2>
+
+            {% include "common/dashboard-incinerateur.html.twig" with {'incinerateur' : incinerateur} %}
+
+    </div>
+  </section>
+{% endblock %}

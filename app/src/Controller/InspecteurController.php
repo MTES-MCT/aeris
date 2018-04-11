@@ -23,11 +23,30 @@ class InspecteurController extends AerisController
     }
 
     public function dashboard_inspecteur(){
-        if (!$this->isInspecteur()) {
+
+        return $this->render("inspecteur/dashboard.html.twig");
+    }
+
+    public function dashboard_incinerateur($incinerateurId)
+    {
+        $incinerateur = $this->getDoctrine()
+            ->getRepository(Incinerateur::class)
+            ->find($incinerateurId);
+
+        if (!$incinerateur) {
+            throw $this->createNotFoundException(
+                "Pas d'incinerateur pour l' id ".$incinerateurId
+            );
+        }
+        if(!$this->isInspecteur()) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        return $this->render("inspecteur/dashboard.html.twig");
+        $dashboardData = $this->getIncinerateurDashboardData($incinerateur);
+
+        return $this->render("inspecteur/dashboard-incinerateur.html.twig", array_merge([
+            'incinerateur' =>  $incinerateur
+        ], $dashboardData));
     }
 
     public function liste_incinerateurs()
