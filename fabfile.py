@@ -9,13 +9,16 @@ env.hosts = [
 ]
 env.user = 'root' # should be changed asap
 
-def deploy(env_name):
+def check_environment(env_name):
     existing_environments = ['staging', 'prod']
     if env_name not in existing_environments:
         puts('%s is not a valid environment' % env_name)
         puts('Allowed environments: %s' % ', '.join(existing_environments))
         exit(1)
 
+def deploy(env_name):
+    check_environment(env_name)
+    
     deploy_timestamp="%(time).0f" % {'time':time()}
 
     deployment_directory='/home/deploy/%s/releases/release-%s' % (env_name, deploy_timestamp)
@@ -41,16 +44,26 @@ def enable_project(env_name, deployment_directory):
     run('cp /home/deploy/%s/shared/env %s/.env' % (env_name, deployment_directory)) 
     # warmup cache
     with cd(deployment_directory):
-        run('composer install')
-        run('composer dump-autoload --optimize')
         run('npm install')
-        run('bin/console cache:clear --env=dev')
-        run('bin/console cache:clear --env=prod')
+        run('composer install --no-dev --optimize-autoloader')
+        run('bin/console cache:clear --env=dev --no-debug')
+        run('bin/console cache:clear --env=prod --no-debug')
         run('bin/console doctrine:migrations:migrate --no-interaction')
-        run('bin/console cache:warmup --env=dev >> /dev/null')
-        run('bin/console cache:warmup --env=prod >> /dev/null')
 
     # Create symlink
+    run('ln -sfn %s /var/www/aeris-%s' % (deployment_directory, env_name))
+    # Restart the necessary services
+    run('service php7.0-fpm restart')
+    run('service nginx restart')
+
+def list_releases(env_name):
+    check_environment(env_name)
+    run('find /home/deploy/%s/releases -maxdepth 1 -printf "%%f\n"' % (env_name))
+
+def set_release(env_name, release):
+    # Create symlink
+    deployment_directory='/home/deploy/%s/releases/%s' % (env_name, release)
+ 
     run('ln -sfn %s /var/www/aeris-%s' % (deployment_directory, env_name))
     # Restart the necessary services
     run('service php7.0-fpm restart')
