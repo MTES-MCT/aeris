@@ -32,7 +32,7 @@ Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href=
                 {{ declaration.comment }}
               </td>
               <td>
-                <a class="button">Telecharger le fichier</a>
+                <a class="button" href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">Voir la déclaration</a>
               </td>
             </tr>
             {% endfor  %}

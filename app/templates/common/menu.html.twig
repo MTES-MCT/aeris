@@ -5,11 +5,6 @@
 
   <div class="navbar-menu">
       <div class="navbar-end">
-          <div class="navbar-item">
-            <a href="{{ path('route_dashboard') }}">
-              <i class="fas fa-chart-line"></i> Tableau de bord
-            </a>
-          </div>
           {% if is_granted('ROLE_INSPECTEUR') %}
            <div class="navbar-item">
             <a href="{{ path('route_liste_incinerateurs') }}">
@@ -17,6 +12,11 @@
             </a>
           </div>  
           {% elseif is_granted('ROLE_PROPRIETAIRE') %}
+          <div class="navbar-item">
+            <a href="{{ path('route_dashboard') }}">
+              <i class="fas fa-chart-line"></i> Tableau de bord
+            </a>
+          </div>
           <div class="navbar-item">
             <a href="{{ path('route_declaration') }}">
               <i class="fas fa-comment"></i> Déclarer
