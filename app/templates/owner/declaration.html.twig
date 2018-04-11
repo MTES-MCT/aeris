@@ -11,8 +11,7 @@
 {% block body %}
   <section class="section">
     <div class="container">
-        <h2 class="title is-2">Effectuer une déclaration</h2>
-
+        <h2 class="title is-2">Effectuer une déclaration mensuelle</h2>
 
         {{ form_start(form) }}
         <h3 class="title is-3">Volume de déchets incinérés</h3>
@@ -47,12 +46,12 @@
             <table class="table">
               <tbody>
                 <tr>
-                  <td>Nombre d'heures de fonctionnement théorique</td>
+                  <td>Nombre d'heures de fonctionnement théoriques</td>
                   <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
                   <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
                 </tr>
                 <tr>
-                  <td>Nombre d'heures de fonctionnement réel</td>
+                  <td>Nombre d'heures de fonctionnement réelles</td>
                   <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
                   <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
                 </tr>
@@ -93,7 +92,9 @@
                   <td>{{ form_errors(mesureDioxine.disponibiliteAnalyseur) }}</td>
                 </tr>
                 <tr>
-                  <td>Concentration en dioxines </td>
+                  <td>Concentration des PCDD/PCDF<br/>
+                    (ng NATO I-TEQ/Nm<sup>3</sup> à O<sub>2réf</sub> sur gaz sec)
+                  </td>
                   <td>{{ form_widget(mesureDioxine.concentration) }}</td>
                   <td>{{ form_errors(mesureDioxine.concentration) }}</td>
                 </tr>
