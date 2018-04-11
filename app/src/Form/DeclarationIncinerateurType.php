@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class DeclarationIncinerateurType extends AbstractType
 {
@@ -30,6 +31,7 @@ class DeclarationIncinerateurType extends AbstractType
                 'entry_type' => DeclarationFonctionnementLigneType::class,
                 'entry_options' => array('label' => false),
             ])
+           ->add('declarationMonth', DateType::class, [])
             ->add('comment')
         ;
     }

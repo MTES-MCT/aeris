@@ -29,6 +29,11 @@ class DeclarationIncinerateur
     private $createdAt;
 
     /**
+     * @ORM\Column(name="declaration_month", type="datetime", nullable=true)
+     */
+    private $declarationMonth;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Incinerateur", inversedBy="declarationsIncinerateur")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -268,6 +273,26 @@ class DeclarationIncinerateur
     {
         $this->declarationsFonctionnementLigne[] = $declaration;
         $declaration->setDeclarationIncinerateur($this);
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeclarationMonth()
+    {
+        return $this->declarationMonth;
+    }
+
+    /**
+     * @param mixed $declarationMonth
+     *
+     * @return self
+     */
+    public function setDeclarationMonth($declarationMonth)
+    {
+        $this->declarationMonth = $declarationMonth;
+
         return $this;
     }
 }

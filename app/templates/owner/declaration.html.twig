@@ -12,8 +12,18 @@
   <section class="section">
     <div class="container">
         <h2 class="title is-2">Effectuer une déclaration mensuelle</h2>
-
         {{ form_start(form) }}
+
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Mois de déclaration</td>
+              <td>{{ form_widget(form.declarationMonth) }}</td>
+              <td>{{ form_errors(form.declarationMonth) }}</td>
+            </tr>
+          </tbody>
+        </table>
+
         <h3 class="title is-3">Volume de déchets incinérés</h3>
         <div class="recap-declaration-dechets">
             <ul>
