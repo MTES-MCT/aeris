@@ -37,6 +37,12 @@ class Incinerateur
     private $owner;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="incinerateursToWatch")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $inspecteur;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Declaration\DeclarationIncinerateur", mappedBy="incinerateur")
      */
     private $declarationsIncinerateur;

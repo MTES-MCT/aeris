@@ -24,6 +24,11 @@ class User extends BaseUser
      */
     private $incinerateurs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Incinerateur", mappedBy="inspecteur")
+     */
+    private $incinerateursToWatch;
+
     public function __construct()
     {
         parent::__construct();
