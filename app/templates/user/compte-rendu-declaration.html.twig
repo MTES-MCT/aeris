@@ -13,7 +13,12 @@
 {% block body %}
   <section class="section">
     <div class="container">
+      {% if declaration.declarationMonth %}
+    <h2 class="title is-2">Déclaration concernant les rejets durant {{ declaration.declarationMonth|date('m/Y') }} </h2>
+    Déclaration effectuée le {{ declaration.createdAt|date('d/m/Y') }}
+    {% else %}
     <h2 class="title is-2">Déclaration du {{ declaration.createdAt|date('d/m/Y') }} </h2>
+    {% endif %}
 
     <div class="recap-declaration-dechets">
         {% if declaration.declarationDechets %}

@@ -23,15 +23,27 @@ class DeclarationIncinerateurType extends AbstractType
             ->add('declarationDechets', 
                 DeclarationDechetsType::class
             )
-           ->add('mesuresDioxine', CollectionType::class, [
-                'entry_type' => MesureDioxineType::class,
-                'entry_options' => array('label' => false),
-            ])
-           ->add('declarationsFonctionnementLigne', CollectionType::class, [
-                'entry_type' => DeclarationFonctionnementLigneType::class,
-                'entry_options' => array('label' => false),
-            ])
-           ->add('declarationMonth', DateType::class, [])
+            ->add(
+                'mesuresDioxine',
+                CollectionType::class,
+                [
+                    'entry_type' => MesureDioxineType::class,
+                    'entry_options' => array('label' => false),
+                ]
+            )
+            ->add(
+                'declarationsFonctionnementLigne',
+                CollectionType::class,
+                [
+                    'entry_type' => DeclarationFonctionnementLigneType::class,
+                    'entry_options' => array('label' => false),
+                ]
+            )
+            ->add('declarationMonth',
+                DateType::class,
+                [
+                    'data' => new \DateTime('first day of this month')
+                ])
             ->add('comment')
         ;
     }

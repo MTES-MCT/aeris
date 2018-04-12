@@ -20,11 +20,9 @@ class MesureDioxineType extends AbstractType
             ->add('nomLaboratoire', TextType::class)
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
             ])
             ->add('disponibiliteLigne', FloatType::class)
             ->add('disponibiliteAnalyseur', NumberType::class)
