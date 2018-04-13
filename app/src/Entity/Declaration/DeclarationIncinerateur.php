@@ -12,7 +12,8 @@ use Doctrine\Common\Collections\Collection;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeclarationIncinerateurRepository")
  * @ORM\HasLifecycleCallbacks()
-* @ORM\Table(name="declaration_incinerateur")
+ * @ORM\Table(name="declaration_incinerateur")
+ * @Vich\Uploadable
  */
 class DeclarationIncinerateur
 {
@@ -189,12 +190,12 @@ class DeclarationIncinerateur
      */
     public function setDeclarationFile(File $declarationFile = null)
     {
-        $this->imageFile = $declarationFile;
+        $this->declarationFile = $declarationFile;
     }
 
     public function getDeclarationFile()
     {
-        return $this->imageFile;
+        return $this->declarationFile;
     }
 
     /**
