@@ -42,12 +42,12 @@ def upload_code(deployment_directory):
 def enable_project(env_name, deployment_directory):
     # Copy of the environment file
     run('cp /home/deploy/%s/shared/env %s/.env' % (env_name, deployment_directory)) 
+    
     # warmup cache
     with cd(deployment_directory):
         run('npm install')
-        run('composer install --no-dev --optimize-autoloader')
-        run('bin/console cache:clear --env=dev --no-debug')
-        run('bin/console cache:clear --env=prod --no-debug')
+        run('composer install --optimize-autoloader')
+        run('bin/console cache:clear --no-debug')
         run('bin/console doctrine:migrations:migrate --no-interaction')
 
     # Create symlink
