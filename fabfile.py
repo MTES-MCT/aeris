@@ -47,7 +47,12 @@ def enable_project(env_name, deployment_directory):
     with cd(deployment_directory):
         run('npm install')
         run('composer install --optimize-autoloader')
-        run('bin/console cache:clear --no-debug')
+        run('chmod a+w var/ -R')
+        run('bin/console cache:clear --env=dev --no-debug')
+        run('bin/console cache:clear --env=prod --no-debug')
+        run('bin/console cache:warmup --env=dev --no-debug')
+        run('bin/console cache:warmup --env=prod --no-debug')
+        run('chmod a+w var/ -R')
         run('bin/console doctrine:migrations:migrate --no-interaction')
 
     # Create symlink
