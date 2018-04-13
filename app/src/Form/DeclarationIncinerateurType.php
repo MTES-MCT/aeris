@@ -44,7 +44,9 @@ class DeclarationIncinerateurType extends AbstractType
                 [
                     'data' => new \DateTime('first day of this month')
                 ])
-            ->add('declarationFile', VichFileType::class)
+            ->add('declarationFile', VichFileType::class, [
+                    'required' => false
+                ])
             ->add('comment')
         ;
     }

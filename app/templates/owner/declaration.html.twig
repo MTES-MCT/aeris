@@ -122,6 +122,11 @@
 
         {% endfor %}
 
+        <h3 class="title is-3">Declaration de mesures continues</h3>
+        <p>
+
+        <a href="{{ url('route_download_template') }}" class="button is-primary">Téléchargez un modèle de déclaration</a> puis renvoyez ce document complété: {{ form_widget(form.declarationFile) }}<br/>
+        </p>
         <h3 class="title is-3">Remarques</h3>
         {{ form_widget(form.comment) }}<br/>
 
