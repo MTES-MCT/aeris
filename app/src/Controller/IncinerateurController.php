@@ -59,6 +59,7 @@ class IncinerateurController extends AerisController
             'declaration' => $declaration
         ]);
     }
+
 /*
     public function crSample()
     {
