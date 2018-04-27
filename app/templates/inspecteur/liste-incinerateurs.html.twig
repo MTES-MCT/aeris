@@ -8,7 +8,8 @@
           <thead>
             <tr>
               <th>Incinérateur</th>
-              <th>Lien</th>
+              <th>Tableau de bord</th>
+              <th>Historique des déclarations</th>
             </tr>
           </thead>
           <tbody>
@@ -16,7 +17,11 @@
             <tr>
               <th><a href="{{ path('route_dashboard_incinerateur', {incinerateurId: incinerateur.id }) }}">{{ incinerateur.name }}</a></th>
               <td>
-                <a class="button" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder</a>
+                <a class="button" href="{{ path('route_dashboard_incinerateur', {incinerateurId: incinerateur.id }) }}">Tableau de bord</a>
+              </td>
+
+              <td>
+                <a class="button" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Historique des déclarations</a>
               </td>
             </tr>
             {% endfor %}
