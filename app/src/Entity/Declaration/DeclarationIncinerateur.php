@@ -67,11 +67,6 @@ class DeclarationIncinerateur
      * @ORM\OneToOne(targetEntity="App\Entity\Declaration\DeclarationDechets", mappedBy="declarationIncinerateur", cascade={"persist"})
      */
     private $declarationDechets;
- 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\MesureDioxine", mappedBy="declarationIncinerateur", cascade={"persist"})
-     */
-    private $mesuresDioxine;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Declaration\DeclarationFonctionnementLigne", mappedBy="declarationIncinerateur", cascade={"persist"})
@@ -79,7 +74,6 @@ class DeclarationIncinerateur
     private $declarationsFonctionnementLigne;
 
     public function __construct(){
-        $this->mesuresDioxine = new ArrayCollection();
         $this->declarationsFonctionnementLigne = new ArrayCollection();
     }
 
@@ -222,35 +216,6 @@ class DeclarationIncinerateur
     /**
      * @return mixed
      */
-    public function getMesuresDioxine()
-    {
-        return $this->mesuresDioxine;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function setMesuresDioxine($mesures)
-    {
-        $this->mesuresDioxine = $mesures;
-        return $this;
-    }
-
-    /**
-     * @param mixed $mesuresDioxine
-     *
-     * @return self
-     */
-    public function addMesuresDioxines($mesureDioxine)
-    {
-        $this->mesuresDioxine[] = $mesureDioxine;
-        $mesureDioxine->setDeclarationIncinerateur($this);
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getDeclarationsFonctionnementLigne()
     {
         return $this->declarationsFonctionnementLigne;
@@ -266,7 +231,7 @@ class DeclarationIncinerateur
     }
 
     /**
-     * @param mixed $mesuresDioxine
+     * @param mixed $declaration
      *
      * @return self
      */

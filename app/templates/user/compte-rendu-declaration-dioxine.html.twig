@@ -1,0 +1,67 @@
+{% extends "common/base_inside.html.twig" %}
+
+{% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+    </style>
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container">
+    <h2 class="title is-2">Déclaration de dioxines</h2>
+        {% if not declaration.mesuresDioxine is empty %}
+          <h3 class="title is-3">Declaration dioxines</h3>
+          {% for mesureDioxine in declaration.mesuresDioxine %}
+              {% if mesureDioxine.ligne %}
+              <h4 class="title is-4">Ligne n° {{ mesureDioxine.ligne.numero }}</h4>
+              {% else %}
+              <h4 class="title is-4">ligne</h4>
+              {% endif %}
+
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td>Nom du laboratoire</td>
+                    <td>{{ mesureDioxine.nomLaboratoire }}</td>
+                  </tr>
+                  <tr>
+                    <td>Date de début des mesures</td>
+                    <td>{{ mesureDioxine.dateDebut|date("d/m/Y") }}</td>
+                  </tr>
+                  <tr>
+                    <td>Date de fin des mesures</td>
+                    <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
+                  </tr>
+                  <tr>
+                    <td>Disponibilité de la ligne sur la période (%) </td>
+                    <td>{{ mesureDioxine.disponibiliteLigne }}</td>
+                  </tr>
+                  <tr>
+                    <td>Disponibilité de l'analyseur sur la période (%) </td>
+                    <td>{{ mesureDioxine.disponibiliteAnalyseur }}</td>
+                  </tr>
+                  <tr>
+                    <td>Concentration des PCDD/PCDF<br/>
+                    (ng NATO I-TEQ/Nm<sup>3</sup> à O<sub>2réf</sub> sur gaz sec)</td>
+                    <td style="background-color:#C7DBD0">{{ mesureDioxine.concentration }}</td>
+                  </tr>
+                  <tr>
+                    <td>Remarques</td>
+                    <td>{{ mesureDioxine.commentaire }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+          {% endfor %}
+        {% endif %}
+
+    </div>
+
+    </div>
+  </section>
+{% endblock %}

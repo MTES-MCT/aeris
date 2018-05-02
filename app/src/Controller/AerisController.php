@@ -51,7 +51,7 @@ class AerisController extends Controller
             }
         }
 
-        foreach ($incinerateur->getDeclarationsIncinerateur() as $declaration) {
+        foreach ($incinerateur->getDeclarationsDioxine() as $declaration) {
 
            $declarationsDioxines = $declaration->getMesuresDioxine();
            if ($declarationsDioxines) {

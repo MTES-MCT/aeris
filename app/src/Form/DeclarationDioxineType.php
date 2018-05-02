@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationDioxine;
 use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\MesureDioxine;
 use App\Form\DeclarationDechetsType;
@@ -15,38 +16,19 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-class DeclarationIncinerateurType extends AbstractType
+class DeclarationDioxineType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('declarationDechets', 
-                DeclarationDechetsType::class
-            )
-            /*->add(
+            ->add(
                 'mesuresDioxine',
                 CollectionType::class,
                 [
                     'entry_type' => MesureDioxineType::class,
                     'entry_options' => array('label' => false),
                 ]
-            )*/
-            ->add(
-                'declarationsFonctionnementLigne',
-                CollectionType::class,
-                [
-                    'entry_type' => DeclarationFonctionnementLigneType::class,
-                    'entry_options' => array('label' => false),
-                ]
             )
-            ->add('declarationMonth',
-                DateType::class,
-                [
-                    'data' => new \DateTime('first day of this month')
-                ])
-            ->add('declarationFile', VichFileType::class, [
-                    'required' => false
-                ])
             ->add('comment')
         ;
     }
@@ -54,7 +36,7 @@ class DeclarationIncinerateurType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => DeclarationIncinerateur::class,
+            'data_class' => DeclarationDioxine::class,
         ]);
     }
 }

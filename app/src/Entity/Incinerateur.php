@@ -42,6 +42,11 @@ class Incinerateur
     private $declarationsIncinerateur;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\DeclarationDioxine", mappedBy="incinerateur")
+     */
+    private $declarationsDioxine;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\IncinerateurLigne", mappedBy="incinerateur")
      */
     private $lignes;
@@ -140,6 +145,26 @@ class Incinerateur
     public function setLignes($lignes)
     {
         $this->lignes = $lignes;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeclarationsDioxine()
+    {
+        return $this->declarationsDioxine;
+    }
+
+    /**
+     * @param mixed $declarationsDioxine
+     *
+     * @return self
+     */
+    public function setDeclarationsDioxine($declarationsDioxine)
+    {
+        $this->declarationsDioxine = $declarationsDioxine;
 
         return $this;
     }

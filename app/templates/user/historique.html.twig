@@ -10,6 +10,8 @@ Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href=
 
       <h2 class="title is-2">Historique de déclarations de <strong>{{incinerateur.name}}</strong></h2>
 
+      <h3 class="title is-3">Mesures continues</h3>
+
       <table class="table">
           <thead>
             <tr>
@@ -33,6 +35,35 @@ Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href=
               </td>
               <td>
                 <a class="button" href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">Voir la déclaration</a>
+              </td>
+            </tr>
+            {% endfor  %}
+          </tbody>
+      </table>
+
+            <table class="table">
+          <thead>
+            <tr>
+              <th>Déclaration</th>
+              <th>Date</th>
+              <th>Commentaire</th>
+              <th>Lien</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for declaration in incinerateur.declarationsDioxine  %}
+            <tr>
+              <th>
+                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
+              </th>
+              <td>
+                {{ declaration.createdAt|date('d/m/Y') }}
+              </td>
+              <td>
+                {{ declaration.comment }}
+              </td>
+              <td>
+                <a class="button" href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">Voir la déclaration</a>
               </td>
             </tr>
             {% endfor  %}

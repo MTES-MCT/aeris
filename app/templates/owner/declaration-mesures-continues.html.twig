@@ -1,0 +1,89 @@
+{% extends "common/base_inside.html.twig" %}
+{% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+    </style>
+{% endblock %}
+{% block body %}
+  <section class="section">
+    <div class="container">
+        <h2 class="title is-2">Effectuer une déclaration mensuelle</h2>
+        {{ form_start(form) }}
+
+        <table class="table">
+          <tbody>
+            <tr>
+
+              <td>Mois de déclaration</td>
+              <style type="text/css">#declaration_incinerateur_declarationMonth_day {
+                display:none;
+                }</style>
+              <td>{{ form_widget(form.declarationMonth) }}</td>
+              <td>{{ form_errors(form.declarationMonth) }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="title is-3">Volume de déchets incinérés</h3>
+        <div class="recap-declaration-dechets">
+            <ul>
+                <li>
+                {{ form_widget(form.declarationDechets.qtiteIncinereeTotale) }} T de déchets incinérés, dont:
+
+                <ul>
+                    <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsDasri) }}T DASRI</li>
+                    <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsDangereux) }}T de déchets dangereux</li>
+                    <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereux) }}T de déchets non dangereux, dont
+                        <ul>
+                            <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers) }}T de déchets ménagers
+                            </li>
+                            <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri) }}T de refus de tri
+                            </li>
+                            <li>{{ form_widget(form.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae) }}T de déchets DAE non dangereux</li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+        </div>
+
+
+
+        <h3 class="title is-3">Declaration générale de fonctionnement</h3>
+        {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
+
+            <h4 class="title is-4">Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}</h4>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Nombre d'heures de fonctionnement théoriques</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                </tr>
+                <tr>
+                  <td>Nombre d'heures de fonctionnement réelles</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                </tr>
+              </tbody>
+            </table>
+        {% endfor %}
+
+
+        <h3 class="title is-3">Declaration de mesures continues</h3>
+        <p>
+
+        <a href="{{ url('route_download_template') }}" class="button is-primary">Téléchargez un modèle de déclaration</a> puis renvoyez ce document complété: {{ form_widget(form.declarationFile) }}<br/>
+        </p>
+        <h3 class="title is-3">Remarques</h3>
+        {{ form_widget(form.comment) }}<br/>
+
+        <input type="submit" value="Déclarer !" class="button is-primary"/>
+        {{ form_end(form) }}
+    </div>
+  </section>
+{% endblock %}
