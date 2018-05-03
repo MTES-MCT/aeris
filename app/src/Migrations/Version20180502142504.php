@@ -28,9 +28,9 @@ class Version20180502142504 extends AbstractMigration
         $this->addSql('ALTER TABLE mesure_dioxine RENAME COLUMN declaration_incinerateur_id TO declaration_dioxine_id');
         $this->addSql('ALTER TABLE mesure_dioxine ADD CONSTRAINT FK_29E44FB3B30F124D FOREIGN KEY (declaration_dioxine_id) REFERENCES declaration_dioxines (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('CREATE INDEX IDX_29E44FB3B30F124D ON mesure_dioxine (declaration_dioxine_id)');
-        $this->addSql('ALTER TABLE incinerateur DROP CONSTRAINT fk_bec9251bb7728aa0');
-        $this->addSql('DROP INDEX idx_bec9251bb7728aa0');
-        $this->addSql('ALTER TABLE incinerateur DROP inspecteur_id');
+        // $this->addSql('ALTER TABLE incinerateur DROP CONSTRAINT fk_bec9251bb7728aa0');
+        //$this->addSql('DROP INDEX idx_bec9251bb7728aa0');
+        //$this->addSql('ALTER TABLE incinerateur DROP inspecteur_id');
     }
 
     /**
