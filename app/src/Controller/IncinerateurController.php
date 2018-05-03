@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationDioxine;
 
 class IncinerateurController extends AerisController
 {
@@ -42,8 +43,29 @@ class IncinerateurController extends AerisController
 
     public function cr($declarationId)
     {
+        return $this->generateCRIfAllowed(
+            $declarationId,
+            DeclarationIncinerateur::class,
+            "user/compte-rendu-declaration.html.twig"
+        );
+    }
+
+    public function crDioxine($declarationId)
+    {
+        return $this->generateCRIfAllowed(
+            $declarationId,
+            DeclarationDioxine::class,
+            "user/compte-rendu-declaration-dioxine.html.twig"
+        );
+    }
+
+    private function generateCRIfAllowed(
+        $declarationId,
+        $type,
+        $template)
+    {
         $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
+            ->getRepository($type)
             ->find($declarationId);
 
         if (!$declaration) {
@@ -55,7 +77,7 @@ class IncinerateurController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        return $this->render("user/compte-rendu-declaration.html.twig", [
+        return $this->render($template, [
             'declaration' => $declaration
         ]);
     }

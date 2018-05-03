@@ -57,10 +57,10 @@ class MesureDioxine
     private $commentaire;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Declaration\DeclarationIncinerateur", inversedBy="mesuresDioxine")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Declaration\DeclarationDioxine", inversedBy="mesuresDioxine")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $declarationIncinerateur;
+    private $declarationDioxine;
 
     /**
      * @return mixed
@@ -245,19 +245,19 @@ class MesureDioxine
     /**
      * @return mixed
      */
-    public function getDeclarationIncinerateur()
+    public function getDeclarationDioxine()
     {
-        return $this->declarationIncinerateur;
+        return $this->declarationDioxine;
     }
 
     /**
-     * @param mixed $declarationIncinerateur
+     * @param mixed $declarationDioxine
      *
      * @return self
      */
-    public function setDeclarationIncinerateur($declarationIncinerateur)
+    public function setDeclarationDioxine($declarationDioxine)
     {
-        $this->declarationIncinerateur = $declarationIncinerateur;
+        $this->declarationDioxine = $declarationDioxine;
 
         return $this;
     }
