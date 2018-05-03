@@ -1,22 +1,40 @@
 {% extends "common/base_inside.html.twig" %}
 {% block stylesheets %}
 <style type="text/css">
-
+.title {
+  text-align: center;
+  padding-bottom: 2em;
+}
 .recap-declaration-dechets ul {
     list-style: square;
     padding-left: 2em;
+}
+.declaration-cta {
+
+}
+.columns {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.column {
+  text-align: center;
 }
     </style>
 {% endblock %}
 {% block body %}
   <section class="section">
     <div class="container">
-        <h2 class="title is-2">Effectuer une déclaration</h2>
-        
-        <ul>
-          <li><a href="{{ path('route_declaration_dioxines') }}">déclaration de dioxines</a></li>
-          <li><a href="{{ path('route_declaration_mesures_continues') }}">déclaration de mesures continues</a></li>
-        </ul>
+      <h2 class="title is-2">Commencez votre déclaration mensuelle</h2>
+
+      <div class="columns">
+        <div class="column">
+          <a href="{{ path('route_declaration_dioxines') }}" class="declaration-cta button is-primary is-large">Dioxines et furannes</a>
+        </div>
+        <div class="column">
+          <a href="{{ path('route_declaration_mesures_continues') }}" class="declaration-cta button is-primary is-large">Mesures continues</a>
+        </div>
+      </div>
 
     </div>
   </section>
