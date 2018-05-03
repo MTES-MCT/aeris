@@ -12,6 +12,7 @@ Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href=
 
       <h3 class="title is-3">Mesures continues</h3>
 
+      {% if not incinerateur.declarationsIncinerateur is empty %}
       <table class="table">
           <thead>
             <tr>
@@ -41,8 +42,14 @@ Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href=
           </tbody>
       </table>
 
-      <h3 class="title is-3">Dioxines</h3>
+      {% else %}
+      <p>Vous n'avez à ce  jour pas effectué de déclaration de mesures continues.</p>
+      <br>
+      <a href="{{ path('route_declaration_mesures_continues') }}" class="button is-primary is-large">Effectuer une déclaration de mesures continues</a>
+      {% endif %}
 
+      <h3 class="title is-3">Dioxines</h3>
+      {% if not incinerateur.declarationsDioxine is empty %}
       <table class="table">
           <thead>
             <tr>
@@ -71,6 +78,13 @@ Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href=
             {% endfor  %}
           </tbody>
       </table>
+
+      {% else %}
+      <p>Vous n'avez à ce  jour pas effectué de déclaration de dioxines et furannes.</p>
+      <br>
+      <a href="{{ path('route_declaration_dioxines') }}" class="button is-primary is-large">Effectuer une déclaration de dioxines et furannes</a>
+      {% endif %}
+
       {#
       <h2>compte rendu test</h2>
       <a href="{{ path('route_cr_sample') }}">accéder</a>

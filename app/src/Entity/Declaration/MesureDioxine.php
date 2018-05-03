@@ -57,6 +57,11 @@ class MesureDioxine
     private $commentaire;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $numeroCartouche;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Declaration\DeclarationDioxine", inversedBy="mesuresDioxine")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -258,6 +263,26 @@ class MesureDioxine
     public function setDeclarationDioxine($declarationDioxine)
     {
         $this->declarationDioxine = $declarationDioxine;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumeroCartouche()
+    {
+        return $this->numeroCartouche;
+    }
+
+    /**
+     * @param mixed $numeroCartouche
+     *
+     * @return self
+     */
+    public function setNumeroCartouche($numeroCartouche)
+    {
+        $this->numeroCartouche = $numeroCartouche;
 
         return $this;
     }

@@ -18,6 +18,7 @@ class MesureDioxineType extends AbstractType
     {
         $builder
             ->add('nomLaboratoire', TextType::class)
+            ->add('numeroCartouche', TextType::class)
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
             ])
