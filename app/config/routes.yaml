@@ -12,13 +12,12 @@ route_history:
     defaults: { _controller: 'App\Controller\IncinerateurController::historique' }
 
 route_cr_declaration:
-    path: /compte-rendu-declaration/{declarationId}
+    path: /historique/declaration-mesures-continues/{declarationId}
     defaults: { _controller: 'App\Controller\IncinerateurController::cr' }
 
 route_cr_declaration_dioxine:
-    path: /compte-rendu-declaration-dioxine/{declarationId}
+    path: /historique/declaration-dioxine/{declarationId}
     defaults: { _controller: 'App\Controller\IncinerateurController::crDioxine' }
-
 
 #route_cr_sample:
 #    path: /compte-rendu
@@ -30,15 +29,15 @@ route_dashboard_owner:
     defaults: { _controller: 'App\Controller\OwnerController::dashboard' }
 
 route_declaration:
-    path: /declaration
+    path: /declarer
     defaults: { _controller: 'App\Controller\OwnerController::declaration' }
 
 route_declaration_dioxines:
-    path: /declaration-dioxines
+    path: /declarer-dioxines
     defaults: { _controller: 'App\Controller\OwnerController::declarationDioxines' }
 
 route_declaration_mesures_continues:
-    path: /declaration-continues
+    path: /declarer-mesures-continues
     defaults: { _controller: 'App\Controller\OwnerController::declarationMesuresContinues' }
 
 

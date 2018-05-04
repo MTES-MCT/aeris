@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Aeris{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+      <style type="text/css">
+.menu-container {
+  margin-top: 1em;
+}
+.is-active {
+  background-color: #3273dc;
+}
+.is-active a {
+  color:white;
+  font-weight:bold;
+}
+      </style>
     {% block stylesheets %}
     {% endblock %}
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
@@ -12,7 +24,7 @@
   </head>
   <body>
   <section class="navigation">
-    <div class="container">
+    <div class="container menu-container">
         {% include 'common/menu.html.twig' %}
     </div>
   </section>
