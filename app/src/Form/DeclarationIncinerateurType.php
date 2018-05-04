@@ -23,14 +23,6 @@ class DeclarationIncinerateurType extends AbstractType
             ->add('declarationDechets', 
                 DeclarationDechetsType::class
             )
-            /*->add(
-                'mesuresDioxine',
-                CollectionType::class,
-                [
-                    'entry_type' => MesureDioxineType::class,
-                    'entry_options' => array('label' => false),
-                ]
-            )*/
             ->add(
                 'declarationsFonctionnementLigne',
                 CollectionType::class,
