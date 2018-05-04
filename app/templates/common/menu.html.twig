@@ -6,25 +6,25 @@
   <div class="navbar-menu">
       <div class="navbar-end">
           {% if is_granted('ROLE_INSPECTEUR') %}
-           <div class="navbar-item">
+           <div class="navbar-item {% if path('route_liste_incinerateurs') in app.request.requestUri %}is-active{% endif %}">
             <a href="{{ path('route_liste_incinerateurs') }}">
               <i class="fas fa-list-ul"></i> Incinérateurs
             </a>
           </div>  
           {% elseif is_granted('ROLE_PROPRIETAIRE') %}
-          <div class="navbar-item">
+          <div class="navbar-item {% if path('route_dashboard') in app.request.requestUri %}is-active{% endif %}" >
             <a href="{{ path('route_dashboard') }}">
-              <i class="fas fa-chart-line"></i> Tableau de bord
+                <i class="fas fa-chart-line"></i> Tableau de bord 
             </a>
           </div>
-          <div class="navbar-item">
+          <div class="navbar-item {% if path('route_declaration') in app.request.requestUri %}is-active{% endif %}">
             <a href="{{ path('route_declaration') }}">
               <i class="fas fa-comment"></i> Déclarer
             </a>
           </div>
           
             {% if app.user.incinerateurs != null %}
-          <div class="navbar-item">
+          <div class="navbar-item {% if '/historique' in app.request.requestUri %}is-active{% endif %}">
             <a href="{{ path('route_history', {incinerateurId: app.user.incinerateurs[0].id }) }}">
               <i class="fas fa-calendar-alt"></i> Historique
             </a>
