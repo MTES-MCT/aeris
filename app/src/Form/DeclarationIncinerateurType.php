@@ -11,7 +11,7 @@ use App\Form\DeclarationFonctionnementLigneType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,9 +44,6 @@ class DeclarationIncinerateurType extends AbstractType
                         'form.declaration.choice.model_meac' => DeclarationIncinerateur::METHOD_MEAC,
                         'form.declaration.choice.model_wex' => DeclarationIncinerateur::METHOD_WEX,
                     ]
-                ])
-            ->add('declarationFile', VichFileType::class, [
-                    'required' => false
                 ])
             ->add('comment')
         ;
