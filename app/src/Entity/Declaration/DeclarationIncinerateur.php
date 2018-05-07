@@ -273,4 +273,24 @@ class DeclarationIncinerateur
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getMethodeDeclaration()
+    {
+        return $this->methodeDeclaration;
+    }
+
+    /**
+     * @param string $methodeDeclaration
+     *
+     * @return self
+     */
+    public function setMethodeDeclaration($methodeDeclaration)
+    {
+        $this->methodeDeclaration = $methodeDeclaration;
+
+        return $this;
+    }
 }
