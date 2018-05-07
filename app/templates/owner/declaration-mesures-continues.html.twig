@@ -109,9 +109,7 @@
 
             <p>Vous pouvez également utiliser le <a href="{{ url('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
 
-            <p>
-              Méthode de saisie : menu déroulant avec “Modèle  DREAL, rapports MEAC300 (Sick), rapports WEX (Envea)
-            </p>
+            Méthode de déclaration : {{ form_widget(form.methodeDeclaration) }}
           </p>
         </div>
 

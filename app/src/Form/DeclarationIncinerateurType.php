@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DeclarationIncinerateurType extends AbstractType
 {
@@ -35,6 +36,14 @@ class DeclarationIncinerateurType extends AbstractType
                 DateType::class,
                 [
                     'data' => new \DateTime('first day of this month')
+                ])
+            ->add('methodeDeclaration', ChoiceType::class, [
+                    'label' =>  'Méthode de saisie',
+                    'choices'  => [
+                        'Modèle DREAL' => DeclarationIncinerateur::METHOD_DREAL,
+                        'Rapports MEAC300 (Sick)' => DeclarationIncinerateur::METHOD_MEAC,
+                        'rapports WEX (Envea)' => DeclarationIncinerateur::METHOD_WEX,
+                    ]
                 ])
             ->add('declarationFile', VichFileType::class, [
                     'required' => false
