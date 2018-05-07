@@ -106,6 +106,9 @@
               <li>En remplissant nos modèles de fichiers, et en les chargeant sur le site</li>
               <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
             </ul>
+
+            <p>Vous pouvez également utiliser le <a href="{{ url('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
+
             <p>
               Méthode de saisie : menu déroulant avec “Modèle  DREAL, rapports MEAC300 (Sick), rapports WEX (Envea)
             </p>
@@ -121,7 +124,7 @@
             </div>
 
             <p>
-              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_compteurs.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
             </p>
           </div>
           <div class="column">
@@ -129,14 +132,14 @@
 
             <div class="upload-area">upload</div>
             <p>
-              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_concentrations.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
             </p>
           </div>
           <div class="column">
             <h4  class="title is-4">Flux</h4>
             <div class="upload-area">upload</div>
             <p>
-              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_flux.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
             </p>
           </div>
         </div>

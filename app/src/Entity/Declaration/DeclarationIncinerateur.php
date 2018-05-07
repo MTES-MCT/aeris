@@ -17,6 +17,10 @@ use Doctrine\Common\Collections\Collection;
  */
 class DeclarationIncinerateur
 {
+    const METHOD_DREAL = 'dreal';
+    const METHOD_MEAC = 'meac3000';
+    const METHOD_WEX = 'wex';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -73,8 +77,16 @@ class DeclarationIncinerateur
      */
     private $declarationsFonctionnementLigne;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $methodeDeclaration;
+
     public function __construct(){
         $this->declarationsFonctionnementLigne = new ArrayCollection();
+        $this->methodeDeclaration = self::METHOD_DREAL;
     }
 
     /**

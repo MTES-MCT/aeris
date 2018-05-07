@@ -41,9 +41,9 @@ route_declaration_mesures_continues:
     defaults: { _controller: 'App\Controller\OwnerController::declarationMesuresContinues' }
 
 
-route_download_template:
-    path: /telecharger-modele
-    defaults: { _controller: 'App\Controller\OwnerController::downloadDeclarationTemplate' }
+route_download_asset:
+    path: /telecharger-ressource
+    defaults: { _controller: 'App\Controller\OwnerController::downloadAsset' }
 
 ### Inspecteur
 
