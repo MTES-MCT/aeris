@@ -3,6 +3,6 @@ vich_uploader:
 
     mappings:
         declaration_incinerateur:
-            uri_prefix: '/declaration-incinerateur'
-            upload_destination: '%kernel.project_dir%/public/declarations'
+            uri_prefix: '/build/declarations'
+            upload_destination: '%kernel.project_dir%/public/build/declarations'
             namer: vich_uploader.namer_origname
