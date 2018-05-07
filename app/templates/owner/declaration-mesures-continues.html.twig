@@ -6,7 +6,26 @@
     list-style: square;
     padding-left: 2em;
 }
-    </style>
+.upload {
+  text-align: center;
+}
+.upload .title {
+  text-transform: uppercase;
+}
+.upload-info {
+  margin-bottom: 2em;
+}
+.upload-area {
+  height:4em;
+  margin:1em;
+  border: 0.2em dashed darkgrey;
+  border-radius: 0.5em;
+}
+
+.upload-area .vich-file{
+  margin: 0 auto;
+}
+</style>
 
 <link rel="stylesheets" type="text/css" href="{{ asset('build/static/css/dropzone.css') }}" />
 <script type="text/javascript" src="{{ asset('build/static/js/dropzone.js') }}"></script>
@@ -85,37 +104,48 @@ Dropzone.options.declarationUpload = {
 
         <h3 class="title is-3">Declaration de mesures continues</h3>
 
-        <p>
-          Le détail des données à envoyer est indiqué dans chaque modèle de fichier.
-        </p>
-        <p></p>
-          Vous pouvez déclarer : 
-          <ul>
-            <li>En remplissant nos modèles de fichiers, et en les chargeant sur le site</li>
-            <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
-          </ul>
+        <div class="upload-info">
           <p>
-            Méthode de saisie : menu déroulant avec “Modèle  DREAL, rapports MEAC300 (Sick), rapports WEX (Envea)
+            Le détail des données à envoyer est indiqué dans chaque modèle de fichier.
           </p>
-        </p>
+          <p></p>
+            Vous pouvez déclarer : 
+            <ul>
+              <li>En remplissant nos modèles de fichiers, et en les chargeant sur le site</li>
+              <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
+            </ul>
+            <p>
+              Méthode de saisie : menu déroulant avec “Modèle  DREAL, rapports MEAC300 (Sick), rapports WEX (Envea)
+            </p>
+          </p>
+        </div>
 
-        <div class="columns">
+        <div class="columns upload">
           <div class="column">
             <h4  class="title is-4">Compteurs</h4>
 
+            <div class="upload-area">
             {{ form_widget(form.declarationFile) }}
+            </div>
 
             <p>
-              <a href="{{ url('route_download_template') }}" class="button is-primary">Téléchargez notre modèle pour les compteurs</a>
+              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
             </p>
           </div>
           <div class="column">
             <h4  class="title is-4">Concentration</h4>
-            Second column
+
+            <div class="upload-area">upload</div>
+            <p>
+              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les concentration</a>
+            </p>
           </div>
           <div class="column">
             <h4  class="title is-4">Flux</h4>
-            Third column
+            <div class="upload-area">upload</div>
+            <p>
+              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
+            </p>
           </div>
         </div>
 
