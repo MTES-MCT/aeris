@@ -27,14 +27,6 @@
 }
 </style>
 
-<link rel="stylesheets" type="text/css" href="{{ asset('build/static/css/dropzone.css') }}" />
-<script type="text/javascript" src="{{ asset('build/static/js/dropzone.js') }}"></script>
-<script type="text/javascript">
-Dropzone.options.declarationUpload = {
-//Dropzone.options.declaration_incinerateur_declarationFile_file = {
-  paramName: "declaration_incinerateur[declarationFile][file]"
-};
-</script>
 {% endblock %}
 {% block body %}
   <section class="section">
@@ -133,11 +125,11 @@ Dropzone.options.declarationUpload = {
             </p>
           </div>
           <div class="column">
-            <h4  class="title is-4">Concentration</h4>
+            <h4  class="title is-4">Concentration et température</h4>
 
             <div class="upload-area">upload</div>
             <p>
-              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les concentration</a>
+              <a href="{{ url('route_download_template') }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
             </p>
           </div>
           <div class="column">
