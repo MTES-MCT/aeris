@@ -40,9 +40,9 @@ class DeclarationIncinerateurType extends AbstractType
             ->add('methodeDeclaration', ChoiceType::class, [
                     'label' =>  'Méthode de saisie',
                     'choices'  => [
-                        'Modèle DREAL' => DeclarationIncinerateur::METHOD_DREAL,
-                        'Rapports MEAC300 (Sick)' => DeclarationIncinerateur::METHOD_MEAC,
-                        'rapports WEX (Envea)' => DeclarationIncinerateur::METHOD_WEX,
+                        'form.declaration.choice.model_dreal' => DeclarationIncinerateur::METHOD_DREAL,
+                        'form.declaration.choice.model_meac' => DeclarationIncinerateur::METHOD_MEAC,
+                        'form.declaration.choice.model_wex' => DeclarationIncinerateur::METHOD_WEX,
                     ]
                 ])
             ->add('declarationFile', VichFileType::class, [
