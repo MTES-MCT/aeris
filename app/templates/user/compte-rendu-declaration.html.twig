@@ -68,18 +68,24 @@
 
               <table class="table">
                 <tbody>
+                  {% if declarationLigne.declarationCompteursFilename != null %}
                   <tr>
                     <td>Compteurs</td>
                     <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationCompteursFile') }}" alt="" >Télécharger</a></td>
                   </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationFluxFilename != null %}
                   <tr>
                     <td>Flux</td>
-                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationCompteursFile') }}" alt="" >Télécharger</a></td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationFluxFile') }}" alt="" >Télécharger</a></td>
                   </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationConcentrationsFilename != null %}
                   <tr>
-                    <td>Concentration</td>
-                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationCompteursFile') }}" alt="" >Télécharger</a></td>
+                    <td>Concentrations et températures</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationConcentrationsFile') }}" alt="" >Télécharger</a></td>
                   </tr>
+                  {% endif %}
                 </tbody>
               </table>
 

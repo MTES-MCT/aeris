@@ -19,6 +19,12 @@ class DeclarationFonctionnementLigneType extends AbstractType
             ->add('declarationCompteursFile', VichFileType::class, [
                     'required' => false
                 ])
+            ->add('declarationConcentrationsFile', VichFileType::class, [
+                    'required' => false
+                ])
+            ->add('declarationFluxFile', VichFileType::class, [
+                    'required' => false
+                ])
         ;
     }
 

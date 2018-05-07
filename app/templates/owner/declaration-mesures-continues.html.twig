@@ -129,14 +129,14 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
           <div class="column">
             <h4  class="title is-4">Concentration et température</h4>
 
-            <div class="upload-area">upload</div>
+            <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationConcentrationsFile) }}</div>
             <p>
               <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_concentrations.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
             </p>
           </div>
           <div class="column">
             <h4  class="title is-4">Flux</h4>
-            <div class="upload-area">upload</div>
+            <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationFluxFile) }}</div>
             <p>
               <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_flux.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
             </p>
