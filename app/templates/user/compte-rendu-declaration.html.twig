@@ -46,13 +46,10 @@
 
 
         {% if not declaration.declarationsFonctionnementLigne is empty %}
-          <h3 class="title is-3">Declaration générale de fonctionnement</h3>
           {% for declarationLigne in declaration.declarationsFonctionnementLigne %}
-              {% if declarationLigne.ligne %}
-              <h4 class="title is-4">Ligne n° {{ declarationLigne.ligne.numero }}</h4>
-              {% else %}
-              <h4 class="title is-4">ligne</h4>
-              {% endif %}
+          <h3 class="title is-3">Ligne n° {{ declarationLigne.ligne.numero }}</h3>
+          
+              <h4 class="title is-4">Déclaration générale</h4>
 
               <table class="table">
                 <tbody>
@@ -66,6 +63,34 @@
                   </tr>
                 </tbody>
               </table>
+
+              <h4 class="title is-4">Mesures continues</h3>
+
+              <table class="table">
+                <tbody>
+                  {% if declarationLigne.declarationCompteursFilename != null %}
+                  <tr>
+                    <td>Compteurs</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationCompteursFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationFluxFilename != null %}
+                  <tr>
+                    <td>Flux</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationFluxFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationConcentrationsFilename != null %}
+                  <tr>
+                    <td>Concentrations et températures</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationConcentrationsFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+
+
+              
 
           {% endfor %}
         {% endif %}
@@ -116,9 +141,7 @@
           {% endfor %}
         {% endif %}
 #}
-        <h3 class="title is-3">Declaration des mesures continues</h3>
-
-        <a href="{{ vich_uploader_asset(declaration, 'declarationFile') }}" alt="" >Télécharger</a>
+        
     </div>
 
     </div>

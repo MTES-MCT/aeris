@@ -11,9 +11,10 @@ use App\Form\DeclarationFonctionnementLigneType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class DeclarationIncinerateurType extends AbstractType
 {
@@ -23,14 +24,6 @@ class DeclarationIncinerateurType extends AbstractType
             ->add('declarationDechets', 
                 DeclarationDechetsType::class
             )
-            /*->add(
-                'mesuresDioxine',
-                CollectionType::class,
-                [
-                    'entry_type' => MesureDioxineType::class,
-                    'entry_options' => array('label' => false),
-                ]
-            )*/
             ->add(
                 'declarationsFonctionnementLigne',
                 CollectionType::class,
@@ -44,8 +37,13 @@ class DeclarationIncinerateurType extends AbstractType
                 [
                     'data' => new \DateTime('first day of this month')
                 ])
-            ->add('declarationFile', VichFileType::class, [
-                    'required' => false
+            ->add('methodeDeclaration', ChoiceType::class, [
+                    'label' =>  'Méthode de saisie',
+                    'choices'  => [
+                        'form.declaration.choice.model_dreal' => DeclarationIncinerateur::METHOD_DREAL,
+                        'form.declaration.choice.model_meac' => DeclarationIncinerateur::METHOD_MEAC,
+                        'form.declaration.choice.model_wex' => DeclarationIncinerateur::METHOD_WEX,
+                    ]
                 ])
             ->add('comment')
         ;

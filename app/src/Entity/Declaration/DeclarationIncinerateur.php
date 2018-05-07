@@ -3,8 +3,7 @@
 namespace App\Entity\Declaration;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 use App\Entity\Incinerateur;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,10 +12,13 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Entity(repositoryClass="App\Repository\DeclarationIncinerateurRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="declaration_incinerateur")
- * @Vich\Uploadable
  */
 class DeclarationIncinerateur
 {
+    const METHOD_DREAL = 'dreal';
+    const METHOD_MEAC = 'meac3000';
+    const METHOD_WEX = 'wex';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -48,22 +50,6 @@ class DeclarationIncinerateur
     private $comment;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @var string
-     */
-    private $declarationFileName;
-
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @Vich\UploadableField(mapping="declaration_incinerateur", fileNameProperty="declarationFileName")
-     * 
-     * @var File
-     */
-    private $declarationFile;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Declaration\DeclarationDechets", mappedBy="declarationIncinerateur", cascade={"persist"})
      */
     private $declarationDechets;
@@ -73,8 +59,16 @@ class DeclarationIncinerateur
      */
     private $declarationsFonctionnementLigne;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $methodeDeclaration;
+
     public function __construct(){
         $this->declarationsFonctionnementLigne = new ArrayCollection();
+        $this->methodeDeclaration = self::METHOD_DREAL;
     }
 
     /**
@@ -154,45 +148,6 @@ class DeclarationIncinerateur
     }
 
     /**
-     * @return string
-     */
-    public function getDeclarationFileName()
-    {
-        return $this->declarationFileName;
-    }
-
-    /**
-     * @param string $declarationFileName
-     *
-     * @return self
-     */
-    public function setDeclarationFileName($declarationFileName)
-    {
-        $this->declarationFileName = $declarationFileName;
-
-        return $this;
-    }
-
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
-     */
-    public function setDeclarationFile(File $declarationFile = null)
-    {
-        $this->declarationFile = $declarationFile;
-    }
-
-    public function getDeclarationFile()
-    {
-        return $this->declarationFile;
-    }
-
-    /**
      * @return mixed
      */
     public function getDeclarationDechets()
@@ -258,6 +213,26 @@ class DeclarationIncinerateur
     public function setDeclarationMonth($declarationMonth)
     {
         $this->declarationMonth = $declarationMonth;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodeDeclaration()
+    {
+        return $this->methodeDeclaration;
+    }
+
+    /**
+     * @param string $methodeDeclaration
+     *
+     * @return self
+     */
+    public function setMethodeDeclaration($methodeDeclaration)
+    {
+        $this->methodeDeclaration = $methodeDeclaration;
 
         return $this;
     }

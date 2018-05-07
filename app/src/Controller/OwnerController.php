@@ -33,6 +33,28 @@ class OwnerController extends AerisController
         return $this->downloadFileByPath($path, $filename);
     }
 
+    // Clearly not the best way to have a list of downloadable files, but also a quick and safe one...
+    public function downloadAsset(Request $request) {
+        $downloadableAssets = [
+            'modele_saisie_compteurs.xlsx',
+            'modele_saisie_flux.xlsx',
+            'modele_saisie_concentrations.xlsx',
+            'referentiel-parametres.xlsx',
+        ];
+
+        $asset = $request->get('asset', '');
+
+        if(in_array($asset, $downloadableAssets)) {
+            $path = $this->get('kernel')->getRootDir().
+            '/../public/build/static/modeles/';
+
+            return $this->downloadFileByPath($path, $asset);
+        }
+        throw $this->createNotFoundException(
+            "Le fichier $asset n'est pas disponible"
+        );
+    }
+
     public function declaration(){
         if(!$this->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));

@@ -2,17 +2,37 @@
 {% block stylesheets %}
 <style type="text/css">
 
-.recap-declaration-dechets ul {
+.recap-declaration-dechets ul, .declaration-mesures-continues ul {
     list-style: square;
     padding-left: 2em;
 }
-    </style>
+.upload {
+  text-align: center;
+}
+.upload .title {
+  text-transform: uppercase;
+}
+.upload-info {
+  margin-bottom: 2em;
+}
+.upload-area {
+  height:4em;
+  margin:1em;
+  border: 0.2em dashed darkgrey;
+  border-radius: 0.5em;
+}
+
+.upload-area .vich-file{
+  margin: 0 auto;
+}
+</style>
+
 {% endblock %}
 {% block body %}
   <section class="section">
-    <div class="container">
+    <div class="container declaration-mesures-continues">
         <h2 class="title is-2">Déclaration mensuelle de mesures continues</h2>
-        {{ form_start(form) }}
+        {{ form_start(form, {'attr': {'class':'dropzone', 'id': "declaration-upload"}}) }}
 
         <table class="table">
           <tbody>
@@ -53,10 +73,12 @@
 
 
 
-        <h3 class="title is-3">Declaration générale de fonctionnement</h3>
         {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
+        <h3 class="title is-3">
+Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
+        </h3>
 
-            <h4 class="title is-4">Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}</h4>
+            <h4 class="title is-4">Declaration générale de fonctionnement</h4>
             <table class="table">
               <tbody>
                 <tr>
@@ -71,14 +93,59 @@
                 </tr>
               </tbody>
             </table>
+
+
+        <h3 class="title is-4">Declaration de mesures continues</h3>
+
+        <div class="upload-info">
+          <p>
+            Le détail des données à envoyer est indiqué dans chaque modèle de fichier.
+          </p>
+          <p></p>
+            Vous pouvez déclarer : 
+            <ul>
+              <li>En remplissant nos modèles de fichiers, et en les chargeant sur le site</li>
+              <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
+            </ul>
+
+            <p>Vous pouvez également utiliser le <a href="{{ url('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
+
+            Méthode de déclaration : {{ form_widget(form.methodeDeclaration) }}
+          </p>
+        </div>
+
+        <div class="columns upload">
+          <div class="column">
+            <h4  class="title is-4">Compteurs</h4>
+
+            <div class="upload-area">
+                {{ form_widget(fonctionnementLigne.declarationCompteursFile) }}
+            </div>
+
+            <p>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_compteurs.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
+            </p>
+          </div>
+          <div class="column">
+            <h4  class="title is-4">Concentration et température</h4>
+
+            <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationConcentrationsFile) }}</div>
+            <p>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_concentrations.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
+            </p>
+          </div>
+          <div class="column">
+            <h4  class="title is-4">Flux</h4>
+            <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationFluxFile) }}</div>
+            <p>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_flux.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
+            </p>
+          </div>
+        </div>
+
+
         {% endfor %}
 
-
-        <h3 class="title is-3">Declaration de mesures continues</h3>
-        <p>
-
-        <a href="{{ url('route_download_template') }}" class="button is-primary">Téléchargez un modèle de déclaration</a> puis renvoyez ce document complété: {{ form_widget(form.declarationFile) }}<br/>
-        </p>
         <h3 class="title is-3">Remarques</h3>
         {{ form_widget(form.comment) }}<br/>
 
@@ -86,4 +153,4 @@
         {{ form_end(form) }}
     </div>
   </section>
-{% endblock %}
+{% endblock %} 
