@@ -73,10 +73,12 @@
 
 
 
-        <h3 class="title is-3">Declaration générale de fonctionnement</h3>
         {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
+        <h3 class="title is-3">
+Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
+        </h3>
 
-            <h4 class="title is-4">Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}</h4>
+            <h4 class="title is-4">Declaration générale de fonctionnement</h4>
             <table class="table">
               <tbody>
                 <tr>
@@ -91,10 +93,9 @@
                 </tr>
               </tbody>
             </table>
-        {% endfor %}
 
 
-        <h3 class="title is-3">Declaration de mesures continues</h3>
+        <h3 class="title is-4">Declaration de mesures continues</h3>
 
         <div class="upload-info">
           <p>
@@ -118,7 +119,7 @@
             <h4  class="title is-4">Compteurs</h4>
 
             <div class="upload-area">
-
+                {{ form_widget(fonctionnementLigne.declarationCompteursFile) }}
             </div>
 
             <p>
@@ -141,6 +142,9 @@
             </p>
           </div>
         </div>
+
+
+        {% endfor %}
 
         <h3 class="title is-3">Remarques</h3>
         {{ form_widget(form.comment) }}<br/>
