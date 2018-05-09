@@ -1,2 +1,2 @@
-//require('../css/app.scss');
+require('../css/app.scss');
 //alert('pouet');
