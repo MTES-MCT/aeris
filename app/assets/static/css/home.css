@@ -1,0 +1,31 @@
+
+.cheminee, .cheminee-fade {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+    background-image: url("/build/static/images/cheminee.jpg");
+    background-attachment: fixed;
+    min-height: calc(-80px + 80vh) !important;
+}
+
+.logo-title {
+    font-size:2em;
+}
+
+.login-container {
+    background-color: yellow;
+    width:50%;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.is-active {
+  background-color: #3273dc;
+}
+.is-active a {
+  color:white;
+  font-weight:bold;
+}

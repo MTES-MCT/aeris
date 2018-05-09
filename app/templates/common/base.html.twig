@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Aeris{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/static/css/template.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/static/css/home.css') }}">
+
         <link rel="icon" type="image/png" href="{{ asset('build/static/favicons/android-chrome-192x192.png') }}" />
         {% block stylesheets %}{% endblock %}
     </head>
