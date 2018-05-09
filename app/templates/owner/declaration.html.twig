@@ -1,33 +1,12 @@
 {% extends "common/base_inside.html.twig" %}
-{% block stylesheets %}
-<style type="text/css">
 
-.declaration-title {
-  text-align: center;
-  padding-bottom: 1em;
-}
-
-.recap-declaration-dechets ul {
-    list-style: square;
-    padding-left: 2em;
-}
-.columns {
-  margin-left: 25%;
-  margin-right: 25%;
-}
-
-.column {
-  text-align: center;
-}
-    </style>
-{% endblock %}
 {% block body %}
   <section class="section">
     <div class="container">
       <h2 class="title declaration-title is-2">Commencez votre déclaration mensuelle</h2>
 
-      <div class="columns">
-        <div class="column">
+      <div class="columns ">
+        <div class="column start-declare-col">
           <a href="{{ path('route_declaration_dioxines') }}" class="declaration-cta button is-primary is-large">Dioxines et furannes</a>
         </div>
         <div class="column">

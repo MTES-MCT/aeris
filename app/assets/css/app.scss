@@ -1,0 +1,75 @@
+.menu-container {
+  margin-top: 1em;
+}
+.is-active {
+  background-color: #3273dc;
+}
+.is-active a {
+  color:white;
+  font-weight:bold;
+}
+
+ul {
+    list-style: square;
+    padding-left: 2em;
+}
+
+.declaration-title {
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+
+
+
+
+.recap-declaration-dechets ul, .declaration-mesures-continues ul {
+    list-style: square;
+    padding-left: 2em;
+}
+.upload {
+  text-align: center;
+}
+.upload .title {
+  text-transform: uppercase;
+}
+.upload-info {
+  margin-bottom: 2em;
+}
+.upload-area {
+  height:4em;
+  margin:1em;
+  border: 0.2em dashed darkgrey;
+  border-radius: 0.5em;
+}
+
+.upload-area .vich-file{
+  margin: 0 auto;
+}
+
+
+
+
+
+.declaration-title {
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.start-declare-cols {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.start-declare-col {
+  text-align: center;
+}
