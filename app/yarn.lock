@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@symfony/webpack-encore@^0.17.0":
+"@symfony/webpack-encore@^0.17.1":
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-0.17.1.tgz#4889d92bd241eff48ff4b72e76fa367b4c085c9e"
   dependencies:
@@ -1019,6 +1019,12 @@ builtin-modules@^1.0.0:
 builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
+
+bulma-calendar@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bulma-calendar/-/bulma-calendar-1.3.0.tgz#caacfb016792c55dadf0edc11aae6fb64c256041"
+  dependencies:
+    camelcase "^4.1.0"
 
 bulma-extensions@^1.0.14:
   version "1.0.14"
