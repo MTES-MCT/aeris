@@ -15,6 +15,12 @@ Some of the notable components include:
 
 We use [Encore](http://symfony.com/doc/current/frontend.html) for dependency management and building JS/CSS. It requires node and yarn. See app/webpack.config.js
 
+### Adding a dependency:
+
+```bash
+$ yarn add bulma-tooltip
+```
+
 ```bash
 $ yarn run encore
 ```
