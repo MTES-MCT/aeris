@@ -79,8 +79,9 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
               <li>En remplissant nos modèles de fichiers, et en les chargeant sur le site</li>
               <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
             </ul>
-
+            {#
             <p>Vous pouvez également utiliser le <a href="{{ url('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
+              #}
 
             Méthode de déclaration : {{ form_widget(form.methodeDeclaration) }}
           </p>
