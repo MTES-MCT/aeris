@@ -21,6 +21,8 @@ We use [Encore](http://symfony.com/doc/current/frontend.html) for dependency man
 $ yarn add bulma-tooltip
 ```
 
+
+
 ```bash
 $ yarn run encore
 ```

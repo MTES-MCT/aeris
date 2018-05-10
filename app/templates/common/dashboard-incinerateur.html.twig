@@ -1,27 +1,42 @@
 {% if incinerateur %}
-<h3 class="title is-3">Synthèse des déclarations de dioxines et furannes</h3>
 
+<h3 class="title is-3">Synthèse des déclarations de dioxines et furannes</h3>
+{#
 <div class="column">
   <button class="button is-primary tooltip" data-tooltip="Tooltip Text">Tooltip</button>
 </div>
+#}
 
-<p>Référence réglementaire : <a href="https://aida.ineris.fr/consultation_document/5277#Annexe_I">AM 20/09/2002, Annexe I d)</a></p>
+<div class="modal" id="depassement-modal">
+   <div class="modal-background"></div>
+   <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">En cas de dépassement</p>
+      <button class="delete close-depassement-modal" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+    <p>En cas de dépassements sur la mesure en semi-continu des dioxines et furannes, l'exploitant doit :
+    <ul>
+      <li>Avertir l'inspection des installations classées dans les meilleurs délais.</li>
+      <li>Faire réaliser un contrôle ponctuel à l'émission des dioxines et furannes par un organisme agréé sous 10 jours.</li>
+      <li>Le résultat des mesures en semi-continu ne permet pas de fonder l'egagement des procédures administratives prévues à l'article L. 514-1 du code de l'environnement.</li>
+    </ul>
 
-<p>En cas de dépassements sur la mesure en semi-continu des dioxines et furannes, l'exploitant doit :
-<ul>
-  <li>Avertir l'inspection des installations classées dans les meilleurs délais.</li>
-  <li>Faire réaliser un contrôle ponctuel à l'émission des dioxines et furannes par un organisme agréé sous 10 jours.</li>
-  <li>Le résultat des mesures en semi-continu ne permet pas de fonder l'egagement des procédures administratives prévues à l'article L. 514-1 du code de l'environnement.</li>
-</ul>
+    Références :
 
-Références :
+    <ul>
+        <li>
+        <a href="https://aida.ineris.fr/consultation_document/5277#Article_28_nouveau">Article 28 b1) de l'AM du 20/09/2002</a>
+        </li>
+        <li>la note DGPR du 28 février 2011</li>
+    </ul>
+    </p>
+   </section>
+   </div>
+</div>
 
-<ul>
-    <li>
-    <a href="https://aida.ineris.fr/consultation_document/5277#Article_28_nouveau">Article 28 b1) de l'AM du 20/09/2002</a>
-    </li>
-    <li>la note DGPR du 28 février 2011</li>
-</ul>
+<p>Référence réglementaire : <a href="https://aida.ineris.fr/consultation_document/5277#Annexe_I">AM 20/09/2002, Annexe I d)</a></p> <button class="button" id="open-depassement-modal">Que faire en cas de dépassement ?</button>
+
 </p>
 
   {% for ligne in incinerateur.lignes %}
@@ -99,10 +114,17 @@ function addChart(ligneId) {
 }
 
 window.onload = function() {
-{% for ligne in incinerateur.lignes %}
-  addChart({{ ligne.numero }})
-{% endfor %}
+  {% for ligne in incinerateur.lignes %}
+    addChart({{ ligne.numero }})
+  {% endfor %}
 
+  $("#open-depassement-modal").click(function() {
+    $("#depassement-modal").addClass("is-active");  
+  });
+
+  $(".close-depassement-modal").click(function() {
+     $("#depassement-modal").removeClass("is-active");
+  });
 };
 
 </script>
