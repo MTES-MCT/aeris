@@ -20,7 +20,7 @@ class DeclarationFonctionnementLigne
     private $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", nullable=true)
      */
     private $nbHeuresFonctionnementTh;
     
