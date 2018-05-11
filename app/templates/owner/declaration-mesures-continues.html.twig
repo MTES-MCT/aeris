@@ -44,30 +44,8 @@
         </div>
 
 
+        <h3 class="title is-3">Declaration de mesures continues</h3>
 
-        {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
-        <h3 class="title is-3">
-Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
-        </h3>
-
-            <h4 class="title is-4">Declaration générale de fonctionnement</h4>
-            <table class="table">
-              <tbody>
-                {#<tr>
-                  <td>Nombre d'heures de fonctionnement théoriques</td>
-                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
-                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
-                </tr>#}
-                <tr>
-                  <td>Nombre d'heures de fonctionnement réelles</td>
-                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
-                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
-                </tr>
-              </tbody>
-            </table>
-
-
-        <h3 class="title is-4">Declaration de mesures continues</h3>
 
         <div class="upload-info">
           <p>
@@ -86,6 +64,30 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
             Méthode de déclaration : {{ form_widget(form.methodeDeclaration) }}
           </p>
         </div>
+
+
+        {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
+        <h4 class="title is-4">
+Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
+        </h4>
+
+            <table class="table">
+              <tbody>
+                {#<tr>
+                  <td>Nombre d'heures de fonctionnement théoriques</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                </tr>#}
+                <tr>
+                  <td>Nombre d'heures de fonctionnement réelles</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+
 
         <div class="columns upload">
           <div class="column">
