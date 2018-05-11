@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Form\Type\FloatType;
 
 class MesureDioxineType extends AbstractType
@@ -28,7 +29,7 @@ class MesureDioxineType extends AbstractType
             ->add('disponibiliteLigne', FloatType::class)
             ->add('disponibiliteAnalyseur', NumberType::class)
             ->add('concentration')
-            ->add('commentaire')
+            ->add('commentaire', TextareaType::class, ['attr' => ['class' => 'comment']])
         ;
     }
 
