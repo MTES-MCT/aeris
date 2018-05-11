@@ -23,7 +23,7 @@ class DeclarationFonctionnementLigne
      * @ORM\Column(type="decimal", nullable=true)
      */
     private $nbHeuresFonctionnementTh;
-    
+
     /**
      * @ORM\Column(type="decimal")
      */
@@ -87,6 +87,10 @@ class DeclarationFonctionnementLigne
      * @var File
      */
     private $declarationConcentrationsFile;
+
+    public function __construct() {
+        $this->setNbHeuresFonctionnementTh(0);
+    }
 
     /**
      * @param mixed $id
