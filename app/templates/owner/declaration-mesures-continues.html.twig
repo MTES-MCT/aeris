@@ -53,11 +53,11 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
             <h4 class="title is-4">Declaration générale de fonctionnement</h4>
             <table class="table">
               <tbody>
-                <tr>
+                {#<tr>
                   <td>Nombre d'heures de fonctionnement théoriques</td>
                   <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
                   <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
-                </tr>
+                </tr>#}
                 <tr>
                   <td>Nombre d'heures de fonctionnement réelles</td>
                   <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
