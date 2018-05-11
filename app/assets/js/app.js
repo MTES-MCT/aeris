@@ -1,3 +1,3 @@
 require('../css/app.scss');
-//require('bulma-extensions/bulma-calendar');
+import bulmaCalendar from '../../node_modules/bulma-extensions/bulma-calendar/dist/bulma-calendar.js';
 //import bulmaCalendar from './node_modules/bulma-calendar';

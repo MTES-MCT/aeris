@@ -22,9 +22,19 @@ class MesureDioxineType extends AbstractType
             ->add('numeroCartouche', TextType::class)
             ->add('dateDebut', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr' => [
+                    'class' => 'calendar',
+                    'placeholder' => 'form.declaration.date_format',
+                ]
             ])
             ->add('dateFin', DateType::class, [
                 'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr' => [
+                    'class' => 'calendar',
+                    'placeholder' => 'form.declaration.date_format',
+                ]
             ])
             ->add('disponibiliteLigne', FloatType::class)
             ->add('disponibiliteAnalyseur', NumberType::class)
