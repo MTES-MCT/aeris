@@ -46,7 +46,12 @@ class DeclarationIncinerateurType extends AbstractType
                         'form.declaration.choice.model_wex' => DeclarationIncinerateur::METHOD_WEX,
                     ]
                 ])
-            ->add('comment', TextareaType::class, ['attr' => ['class' => 'comment']])
+            ->add('comment', TextareaType::class, [
+                'attr' => [
+                    'class' => 'comment'
+                ],
+                'required' =>  false]
+            )
         ;
     }
 

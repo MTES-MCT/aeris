@@ -30,7 +30,12 @@ class DeclarationDioxineType extends AbstractType
                     'entry_options' => array('label' => false),
                 ]
             )
-            ->add('comment', TextareaType::class, ['attr' => ['class' => 'comment']])
+            ->add('comment',
+                    TextareaType::class,
+                    [
+                        'attr' => ['class' => 'comment'],
+                        'required' =>  false
+                ])
         ;
     }
 

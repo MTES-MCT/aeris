@@ -39,7 +39,10 @@ class MesureDioxineType extends AbstractType
             ->add('disponibiliteLigne', FloatType::class)
             ->add('disponibiliteAnalyseur', NumberType::class)
             ->add('concentration')
-            ->add('commentaire', TextareaType::class, ['attr' => ['class' => 'comment']])
+            ->add('commentaire', TextareaType::class, [
+                'attr' => ['class' => 'comment'],
+                'required' =>  false
+            ])
         ;
     }
 
