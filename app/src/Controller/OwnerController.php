@@ -36,9 +36,9 @@ class OwnerController extends AerisController
     // Clearly not the best way to have a list of downloadable files, but also a quick and safe one...
     public function downloadAsset(Request $request) {
         $downloadableAssets = [
-            'modele_saisie_compteurs.xlsx',
-            'modele_saisie_flux.xlsx',
-            'modele_saisie_concentrations.xlsx',
+            'modele_saisie_compteurs.xls',
+            'modele_saisie_flux.xls',
+            'modele_saisie_concentrations.xls',
             'referentiel-parametres.xlsx',
         ];
 
