@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class DeclarationIncinerateurType extends AbstractType
 {
@@ -45,7 +46,7 @@ class DeclarationIncinerateurType extends AbstractType
                         'form.declaration.choice.model_wex' => DeclarationIncinerateur::METHOD_WEX,
                     ]
                 ])
-            ->add('comment')
+            ->add('comment', TextareaType::class, ['attr' => ['class' => 'comment']])
         ;
     }
 

@@ -14,7 +14,7 @@ class DeclarationFonctionnementLigneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nbHeuresFonctionnementTh', FloatType::class)
+            //->add('nbHeuresFonctionnementTh', FloatType::class)
             ->add('nbHeuresFonctionnementReel', FloatType::class)
             ->add('declarationCompteursFile', VichFileType::class, [
                     'required' => false

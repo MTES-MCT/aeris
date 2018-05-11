@@ -1,33 +1,5 @@
 {% extends "common/base_inside.html.twig" %}
-{% block stylesheets %}
-<style type="text/css">
 
-.recap-declaration-dechets ul, .declaration-mesures-continues ul {
-    list-style: square;
-    padding-left: 2em;
-}
-.upload {
-  text-align: center;
-}
-.upload .title {
-  text-transform: uppercase;
-}
-.upload-info {
-  margin-bottom: 2em;
-}
-.upload-area {
-  height:4em;
-  margin:1em;
-  border: 0.2em dashed darkgrey;
-  border-radius: 0.5em;
-}
-
-.upload-area .vich-file{
-  margin: 0 auto;
-}
-</style>
-
-{% endblock %}
 {% block body %}
   <section class="section">
     <div class="container declaration-mesures-continues">
@@ -72,30 +44,8 @@
         </div>
 
 
+        <h3 class="title is-3">Declaration de mesures continues</h3>
 
-        {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
-        <h3 class="title is-3">
-Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
-        </h3>
-
-            <h4 class="title is-4">Declaration générale de fonctionnement</h4>
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Nombre d'heures de fonctionnement théoriques</td>
-                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
-                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
-                </tr>
-                <tr>
-                  <td>Nombre d'heures de fonctionnement réelles</td>
-                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
-                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
-                </tr>
-              </tbody>
-            </table>
-
-
-        <h3 class="title is-4">Declaration de mesures continues</h3>
 
         <div class="upload-info">
           <p>
@@ -107,12 +57,37 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
               <li>En remplissant nos modèles de fichiers, et en les chargeant sur le site</li>
               <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
             </ul>
-
+            {#
             <p>Vous pouvez également utiliser le <a href="{{ url('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
+              #}
 
             Méthode de déclaration : {{ form_widget(form.methodeDeclaration) }}
           </p>
         </div>
+
+
+        {% for fonctionnementLigne in form.declarationsFonctionnementLigne %}
+        <h4 class="title is-4">
+Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
+        </h4>
+
+            <table class="table">
+              <tbody>
+                {#<tr>
+                  <td>Nombre d'heures de fonctionnement théoriques</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementTh) }}</td>
+                </tr>#}
+                <tr>
+                  <td>Nombre d'heures de fonctionnement réelles</td>
+                  <td>{{ form_widget(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                  <td>{{ form_errors(fonctionnementLigne.nbHeuresFonctionnementReel) }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+
 
         <div class="columns upload">
           <div class="column">

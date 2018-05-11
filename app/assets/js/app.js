@@ -1,3 +1,3 @@
 require('../css/app.scss');
-require('../../node_modules/template.data.gouv.fr/template.css');
-require('../../node_modules/chartjs/chart.js');
+//require('bulma-extensions/bulma-calendar');
+//import bulmaCalendar from './node_modules/bulma-calendar';

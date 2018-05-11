@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class DeclarationDioxineType extends AbstractType
 {
@@ -29,7 +30,7 @@ class DeclarationDioxineType extends AbstractType
                     'entry_options' => array('label' => false),
                 ]
             )
-            ->add('comment')
+            ->add('comment', TextareaType::class, ['attr' => ['class' => 'comment']])
         ;
     }
 
