@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 class DeclarationIncinerateur
 {
     const METHOD_DREAL = 'dreal';
-    const METHOD_MEAC = 'meac3000';
+    const METHOD_MEAC = 'meac300';
     const METHOD_WEX = 'wex';
 
     /**

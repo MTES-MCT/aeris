@@ -2,6 +2,6 @@ form:
   declaration:
     choice:
       model_dreal: "Modèle DREAL"
-      model_meac: "Rapports MEAC3000 (Sick)"
+      model_meac: "Rapports MEAC300 (Sick)"
       model_wex: "Rapports WEX (Envea)"
     date_format: 'jj/mm/aaaa'
