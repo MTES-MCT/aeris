@@ -19,7 +19,7 @@
     <ul>
       <li>Avertir l'inspection des installations classées dans les meilleurs délais.</li>
       <li>Faire réaliser un contrôle ponctuel à l'émission des dioxines et furannes par un organisme agréé sous 10 jours.</li>
-      <li>Le résultat des mesures en semi-continu ne permet pas de fonder l'egagement des procédures administratives prévues à l'article L. 514-1 du code de l'environnement.</li>
+      <li>Le résultat des mesures en semi-continu ne permet pas de fonder l'engagement des procédures administratives prévues à l'article L. 514-1 du code de l'environnement.</li>
     </ul>
 
     Références :
@@ -41,9 +41,11 @@
 </p>
 
   {% for ligne in incinerateur.lignes %}
-    <div style="width: 75%;">
+    <div >
       <h4 class="title is-4">Ligne n°{{ ligne.numero }}</h4>
-      <canvas id="canvas_dioxine_{{ligne.numero}}"></canvas>
+      <div class="dioxine-canvas-container">
+        <canvas id="canvas_dioxine_{{ligne.numero}}"></canvas>
+      </div>
     </div>              
   {% endfor %}
 {% endif %}
