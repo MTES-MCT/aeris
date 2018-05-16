@@ -2,11 +2,17 @@
 {% block body %}
   <section class="section">
     <div class="container">
-      {% for declarationId in app.flashes('declaration') %}
+      {% for declarationId in app.flashes('declaration-continues') %}
           <div class="notification is-success">
-Votre déclaration a bien été prise en compte. Vous pouvez y accéder <a href="{{ path('route_cr_declaration', {declarationId: declarationId}) }}">ici</a>.
+Votre déclaration de mesures continues a bien été prise en compte. Vous pouvez y accéder <a href="{{ path('route_cr_declaration', {declarationId: declarationId}) }}">ici</a>.
           </div>
       {% endfor %}
+      {% for declarationId in app.flashes('declaration-dioxines') %}
+          <div class="notification is-success">
+Votre déclaration de dioxines et furannes a bien été prise en compte. Vous pouvez y accéder <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declarationId}) }}">ici</a>.
+          </div>
+      {% endfor %}
+
 
       <h2 class="title is-2">Historique de déclarations de <strong>{{incinerateur.name}}</strong></h2>
 

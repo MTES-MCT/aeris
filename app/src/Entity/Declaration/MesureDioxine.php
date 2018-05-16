@@ -3,6 +3,7 @@
 namespace App\Entity\Declaration;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MesureDioxineRepository")
@@ -33,11 +34,13 @@ class MesureDioxine
     
     /**
      * @ORM\Column(type="decimal", precision=0, scale=0)
+     * @Assert\Range(min=0, max=100)
      */
     private $disponibiliteLigne; 
     
     /**
      * @ORM\Column(type="decimal", precision=0, scale=0)
+     * @Assert\Range(min=0, max=100)
      */
     private $disponibiliteAnalyseur;
     
@@ -48,6 +51,7 @@ class MesureDioxine
 
     /**
      * @ORM\Column(type="decimal", precision=0, scale=0)
+     * @Assert\GreaterThanOrEqual(0)
      */
     private $concentration;
 
