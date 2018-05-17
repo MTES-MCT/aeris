@@ -16,7 +16,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Command}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -32,4 +32,9 @@ services:
         arguments:
             - "@router.default"
             - "@session"
-        
+
+    app.command.LoadReportsCommand:
+        class: App\Command\LoadReportsCommand
+        arguments:
+            - "@App\\Repository\\DeclarationIncinerateurRepository"
+            - "@vich_uploader.property_mapping_factory"
