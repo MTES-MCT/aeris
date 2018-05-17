@@ -98,7 +98,7 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
             </div>
 
             <p>
-              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_compteurs.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_compteurs.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
             </p>
           </div>
           <div class="column">
@@ -106,14 +106,14 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
 
             <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationConcentrationsFile) }}</div>
             <p>
-              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_concentrations.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_concentrations.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
             </p>
           </div>
           <div class="column">
             <h4  class="title is-4">Flux</h4>
             <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationFluxFile) }}</div>
             <p>
-              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_flux.xlsx'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
+              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_flux.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
             </p>
           </div>
         </div>
