@@ -37,4 +37,6 @@ services:
         class: App\Command\LoadReportsCommand
         arguments:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
+            - "@App\\Repository\\MesureRepository"
+            - "@doctrine.orm.entity_manager"
             - "@vich_uploader.property_mapping_factory"

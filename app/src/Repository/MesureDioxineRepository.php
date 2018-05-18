@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\MesureDioxine;
+use App\Entity\Declaration\MesureDioxine;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

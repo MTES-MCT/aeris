@@ -4,6 +4,7 @@ namespace App\Entity\Declaration;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Aeris\Component\ReportParser\DataPoint;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MesureRepository")
@@ -16,11 +17,6 @@ class Mesure
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\IncinerateurLigne", inversedBy="mesuresDioxine")
-     */
-    private $ligne;
 
     /**
      * @ORM\Column(name="date", type="date", nullable=false)
@@ -43,6 +39,14 @@ class Mesure
      * @ORM\JoinColumn(nullable=true)
      */
     private $declarationFonctionnementLigne;
+
+    public static function fromDataPoint(DataPoint $datapoint) {
+        $mesure = new Mesure();
+        $mesure->setDate($datapoint->date);
+        $mesure->setType($datapoint->type);
+        $mesure->setValue($datapoint->value);
+        return $mesure;
+    }
 
     /**
      * @return mixed
@@ -67,26 +71,6 @@ class Mesure
     /**
      * @return mixed
      */
-    public function getLigne()
-    {
-        return $this->ligne;
-    }
-
-    /**
-     * @param mixed $ligne
-     *
-     * @return self
-     */
-    public function setLigne($ligne)
-    {
-        $this->ligne = $ligne;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getDate()
     {
         return $this->date;
@@ -97,11 +81,70 @@ class Mesure
      *
      * @return self
      */
-    public function setDate($dateDebut)
+    public function setDate($date)
     {
         $this->date = $date;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param mixed $value
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeclarationFonctionnementLigne()
+    {
+        return $this->declarationFonctionnementLigne;
+    }
+
+    /**
+     * @param mixed $declarationFonctionnementLigne
+     *
+     * @return self
+     */
+    public function setDeclarationFonctionnementLigne($declarationFonctionnementLigne)
+    {
+        $this->declarationFonctionnementLigne = $declarationFonctionnementLigne;
+
+        return $this;
+    }
 }

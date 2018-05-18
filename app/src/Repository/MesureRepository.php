@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Mesure;
+use App\Entity\Declaration\Mesure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

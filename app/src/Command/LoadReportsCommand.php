@@ -7,23 +7,36 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use App\Repository\DeclarationIncinerateurRepository;
+use App\Repository\MesureRepository;
 use Vich\UploaderBundle\Mapping\PropertyMappingFactory;
 
 use Aeris\Component\ReportParser\Parser\Dreal\ConcentrationParser as DrealConcentrationParser;
 use Aeris\Component\ReportParser\Parser\Dreal\FluxParser as DrealFluxParser;
 use Aeris\Component\ReportParser\Parser\Dreal\CompteursParser as DrealCompteursParser;
 
+use Doctrine\ORM\EntityManager;
+use App\Entity\Declaration\Mesure;
 
 class LoadReportsCommand extends Command
 {
+    /** @var DeclarationIncinerateurRepository */
     private $declarationRepository;
+    /** @var MesureRepository */
+    private $mesureRepository;
+    /** @var EntityManager */
+    private $entityManager;
+    /** @var PropertyMappingFactory */
     private $propertyMapping;
 
     public function __construct(
         DeclarationIncinerateurRepository $declarationRepository,
+        MesureRepository $mesureRepository,
+        EntityManager $entityManager,
         PropertyMappingFactory $propertyMapping    
     ) {
         $this->declarationRepository = $declarationRepository;
+        $this->mesureRepository = $mesureRepository;
+        $this->entityManager = $entityManager;
         $this->propertyMapping = $propertyMapping;
         parent::__construct();
     }
@@ -66,7 +79,15 @@ class LoadReportsCommand extends Command
             $parser = new DrealConcentrationParser();
 
             $datapoints = $parser->parseFile($fullFilePath);
-            var_dump($hasFile, $fullFilePath, $datapoints);
+            // var_dump($hasFile, $fullFilePath, $datapoints);
+
+            foreach($datapoints as $datapoint){
+                $mesure = Mesure::fromDataPoint($datapoint);
+                $mesure->setDeclarationFonctionnementLigne($declarationFonctionnementLigne);
+                $this->entityManager->persist($mesure);
+            }
+
+            $this->entityManager->flush();
         }
     }
 }
