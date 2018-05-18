@@ -88,6 +88,11 @@ class DeclarationFonctionnementLigne
      */
     private $declarationConcentrationsFile;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\Mesure", mappedBy="declarationFonctionnementLigne", cascade={"persist"})
+     */
+    private $mesures;
+
     public function __construct() {
         $this->setNbHeuresFonctionnementTh(0);
     }
