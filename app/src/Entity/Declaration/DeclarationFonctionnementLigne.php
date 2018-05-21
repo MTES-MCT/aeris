@@ -316,4 +316,8 @@ class DeclarationFonctionnementLigne
 
         return $this;
     }
+
+    public function getMesures(){ 
+        return $this->mesures;
+    }
 }

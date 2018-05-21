@@ -41,11 +41,12 @@ class ValidateReportCommand extends Command
         if($declaration != null) {
             $output->writeln(sprintf('Importing data for declaration %s', $declarationId));
             foreach ($declaration->getDeclarationsFonctionnementLigne() as $declarationFonctionnementLigne) {
-                
-                $this->checkDeclarationFonctionnementLigne(
-                    $declaration,
-                    $declarationFonctionnementLigne
-                );
+                if(!empty($declarationFonctionnementLigne->getMesures())) {
+                    $this->checkDeclarationFonctionnementLigne(
+                        $declaration,
+                        $declarationFonctionnementLigne
+                    );
+                }
             }
         }
         else {
@@ -59,6 +60,8 @@ class ValidateReportCommand extends Command
         $rules = new AppliableRules();
 
         $report = new MonthlyReport($declaration->getDeclarationMonth(), $rules);
-        var_dump($report);
+        $report->fillWithMeasures($declarationLigne->getMesures());
+        $report->debug('nox_c_24h_moy');
+        //var_dump($report);
     }
 }
