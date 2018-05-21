@@ -3,7 +3,7 @@
 namespace Aeris\Component\Report;
 
 class MonthlyReport {
-    private $dailyData;
+    public $dailyData;
 
     private $countersValues;
 
@@ -29,10 +29,6 @@ class MonthlyReport {
             $day = $this->getDay($measure->getDate());
             $type = $measure->getType();
             if($day >=  1 && $day <= $this->nbDaysInMonth && in_array($type, $this->rules->fields)) {
-                var_dump(
-                    $day,
-                    $type,
-                    $measure->getValue(), "\n");
                 $this->dailyData[$day][$type] = (float)$measure->getValue();
             }
         }

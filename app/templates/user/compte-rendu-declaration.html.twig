@@ -7,6 +7,9 @@
     list-style: square;
     padding-left: 2em;
 }
+body{
+  overflow-x: scroll;
+}
     </style>
 {% endblock %}
 
@@ -90,6 +93,48 @@
               </table>
 
 
+              {% if reports[declarationLigne.ligne.numero] != null %}
+              {{ dump(reports[declarationLigne.ligne.numero]) }}
+                
+                  {% if declarationLigne.declarationCompteursFilename != null %}
+                  
+                  {% endif %}
+                  {% if declarationLigne.declarationFluxFilename != null %}
+                  <tr>
+                    <td>Flux</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationFluxFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationConcentrationsFilename != null %}
+                  <tr>
+                    <td>Concentrations et températures</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationConcentrationsFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+
+                <table class="table">
+                <tbody>
+
+                
+                <tr>
+                  <td>Jour</td>
+                  {% for k,v in reports[declarationLigne.ligne.numero].dailyData[1] %}
+                  <td>{{ k }}</td>
+                  {% endfor %}
+                </tr>
+                  
+                {% for day,report in reports[declarationLigne.ligne.numero].dailyData %}
+                  <tr>
+                    <td>{{ day }}</td>
+                    {% for v in report %}
+                    <td>{{ v }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+
+                </tbody>
+                </table>
+              {% endif %}
               
 
           {% endfor %}
