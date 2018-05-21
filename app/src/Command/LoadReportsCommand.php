@@ -60,6 +60,7 @@ class LoadReportsCommand extends Command
             $output->writeln(sprintf('Importing data for declaration %s', $declarationId));
             foreach ($declaration->getDeclarationsFonctionnementLigne() as $declarationFonctionnementLigne) {
                 $this->loadConcentrations($declarationFonctionnementLigne);
+                $this->loadFlux($declarationFonctionnementLigne);
             }
         }
         else {
@@ -77,17 +78,33 @@ class LoadReportsCommand extends Command
             $fullFilePath = $uploadDestination.'/'.$filename;
 
             $parser = new DrealConcentrationParser();
-
-            $datapoints = $parser->parseFile($fullFilePath);
-            // var_dump($hasFile, $fullFilePath, $datapoints);
-
-            foreach($datapoints as $datapoint){
-                $mesure = Mesure::fromDataPoint($datapoint);
-                $mesure->setDeclarationFonctionnementLigne($declarationFonctionnementLigne);
-                $this->entityManager->persist($mesure);
-            }
-
-            $this->entityManager->flush();
+            $this->loadDataPoints($parser, $fullFilePath, $declarationFonctionnementLigne);
         }
+    }
+
+    private function loadFlux($declarationFonctionnementLigne) {
+        $filename = $declarationFonctionnementLigne->getDeclarationFluxFileName();
+        $hasFile = !empty($filename);
+        if($hasFile) {
+            $mapping = $this->propertyMapping->fromField($declarationFonctionnementLigne, 'declarationFluxFile');
+
+            $uploadDestination = $mapping->getUploadDestination();
+            $fullFilePath = $uploadDestination.'/'.$filename;
+
+            $parser = new DrealFluxParser();
+            $this->loadDataPoints($parser, $fullFilePath, $declarationFonctionnementLigne);
+        }
+    }
+
+    private function loadDataPoints($parser, $fullFilePath, $declarationFonctionnementLigne) {
+        $datapoints = $parser->parseFile($fullFilePath);
+
+        foreach($datapoints as $datapoint){
+            $mesure = Mesure::fromDataPoint($datapoint);
+            $mesure->setDeclarationFonctionnementLigne($declarationFonctionnementLigne);
+            $this->entityManager->persist($mesure);
+        }
+
+        $this->entityManager->flush();
     }
 }

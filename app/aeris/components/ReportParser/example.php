@@ -12,14 +12,14 @@ $datapoints = $parser->parseFile($inputFileName);
 
 echo var_dump($datapoints);
 
-$parser = new DrealFluxParser();
-$inputFileName = __DIR__ . '/sample-data/sample-flux.xls';
-$datapoints = $parser->parseFile($inputFileName);
-
-echo var_dump($datapoints);
-
-$parser = new DrealCompteursParser();
-$inputFileName = __DIR__ . '/sample-data/sample-compteurs.xls';
-$datapoints = $parser->parseFile($inputFileName);
-
-echo var_dump($datapoints);
+//$parser = new DrealFluxParser();
+//$inputFileName = __DIR__ . '/sample-data/sample-flux.xls';
+//$datapoints = $parser->parseFile($inputFileName);
+//
+//echo var_dump($datapoints);
+//
+//$parser = new DrealCompteursParser();
+//$inputFileName = __DIR__ . '/sample-data/sample-compteurs.xls';
+//$datapoints = $parser->parseFile($inputFileName);
+//
+//echo var_dump($datapoints);
