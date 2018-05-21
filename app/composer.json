@@ -35,7 +35,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "Aeris\\Component\\ReportParser\\": "aeris/components/ReportParser/src/"
+            "Aeris\\Component\\ReportParser\\": "aeris/components/ReportParser/src/",
+            "Aeris\\Component\\Report\\": "aeris/components/Report/src/"
         }
     },
     "autoload-dev": {

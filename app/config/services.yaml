@@ -40,3 +40,8 @@ services:
             - "@App\\Repository\\MesureRepository"
             - "@doctrine.orm.entity_manager"
             - "@vich_uploader.property_mapping_factory"
+
+    app.command.ValidateReportCommand:
+        class: App\Command\ValidateReportCommand
+        arguments:
+            - "@App\\Repository\\DeclarationIncinerateurRepository"
