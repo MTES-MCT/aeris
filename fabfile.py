@@ -57,6 +57,7 @@ def enable_project(env_name, deployment_directory):
 
     # Create symlink
     run('ln -sfn %s /var/www/aeris-%s' % (deployment_directory, env_name))
+    run('rm %s/public/build/declarations -rf' % (deployment_directory))
     run('ln -sfn /var/www/upload-%s %s/public/build/declarations' % (env_name, deployment_directory))
     # Restart the necessary services
     run('service php7.0-fpm restart')
