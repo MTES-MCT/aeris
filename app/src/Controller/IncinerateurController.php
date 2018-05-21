@@ -7,6 +7,9 @@ use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationIncinerateur;
 use App\Entity\Declaration\DeclarationDioxine;
 
+use Aeris\Component\Report\AppliableRules;
+use Aeris\Component\Report\MonthlyReport;
+
 class IncinerateurController extends AerisController
 {
     private function canAccessIncinerateur($incinerateur){
@@ -43,11 +46,34 @@ class IncinerateurController extends AerisController
 
     public function cr($declarationId)
     {
-        return $this->generateCRIfAllowed(
-            $declarationId,
-            DeclarationIncinerateur::class,
-            "user/compte-rendu-declaration.html.twig"
-        );
+        $declaration = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class)
+            ->find($declarationId);
+
+        if (!$declaration) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
+        if(!$this->canAccessIncinerateur($declaration->getIncinerateur())) {
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+
+
+        $rules = new AppliableRules();
+
+        $reports = [];
+        foreach($declaration->getDeclarationsFonctionnementLigne() as $declarationLigne) {
+            $report = new MonthlyReport($declaration->getDeclarationMonth(), $rules);
+            $report->fillWithMeasures($declarationLigne->getMesures());
+        
+            $reports[$declarationLigne->getLigne()->getNumero()] = $report;
+        }
+
+        return $this->render("user/compte-rendu-declaration.html.twig", [
+            'declaration' => $declaration,
+            'reports' => $reports,
+        ]);
     }
 
     public function crDioxine($declarationId)
@@ -81,30 +107,4 @@ class IncinerateurController extends AerisController
             'declaration' => $declaration
         ]);
     }
-
-/*
-    public function crSample()
-    {
-        $period = new \DatePeriod(
-             new \DateTime('2018-03-01'),
-             new \DateInterval('P1D'),
-             new \DateTime('2018-04-01')
-        );
-
-        $dates = [];
-        foreach ($period as $key => $value) {
-            $dates[] = $value->format('d/m/Y');       
-        }
-
-        $fluxCriterions = [ 'Poussières', 'CO', 'COT', 'Hcl', 'HF', 'SO2', 'Nox', 'NH3'];
-        $counterList = [ 'Poussières', 'CO', 'COT', 'HCl',  'HF', 'SO2', 'NOX', 'NH3', 'Total' ];
-        $concentrationList = [ 'Poussières', 'COT', 'HCl',  'HF', 'SO2', 'NOX', 'NH3', 'Total' ];
-
-        return $this->render("user/compte-rendu-sample.html.twig", [
-            'dateList' => $dates,
-            'fluxCriterions' => $fluxCriterions,
-            'counterList' => $counterList,
-            'concentrationList' => $concentrationList,
-        ]);
-    }*/
 } 

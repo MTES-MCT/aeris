@@ -1,0 +1,17 @@
+{
+    "name": "clemk/xls",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.2",
+        "phpunit/phpunit": "^6.5"
+    },
+    "authors": [
+        {
+            "name": "clemkeirua",
+            "email": "clement@keiruaprod.fr"
+        }
+    ],
+     "autoload": {
+        "psr-4": {
+        }
+    }
+}

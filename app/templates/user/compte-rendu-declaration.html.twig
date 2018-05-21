@@ -7,12 +7,15 @@
     list-style: square;
     padding-left: 2em;
 }
+body{
+  overflow-x: scroll !important;
+}
     </style>
 {% endblock %}
 
 {% block body %}
   <section class="section">
-    <div class="container">
+    <div class="container" >
       {% if declaration.declarationMonth %}
     <h2 class="title is-2">Déclaration concernant les rejets durant {{ declaration.declarationMonth|date('m/Y') }} </h2>
     Déclaration effectuée le {{ declaration.createdAt|date('d/m/Y') }}
@@ -51,7 +54,7 @@
           
               <h4 class="title is-4">Déclaration générale</h4>
 
-              <table class="table">
+              <table class="table" >
                 <tbody>
                   {#<tr>
                     <td>Nombre d'heures de fonctionnement théoriques</td>
@@ -65,7 +68,7 @@
               </table>
 
               <h4 class="title is-4">Mesures continues</h3>
-
+              
               <table class="table">
                 <tbody>
                   {% if declarationLigne.declarationCompteursFilename != null %}
@@ -89,59 +92,36 @@
                 </tbody>
               </table>
 
-
-              
-
-          {% endfor %}
-        {% endif %}
-{#
-        {% if not declaration.mesuresDioxine is empty %}
-          <h3 class="title is-3">Declaration dioxines</h3>
-          {% for mesureDioxine in declaration.mesuresDioxine %}
-              {% if mesureDioxine.ligne %}
-              <h4 class="title is-4">Ligne n° {{ mesureDioxine.ligne.numero }}</h4>
-              {% else %}
-              <h4 class="title is-4">ligne</h4>
-              {% endif %}
-
-              <table class="table">
+              {#
+              {% if reports[declarationLigne.ligne.numero] != null %}
+                
+                <table class="table">
+                <thead>
+                <tr>
+                  <th>Jour</th>
+                  {% for k,v in reports[declarationLigne.ligne.numero].dailyData[1] %}
+                  <th>{{ k }}</th>
+                  {% endfor %}
+                </tr>
+                </thead>
                 <tbody>
+                  
+                {% for day,report in reports[declarationLigne.ligne.numero].dailyData %}
                   <tr>
-                    <td>Nom du laboratoire</td>
-                    <td>{{ mesureDioxine.nomLaboratoire }}</td>
+                    <td>{{ day }}</td>
+                    {% for v in report %}
+                    <td>{{ v }}</td>
+                    {% endfor %}
                   </tr>
-                  <tr>
-                    <td>Date de début des mesures</td>
-                    <td>{{ mesureDioxine.dateDebut|date("d/m/Y") }}</td>
-                  </tr>
-                  <tr>
-                    <td>Date de fin des mesures</td>
-                    <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
-                  </tr>
-                  <tr>
-                    <td>Disponibilité de la ligne sur la période (%) </td>
-                    <td>{{ mesureDioxine.disponibiliteLigne }}</td>
-                  </tr>
-                  <tr>
-                    <td>Disponibilité de l'analyseur sur la période (%) </td>
-                    <td>{{ mesureDioxine.disponibiliteAnalyseur }}</td>
-                  </tr>
-                  <tr>
-                    <td>Concentration des PCDD/PCDF<br/>
-                    (ng NATO I-TEQ/Nm<sup>3</sup> à O<sub>2réf</sub> sur gaz sec)</td>
-                    <td style="background-color:#C7DBD0">{{ mesureDioxine.concentration }}</td>
-                  </tr>
-                  <tr>
-                    <td>Remarques</td>
-                    <td>{{ mesureDioxine.commentaire }}</td>
-                  </tr>
+                {% endfor %}
+
                 </tbody>
-              </table>
+                </table>
+              {% endif %}
+              #}
 
           {% endfor %}
         {% endif %}
-#}
-        
     </div>
 
     </div>

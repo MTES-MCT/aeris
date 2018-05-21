@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Declaration\MesureDioxine;
+use App\Entity\Declaration\Mesure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method MesureDioxine|null find($id, $lockMode = null, $lockVersion = null)
- * @method MesureDioxine|null findOneBy(array $criteria, array $orderBy = null)
- * @method MesureDioxine[]    findAll()
- * @method MesureDioxine[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Mesure|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Mesure|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Mesure[]    findAll()
+ * @method Mesure[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MesureDioxineRepository extends ServiceEntityRepository
+class MesureRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, MesureDioxine::class);
+        parent::__construct($registry, Mesure::class);
     }
 
     /*
