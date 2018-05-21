@@ -2,12 +2,15 @@
 
 namespace Aeris\Component\Report;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Aeris\Component\Report\Validator as Assert;
+
 class MonthlyReport {
     public $dailyData;
 
     private $countersValues;
 
-    private $nbDaysInMonth;
+    public $nbDaysInMonth;
     
     private $rules;
 
@@ -46,5 +49,10 @@ class MonthlyReport {
 
     private function getDay($date) {
          return (int)$date->format('d');
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addConstraint(new Assert\IsInMonthlyRange('nox_c_24h_moy', 4, 10));
     }
 }

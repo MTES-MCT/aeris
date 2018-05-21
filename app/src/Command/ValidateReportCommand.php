@@ -11,15 +11,22 @@ use App\Repository\DeclarationIncinerateurRepository;
 use Aeris\Component\Report\AppliableRules;
 use Aeris\Component\Report\MonthlyReport;
 
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 class ValidateReportCommand extends Command
 {
     /** @var DeclarationIncinerateurRepository */
     private $declarationRepository;
 
+    /** @var ValidatorInterface */
+    private $validator;
+
     public function __construct(
-        DeclarationIncinerateurRepository $declarationRepository
+        DeclarationIncinerateurRepository $declarationRepository,
+        ValidatorInterface $validator
     ) {
         $this->declarationRepository = $declarationRepository;
+        $this->validator = $validator;
         parent::__construct();
     }
 
@@ -61,7 +68,9 @@ class ValidateReportCommand extends Command
 
         $report = new MonthlyReport($declaration->getDeclarationMonth(), $rules);
         $report->fillWithMeasures($declarationLigne->getMesures());
+        
+        $errors = $this->validator->validate($report);
         $report->debug('nox_c_24h_moy');
-        //var_dump($report);
+        var_dump($errors);
     }
 }
