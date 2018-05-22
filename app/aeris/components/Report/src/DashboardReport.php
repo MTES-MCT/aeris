@@ -8,7 +8,13 @@ class DashboardReport {
 
     const graphMapping = [
         'psr_c_24h_moy',
-        'co_c_24h_moy'
+        'co_c_24h_moy',
+        'cot_c_24h_moy',
+        'hcl_c_24h_moy',
+        'hf_c_24h_moy',
+        'so2_c_24h_moy',
+        'nox_c_24h_moy',
+        'nh3_c_24h_moy'
     ];
 
     public function __construct($incinerateur) {
