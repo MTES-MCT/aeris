@@ -79,8 +79,6 @@ class AerisController extends Controller
            }
         }
 
-
-
         return [
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,

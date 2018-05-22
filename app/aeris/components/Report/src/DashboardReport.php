@@ -63,37 +63,37 @@ class DashboardReport {
                 'mg/m^3.'
             ),
             'cot_c_24h_moy' => new GraphMetadata(
-                -1,
+                10,
                 'COT',
                 'Concentration moyenne 24h',
                 'mg/m3'
             ),
             'hcl_c_24h_moy' => new GraphMetadata (
-                -1,
+                10,
                 'HCl',
                 'Concentration moyenne 24h',
                 'mg/m^3.'
             ),
             'hf_c_24h_moy' => new GraphMetadata (
-                -1,
+                1,
                 'HF',
                 'Concentration moyenne 24h',
                 'mg/m^3.'
             ),
             'so2_c_24h_moy' => new GraphMetadata (
-                -1,
+                50,
                 'SO2',
                 'Concentration moyenne 24h',
                 'mg/m^3.'
             ),
             'nox_c_24h_moy' => new GraphMetadata (
-                -1,
+                200,
                 'NOx',
                 'Concentration moyenne 24h',
                 'mg/m^3.'
             ),
             'nh3_c_24h_moy' => new GraphMetadata (
-                -1,
+                30,
                 'NH3',
                 'Concentration moyenne 24h',
                 'mg/m^3.'
