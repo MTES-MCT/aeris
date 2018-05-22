@@ -84,7 +84,8 @@ class AerisController extends Controller
         return [
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,
-            'dashboardReport' => new DashboardReport($incinerateur)
+            'dashboardReport' => new DashboardReport($incinerateur),
+            'expectedGraphs' => [ 'psr_c_24h_moy', 'co_c_24h_moy' ]
         ];
     }
 

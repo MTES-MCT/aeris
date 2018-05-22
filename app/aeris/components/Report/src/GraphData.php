@@ -3,11 +3,10 @@
 namespace Aeris\Component\Report;
 
 class GraphData {
-    private $measureType;
-
-    private $days;
-    private $data;
-    private $measures;
+    public $measureType;
+    public $days;
+    public $data;
+    public $measures;
 
     public function __construct($measureType, $measures) {
         // We want to display 6 months of data
@@ -30,7 +29,7 @@ class GraphData {
 
         foreach($iterator as $currentDate) {
             $currDate = $currentDate->format("d/m/Y");
-            $this->days[] = $currentDate;
+            $this->days[] = $currDate;
             $this->data[] = 0;
         }
     }

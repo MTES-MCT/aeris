@@ -2,7 +2,17 @@
 
 <h3 class="title is-3">Synthèse des déclarations de mesures continues</h3>
 
-{{ dump(dashboardReport.graphs[1]) }}
+{% for ligne in incinerateur.lignes %}
+  <div>
+    <h4 class="title is-4">Ligne n°{{ ligne.numero }}</h4>
+    {# We want an explicit list of the graphs #}
+    {% for measureType in expectedGraphs %}
+    <div class="dioxine-canvas-container">
+      <canvas id="canvas_continu_{{ligne.numero}}_{{ measureType }}"></canvas>
+    </div>
+    {% endfor %}
+  </div>              
+{% endfor %}
 
 <h3 class="title is-3">Synthèse des déclarations de dioxines et furannes</h3>
 {#
@@ -59,18 +69,78 @@
 <script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
   
 <script>
-var dashboardData = {{ dioxineGraphData|json_encode()|raw }}
+var reportData = {{ dashboardReport|json_encode()|raw }}
 
-function addChart(ligneId) {
+function addMesureChart(ligneId, measureType) {
   var color = Chart.helpers.color;
   var barChartData = {
-    labels: dashboardData.months,
+    labels: reportData.graphs[ligneId][measureType].days,
     datasets: [{
       label: 'Ligne n°' + ligneId,
       backgroundColor: color('#207245').alpha(0.5).rgbString(),
       borderColor: '#558F6E',
       borderWidth: 1,
-      data: dashboardData.lines[ligneId]
+      data: reportData.graphs[ligneId][measureType].data
+    }]
+  };
+
+  var ctx = document.getElementById('canvas_continu_' + ligneId+'_'+measureType).getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: barChartData,
+    options: {
+      responsive: true,
+      legend: {
+        position: 'top',
+      },
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true,
+                  //suggestedMax: 0.11,
+              }
+              /*,
+              scaleLabel:{
+                display:true,
+                  labelString: "Concentration (nb/m^3)"
+              }*/
+          }]
+      }
+      /*,annotation: {
+        annotations: [
+          {
+            type: "line",
+            mode: "horizontal",
+            scaleID: "y-axis-0",
+            value: 0.1,
+            borderColor: "red",
+            label: {
+              content: 'Seuil : 0.1 ng/m^3.',
+              enabled: true,
+              position: "top"
+            }
+          }
+        ]
+      }*/
+    }
+  });
+}
+
+
+
+
+var dioxineDashboardData = {{ dioxineGraphData|json_encode()|raw }}
+
+function addDioxinesChart(ligneId) {
+  var color = Chart.helpers.color;
+  var barChartData = {
+    labels: dioxineDashboardData.months,
+    datasets: [{
+      label: 'Ligne n°' + ligneId,
+      backgroundColor: color('#207245').alpha(0.5).rgbString(),
+      borderColor: '#558F6E',
+      borderWidth: 1,
+      data: dioxineDashboardData.lines[ligneId]
     }]
   };
 
@@ -122,7 +192,13 @@ function addChart(ligneId) {
 
 window.onload = function() {
   {% for ligne in incinerateur.lignes %}
-    addChart({{ ligne.numero }})
+    addDioxinesChart({{ ligne.numero }});
+  {% endfor %}
+
+  {% for ligne in incinerateur.lignes %}
+      {% for measureType in expectedGraphs %}
+        addMesureChart({{ ligne.numero }}, '{{ measureType }}');
+      {% endfor %}
   {% endfor %}
 
   $("#open-depassement-modal").click(function() {

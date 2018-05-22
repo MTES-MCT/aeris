@@ -9,9 +9,9 @@ class DashboardReport {
     // const KEY_LINES = 'lines';
 
     const graphMapping = [
-            'psr_c_24h_moy',
-            'co_c_24h_moy'
-        ];
+        'psr_c_24h_moy',
+        'co_c_24h_moy'
+    ];
 
     public function __construct($incinerateur) {
         $this->graphs = [];
