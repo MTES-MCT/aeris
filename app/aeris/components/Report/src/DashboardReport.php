@@ -4,6 +4,7 @@ namespace Aeris\Component\Report;
 
 class DashboardReport {
     public $graphs;
+    public $metadata = [];
     private $measuresByLine;
 
     // const KEY_LINES = 'lines';
@@ -16,6 +17,7 @@ class DashboardReport {
     public function __construct($incinerateur) {
         $this->graphs = [];
         $measuresByLine = [];
+        $this->configureMetadata();
 
         // Initialisations of the arrays we use afterwards
         foreach($incinerateur->getLignes() as $currLine) {
@@ -44,5 +46,10 @@ class DashboardReport {
         }
     }
 
-
+    private function configureMetadata(){
+        $this->metadata = [
+            'psr_c_24h_moy' => new GraphMetadata(10, 'Poussières', 'Concentration moyenne 24h', 'ng/m^3.'),
+            'co_c_24h_moy' => new GraphMetadata(50, 'CO', 'Concentration moyenne 24h', 'ng/m^3.')
+        ];
+    }
 }

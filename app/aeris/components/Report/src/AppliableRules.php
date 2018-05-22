@@ -3,7 +3,6 @@
 namespace Aeris\Component\Report;
 
 class AppliableRules {
-    // public $fields = ['nox_c_24h_moy'];
     public $fields = [
         'debit_horaire_moy_jour',
         'tempf1_24h_moy',

@@ -76,7 +76,7 @@ function addMesureChart(ligneId, measureType) {
   var barChartData = {
     labels: reportData.graphs[ligneId][measureType].days,
     datasets: [{
-      label: 'Ligne n°' + ligneId,
+      label: reportData.metadata[measureType].label,
       backgroundColor: color('#207245').alpha(0.5).rgbString(),
       borderColor: '#558F6E',
       borderWidth: 1,
@@ -97,31 +97,31 @@ function addMesureChart(ligneId, measureType) {
           yAxes: [{
               ticks: {
                   beginAtZero:true,
-                  //suggestedMax: 0.11,
+                  suggestedMax: reportData.metadata[measureType].vle * 1.1,
               }
-              /*,
+              ,
               scaleLabel:{
                 display:true,
-                  labelString: "Concentration (nb/m^3)"
-              }*/
+                  labelString: reportData.metadata[measureType].yAxisLabel
+              }
           }]
       }
-      /*,annotation: {
+      ,annotation: {
         annotations: [
           {
             type: "line",
             mode: "horizontal",
             scaleID: "y-axis-0",
-            value: 0.1,
+            value: reportData.metadata[measureType].vle,
             borderColor: "red",
             label: {
-              content: 'Seuil : 0.1 ng/m^3.',
+              content: reportData.metadata[measureType].thresholdLabel,
               enabled: true,
               position: "top"
             }
           }
         ]
-      }*/
+      }
     }
   });
 }
