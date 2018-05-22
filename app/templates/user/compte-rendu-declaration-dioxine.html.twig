@@ -13,14 +13,13 @@
 {% block body %}
   <section class="section">
     <div class="container">
-    <h2 class="title is-2">Déclaration de dioxines</h2>
+    <h2 class="title is-2">Rejets dioxines</h2>
         {% if not declaration.mesuresDioxine is empty %}
-          <h3 class="title is-3">Declaration dioxines</h3>
           {% for mesureDioxine in declaration.mesuresDioxine %}
               {% if mesureDioxine.ligne %}
-              <h4 class="title is-4">Ligne n° {{ mesureDioxine.ligne.numero }}</h4>
+              <h3 class="title is-3">Ligne n° {{ mesureDioxine.ligne.numero }}</h3>
               {% else %}
-              <h4 class="title is-4">ligne</h4>
+              <h3 class="title is-3">ligne</h3>
               {% endif %}
 
               <table class="table">

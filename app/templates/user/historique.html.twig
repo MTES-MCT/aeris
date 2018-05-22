@@ -22,8 +22,8 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <table class="table">
           <thead>
             <tr>
-              <th>Déclaration</th>
-              <th>Date</th>
+              <th>Période</th>
+              <th>Date de déclaration</th>
               <th>Commentaire</th>
               <th>Lien</th>
             </tr>
@@ -32,7 +32,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
             {% for declaration in incinerateur.declarationsIncinerateur  %}
             <tr>
               <th>
-                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
+                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|date('M Y') }} </a>
               </th>
               <td>
                 {{ declaration.createdAt|date('d/m/Y') }}

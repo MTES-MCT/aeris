@@ -158,14 +158,17 @@ class OwnerController extends AerisController
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         if(!$this->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
 
         $mainIncinerateur = $this->getMainIncinerateur();
-        $dashboardData = $this->getIncinerateurDashboardData($mainIncinerateur);
+        $dashboardData = $this->getIncinerateurDashboardData(
+            $mainIncinerateur,
+            $request->get('ligne')
+        );
 
         return $this->render("owner/dashboard-exploitant.html.twig", array_merge([
             'mainIncinerateur' =>  $mainIncinerateur
