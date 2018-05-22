@@ -5,9 +5,6 @@ namespace Aeris\Component\Report;
 class DashboardReport {
     public $graphs;
     public $metadata = [];
-    private $measuresByLine;
-
-    // const KEY_LINES = 'lines';
 
     const graphMapping = [
         'psr_c_24h_moy',
@@ -35,21 +32,66 @@ class DashboardReport {
                 );
             }
         }
-        $this->measuresByLine = $measuresByLine;
 
         // Formatting of the data for display in graphs
         foreach($incinerateur->getLignes() as $currLine) {
             $measures = [];
             foreach(self::graphMapping as $currentGraph) {
-                $this->graphs[$currLine->getNumero()][$currentGraph] = new GraphData($currentGraph, $this->measuresByLine[$currLine->getNumero()]);
+                $this->graphs[$currLine->getNumero()][$currentGraph] = new GraphData($currentGraph, $measuresByLine[$currLine->getNumero()]);
             }
         }
     }
 
     private function configureMetadata(){
         $this->metadata = [
-            'psr_c_24h_moy' => new GraphMetadata(10, 'Poussières', 'Concentration moyenne 24h', 'ng/m^3.'),
-            'co_c_24h_moy' => new GraphMetadata(50, 'CO', 'Concentration moyenne 24h', 'ng/m^3.')
+            'psr_c_24h_moy' => new GraphMetadata(
+                10,
+                'Poussières',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            ),
+            'co_c_24h_moy' => new GraphMetadata(
+                50,
+                'CO',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            ),
+            'cot_c_24h_moy' => new GraphMetadata(
+                -1,
+                'COT',
+                'Concentration moyenne 24h',
+                'mg/m3'
+            ),
+            'hcl_c_24h_moy' => new GraphMetadata (
+                -1,
+                'HCl',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            ),
+            'hf_c_24h_moy' => new GraphMetadata (
+                -1,
+                'HF',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            ),
+            'so2_c_24h_moy' => new GraphMetadata (
+                -1,
+                'SO2',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            ),
+            'nox_c_24h_moy' => new GraphMetadata (
+                -1,
+                'NOx',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            ),
+            'nh3_c_24h_moy' => new GraphMetadata (
+                -1,
+                'NH3',
+                'Concentration moyenne 24h',
+                'mg/m^3.'
+            )
         ];
     }
 }
