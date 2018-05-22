@@ -7,6 +7,7 @@ class GraphData {
 
     private $days;
     private $data;
+    private $measures;
 
     public function __construct($measureType, $measures) {
         // We want to display 6 months of data
@@ -35,6 +36,13 @@ class GraphData {
     }
 
     private function prepareData($type, $measures) {
-
+        foreach($measures as $measure) {
+            if($measure->getType() == $type && $measure->getDate() > $this->firstDate) {
+                $nbDaysDate = date_diff($measure->getDate(), $this->firstDate);
+                if ($nbDaysDate->days < count($this->data)) {
+                    $this->data[$nbDaysDate->days] = $measure->getValue();
+                }
+            }
+        }
     }
 }
