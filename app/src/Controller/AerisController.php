@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
+use Aeris\Component\Report\DashboardReport;
 
 class AerisController extends Controller
 {
@@ -78,9 +79,12 @@ class AerisController extends Controller
            }
         }
 
+
+
         return [
-            'output' => $output,
-            'dioxines' => $dioxines
+            'dioxineGraphData' => $output,
+            'dioxines' => $dioxines,
+            'dashboardReport' => new DashboardReport($incinerateur)
         ];
     }
 

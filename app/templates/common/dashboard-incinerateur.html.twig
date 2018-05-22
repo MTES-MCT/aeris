@@ -55,7 +55,7 @@
 <script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
   
 <script>
-var dashboardData = {{ output|json_encode()|raw }}
+var dashboardData = {{ dioxineGraphData|json_encode()|raw }}
 
 function addChart(ligneId) {
   var color = Chart.helpers.color;
