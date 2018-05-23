@@ -1,3 +1,11 @@
+{% macro canvasContinu(ligneId, measureType) %}
+<div class="dioxine-canvas-container">
+  <canvas id="canvas_continu_{{ligneId}}_{{ measureType }}"></canvas>
+</div>
+{% endmacro %}
+
+{% import _self as s %}
+
 {% if incinerateur %}
 <nav class="panel">
   <p class="panel-tabs">
@@ -10,11 +18,7 @@
 
 {% if ligneId == null %}
   <h3 class="title is-3">Synthèse globale</h3>
-  {#
-  <p>
-    pouet
-  </p>
-  #}
+  
 {% else %}
 
   <h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
@@ -48,14 +52,14 @@
         <tr>
           <th>Identifiant</th>
           <th>Paramètres</th>
-          <th>Poussières</th>
-          <th>CO</th>
-          <th>COT</th>
-          <th>HCl</th>
-          <th>HF</th>
-          <th>SO2</th>
-          <th>NOX</th>
-          <th>NH3</th>
+          <th><a href="#section-poussieres">Poussières</a></th>
+          <th><a href="#section-co">CO</a></th>
+          <th><a href="#section-cot">COT</a></th>
+          <th><a href="#section-hcl">HCl</a></th>
+          <th><a href="#section-hf">HF</a></th>
+          <th><a href="#section-so2">SO2</a></th>
+          <th><a href="#section-nox">NOX</a></th>
+          <th><a href="#section-nh3">NH3</a></th>
           <th>Total</th>
         </tr>
       </thead>
@@ -114,20 +118,29 @@
         </tr>
       </tbody>
     </table>
-
-
   </div>
-
-
 
   <div>
     <h4 class="title is-4">Déclarations de mesures continues</h4>
     {# We want an explicit list of the graphs #}
-    {% for measureType in expectedGraphs %}
-    <div class="dioxine-canvas-container">
-      <canvas id="canvas_continu_{{ligneId}}_{{ measureType }}"></canvas>
-    </div>
-    {% endfor %}
+    
+    <h5 class="is-h5" id="section-poussieres">Poussières</h5>
+    {{ s.canvasContinu(ligneId, 'psr_c_24h_moy') }}
+    <h5 class="is-h5" id="section-co">CO</h5>
+    {{ s.canvasContinu(ligneId, 'co_c_24h_moy') }}
+    <h5 class="is-h5" id="section-cot">COT</h5>
+    {{ s.canvasContinu(ligneId, 'cot_c_24h_moy') }}
+    <h5 class="is-h5" id="section-hcl">HCL</h5>
+    {{ s.canvasContinu(ligneId, 'hcl_c_24h_moy') }}
+    <h5 class="is-h5" id="section-hf">HF</h5>
+    {{ s.canvasContinu(ligneId, 'hf_c_24h_moy') }}
+    <h5 class="is-h5" id="section-so2">SO2</h5>
+    {{ s.canvasContinu(ligneId, 'so2_c_24h_moy') }}
+    <h5 class="is-h5" id="section-nox">NOX</h5>
+    {{ s.canvasContinu(ligneId, 'nox_c_24h_moy') }}
+    <h5 class="is-h5" id="section-nh3">NH3</h5>
+    {{ s.canvasContinu(ligneId, 'nh3_c_24h_moy') }}
+
   </div>
 
   <h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes</h3>
