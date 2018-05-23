@@ -22,9 +22,12 @@ class DashboardController extends AerisController
         }
         $incinerateur = $this->getMainIncinerateur();
         $params['incinerateurId'] = $incinerateur->getId();
+
         if(!empty($request->get('ligne'))) {
             $params['ligne'] = $request->get('ligne');
+            return $this->redirect($this->generateUrl("route_dashboard_incinerateur_ligne", $params));
         }
+
         return $this->redirect($this->generateUrl("route_dashboard_incinerateur", $params));
     }
 
@@ -45,7 +48,32 @@ class DashboardController extends AerisController
 
         $dashboardData = $this->getIncinerateurDashboardData(
             $incinerateur,
-            $request->get('ligne')
+            null
+        );
+
+        return $this->render("dashboard/dashboard-incinerateur.html.twig", array_merge([
+            'incinerateur' =>  $incinerateur
+        ], $dashboardData));
+    }
+
+    public function dashboard_ligne(Request $request, $incinerateurId, $ligneId)
+    {
+        $incinerateur = $this->getDoctrine()
+            ->getRepository(Incinerateur::class)
+            ->find($incinerateurId);
+
+        if (!$incinerateur) {
+            throw $this->createNotFoundException(
+                "Pas d'incinerateur pour l' id ".$incinerateurId
+            );
+        }
+        if(!$this->canAccessIncinerateur($incinerateur)) {
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+
+        $dashboardData = $this->getIncinerateurDashboardData(
+            $incinerateur,
+            $ligneId
         );
 
         return $this->render("dashboard/dashboard-incinerateur.html.twig", array_merge([
