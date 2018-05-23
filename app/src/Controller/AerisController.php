@@ -4,10 +4,21 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
-use Aeris\Component\Report\DashboardReport;
 
 class AerisController extends Controller
 {
+    protected function canAccessIncinerateur($incinerateur){
+        $authChecker = $this->get('security.authorization_checker'); 
+        if ($authChecker->isGranted('ROLE_INSPECTEUR')) {
+            return true;
+        }
+        if($authChecker->isGranted('ROLE_PROPRIETAIRE')) {
+            $mainIncinerateur = $this->getMainIncinerateur();
+            return $mainIncinerateur->getId() == $incinerateur->getId();
+        }
+        return false;
+    }
+
     protected function getMainIncinerateur(){
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $incinerateurs = $user->getIncinerateurs();
@@ -15,6 +26,16 @@ class AerisController extends Controller
             return $incinerateurs[0];
         }
         return null;
+    }
+
+    protected function isInspecteur(){
+        $authChecker = $this->get('security.authorization_checker'); 
+        return $authChecker->isGranted('ROLE_INSPECTEUR');
+    }
+
+    protected function isOwner(){
+        $authChecker = $this->get('security.authorization_checker'); 
+        return $authChecker->isGranted('ROLE_PROPRIETAIRE');
     }
 
     protected function downloadFileByPath($path, $filename) {
@@ -28,76 +49,5 @@ class AerisController extends Controller
 
         $response->setContent($content);
         return $response;
-    }
-
-    public function getIncinerateurDashboardData(
-        $incinerateur,
-        $ligneId
-    ){
-        $dioxines = [];
-        $listOfMonths = $this->createListOfMonths();
-        $output = [
-            'months' =>  [],
-            'lines' => []
-        ];
-
-        foreach($incinerateur->getLignes() as $currLine) {
-            $output['lines'][$currLine->getNumero()] = [];
-            $dioxines[$currLine->getNumero()] = [];
-        }
-
-        foreach($listOfMonths as $date) {
-            $currDate = $date->format("M Y");
-            $output['months'][] = $currDate;
-
-            foreach($incinerateur->getLignes() as $currLine) {
-                $output['lines'][$currLine->getNumero()][] = 0;
-            }
-        }
-
-        foreach ($incinerateur->getDeclarationsDioxine() as $declaration) {
-
-           $declarationsDioxines = $declaration->getMesuresDioxine();
-           if ($declarationsDioxines) {
-            foreach ($declarationsDioxines as $currDeclarationDioxines) {
-                $ligne = $currDeclarationDioxines->getLigne();
-                if ($ligne != null) {
-                    $result = [
-                        'numeroLigne' =>  $ligne->getNumero(),
-                        'debut' => $currDeclarationDioxines->getDateDebut(),
-                        'fin' => $currDeclarationDioxines->getDateFin(),
-                        'disponibiliteLigne' =>  $currDeclarationDioxines->getDisponibiliteLigne(),
-                        'disponibiliteAnalyseur' =>  $currDeclarationDioxines->getDisponibiliteAnalyseur(),
-                        'concentration' =>  $currDeclarationDioxines->getConcentration(),
-                    ];
-
-                    $month = $currDeclarationDioxines->getDateDebut()->format('M Y');
-                    $monthIndex = array_search($month, $output['months']);
-                    if($monthIndex !== NULL) {
-                        $output['lines'][$ligne->getNumero()][$monthIndex] = $currDeclarationDioxines->getConcentration();
-                    }
-                    array_push($dioxines[$ligne->getNumero()], $result);
-                }
-            }
-           }
-        }
-
-        return [
-            'ligneId' => $ligneId,
-            'dioxineGraphData' => $output,
-            'dioxines' => $dioxines,
-            'dashboardReport' => new DashboardReport($incinerateur),
-            'expectedGraphs' => DashboardReport::graphMapping
-        ];
-    }
-
-    private function createListOfMonths(){
-        $period = new \DatePeriod(
-             new \DateTime('-6 months'),
-             new \DateInterval('P1M'),
-             new \DateTime()
-        );
-
-        return $period;
     }
 } 

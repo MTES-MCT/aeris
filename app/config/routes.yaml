@@ -4,7 +4,7 @@ route_index:
 
 route_dashboard:
     path: /tableau-de-bord
-    defaults: { _controller: 'App\Controller\UserController::dashboard' }
+    defaults: { _controller: 'App\Controller\DashboardController::dashboard' }
 
 ### Incinérateur
 route_history:
@@ -19,10 +19,6 @@ route_cr_declaration_dioxine:
     path: /historique/declaration-dioxine/{declarationId}
     defaults: { _controller: 'App\Controller\IncinerateurController::crDioxine' }
 
-#route_cr_sample:
-#    path: /compte-rendu
-#    defaults: { _controller: 'App\Controller\IncinerateurController::crSample' }
-
 ### Owner
 route_dashboard_owner:
     path: /tableau-de-bord-exploitant
@@ -30,7 +26,7 @@ route_dashboard_owner:
 
 route_declaration:
     path: /declarer
-    defaults: { _controller: 'App\Controller\OwnerController::declaration' }
+    defaults: { _controller: 'App\Controller\OwnerController::declarationChoice' }
 
 route_declaration_dioxines:
     path: /declarer-dioxines
@@ -46,18 +42,13 @@ route_download_asset:
     defaults: { _controller: 'App\Controller\OwnerController::downloadAsset' }
 
 ### Inspecteur
-
-route_dashboard_inspecteur:
-    path: /tableau-de-bord-inspecteur
-    defaults: { _controller: 'App\Controller\InspecteurController::dashboard_inspecteur' }
-
 route_liste_incinerateurs:
     path: /liste-incinerateurs
     defaults: { _controller: 'App\Controller\InspecteurController::liste_incinerateurs' }
 
 route_dashboard_incinerateur:
     path: /tableau-de-bord-incinerateur/{incinerateurId}
-    defaults: { _controller: 'App\Controller\InspecteurController::dashboard_incinerateur' }
+    defaults: { _controller: 'App\Controller\DashboardController::dashboard_incinerateur' }
 
 ### Login
 fos_user:
