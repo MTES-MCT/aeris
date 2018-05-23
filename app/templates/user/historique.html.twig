@@ -29,7 +29,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
             </tr>
           </thead>
           <tbody>
-            {% for declaration in incinerateur.declarationsIncinerateur  %}
+            {% for declaration in incinerateur.declarationsIncinerateur|sortbyfield('createdAt')|reverse %}
             <tr>
               <th>
                 <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|date('M Y') }} </a>
@@ -59,21 +59,17 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <table class="table">
           <thead>
             <tr>
-              <th>Déclaration</th>
-              <th>Date</th>
+              <th>Date de déclaration</th>
               <th>Commentaire</th>
               <th>Lien</th>
             </tr>
           </thead>
           <tbody>
-            {% for declaration in incinerateur.declarationsDioxine  %}
+            {% for declaration in incinerateur.declarationsDioxine  |sortbyfield('createdAt')|reverse %}
             <tr>
               <th>
-                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
+                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.createdAt|date('d/m/Y') }}</a>
               </th>
-              <td>
-                {{ declaration.createdAt|date('d/m/Y') }}
-              </td>
               <td>
                 {{ declaration.comment }}
               </td>

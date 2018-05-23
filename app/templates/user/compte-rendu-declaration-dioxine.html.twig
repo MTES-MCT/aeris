@@ -37,6 +37,10 @@
                     <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
                   </tr>
                   <tr>
+                    <td>Numéro du cartouche</td>
+                    <td>{{ mesureDioxine.numeroCartouche }}</td>
+                  </tr>
+                  <tr>
                     <td>Disponibilité de la ligne sur la période (%) </td>
                     <td>{{ mesureDioxine.disponibiliteLigne }}</td>
                   </tr>
@@ -47,7 +51,7 @@
                   <tr>
                     <td>Concentration des PCDD/PCDF<br/>
                     (ng NATO I-TEQ/Nm<sup>3</sup> à O<sub>2réf</sub> sur gaz sec)</td>
-                    <td style="background-color:#C7DBD0">{{ mesureDioxine.concentration }}</td>
+                    <td style="background-color:#C7DBD0">{{ mesureDioxine.concentration | number_format(5) }}</td>
                   </tr>
                   <tr>
                     <td>Remarques</td>

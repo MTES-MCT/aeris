@@ -45,3 +45,8 @@ services:
         class: App\Command\ValidateReportCommand
         arguments:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
+
+    twig.extension.sortbyfield:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }
