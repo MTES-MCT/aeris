@@ -46,6 +46,16 @@ services:
         arguments:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
 
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    # twig.extension.french_month:
+    #     class: App\Twig\FrenchMonthExtension
+    #     tags:
+    #         - { name: twig.extension }
+
     twig.extension.sortbyfield:
         class: Snilius\Twig\SortByFieldExtension
         tags:
