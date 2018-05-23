@@ -32,7 +32,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
             {% for declaration in incinerateur.declarationsIncinerateur|sortbyfield('createdAt')|reverse %}
             <tr>
               <th>
-                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|monthfr }} </a>
+                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|monthfr|raw }} </a>
               </th>
               <td>
                 {{ declaration.createdAt|localizeddate('medium', 'none') }}

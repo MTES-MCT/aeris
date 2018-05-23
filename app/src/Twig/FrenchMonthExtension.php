@@ -22,7 +22,7 @@ class FrenchMonthExtension extends AbstractExtension
 
         $datefr = '';
         if($date != null ){
-            $datefr = $months[$date->format('n')]." ".$date->format('Y');
+            $datefr = $months[$date->format('n')]."&nbsp;".$date->format('Y');
         }
         return $datefr;
     }
