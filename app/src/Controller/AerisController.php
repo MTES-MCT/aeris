@@ -32,7 +32,7 @@ class AerisController extends Controller
 
     public function getIncinerateurDashboardData(
         $incinerateur,
-        $ligne
+        $ligneId
     ){
         $dioxines = [];
         $listOfMonths = $this->createListOfMonths();
@@ -83,7 +83,7 @@ class AerisController extends Controller
         }
 
         return [
-            'ligne' => $ligne,
+            'ligneId' => $ligneId,
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,
             'dashboardReport' => new DashboardReport($incinerateur),

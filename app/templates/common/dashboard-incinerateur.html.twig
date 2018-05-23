@@ -1,12 +1,14 @@
 {% if incinerateur %}
 
+{#
 <nav class="panel">
   <p class="panel-tabs">
     {% for ligne in incinerateur.lignes %}
-      <a class="" href="{{ url('route_dashboard', {'ligne': ligne.numero}) }}">Ligne n°{{ ligne.numero }}</a>
+      <a class="{% if ligne.numero == ligneId %}is-active{% endif %}" href="{{ url('route_dashboard', {'ligne': ligne.numero}) }}">Ligne n°{{ ligne.numero }}</a>
     {% endfor %}
   </p>
 </nav>
+  #}
 
 <h3 class="title is-3">Synthèse des déclarations de mesures continues</h3>
 
