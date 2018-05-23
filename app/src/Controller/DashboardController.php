@@ -48,7 +48,7 @@ class DashboardController extends AerisController
             $request->get('ligne')
         );
 
-        return $this->render("inspecteur/dashboard-incinerateur.html.twig", array_merge([
+        return $this->render("dashboard/dashboard-incinerateur.html.twig", array_merge([
             'incinerateur' =>  $incinerateur
         ], $dashboardData));
     }
