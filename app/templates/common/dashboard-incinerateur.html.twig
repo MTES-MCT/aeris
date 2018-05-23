@@ -1,226 +1,225 @@
 {% if incinerateur %}
-
-{#
 <nav class="panel">
   <p class="panel-tabs">
+    <a class="{% if ligneId == null %}is-active{% endif %}" href="{{ url('route_dashboard') }}">Global</a>
     {% for ligne in incinerateur.lignes %}
       <a class="{% if ligne.numero == ligneId %}is-active{% endif %}" href="{{ url('route_dashboard', {'ligne': ligne.numero}) }}">Ligne n°{{ ligne.numero }}</a>
     {% endfor %}
   </p>
 </nav>
-  #}
 
-<h3 class="title is-3">Synthèse des déclarations de mesures continues</h3>
+{% if ligneId == null %}
+  <h3 class="title is-3">Synthèse globale</h3>
 
-{% for ligne in incinerateur.lignes %}
+  <p>
+    pouet
+  </p>
+
+
+{% else %}
+
+  <h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
+
   <div>
-    <h4 class="title is-4">Ligne n°{{ ligne.numero }}</h4>
+    <h4 class="title is-4">Déclarations de mesures continues</h4>
     {# We want an explicit list of the graphs #}
     {% for measureType in expectedGraphs %}
     <div class="dioxine-canvas-container">
-      <canvas id="canvas_continu_{{ligne.numero}}_{{ measureType }}"></canvas>
+      <canvas id="canvas_continu_{{ligneId}}_{{ measureType }}"></canvas>
     </div>
     {% endfor %}
-  </div>              
-{% endfor %}
+  </div>
 
 
 
 
-<h3 class="title is-3">Synthèse des déclarations de dioxines et furannes</h3>
-{#
-<div class="column">
-  <button class="button is-primary tooltip" data-tooltip="Tooltip Text">Tooltip</button>
-</div>
-#}
+  <h3 class="title is-3">Déclarations de dioxines et furannes</h3>
+  {#
+  <div class="column">
+    <button class="button is-primary tooltip" data-tooltip="Tooltip Text">Tooltip</button>
+  </div>
+  #}
 
-<div class="modal" id="depassement-modal">
-   <div class="modal-background"></div>
-   <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">En cas de dépassement</p>
-      <button class="delete close-depassement-modal" aria-label="close"></button>
-    </header>
-    <section class="modal-card-body">
-    <p>En cas de dépassements sur la mesure en semi-continu des dioxines et furannes, l'exploitant doit :
-    <ul>
-      <li>Avertir l'inspection des installations classées dans les meilleurs délais.</li>
-      <li>Faire réaliser un contrôle ponctuel à l'émission des dioxines et furannes par un organisme agréé sous 10 jours.</li>
-      <li>Le résultat des mesures en semi-continu ne permet pas de fonder l'engagement des procédures administratives prévues à l'article L. 514-1 du code de l'environnement.</li>
-    </ul>
+  <div class="modal" id="depassement-modal">
+     <div class="modal-background"></div>
+     <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">En cas de dépassement</p>
+        <button class="delete close-depassement-modal" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+      <p>En cas de dépassements sur la mesure en semi-continu des dioxines et furannes, l'exploitant doit :
+      <ul>
+        <li>Avertir l'inspection des installations classées dans les meilleurs délais.</li>
+        <li>Faire réaliser un contrôle ponctuel à l'émission des dioxines et furannes par un organisme agréé sous 10 jours.</li>
+        <li>Le résultat des mesures en semi-continu ne permet pas de fonder l'engagement des procédures administratives prévues à l'article L. 514-1 du code de l'environnement.</li>
+      </ul>
 
-    Références :
-    <ul>
-        <li>Article 28 b1) de l'AM du 20/09/2002</a>
-          <span class="tag is-link">
-            <a href="https://aida.ineris.fr/consultation_document/5277#Article_28_nouveau">lien</a>
-          </span>
-        </li>
-        <li>la note DGPR du 28 février 2011</li>
-    </ul>
-    </p>
-   </section>
-   </div>
-</div>
+      Références :
+      <ul>
+          <li>Article 28 b1) de l'AM du 20/09/2002</a>
+            <span class="tag is-link">
+              <a href="https://aida.ineris.fr/consultation_document/5277#Article_28_nouveau">lien</a>
+            </span>
+          </li>
+          <li>la note DGPR du 28 février 2011</li>
+      </ul>
+      </p>
+     </section>
+     </div>
+  </div>
 
-<p>Référence réglementaire : <a href="https://aida.ineris.fr/consultation_document/5277#Annexe_I">AM 20/09/2002, Annexe I d)</a></p> <button class="button" id="open-depassement-modal">Que faire en cas de dépassement ?</button>
+  <p>Référence réglementaire : <a href="https://aida.ineris.fr/consultation_document/5277#Annexe_I">AM 20/09/2002, Annexe I d)</a></p> <button class="button" id="open-depassement-modal">Que faire en cas de dépassement ?</button>
 
-</p>
+  </p>
 
-  {% for ligne in incinerateur.lignes %}
-    <div >
-      <h4 class="title is-4">Ligne n°{{ ligne.numero }}</h4>
-      <div class="dioxine-canvas-container">
-        <canvas id="canvas_dioxine_{{ligne.numero}}"></canvas>
+      <div >
+        <div class="dioxine-canvas-container">
+          <canvas id="canvas_dioxine_{{ligneId}}"></canvas>
+        </div>
       </div>
-    </div>              
-  {% endfor %}
-{% endif %}
+  {% endif %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.5/chartjs-plugin-annotation.js"></script>
-<script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
-  
-<script>
-var reportData = {{ dashboardReport|json_encode()|raw }}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.5/chartjs-plugin-annotation.js"></script>
+  <script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
+    
+  <script>
+  var reportData = {{ dashboardReport|json_encode()|raw }}
 
-function addMesureChart(ligneId, measureType) {
-  var color = Chart.helpers.color;
-  var barChartData = {
-    labels: reportData.graphs[ligneId][measureType].days,
-    datasets: [{
-      label: reportData.metadata[measureType].label,
-      backgroundColor: color('#207245').alpha(0.5).rgbString(),
-      borderColor: '#558F6E',
-      borderWidth: 1,
-      data: reportData.graphs[ligneId][measureType].data
-    }]
-  };
+  function addMesureChart(ligneId, measureType) {
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: reportData.graphs[ligneId][measureType].days,
+      datasets: [{
+        label: reportData.metadata[measureType].label,
+        backgroundColor: color('#207245').alpha(0.5).rgbString(),
+        borderColor: '#558F6E',
+        borderWidth: 1,
+        data: reportData.graphs[ligneId][measureType].data
+      }]
+    };
 
-  var ctx = document.getElementById('canvas_continu_' + ligneId+'_'+measureType).getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: barChartData,
-    options: {
-      responsive: true,
-      legend: {
-        position: 'top',
-      },
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero:true,
-                  suggestedMax: reportData.metadata[measureType].vle * 1.1,
+    var ctx = document.getElementById('canvas_continu_' + ligneId+'_'+measureType).getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: barChartData,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    suggestedMax: reportData.metadata[measureType].vle * 1.1,
+                }
+                ,
+                scaleLabel:{
+                  display:true,
+                    labelString: reportData.metadata[measureType].yAxisLabel
+                }
+            }]
+        }
+        ,annotation: {
+          annotations: [
+            {
+              type: "line",
+              mode: "horizontal",
+              scaleID: "y-axis-0",
+              value: reportData.metadata[measureType].vle,
+              borderColor: "red",
+              label: {
+                content: reportData.metadata[measureType].thresholdLabel,
+                enabled: true,
+                position: "top"
               }
-              ,
-              scaleLabel:{
-                display:true,
-                  labelString: reportData.metadata[measureType].yAxisLabel
-              }
-          }]
-      }
-      ,annotation: {
-        annotations: [
-          {
-            type: "line",
-            mode: "horizontal",
-            scaleID: "y-axis-0",
-            value: reportData.metadata[measureType].vle,
-            borderColor: "red",
-            label: {
-              content: reportData.metadata[measureType].thresholdLabel,
-              enabled: true,
-              position: "top"
             }
-          }
-        ]
+          ]
+        }
       }
-    }
-  });
-}
+    });
+  }
 
 
 
 
-var dioxineDashboardData = {{ dioxineGraphData|json_encode()|raw }}
+  var dioxineDashboardData = {{ dioxineGraphData|json_encode()|raw }}
 
-function addDioxinesChart(ligneId) {
-  var color = Chart.helpers.color;
-  var barChartData = {
-    labels: dioxineDashboardData.months,
-    datasets: [{
-      label: 'Ligne n°' + ligneId,
-      backgroundColor: color('#207245').alpha(0.5).rgbString(),
-      borderColor: '#558F6E',
-      borderWidth: 1,
-      data: dioxineDashboardData.lines[ligneId]
-    }]
-  };
+  function addDioxinesChart(ligneId) {
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: dioxineDashboardData.months,
+      datasets: [{
+        label: 'Ligne n°' + ligneId,
+        backgroundColor: color('#207245').alpha(0.5).rgbString(),
+        borderColor: '#558F6E',
+        borderWidth: 1,
+        data: dioxineDashboardData.lines[ligneId]
+      }]
+    };
 
-  var ctx = document.getElementById('canvas_dioxine_' + ligneId).getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: barChartData,
-    options: {
-      responsive: true,
-      legend: {
-        position: 'top',
-      },
-      /*title: {
-        display: true,
-        text: 'Declarations de dioxines'
-      },*/
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero:true,
-                  suggestedMax: 0.11,
-              },
-              scaleLabel:{
-                display:true,
-                  labelString: "Concentration (nb/m^3)"
+    var ctx = document.getElementById('canvas_dioxine_' + ligneId).getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: barChartData,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        /*title: {
+          display: true,
+          text: 'Declarations de dioxines'
+        },*/
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    suggestedMax: 0.11,
+                },
+                scaleLabel:{
+                  display:true,
+                    labelString: "Concentration (nb/m^3)"
 
+                }
+            }]
+        },
+        annotation: {
+          annotations: [
+            {
+              type: "line",
+              mode: "horizontal",
+              scaleID: "y-axis-0",
+              value: 0.1,
+              borderColor: "red",
+              label: {
+                content: 'Seuil : 0.1 ng/m^3.',
+                enabled: true,
+                position: "top"
               }
-          }]
-      },
-      annotation: {
-        annotations: [
-          {
-            type: "line",
-            mode: "horizontal",
-            scaleID: "y-axis-0",
-            value: 0.1,
-            borderColor: "red",
-            label: {
-              content: 'Seuil : 0.1 ng/m^3.',
-              enabled: true,
-              position: "top"
             }
-          }
-        ]
+          ]
+        }
       }
-    }
-  });
-}
+    });
+  }
 
-window.onload = function() {
-  {% for ligne in incinerateur.lignes %}
-    addDioxinesChart({{ ligne.numero }});
-  {% endfor %}
-
-  {% for ligne in incinerateur.lignes %}
+  window.onload = function() {
+      addDioxinesChart({{ ligneId }});
       {% for measureType in expectedGraphs %}
-        addMesureChart({{ ligne.numero }}, '{{ measureType }}');
+        addMesureChart({{ ligneId }}, '{{ measureType }}');
       {% endfor %}
-  {% endfor %}
 
-  $("#open-depassement-modal").click(function() {
-    $("#depassement-modal").addClass("is-active");  
-  });
+    $("#open-depassement-modal").click(function() {
+      $("#depassement-modal").addClass("is-active");  
+    });
 
-  $(".close-depassement-modal").click(function() {
-     $("#depassement-modal").removeClass("is-active");
-  });
-};
+    $(".close-depassement-modal").click(function() {
+       $("#depassement-modal").removeClass("is-active");
+    });
+  };
 
-</script>
+  </script>
+{% endif %}
