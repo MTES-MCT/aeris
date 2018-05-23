@@ -22,20 +22,20 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <table class="table">
           <thead>
             <tr>
-              <th>Déclaration</th>
-              <th>Date</th>
+              <th>Période</th>
+              <th>Date de déclaration</th>
               <th>Commentaire</th>
               <th>Lien</th>
             </tr>
           </thead>
           <tbody>
-            {% for declaration in incinerateur.declarationsIncinerateur  %}
+            {% for declaration in incinerateur.declarationsIncinerateur|sortbyfield('createdAt')|reverse %}
             <tr>
               <th>
-                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
+                <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|monthfr|raw }} </a>
               </th>
               <td>
-                {{ declaration.createdAt|date('d/m/Y') }}
+                {{ declaration.createdAt|localizeddate('medium', 'none') }}
               </td>
               <td>
                 {{ declaration.comment }}
@@ -59,21 +59,17 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <table class="table">
           <thead>
             <tr>
-              <th>Déclaration</th>
-              <th>Date</th>
+              <th>Date de déclaration</th>
               <th>Commentaire</th>
               <th>Lien</th>
             </tr>
           </thead>
           <tbody>
-            {% for declaration in incinerateur.declarationsDioxine  %}
+            {% for declaration in incinerateur.declarationsDioxine  |sortbyfield('createdAt')|reverse %}
             <tr>
               <th>
-                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.id }}</a>
+                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.createdAt|localizeddate('medium', 'none') }}</a>
               </th>
-              <td>
-                {{ declaration.createdAt|date('d/m/Y') }}
-              </td>
               <td>
                 {{ declaration.comment }}
               </td>

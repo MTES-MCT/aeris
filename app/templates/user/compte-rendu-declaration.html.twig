@@ -1,5 +1,15 @@
 {% extends "common/base_inside.html.twig" %}
 
+{% macro displayZeroIfNull(v) %}
+    {% if v != null %}
+      {{ v }}
+    {% else%}
+      0
+    {% endif %}
+{% endmacro %}
+
+{% import _self as s %}
+
 {% block stylesheets %}
 <style type="text/css">
 
@@ -17,7 +27,7 @@ body{
   <section class="section">
     <div class="container" >
       {% if declaration.declarationMonth %}
-    <h2 class="title is-2">Déclaration concernant les rejets durant {{ declaration.declarationMonth|date('m/Y') }} </h2>
+    <h2 class="title is-2">Rejets air - {{ declaration.declarationMonth|date('m/Y') }} </h2>
     Déclaration effectuée le {{ declaration.createdAt|date('d/m/Y') }}
     {% else %}
     <h2 class="title is-2">Déclaration du {{ declaration.createdAt|date('d/m/Y') }} </h2>
@@ -25,21 +35,21 @@ body{
 
     <div class="recap-declaration-dechets">
         {% if declaration.declarationDechets %}
-          <h3 class="title is-3">Déchets</h3>
+          <h3 class="title is-3">Quantité de déchets incinérés</h3>
           <ul>
               <li>
-              {{ declaration.declarationDechets.qtiteIncinereeTotale }} T de déchets incinérés, dont:
+              <strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeTotale) }}</strong> T de déchets incinérés, dont:
 
               <ul>
-                  <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDasri }}T DASRI</li>
-                  <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsDangereux }}T de déchets dangereux</li>
-                  <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereux }}T de déchets non dangereux, dont
+                  <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsDasri) }}</strong> T DASRI</li>
+                  <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsDangereux ) }}</strong> T de déchets dangereux</li>
+                  <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereux) }}</strong> T de déchets non dangereux, dont
                       <ul>
-                          <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers }}T de déchets ménagers
+                          <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers) }}</strong> T de déchets ménagers
                           </li>
-                          <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri }}T de refus de tri
+                          <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri) }}</strong> T de refus de tri
                           </li>
-                          <li>{{ declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae }}T de déchets DAE non dangereux</li>
+                          <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae) }}</strong> T de déchets DAE non dangereux</li>
                       </ul>
                   </li>
               </ul>

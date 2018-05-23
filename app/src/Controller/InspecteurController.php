@@ -27,7 +27,7 @@ class InspecteurController extends AerisController
         return $this->render("inspecteur/dashboard.html.twig");
     }
 
-    public function dashboard_incinerateur($incinerateurId)
+    public function dashboard_incinerateur(Request $request, $incinerateurId)
     {
         $incinerateur = $this->getDoctrine()
             ->getRepository(Incinerateur::class)
@@ -42,7 +42,10 @@ class InspecteurController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        $dashboardData = $this->getIncinerateurDashboardData($incinerateur);
+        $dashboardData = $this->getIncinerateurDashboardData(
+            $incinerateur,
+            $request->get('ligne')
+        );
 
         return $this->render("inspecteur/dashboard-incinerateur.html.twig", array_merge([
             'incinerateur' =>  $incinerateur
