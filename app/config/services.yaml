@@ -33,6 +33,13 @@ services:
             - "@router.default"
             - "@session"
 
+    app.security.helper:
+        class: App\Security\SecurityHelper
+        arguments:
+            - "@security.authorization_checker"
+            - "@security.token_storage"
+        public: true
+
     app.command.LoadReportsCommand:
         class: App\Command\LoadReportsCommand
         arguments:

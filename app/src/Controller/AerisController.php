@@ -7,35 +7,8 @@ use App\Entity\Incinerateur;
 
 class AerisController extends Controller
 {
-    protected function canAccessIncinerateur($incinerateur){
-        $authChecker = $this->get('security.authorization_checker'); 
-        if ($authChecker->isGranted('ROLE_INSPECTEUR')) {
-            return true;
-        }
-        if($authChecker->isGranted('ROLE_PROPRIETAIRE')) {
-            $mainIncinerateur = $this->getMainIncinerateur();
-            return $mainIncinerateur->getId() == $incinerateur->getId();
-        }
-        return false;
-    }
-
-    protected function getMainIncinerateur(){
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        $incinerateurs = $user->getIncinerateurs();
-        if(!empty($incinerateurs)) {
-            return $incinerateurs[0];
-        }
-        return null;
-    }
-
-    protected function isInspecteur(){
-        $authChecker = $this->get('security.authorization_checker'); 
-        return $authChecker->isGranted('ROLE_INSPECTEUR');
-    }
-
-    protected function isOwner(){
-        $authChecker = $this->get('security.authorization_checker'); 
-        return $authChecker->isGranted('ROLE_PROPRIETAIRE');
+    public function getMainIncinerateur(){
+        return $this->get('app.security.helper')->getMainIncinerateur();
     }
 
     protected function downloadFileByPath($path, $filename) {

@@ -19,7 +19,7 @@ class InspecteurController extends AerisController
 {
     public function liste_incinerateurs()
     {
-        if (!$this->isInspecteur()) {
+        if (!$this->get('app.security.helper')->isInspecteur()) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 

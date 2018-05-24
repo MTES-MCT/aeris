@@ -42,7 +42,7 @@ class DashboardController extends AerisController
                 "Pas d'incinerateur pour l' id ".$incinerateurId
             );
         }
-        if(!$this->canAccessIncinerateur($incinerateur)) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($incinerateur)) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 
@@ -67,7 +67,7 @@ class DashboardController extends AerisController
                 "Pas d'incinerateur pour l' id ".$incinerateurId
             );
         }
-        if(!$this->canAccessIncinerateur($incinerateur)) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($incinerateur)) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 

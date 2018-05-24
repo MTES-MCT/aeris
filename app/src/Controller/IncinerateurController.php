@@ -23,7 +23,7 @@ class IncinerateurController extends AerisController
                 "Pas d'incinerateur pour l' id ".$incinerateurId
             );
         }
-        if(!$this->canAccessIncinerateur($incinerateur)) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($incinerateur)) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 
@@ -43,7 +43,7 @@ class IncinerateurController extends AerisController
                 "Pas de declaration pour l' id ".$declarationId
             );
         }
-        if(!$this->canAccessIncinerateur($declaration->getIncinerateur())) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($declaration->getIncinerateur())) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 
@@ -86,7 +86,7 @@ class IncinerateurController extends AerisController
                 "Pas de declaration pour l' id ".$declarationId
             );
         }
-        if(!$this->canAccessIncinerateur($declaration->getIncinerateur())) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($declaration->getIncinerateur())) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 
