@@ -51,7 +51,7 @@ class OwnerController extends AerisController
     }
 
     public function declarationChoice(){
-        if(!$this->isOwner()){
+        if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
 
@@ -60,7 +60,7 @@ class OwnerController extends AerisController
 
     public function declarationDioxines()
     {
-        if(!$this->isOwner()){
+        if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
         // This method (especially, others are no better) is terrible and should be split ASAP
@@ -107,7 +107,7 @@ class OwnerController extends AerisController
     }
     public function declarationMesuresContinues()
     {
-        if(!$this->isOwner()){
+        if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
         // This method (especially, others are no better) is terrible and should be split ASAP
