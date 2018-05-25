@@ -10,7 +10,7 @@
 {% block dashboard %}
 
 <h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
-
+{#
 <div>
   <table class="table">
     <thead>
@@ -102,10 +102,10 @@
   </table>
 </div>
 
+
 <div>
   <h4 class="title is-4">Déclarations de mesures continues</h4>
-  {# We want an explicit list of the graphs #}
-  
+
   <h5 class="is-h5" id="section-poussieres">Poussières</h5>
   {{ s.canvasContinu(ligneId, 'psr_c_24h_moy') }}
   <h5 class="is-h5" id="section-co">CO</h5>
@@ -124,6 +124,8 @@
   {{ s.canvasContinu(ligneId, 'nh3_c_24h_moy') }}
 
 </div>
+
+#}
 
 <h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes</h3>
 
@@ -177,9 +179,11 @@ var dioxineDashboardData = {{ dioxineGraphData|json_encode()|raw }}
 
 window.onload = function() {
     addDioxinesChart({{ ligneId }});
+    {#
     {% for measureType in expectedGraphs %}
       addMesureChart({{ ligneId }}, '{{ measureType }}');
     {% endfor %}
+    #}
 
   $("#open-depassement-modal").click(function() {
     $("#depassement-modal").addClass("is-active");  
