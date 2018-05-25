@@ -15,7 +15,6 @@ class FrenchMonthExtension extends AbstractExtension
     }
 
     public function monthfr($date) {
-        dump($date, get_class($date));
         $days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi","Samedi"];
         // $months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
         $months = ["Jan.", "Fév.", "Mars", "Avr.", "Mai", "Juin", "Jui.", "Août", "Sep.", "Oct.", "Nov.", "Déc."];
