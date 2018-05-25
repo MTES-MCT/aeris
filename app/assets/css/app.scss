@@ -7,7 +7,7 @@
 .is-active {
   background-color: #3273dc;
 }
-.is-active a {
+.is-active a, .panel-tabs a.is-active {
   color:white;
   font-weight:bold;
 }
@@ -83,4 +83,8 @@ ul {
 
 .dioxine-canvas-container {
   width: 75%;
+}
+
+.panel-tabs {
+  font-size: 1.5em;
 }

@@ -12,18 +12,6 @@ use Aeris\Component\Report\MonthlyReport;
 
 class IncinerateurController extends AerisController
 {
-    private function canAccessIncinerateur($incinerateur){
-        $authChecker = $this->get('security.authorization_checker'); 
-        if ($authChecker->isGranted('ROLE_INSPECTEUR')) {
-            return true;
-        }
-        if($authChecker->isGranted('ROLE_PROPRIETAIRE')) {
-            $mainIncinerateur = $this->getMainIncinerateur();
-            return $mainIncinerateur->getId() == $incinerateur->getId();
-        }
-        return false;
-    }
-
     public function historique($incinerateurId)
     {
         $incinerateur = $this->getDoctrine()
@@ -35,7 +23,7 @@ class IncinerateurController extends AerisController
                 "Pas d'incinerateur pour l' id ".$incinerateurId
             );
         }
-        if(!$this->canAccessIncinerateur($incinerateur)) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($incinerateur)) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 
@@ -55,10 +43,9 @@ class IncinerateurController extends AerisController
                 "Pas de declaration pour l' id ".$declarationId
             );
         }
-        if(!$this->canAccessIncinerateur($declaration->getIncinerateur())) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($declaration->getIncinerateur())) {
             return $this->redirect($this->generateUrl("route_index"));
         }
-
 
         $rules = new AppliableRules();
 
@@ -99,7 +86,7 @@ class IncinerateurController extends AerisController
                 "Pas de declaration pour l' id ".$declarationId
             );
         }
-        if(!$this->canAccessIncinerateur($declaration->getIncinerateur())) {
+        if(!$this->get('app.security.helper')->canAccessIncinerateur($declaration->getIncinerateur())) {
             return $this->redirect($this->generateUrl("route_index"));
         }
 

@@ -1,0 +1,8 @@
+<nav class="panel">
+  <p class="panel-tabs">
+    <a class="{% if ligneId == null %}is-active{% endif %}" href="{{ url('route_dashboard_incinerateur', {'incinerateurId': incinerateur.id}) }}">Global</a>
+    {% for ligne in incinerateur.lignes %}
+      <a class="{% if ligne.numero == ligneId %}is-active{% endif %}" href="{{ url('route_dashboard_incinerateur_ligne', {'incinerateurId': incinerateur.id, 'ligneId': ligne.numero}) }}">Ligne n°{{ ligne.numero }}</a>
+    {% endfor %}
+  </p>
+</nav>

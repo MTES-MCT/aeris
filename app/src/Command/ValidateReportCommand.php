@@ -70,7 +70,7 @@ class ValidateReportCommand extends Command
         $report->fillWithMeasures($declarationLigne->getMesures());
         
         $errors = $this->validator->validate($report);
-        $report->debug('nox_c_24h_moy');
+        //$report->debug('nox_c_24h_moy');
         var_dump($errors);
     }
 }
