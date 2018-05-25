@@ -16,12 +16,11 @@ class FrenchMonthExtension extends AbstractExtension
 
     public function monthfr($date) {
         $days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi","Samedi"];
-        // $months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
         $months = ["Jan.", "Fév.", "Mars", "Avr.", "Mai", "Juin", "Jui.", "Août", "Sep.", "Oct.", "Nov.", "Déc."];
 
         $datefr = '';
         if($date != null ){
-            $datefr = $months[$date->format('n')]."&nbsp;".$date->format('Y');
+            $datefr = $months[($date->format('n')-1)%12]."&nbsp;".$date->format('Y');
         }
         return $datefr;
     }
