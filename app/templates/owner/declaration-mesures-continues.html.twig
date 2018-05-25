@@ -58,7 +58,7 @@
               <li>En envoyant directement les fichiers extraits de votre logiciel de suivi, au format .xls </li>
             </ul>
             {#
-            <p>Vous pouvez également utiliser le <a href="{{ url('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
+            <p>Vous pouvez également utiliser le <a href="{{ path('route_download_asset', {'asset': 'referentiel-parametres.xlsx'}) }}" class="is-info">référentiel de données</a> comme source de référence</p>
               #}
 
             Méthode de déclaration : {{ form_widget(form.methodeDeclaration) }}
@@ -98,7 +98,7 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
             </div>
 
             <p>
-              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_compteurs.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
+              <a href="{{ path('route_download_asset', {'asset': 'modele_saisie_compteurs.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les compteurs</a>
             </p>
           </div>
           <div class="column">
@@ -106,14 +106,14 @@ Ligne n°{{ fonctionnementLigne.vars['value'].ligne.numero }}
 
             <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationConcentrationsFile) }}</div>
             <p>
-              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_concentrations.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
+              <a href="{{ path('route_download_asset', {'asset': 'modele_saisie_concentrations.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les concentrations et températures</a>
             </p>
           </div>
           <div class="column">
             <h4  class="title is-4">Flux</h4>
             <div class="upload-area">{{ form_widget(fonctionnementLigne.declarationFluxFile) }}</div>
             <p>
-              <a href="{{ url('route_download_asset', {'asset': 'modele_saisie_flux.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
+              <a href="{{ path('route_download_asset', {'asset': 'modele_saisie_flux.xls'}) }}" class="button is-info">Téléchargez notre modèle pour les flux</a>
             </p>
           </div>
         </div>
