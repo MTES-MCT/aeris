@@ -7,6 +7,11 @@
 {% import _self as s %}
 
 {% extends "dashboard/base_dashboard.html.twig" %}
+{% block title %}
+Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
+{% endblock %}
+
+
 {% block dashboard %}
 
 <h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
