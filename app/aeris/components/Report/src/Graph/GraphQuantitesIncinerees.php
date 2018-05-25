@@ -48,7 +48,7 @@ class GraphQuantitesIncinerees {
                 $timeDifference = $dateDeclaration->diff($this->firstDate);
                 $index = $timeDifference->m;
 
-                $this->data[$index] = 4;
+                $this->data[$index] = $dechets->getQtiteIncinereeTotale();
                 // $this->data[$nbDaysDate->days] = $measure->getValue()
             }
         }

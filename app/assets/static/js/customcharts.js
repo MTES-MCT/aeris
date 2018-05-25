@@ -107,3 +107,43 @@ function addDioxinesChart(ligneId) {
       }
     });
 }
+
+
+
+function addQuantiteesIncinereesChart(dashboardData) {
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: dashboardData.months,
+      datasets: [{
+        label: 'Quantitees incinérées',
+        backgroundColor: color('#207245').alpha(0.5).rgbString(),
+        borderColor: '#558F6E',
+        borderWidth: 1,
+        data: dashboardData.data
+      }]
+    };
+
+    var ctx = document.getElementById('canvas_quantitees_incinerees').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: barChartData,
+      options: {
+        responsive: true,
+        legend: {
+          position: 'top',
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                },
+                scaleLabel:{
+                  display:true,
+                    labelString: "Quantités incinérés (T)"
+
+                }
+            }]
+        }
+      }
+    });
+}

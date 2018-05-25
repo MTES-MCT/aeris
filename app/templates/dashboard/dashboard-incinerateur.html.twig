@@ -6,5 +6,29 @@ Aeris - Synthèse globale - {{ incinerateur.name }}
 {% block dashboard %}
 <h3 class="title is-3">Synthèse globale</h3>
 
-{{ dump(dashboardData) }}
+<p>
+    Quantité de déchets incinérés depuis le {{ dashboardData.dateDebutAnnee|date("d/m/Y") }} (T) : {{ dashboardData.cumulQtitesIncinereesDebutAnnee }}
+</p>
+
+<div>
+  <div class="dioxine-canvas-container">
+    <canvas id="canvas_quantitees_incinerees"></canvas>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.5/chartjs-plugin-annotation.js"></script>
+<script src="https://cdn.rawgit.com/chartjs/Chart.js/master/samples/utils.js"></script>
+<script src="{{ asset('build/static/js/customcharts.js') }}"></script>
+  
+<script>
+var reportData = {{ dashboardData.graphQtitesIncinerees|json_encode()|raw }}
+
+window.onload = function() {
+    addQuantiteesIncinereesChart(reportData);
+};
+
+</script>
+
+
 {% endblock %}
