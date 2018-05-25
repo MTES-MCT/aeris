@@ -9,7 +9,8 @@ use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\DeclarationIncinerateur;
 use App\Entity\Declaration\MesureDioxine;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Aeris\Component\Report\DashboardReport;
+use Aeris\Component\Report\Dashboard\DashboardReport;
+use Aeris\Component\Report\DashboardLineReport;
 
 class DashboardController extends AerisController
 {
@@ -46,14 +47,14 @@ class DashboardController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        $dashboardData = $this->getIncinerateurDashboardData(
-            $incinerateur,
-            null
-        );
+        $dashboardData = new DashboardReport($incinerateur);
 
-        return $this->render("dashboard/dashboard-incinerateur.html.twig", array_merge([
-            'incinerateur' =>  $incinerateur
-        ], $dashboardData));
+        return $this->render("dashboard/dashboard-incinerateur.html.twig", [
+            'incinerateur' =>  $incinerateur,
+            'dashboardData' =>  $dashboardData,
+            'ligneId' =>  null
+        ]
+        );
     }
 
     public function dashboard_ligne(Request $request, $incinerateurId, $ligneId)
@@ -137,8 +138,8 @@ class DashboardController extends AerisController
             'ligneId' => $ligneId,
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,
-            'dashboardReport' => new DashboardReport($incinerateur),
-            'expectedGraphs' => DashboardReport::graphMapping
+            'dashboardReport' => new DashboardLineReport($incinerateur),
+            'expectedGraphs' => DashboardLineReport::graphMapping
         ];
     }
 

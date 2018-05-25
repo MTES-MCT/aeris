@@ -2,7 +2,7 @@
 
 namespace Aeris\Component\Report;
 
-class DashboardReport {
+class DashboardLineReport {
     public $graphs;
     public $metadata = [];
 
