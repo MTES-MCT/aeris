@@ -138,7 +138,7 @@ class DashboardController extends AerisController
             'ligneId' => $ligneId,
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,
-            'dashboardReport' => new LineReport($incinerateur),
+            'lineReport' => new LineReport($incinerateur),
             'expectedGraphs' => LineReport::graphMapping
         ];
     }

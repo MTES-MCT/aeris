@@ -1,6 +1,7 @@
 <?php
 
-namespace Aeris\Component\Report\Graph;
+namespace Aeris\Component\Report\Table;
+use Aeris\Component\Report\AppliableRules;
 
 class TableCompteursAnnuel {
     public $measures;

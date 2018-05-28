@@ -4,8 +4,10 @@ namespace Aeris\Component\Report\Dashboard;
 
 use Aeris\Component\Report\GraphMetadata;
 use Aeris\Component\Report\GraphData;
+use Aeris\Component\Report\Table\TableCompteursAnnuel;
 
 class LineReport {
+    public $tableCompteurs;
     public $graphs;
     public $metadata = [];
 
@@ -24,7 +26,14 @@ class LineReport {
         $this->graphs = [];
         $measuresByLine = [];
         $this->configureMetadata();
+        $this->buildGraphs($incinerateur);        
+        $this->buildTableCompteurs($incinerateur);        
+    }
 
+    private function buildTableCompteurs($incinerateur){
+        $this->tableCompteurs = new TableCompteursAnnuel($incinerateur);
+    }
+    private function buildGraphs($incinerateur){
         // Initialisations of the arrays we use afterwards
         foreach($incinerateur->getLignes() as $currLine) {
             $this->graphs[$currLine->getNumero()] = [];

@@ -42,7 +42,7 @@ class AppliableRules {
         'nh3_f_1h_max'
     ];
 
-    static $compteursTypes = [
+    const compteursTypes = [
         'compt_art10_mensuel',
         'nb_dep_4h_mensuel',
         'nb_dep_c_moy_24h_mensuel',
@@ -50,7 +50,12 @@ class AppliableRules {
         'nb_moy_24h_invalides_mensuel'
     ];
 
-    static $compteursComponents = [
+// Dépassement VLE article 10 (h)  
+// Nombre de dépassements de la concentration moyenne journalière (j)
+// Nombre de dépassements du flux journalier (j)
+// Nombre de dépassements > 4h 
+
+    const compteursComponents = [
         'Poussières',
         'CO',
         'COT',
