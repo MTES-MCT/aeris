@@ -24,7 +24,7 @@ class Mesure
     private $date;
 
     /**
-     * @ORM\Column(type="decimal", precision=0, scale=0)
+     * @ORM\Column(type="decimal", precision=20, scale=10)
      * @Assert\GreaterThanOrEqual(0)
      */
     private $value;

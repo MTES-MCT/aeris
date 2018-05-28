@@ -3,9 +3,9 @@
 namespace Aeris\Component\ReportParser\Parser\Dreal;
 
 use Aeris\Component\ReportParser\FileParser;
-use Aeris\Component\ReportParser\DataPoint;
+use Aeris\Component\ReportParser\CompteurDataPoint;
 
-class CompteursParser extends FileParser {
+class CompteurParser extends FileParser {
     const XSTART = 4;
     const YSTART = 3;
 
@@ -29,13 +29,22 @@ class CompteursParser extends FileParser {
     ];
 
     public function parseFile($filename) {
+        $datapoints = [];
         $spreadsheet = $this->loadSpreadsheet($filename);
+        
         for($col = 0; $col < count($this->cols); $col += 1) {
             for($row = 0; $row < count($this->rows); $row += 1) {
                 $cellValue = $spreadsheet->getActiveSheet()->getCellByColumnAndRow(self::XSTART + $col, self::YSTART + $row)->getValue();
 
-                echo $this->rows[$row]." ".$this->cols[$col]." => ".$cellValue."\n";
+                $datapoint = new CompteurDataPoint(
+                    $this->rows[$row],
+                    $this->cols[$col],
+                    (int)$cellValue
+                );
+                $datapoints[] = $datapoint;
             }
         }
+
+        return $datapoints;
     }
 }

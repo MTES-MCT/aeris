@@ -15,7 +15,6 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 {% block dashboard %}
 
 <h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
-{#
 <div>
   <table class="table">
     <thead>
@@ -130,7 +129,6 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 
 </div>
 
-#}
 
 <h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes</h3>
 
@@ -184,11 +182,9 @@ var dioxineDashboardData = {{ dioxineGraphData|json_encode()|raw }}
 
 window.onload = function() {
     addDioxinesChart({{ ligneId }});
-    {#
     {% for measureType in expectedGraphs %}
       addMesureChart({{ ligneId }}, '{{ measureType }}');
     {% endfor %}
-    #}
 
   $("#open-depassement-modal").click(function() {
     $("#depassement-modal").addClass("is-active");  

@@ -93,6 +93,11 @@ class DeclarationFonctionnementLigne
      */
     private $mesures;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Declaration\MesureCompteur", mappedBy="declarationFonctionnementLigne", cascade={"persist"})
+     */
+    private $mesuresCompteurs;
+
     public function __construct() {
         $this->setNbHeuresFonctionnementTh(0);
     }

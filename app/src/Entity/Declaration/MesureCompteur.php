@@ -4,7 +4,7 @@ namespace App\Entity\Declaration;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Aeris\Component\ReportParser\DataPoint;
+use Aeris\Component\ReportParser\CompteurDataPoint;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MesureCompteurRepository")
@@ -35,10 +35,20 @@ class MesureCompteur
     private $component;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Declaration\DeclarationFonctionnementLigne", inversedBy="mesures")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Declaration\DeclarationFonctionnementLigne", inversedBy="mesuresCompteurs")
      * @ORM\JoinColumn(nullable=true)
      */
     private $declarationFonctionnementLigne;
+
+    public static function fromCompteurDataPoint(CompteurDataPoint $datapoint) {
+        $mesure = new self();
+        $mesure->setType($datapoint->type);
+        $mesure->setComponent($datapoint->component);
+        $mesure->setValue($datapoint->value);
+
+        return $mesure;
+    }
+
 
     /**
      * @return mixed
@@ -116,6 +126,26 @@ class MesureCompteur
     public function setDeclarationFonctionnementLigne($declarationFonctionnementLigne)
     {
         $this->declarationFonctionnementLigne = $declarationFonctionnementLigne;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComponent()
+    {
+        return $this->component;
+    }
+
+    /**
+     * @param mixed $component
+     *
+     * @return self
+     */
+    public function setComponent($component)
+    {
+        $this->component = $component;
 
         return $this;
     }

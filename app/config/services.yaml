@@ -48,6 +48,14 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@vich_uploader.property_mapping_factory"
 
+    app.command.LoadCounterReportsCommand:
+        class: App\Command\LoadCounterReportsCommand
+        arguments:
+            - "@App\\Repository\\DeclarationIncinerateurRepository"
+            - "@App\\Repository\\MesureRepository"
+            - "@doctrine.orm.entity_manager"
+            - "@vich_uploader.property_mapping_factory"
+
     app.command.ValidateReportCommand:
         class: App\Command\ValidateReportCommand
         arguments:
