@@ -56,51 +56,31 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
     <tbody>
       <tr>
         <td>Dépassement VLE article 10 (h)</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
+        {% for component in lineReport.tableCompteurs.colonnes %}
+        <td>{{ lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] }}</td>
+        {% endfor %}
+        <td>N/A</td>
       </tr>
       <tr>
         <td>Nombre de dépassements de la concentration moyenne journalière (j)</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
+        {% for component in lineReport.tableCompteurs.colonnes %}
+        <td>{{ lineReport.tableCompteurs.measures['nb_dep_c_moy_24h_mensuel'][component] }}</td>
+        {% endfor %}
+        <td>N/A</td>
       </tr>
       <tr>
         <td>Nombre de dépassements du flux journalier (j)</td>
-        <td>4</td>
-        <td>4</td>
-        <td style="background-color:red">4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
+        {% for component in lineReport.tableCompteurs.colonnes %}
+        <td>{{ lineReport.tableCompteurs.measures['nb_dep_f_24h_mensuel'][component] }}</td>
+        {% endfor %}
+        <td>N/A</td>
       </tr>
       <tr>
         <td>Nombre de dépassements > 4h </td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
-        <td>4</td>
+        {% for component in lineReport.tableCompteurs.colonnes %}
+        <td>{{ lineReport.tableCompteurs.measures['nb_dep_4h_mensuel'][component] }}</td>
+        {% endfor %}
+        <td>N/A</td>
       </tr>
     </tbody>
   </table>
@@ -177,7 +157,7 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 <script src="{{ asset('build/static/js/customcharts.js') }}"></script>
   
 <script>
-var reportData = {{ dashboardReport|json_encode()|raw }}
+var reportData = {{ lineReport|json_encode()|raw }}
 var dioxineDashboardData = {{ dioxineGraphData|json_encode()|raw }}
 
 window.onload = function() {
