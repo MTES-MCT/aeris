@@ -22,16 +22,16 @@ class LineReport {
         'nh3_c_24h_moy'
     ];
 
-    public function __construct($incinerateur) {
+    public function __construct($incinerateur, $ligneId) {
         $this->graphs = [];
         $measuresByLine = [];
         $this->configureMetadata();
         $this->buildGraphs($incinerateur);        
-        $this->buildTableCompteurs($incinerateur);        
+        $this->buildTableCompteurs($incinerateur, $ligneId);        
     }
 
-    private function buildTableCompteurs($incinerateur){
-        $this->tableCompteurs = new TableCompteursAnnuel($incinerateur);
+    private function buildTableCompteurs($incinerateur, $ligneId){
+        $this->tableCompteurs = new TableCompteursAnnuel($incinerateur, $ligneId);
     }
     private function buildGraphs($incinerateur){
         // Initialisations of the arrays we use afterwards

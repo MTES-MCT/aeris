@@ -9,7 +9,12 @@ class TableCompteursAnnuel {
     public $lignes;
     public $colonnes;
 
-    public function __construct($incinerateur) {
+    public function __construct($incinerateur, $ligneId) {
+        $this->setup();
+        $this->extractCounterValues($incinerateur, $ligneId);
+    }
+
+    private function setup(){
         $this->measures = [];
         $this->lignes = AppliableRules::compteursTypes;
         $this->colonnes = AppliableRules::compteursComponents;
@@ -19,6 +24,18 @@ class TableCompteursAnnuel {
             foreach($this->colonnes as $colonne) {
                 $this->measures[$type][$colonne] = 8;
             }
+        }
+    }
+
+    private function extractCounterValues($incinerateur, $ligneId) {
+        foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
+            $dateDeclaration = $currDeclaration->getDeclarationMonth();
+            
+            // foreach($incinerateur->getDeclarationLigne() as $declLigne) {
+            //     if($declLigne->getNumero == $ligneId) {
+                    
+            //     }
+            // }
         }
     }
 }
