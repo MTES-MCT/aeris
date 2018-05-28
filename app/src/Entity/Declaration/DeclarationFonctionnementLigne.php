@@ -325,4 +325,8 @@ class DeclarationFonctionnementLigne
     public function getMesures(){ 
         return $this->mesures;
     }
+
+    public function getMesuresCompteurs(){ 
+        return $this->mesuresCompteurs;
+    }
 }

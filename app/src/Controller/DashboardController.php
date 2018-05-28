@@ -9,7 +9,7 @@ use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\DeclarationIncinerateur;
 use App\Entity\Declaration\MesureDioxine;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Aeris\Component\Report\Dashboard\Dashboard\GeneralReport;
+use Aeris\Component\Report\Dashboard\GeneralReport;
 use Aeris\Component\Report\Dashboard\LineReport;
 
 class DashboardController extends AerisController

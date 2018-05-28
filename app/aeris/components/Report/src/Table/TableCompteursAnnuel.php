@@ -11,7 +11,7 @@ class TableCompteursAnnuel {
 
     public function __construct($incinerateur, $ligneId) {
         $this->setup();
-        $this->extractCounterValues($incinerateur, $ligneId);
+        $this->analyzeDeclarations($incinerateur, $ligneId);
     }
 
     private function setup(){
@@ -25,16 +25,27 @@ class TableCompteursAnnuel {
                 $this->measures[$type][$colonne] = 8;
             }
         }
+
     }
 
-    private function extractCounterValues($incinerateur, $ligneId) {
+    private function analyzeDeclarations($incinerateur, $ligneId) {
         foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
             $dateDeclaration = $currDeclaration->getDeclarationMonth();
             
-            // foreach($incinerateur->getDeclarationLigne() as $declLigne) {
-            //     if($declLigne->getNumero == $ligneId) {
-                    
-            //     }
+            foreach($currDeclaration->getDeclarationsFonctionnementLigne() as $declLigne) {
+                if($declLigne->getLigne()->getNumero() == $ligneId) {
+                    $this->extractCounterValues($declLigne->getMesuresCompteurs());
+                }
+            }
+        }
+    }
+
+    private function extractCounterValues($measures){
+        foreach($measures as $measure) {
+            $this->measures[$measure->getType()][$measure->getComponent()] = $measure->getValue();
+            // if(in_array($measure->getType(), $this->lignes)
+            //     && in_array($measure->getComponent(), $this->colonnes)) {
+
             // }
         }
     }

@@ -49,7 +49,6 @@ class MesureCompteur
         return $mesure;
     }
 
-
     /**
      * @return mixed
      */
