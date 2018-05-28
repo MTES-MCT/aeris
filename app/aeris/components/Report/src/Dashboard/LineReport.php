@@ -1,8 +1,11 @@
 <?php
 
-namespace Aeris\Component\Report;
+namespace Aeris\Component\Report\Dashboard;
 
-class DashboardLineReport {
+use Aeris\Component\Report\GraphMetadata;
+use Aeris\Component\Report\GraphData;
+
+class LineReport {
     public $graphs;
     public $metadata = [];
 

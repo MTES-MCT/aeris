@@ -41,4 +41,23 @@ class AppliableRules {
         'nh3_f_24h',
         'nh3_f_1h_max'
     ];
+
+    static $compteursTypes = [
+        'compt_art10_mensuel',
+        'nb_dep_4h_mensuel',
+        'nb_dep_c_moy_24h_mensuel',
+        'nb_dep_f_24h_mensuel',
+        'nb_moy_24h_invalides_mensuel'
+    ];
+
+    static $compteursComponents = [
+        'Poussières',
+        'CO',
+        'COT',
+        'HCl',
+        'HF',
+        'SO2',
+        'NOX',
+        'NH3'
+    ];
 }

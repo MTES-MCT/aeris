@@ -4,7 +4,7 @@ namespace Aeris\Component\Report\Dashboard;
 
 use Aeris\Component\Report\Graph\GraphQuantitesIncinerees;
 
-class DashboardReport {
+class GeneralReport {
     public $graphQtitesIncinerees;
 
     public $cumulQtitesIncinereesDebutAnnee;
