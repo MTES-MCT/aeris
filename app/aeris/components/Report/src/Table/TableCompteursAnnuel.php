@@ -22,7 +22,7 @@ class TableCompteursAnnuel {
         foreach($this->lignes as $type) {
             $this->measures[$type] = [];
             foreach($this->colonnes as $colonne) {
-                $this->measures[$type][$colonne] = 8;
+                $this->measures[$type][$colonne] = 0;
             }
         }
 
