@@ -147,3 +147,77 @@ function addQuantiteesIncinereesChart(dashboardData) {
       }
     });
 }
+
+
+
+
+function addHeuresFonctionnementChart(dashboardData) {
+    var chartData = {
+      labels: dashboardData.months,
+      datasets: [{
+        type: 'line',
+        label: 'Heures de fonctionnement théorique',
+        borderColor: window.chartColors.blue,
+        borderWidth: 2,
+        fill: false,
+        data: dashboardData.heuresTheoriques
+      }, {
+        type: 'bar',
+        label: 'Dataset 2',
+        backgroundColor: window.chartColors.red,
+        data: [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        borderColor: 'white',
+        borderWidth: 2
+      }, {
+        type: 'bar',
+        label: 'Dataset 3',
+        backgroundColor: window.chartColors.green,
+        data: [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ]
+      }]
+    };
+
+    var ctx = document.getElementById('canvas_heures_fonctionnement').getContext('2d');
+      window.myMixedChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Heures de fonctionnement'
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: true
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                },
+                scaleLabel:{
+                  display:true,
+                    labelString: "Heures de fonctionnement"
+
+                }
+            }]
+          }
+        }
+      });s
+}
