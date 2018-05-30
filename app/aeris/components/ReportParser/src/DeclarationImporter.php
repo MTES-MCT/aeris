@@ -38,7 +38,7 @@ class DeclarationImporter {
         }
     }
 
-    private function loadCompteurs($declarationFonctionnementLigne) {
+    public function loadCompteurs($declarationFonctionnementLigne) {
         $filename = $declarationFonctionnementLigne->getDeclarationCompteursFileName();
         $hasFile = !empty($filename);
         if($hasFile) {
@@ -65,7 +65,7 @@ class DeclarationImporter {
     }
 
 
-    private function loadConcentrations($declarationFonctionnementLigne) {
+    public function loadConcentrations($declarationFonctionnementLigne) {
         $filename = $declarationFonctionnementLigne->getDeclarationConcentrationsFileName();
         $hasFile = !empty($filename);
         if($hasFile) {
@@ -79,7 +79,7 @@ class DeclarationImporter {
         }
     }
 
-    private function loadFlux($declarationFonctionnementLigne) {
+    public function loadFlux($declarationFonctionnementLigne) {
         $filename = $declarationFonctionnementLigne->getDeclarationFluxFileName();
         $hasFile = !empty($filename);
         if($hasFile) {

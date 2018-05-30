@@ -44,7 +44,7 @@ class LoadCounterReportsCommand extends Command
             ->find($declarationId);
 
         foreach ($declaration->getDeclarationsFonctionnementLigne() as $declarationFonctionnementLigne) {
-                $this->loadCompteurs($declarationFonctionnementLigne);
+                $this->declarationImporter->loadCompteurs($declarationFonctionnementLigne);
             }
     }    
 }
