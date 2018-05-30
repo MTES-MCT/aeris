@@ -86,6 +86,7 @@ class OwnerController extends AerisController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($declaration);
             $entityManager->flush();
+
             $response = new RedirectResponse($this->generateUrl('route_history', [
                 'incinerateurId' => $mainIncinerateur->getId()
             ]));
@@ -96,7 +97,6 @@ class OwnerController extends AerisController
                 $declaration->getId()
             );
 
-            $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
 
             return $response->send();
         }
@@ -139,7 +139,7 @@ class OwnerController extends AerisController
                 'incinerateurId' => $mainIncinerateur->getId()
             ]));
             $response->prepare($request);
-
+            $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
             $this->addFlash(
                 'declaration',
                 $declaration->getId()
