@@ -54,7 +54,7 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
     </tbody>
   </table>
 
-  <table class="table">
+  <table class="table" id="table-summary">
     <thead>
       <tr>
         <th>Paramètres</th>
@@ -82,21 +82,21 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 <div>
   <h4 class="title is-4">Déclarations de mesures continues</h4>
 
-  <h5 class="title is-5" id="section-poussieres">Poussières</h5>
+  <h5 class="title is-5" id="section-poussieres">Poussières <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'psr_c_24h_moy') }}
-  <h5 class="title is-5" id="section-co">CO</h5>
+  <h5 class="title is-5" id="section-co">CO <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'co_c_24h_moy') }}
-  <h5 class="title is-5" id="section-cot">COT</h5>
+  <h5 class="title is-5" id="section-cot">COT <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'cot_c_24h_moy') }}
-  <h5 class="title is-5" id="section-hcl">HCL</h5>
+  <h5 class="title is-5" id="section-hcl">HCL <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'hcl_c_24h_moy') }}
-  <h5 class="title is-5" id="section-hf">HF</h5>
+  <h5 class="title is-5" id="section-hf">HF <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'hf_c_24h_moy') }}
-  <h5 class="title is-5" id="section-so2">SO2</h5>
+  <h5 class="title is-5" id="section-so2">SO2 <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'so2_c_24h_moy') }}
-  <h5 class="title is-5" id="section-nox">NOX</h5>
+  <h5 class="title is-5" id="section-nox">NOX <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nox_c_24h_moy') }}
-  <h5 class="title is-5" id="section-nh3">NH3</h5>
+  <h5 class="title is-5" id="section-nh3">NH3 <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nh3_c_24h_moy') }}
 
 </div>
