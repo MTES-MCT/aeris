@@ -164,7 +164,7 @@ function addHeuresFonctionnementChart(dashboardData) {
     labels: dashboardData.months,
     datasets: [{
       type: 'line',
-      label: 'Heures de fonctionnement thÃ©orique',
+      label: 'Heures de fonctionnement théorique',
       borderColor: window.chartColors.blue,
       borderWidth: 2,
       fill: false,
