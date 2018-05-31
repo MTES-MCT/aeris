@@ -6,6 +6,8 @@ Aeris - Historique des déclarations - {{ incinerateur.name }}
 {% block body %}
   <section class="section">
     <div class="container">
+      <a class="button is-primary button-goback" href="{{ path('route_dashboard', {incinerateurId: incinerateur.id }) }}">Retour au tableau de bord</a>
+
       {% for declarationId in app.flashes('declaration-continues') %}
           <div class="notification is-success">
 Votre déclaration de mesures continues a bien été prise en compte. Vous pouvez y accéder <a href="{{ path('route_cr_declaration', {declarationId: declarationId}) }}">ici</a>.
