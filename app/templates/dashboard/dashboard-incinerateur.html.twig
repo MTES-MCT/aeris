@@ -6,6 +6,7 @@ Aeris - Synthèse globale - {{ incinerateur.name }}
 {% block dashboard %}
 <h3 class="title is-3">Synthèse globale</h3>
 
+<h4 class="title is-4">Quantité de déchets incinérés</h4>
 <p>
     Quantité de déchets incinérés depuis le {{ dashboardData.dateDebutAnnee|date("d/m/Y") }} (T) : {{ dashboardData.cumulQtitesIncinereesDebutAnnee }}
 </p>
@@ -16,7 +17,7 @@ Aeris - Synthèse globale - {{ incinerateur.name }}
   </div>
 </div>
 
-<p>Heures de fonctionnement</p>
+<h4 class="title is-4">Heures de fonctionnement</h4>
 
 <div>
   <div class="dioxine-canvas-container">
