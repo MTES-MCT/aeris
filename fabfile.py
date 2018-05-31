@@ -54,6 +54,7 @@ def enable_project(env_name, deployment_directory):
         run('bin/console cache:warmup --env=prod --no-debug')
         run('chmod a+w var/ -R')
         run('bin/console doctrine:migrations:migrate --no-interaction')
+        run('cp assets/static public/build/static -R')
 
     # Create symlink
     run('ln -sfn %s /var/www/aeris-%s' % (deployment_directory, env_name))
