@@ -63,6 +63,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <table class="table">
           <thead>
             <tr>
+              <th>Période</th>
               <th>Date de déclaration</th>
               <th>Commentaire</th>
               <th>Lien</th>
@@ -71,9 +72,18 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
           <tbody>
             {% for declaration in incinerateur.declarationsDioxine  |sortbyfield('createdAt')|reverse %}
             <tr>
-              <th>
+              <td>
+                {% for diox in declaration.mesuresDioxine%}
+                  {# This is definitely the worst array access ever writen. #}
+                  {# We only want to display the first item, yet somehow declaration.mesuresDioxine[0] or declaration.mesuresDioxine|first are not enough #}
+                  {% if loop.first %}
+                    {{ diox.dateDebut|date('d/m/Y') }} - {{ diox.dateFin|date('d/m/Y') }} <br />
+                  {% endif %}
+                {% endfor %}                  
+              </td>
+              <td>
                 <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.createdAt|localizeddate('medium', 'none') }}</a>
-              </th>
+              </td>
               <td>
                 {{ declaration.comment }}
               </td>
