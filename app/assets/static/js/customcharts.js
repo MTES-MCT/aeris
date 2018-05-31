@@ -151,6 +151,7 @@ function addQuantiteesIncinereesChart(dashboardData) {
 
 
 
+
 function addHeuresFonctionnementChart(dashboardData) {
   var chartColors = [
     window.chartColors.red,
@@ -163,11 +164,12 @@ function addHeuresFonctionnementChart(dashboardData) {
     labels: dashboardData.months,
     datasets: [{
       type: 'line',
-      label: 'Heures de fonctionnement théorique',
+      label: 'Heures de fonctionnement thÃ©orique',
       borderColor: window.chartColors.blue,
       borderWidth: 2,
       fill: false,
       data: dashboardData.heuresTheoriques
+      // ,steppedLine: true
     }]
   };
 
@@ -176,21 +178,13 @@ function addHeuresFonctionnementChart(dashboardData) {
       type: 'bar',
       label: "Ligne " + dashboardData.lignes[i],
       backgroundColor: chartColors[i],
-      data: [
-        4,
-        4,
-        4,
-        4,
-        4,
-        4
-      ],
+      data: dashboardData.data[dashboardData.lignes[i]],
       borderColor: 'white',
       borderWidth: 2
     });
   }
 
   var ctx = document.getElementById('canvas_heures_fonctionnement').getContext('2d');
-  console.log(chartData);
   window.heuresFonctionnementChart = new Chart(ctx, {
     type: 'bar',
     data: chartData,
