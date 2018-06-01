@@ -32,6 +32,11 @@ services:
         arguments:
             - "@router.default"
             - "@session"
+    
+    app.security.logout_success_handler:
+        class: App\Security\LogoutSuccessHandler
+        arguments:
+            - "@router.default"
 
     app.security.helper:
         class: App\Security\SecurityHelper
