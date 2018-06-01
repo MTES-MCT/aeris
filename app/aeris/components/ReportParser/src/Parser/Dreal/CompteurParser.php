@@ -34,14 +34,19 @@ class CompteurParser extends FileParser {
         
         for($col = 0; $col < count($this->cols); $col += 1) {
             for($row = 0; $row < count($this->rows); $row += 1) {
-                $cellValue = $spreadsheet->getActiveSheet()->getCellByColumnAndRow(self::XSTART + $col, self::YSTART + $row)->getValue();
+                try {
+                    $cellValue = $spreadsheet->getActiveSheet()->getCellByColumnAndRow(self::XSTART + $col, self::YSTART + $row)->getValue();
 
-                $datapoint = new CompteurDataPoint(
-                    $this->rows[$row],
-                    $this->cols[$col],
-                    (int)$cellValue
-                );
-                $datapoints[] = $datapoint;
+                    $datapoint = new CompteurDataPoint(
+                        $this->rows[$row],
+                        $this->cols[$col],
+                        (int)$cellValue
+                    );
+                    $datapoints[] = $datapoint;
+                }
+                catch(\Exception $e){
+                    // We did not manage to read the data
+                }
             }
         }
 

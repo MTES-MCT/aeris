@@ -57,12 +57,19 @@ class Parser extends FileParser {
         $dataPoints = [];
         $colIndex = $this->getColumnIndex($spreadsheet, $columnName);
         foreach($dates as list($yIndex, $date)) {
-            $cellValue = $spreadsheet->getActiveSheet()->getCellByColumnAndRow($colIndex, $yIndex)->getValue();
-            if (!empty($cellValue)) {
-                $dataPoint = new DataPoint($columnName, $date, $cellValue);
-                $dataPoints[] = $dataPoint;
+            try {
+                $cell = $spreadsheet->getActiveSheet()->getCellByColumnAndRow($colIndex, $yIndex);
+                $cellValue = $cell->getValue();
+                if (!empty($cellValue)) {
+                    $dataPoint = new DataPoint($columnName, $date, $cellValue);
+                    $dataPoints[] = $dataPoint;
+                }
+            }
+            catch(\Exception $e){
+                // We did not manage to read the data
             }
         }
+
         return $dataPoints;
     }
 }
