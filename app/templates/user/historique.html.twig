@@ -6,6 +6,8 @@ Aeris - Historique des déclarations - {{ incinerateur.name }}
 {% block body %}
   <section class="section">
     <div class="container">
+      <a class="button is-primary button-goback" href="{{ path('route_dashboard', {incinerateurId: incinerateur.id }) }}">Retour au tableau de bord</a>
+
       {% for declarationId in app.flashes('declaration-continues') %}
           <div class="notification is-success">
 Votre déclaration de mesures continues a bien été prise en compte. Vous pouvez y accéder <a href="{{ path('route_cr_declaration', {declarationId: declarationId}) }}">ici</a>.
@@ -35,9 +37,9 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
           <tbody>
             {% for declaration in incinerateur.declarationsIncinerateur|sortbyfield('createdAt')|reverse %}
             <tr>
-              <th>
+              <td>
                 <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|monthfr|raw }} </a>
-              </th>
+              </td>
               <td>
                 {{ declaration.createdAt|localizeddate('medium', 'none') }}
               </td>
@@ -63,6 +65,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <table class="table">
           <thead>
             <tr>
+              <th>Période</th>
               <th>Date de déclaration</th>
               <th>Commentaire</th>
               <th>Lien</th>
@@ -71,9 +74,20 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
           <tbody>
             {% for declaration in incinerateur.declarationsDioxine  |sortbyfield('createdAt')|reverse %}
             <tr>
-              <th>
-                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">{{ declaration.createdAt|localizeddate('medium', 'none') }}</a>
-              </th>
+              <td>
+                <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">
+                {% for diox in declaration.mesuresDioxine%}
+                  {# This is definitely the worst array access ever writen. #}
+                  {# We only want to display the first item, yet somehow declaration.mesuresDioxine[0] or declaration.mesuresDioxine|first are not enough #}
+                  {% if loop.first %}
+                    {{ diox.dateDebut|date('d/m/Y') }} - {{ diox.dateFin|date('d/m/Y') }} <br />
+                  {% endif %}
+                {% endfor %}
+                </a>              
+              </td>
+              <td>
+                {{ declaration.createdAt|localizeddate('medium', 'none') }}
+              </td>
               <td>
                 {{ declaration.comment }}
               </td>
@@ -90,11 +104,6 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       <br>
       <a href="{{ path('route_declaration_dioxines') }}" class="button is-primary is-large">Effectuer une déclaration de dioxines et furannes</a>
       {% endif %}
-
-      {#
-      <h2>compte rendu test</h2>
-      <a href="{{ path('route_cr_sample') }}">accéder</a>
-      #}
     </div>
   </section>
 {% endblock %}

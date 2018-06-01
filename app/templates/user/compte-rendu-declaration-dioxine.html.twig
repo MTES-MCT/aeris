@@ -17,6 +17,7 @@ Aeris - Compte rendu de déclaration de dioxines
 {% block body %}
   <section class="section">
     <div class="container">
+      <a class="button is-primary button-goback" href="{{ path('route_history', {incinerateurId: declaration.incinerateur.id }) }}">Retour à l'historique</a>
     <h2 class="title is-2">Rejets dioxines</h2>
         {% if not declaration.mesuresDioxine is empty %}
           {% for mesureDioxine in declaration.mesuresDioxine %}

@@ -13,6 +13,7 @@ class GraphHeuresFonctionnement {
     public function __construct($incinerateur) {
         // We want to display 6 months of data
         $this->firstDate = new \DateTime('-5 months');
+        $this->firstDate->modify('first day of this month');
 
         $this->prepareListOfMonths($incinerateur);
         $this->prepareData($incinerateur);

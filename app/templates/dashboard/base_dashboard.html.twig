@@ -2,7 +2,7 @@
 {% block body %}
   <section class="section">
     <div class="container">
-      <a class="button is-primary" style="float:right; font-size:1.5em" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder à l'historique des déclarations</a>
+      <a class="button is-primary button-goback" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder à l'historique des déclarations</a>
 
       <h2 class="title is-2">Tableau de bord de <strong>{{incinerateur.name}}</strong></h2>
 
@@ -14,8 +14,7 @@
 
         {% endif %}
 
-       <a class="button is-primary" style="float:right; font-size:1.5em" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder à l'historique des déclarations</a>
-
+       <a class="button is-primary button-goback" href="{{ path('route_history', {incinerateurId: incinerateur.id }) }}">Accéder à l'historique des déclarations</a>
     </div>
   </section>
 {% endblock %}

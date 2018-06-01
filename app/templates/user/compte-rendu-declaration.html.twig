@@ -30,6 +30,7 @@ body{
 {% block body %}
   <section class="section">
     <div class="container" >
+      <a class="button is-primary button-goback" href="{{ path('route_history', {incinerateurId: declaration.incinerateur.id }) }}">Retour à l'historique</a>
       {% if declaration.declarationMonth %}
     <h2 class="title is-2">Rejets air - {{ declaration.declarationMonth|date('m/Y') }} </h2>
     Déclaration effectuée le {{ declaration.createdAt|date('d/m/Y') }}
