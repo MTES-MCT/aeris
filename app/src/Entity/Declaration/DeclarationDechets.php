@@ -17,37 +17,37 @@ class DeclarationDechets
     private $id;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeTotale;
     
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeDechetsDangereux;
     
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeDechetsDasri;
     
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeDechetsNonDangereux;
     
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeDechetsNonDangereuxMenagers;
     
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeDechetsNonDangereuxRefusTri;
     
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=20, scale=10, nullable=true)
      */
     private $qtiteIncinereeDechetsNonDangereuxDae;
 
