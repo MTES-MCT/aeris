@@ -70,9 +70,9 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
         <th><a href="#section-cot">COT</a></th>
         <th><a href="#section-hcl">HCl</a></th>
         <th><a href="#section-hf">HF</a></th>
-        <th><a href="#section-so2">SO2</a></th>
+        <th><a href="#section-so2">SO<sub>2</sub></a></th>
         <th><a href="#section-nox">NOX</a></th>
-        <th><a href="#section-nh3">NH3</a></th>
+        <th><a href="#section-nh3">NH<sub>3</sub></a></th>
         <th>Total</th>
       </tr>
     </thead>
@@ -94,19 +94,19 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 
   <h5 class="title is-5" id="section-poussieres">Poussières <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'psr_c_24h_moy') }}
-  <h5 class="title is-5" id="section-co">CO <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-co">CO<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'co_c_24h_moy') }}
-  <h5 class="title is-5" id="section-cot">COT <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-cot">COT<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'cot_c_24h_moy') }}
-  <h5 class="title is-5" id="section-hcl">HCL <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-hcl">HCl<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'hcl_c_24h_moy') }}
-  <h5 class="title is-5" id="section-hf">HF <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-hf">HF<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'hf_c_24h_moy') }}
-  <h5 class="title is-5" id="section-so2">SO2 <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-so2">SO<sub>2</sub><a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'so2_c_24h_moy') }}
-  <h5 class="title is-5" id="section-nox">NOX <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-nox">NOX<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nox_c_24h_moy') }}
-  <h5 class="title is-5" id="section-nh3">NH3 <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-nh3">NH<sub>3</sub><a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nh3_c_24h_moy') }}
 
 </div>
