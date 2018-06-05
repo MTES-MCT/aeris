@@ -14,6 +14,7 @@ class GraphHeuresFonctionnement {
         // We want to display 6 months of data
         $this->firstDate = new \DateTime('-5 months');
         $this->firstDate->modify('first day of this month');
+        $this->firstDate->setTime(0, 0, 0);
 
         $this->prepareListOfMonths($incinerateur);
         $this->prepareData($incinerateur);
