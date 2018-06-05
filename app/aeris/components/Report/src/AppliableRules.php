@@ -63,6 +63,7 @@ class AppliableRules {
         'HF',
         'SO2',
         'NOX',
-        'NH3'
+        'NH3',
+        'Total'
     ];
 }

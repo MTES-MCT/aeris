@@ -25,7 +25,8 @@ class CompteurParser extends FileParser {
         'HF',
         'SO2',
         'NOX',
-        'NH3'
+        'NH3',
+        'Total',
     ];
 
     public function parseFile($filename) {

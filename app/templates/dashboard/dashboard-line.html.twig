@@ -10,7 +10,6 @@
   {% for component in lineReport.tableCompteurs.colonnes %}
   <td class="{% if lineReport.tableCompteurs.measures[colonne][component] > 0%}compteur-invalide{%endif%}">{{ lineReport.tableCompteurs.measures[colonne][component] }}</td>
   {% endfor %}
-  <td>N/A</td>
 </tr>
 {% endmacro %}
 
