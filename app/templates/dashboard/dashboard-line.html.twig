@@ -34,7 +34,7 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
   <table class="table">
     <thead>
       <tr>
-        <th>Dernier mois</th>
+        <th>&nbsp;</th>
         <th>Dernier mois</th>
         <th>Année</th>
       </tr>
@@ -42,13 +42,13 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
     <tbody>
       <tr>
         <td>Compteurs 60h</td>
-        <td></td>
-        <td></td>
+        <td>{{ lineReport.tableDioxinesCompteurs60.compteur60DernierMois }}</td>
+        <td>{{ lineReport.tableDioxinesCompteurs60.compteur60Annuel }}</td>
       </tr>
       <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
-        <td></td>
-        <td></td>
+        <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois }}</td>
+        <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesAnnuel }}</td>
       </tr>
     </tbody>
   </table>
