@@ -28,9 +28,15 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
   color: #fff;
   font-weight:bold;
 }
+.compteur-warning{
+  background-color: #ffdd57;
+  color: #000;
+  font-weight:bold;
+}
 </style>
 <h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
 <div>
+
   <table class="table">
     <thead>
       <tr>
@@ -40,11 +46,13 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
       </tr>
     </thead>
     <tbody>
+      {#
       <tr>
         <td>Compteurs 60h</td>
         <td>{{ lineReport.tableDioxinesCompteurs60.compteur60DernierMois }}</td>
         <td>{{ lineReport.tableDioxinesCompteurs60.compteur60Annuel }}</td>
       </tr>
+        #}
       <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
         <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois }}</td>
@@ -69,7 +77,10 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
       </tr>
     </thead>
     <tbody>
-      {{ s.ligneTableau(lineReport, "Dépassement VLE article 10 (h)",'compt_art10_mensuel') }}
+      <td>Dépassement VLE article 10 (h)</td>
+      {% for component in lineReport.tableCompteurs.colonnes %}
+      <td class="{% if lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] > 60 %}compteur-invalide{%elseif lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] > 0 and lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] < 60%}compteur-warning{%endif%}">{{ lineReport.tableCompteurs.measures["compt_art10_mensuel"][component] }}</td>
+      {% endfor %}
       {{ s.ligneTableau(lineReport, "Nombre de dépassements de la concentration moyenne journalière (j)",'nb_dep_c_moy_24h_mensuel') }}
       {{ s.ligneTableau(lineReport, "Nombre de dépassements du flux journalier (j)",'nb_dep_f_24h_mensuel') }}
       {{ s.ligneTableau(lineReport, "Nombre de dépassements > 4h",'nb_dep_4h_mensuel') }}
