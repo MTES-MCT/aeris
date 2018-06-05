@@ -1,6 +1,6 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^7.0.8",
         "ext-iconv": "*",

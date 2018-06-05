@@ -9,3 +9,7 @@ La documentation se trouve dans le répertoire [documentation](./documentation).
 
  - des informations techniques: installation du projet, outils utilisés, modélisation du domaine métier...
  - des informations fonctionnelles, sur le problème que nous cherchons à résoudre à l'aide d'un outil informatique, un glossaire, etc.
+
+## Licence
+
+Ce projet est sous licence [MIT](./LICENSE.txt)
