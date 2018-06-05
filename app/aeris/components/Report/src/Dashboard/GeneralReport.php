@@ -4,6 +4,7 @@ namespace Aeris\Component\Report\Dashboard;
 
 use Aeris\Component\Report\Graph\GraphQuantitesIncinerees;
 use Aeris\Component\Report\Graph\GraphHeuresFonctionnement;
+use Aeris\Component\Report\DateUtils;
 
 class GeneralReport {
     public $graphQtitesIncinerees;
@@ -14,7 +15,7 @@ class GeneralReport {
 
     public function __construct($incinerateur) {
         $now = new \DateTime;
-        $this->dateDebutAnnee = \DateTime::createFromFormat('j-M-Y', sprintf('01-January-%s', $now->format('Y')));
+        $this->dateDebutAnnee = DateUtils::getFirstOfJanuaryThisYear();
 
         $this->graphQtitesIncinerees = new GraphQuantitesIncinerees($incinerateur);
         $this->graphHeuresFonctionnement = new GraphHeuresFonctionnement($incinerateur);
@@ -23,7 +24,7 @@ class GeneralReport {
 
     private function extraireCumulDepuisDebutAnnee($incinerateur) {       
         $this->cumulQtitesIncinereesDebutAnnee = 0;
-        $now = new \DateTime;
+        $now = new \DateTime();
 
         foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
             $dateDeclaration = $currDeclaration->getDeclarationMonth();

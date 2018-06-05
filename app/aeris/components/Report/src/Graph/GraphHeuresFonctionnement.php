@@ -54,7 +54,7 @@ class GraphHeuresFonctionnement {
         $now = new \DateTime;
         foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
             $dateDeclaration = $currDeclaration->getDeclarationMonth();
-            if($dateDeclaration > $this->firstDate && $dateDeclaration < $now) {
+            if($dateDeclaration >= $this->firstDate && $dateDeclaration < $now) {
                 $dechets = $currDeclaration->getDeclarationDechets();
                 $declarationMonth = $this->formatDate($dateDeclaration);
                 $timeDifference = $dateDeclaration->diff($this->firstDate);

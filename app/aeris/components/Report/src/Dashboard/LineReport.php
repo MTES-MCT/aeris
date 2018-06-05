@@ -7,6 +7,7 @@ use Aeris\Component\Report\GraphData;
 use Aeris\Component\Report\Table\TableCompteursAnnuel;
 use Aeris\Component\Report\Table\TableDioxinesCompteurs60;
 
+
 class LineReport {
     public $tableCompteurs;
     public $tableDioxinesCompteurs60;
