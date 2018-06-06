@@ -24,8 +24,8 @@ class TableDioxinesCompteurs60 {
         $firstValidDate = DateUtils::getFirstOfJanuaryThisYear();
 
         foreach($measures as $measure) {
-            if($measure->getDateDebut() >= $firstValidDate){
-                if($measure->getValue() > 0.2) {
+            if($measure->getDateDebut() >= $firstValidDate && $measure->getLigne()->getNumero() == $ligneId){
+                if($measure->getConcentration() > 0.1) {
                     $this->nbDepassementDioxinesAnnee++;
                 }
             }

@@ -46,17 +46,10 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
       </tr>
     </thead>
     <tbody>
-      {#
-      <tr>
-        <td>Compteurs 60h</td>
-        <td>{{ lineReport.tableDioxinesCompteurs60.compteur60DernierMois }}</td>
-        <td>{{ lineReport.tableDioxinesCompteurs60.compteur60Annuel }}</td>
-      </tr>
-        #}
       <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
         <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois }} ng/m<sup>3</sup></td>
-        <td>{{ lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee }} dépassements</td>
+        <td class="{% if lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee > 0 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee }} dépassements</td>
       </tr>
     </tbody>
   </table>
