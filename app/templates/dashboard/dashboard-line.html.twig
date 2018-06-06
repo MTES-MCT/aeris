@@ -41,14 +41,14 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
     <thead>
       <tr>
         <th>&nbsp;</th>
-        <!-- <th>Dernier mois</th> -->
+        <th>Dernier mois</th>
         <th>Année</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
-        <!-- <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois }} ng/m<sup>3</sup></td> -->
+        <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois  | number_format(3) }} ng/m<sup>3</sup></td>
         <td class="{% if lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee > 0 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee }} dépassements</td>
       </tr>
     </tbody>
@@ -101,7 +101,6 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
   {{ s.canvasContinu(ligneId, 'nox_c_24h_moy') }}
   <h5 class="title is-5" id="section-nh3">NH<sub>3</sub><a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nh3_c_24h_moy') }}
-
 </div>
 
 

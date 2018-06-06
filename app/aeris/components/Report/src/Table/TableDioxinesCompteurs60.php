@@ -22,11 +22,17 @@ class TableDioxinesCompteurs60 {
 
     private function extractDioxinesValues($measures, $ligneId){
         $firstValidDate = DateUtils::getFirstOfJanuaryThisYear();
+        $mostRecentDate = null;
+        $this->dioxinesDernierMois = 0;
 
         foreach($measures as $measure) {
             if($measure->getDateDebut() >= $firstValidDate && $measure->getLigne()->getNumero() == $ligneId){
                 if($measure->getConcentration() > 0.1) {
                     $this->nbDepassementDioxinesAnnee++;
+                }
+                if($mostRecentDate == null or $mostRecentDate < $measure->getDateDebut()) {
+                    $mostRecentDate = $measure->getDateDebut();
+                    $this->dioxinesDernierMois = $measure->getConcentration();
                 }
             }
         }
