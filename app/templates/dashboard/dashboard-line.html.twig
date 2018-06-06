@@ -48,7 +48,7 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
     <tbody>
       <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
-        <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois  | number_format(3) }} ng/m<sup>3</sup></td>
+        <td class="{% if lineReport.tableDioxinesCompteurs60.dioxinesDernierMois > 0.1 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois  | number_format(3) }} ng/m<sup>3</sup></td>
         <td class="{% if lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee > 0 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee }} dépassements</td>
       </tr>
     </tbody>
