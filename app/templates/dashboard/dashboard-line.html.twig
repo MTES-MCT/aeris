@@ -34,21 +34,21 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
   font-weight:bold;
 }
 </style>
-<h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
+<h3 class="title is-3" id="titre-synthese">Synthèse ligne n°{{ ligneId }}</h3>
 <div>
 
-  <table class="table">
+  <table class="table" >
     <thead>
       <tr>
         <th>&nbsp;</th>
-        <th>Dernier mois</th>
+        <!-- <th>Dernier mois</th> -->
         <th>Année</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
-        <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois }} ng/m<sup>3</sup></td>
+        <!-- <td>{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois }} ng/m<sup>3</sup></td> -->
         <td class="{% if lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee > 0 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee }} dépassements</td>
       </tr>
     </tbody>
@@ -105,7 +105,7 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 </div>
 
 
-<h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes</h3>
+<h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes  <a href="#titre-synthese"><i class="fas fa-level-up-alt"></i></a></h3>
 
 <div class="modal" id="depassement-modal">
    <div class="modal-background"></div>
