@@ -5,9 +5,12 @@ namespace Aeris\Component\Report\Dashboard;
 use Aeris\Component\Report\GraphMetadata;
 use Aeris\Component\Report\GraphData;
 use Aeris\Component\Report\Table\TableCompteursAnnuel;
+use Aeris\Component\Report\Table\TableDioxinesCompteurs60;
+
 
 class LineReport {
     public $tableCompteurs;
+    public $tableDioxinesCompteurs60;
     public $graphs;
     public $metadata = [];
 
@@ -27,12 +30,10 @@ class LineReport {
         $measuresByLine = [];
         $this->configureMetadata();
         $this->buildGraphs($incinerateur);        
-        $this->buildTableCompteurs($incinerateur, $ligneId);        
+        $this->tableCompteurs = new TableCompteursAnnuel($incinerateur, $ligneId);
+        $this->tableDioxinesCompteurs60 = new TableDioxinesCompteurs60($incinerateur, $ligneId);
     }
 
-    private function buildTableCompteurs($incinerateur, $ligneId){
-        $this->tableCompteurs = new TableCompteursAnnuel($incinerateur, $ligneId);
-    }
     private function buildGraphs($incinerateur){
         // Initialisations of the arrays we use afterwards
         foreach($incinerateur->getLignes() as $currLine) {

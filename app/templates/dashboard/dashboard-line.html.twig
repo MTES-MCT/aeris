@@ -10,7 +10,6 @@
   {% for component in lineReport.tableCompteurs.colonnes %}
   <td class="{% if lineReport.tableCompteurs.measures[colonne][component] > 0%}compteur-invalide{%endif%}">{{ lineReport.tableCompteurs.measures[colonne][component] }}</td>
   {% endfor %}
-  <td>N/A</td>
 </tr>
 {% endmacro %}
 
@@ -29,27 +28,28 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
   color: #fff;
   font-weight:bold;
 }
+.compteur-warning{
+  background-color: #ffdd57;
+  color: #000;
+  font-weight:bold;
+}
 </style>
-<h3 class="title is-3">Synthèse ligne n°{{ ligneId }}</h3>
+<h3 class="title is-3" id="titre-synthese">Synthèse ligne n°{{ ligneId }}</h3>
 <div>
-  <table class="table">
+
+  <table class="table" >
     <thead>
       <tr>
-        <th>Dernier mois</th>
+        <th>&nbsp;</th>
         <th>Dernier mois</th>
         <th>Année</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Compteurs 60h</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
         <td><a href="#section-dioxines">Dioxines</a></td>
-        <td></td>
-        <td></td>
+        <td class="{% if lineReport.tableDioxinesCompteurs60.dioxinesDernierMois > 0.1 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.dioxinesDernierMois  | number_format(3) }} ng/m<sup>3</sup></td>
+        <td class="{% if lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee > 0 %}compteur-invalide{%endif%}">{{ lineReport.tableDioxinesCompteurs60.nbDepassementDioxinesAnnee }} dépassements</td>
       </tr>
     </tbody>
   </table>
@@ -59,18 +59,21 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
       <tr>
         <th>Paramètres</th>
         <th><a href="#section-poussieres">Poussières</a></th>
-        <th><a href="#section-co">CO</a></th>
-        <th><a href="#section-cot">COT</a></th>
-        <th><a href="#section-hcl">HCl</a></th>
-        <th><a href="#section-hf">HF</a></th>
-        <th><a href="#section-so2">SO2</a></th>
-        <th><a href="#section-nox">NOX</a></th>
-        <th><a href="#section-nh3">NH3</a></th>
+        <th><a href="#section-co"><abbr title="Monoxyde de carbone">CO</abbr></a></th>
+        <th><a href="#section-cot"><abbr title="Carbone organique total">COT</abbr></a></th>
+        <th><a href="#section-hcl"><abbr title="Chlorure d'hydrogène">HCl</abbr></a></th>
+        <th><a href="#section-hf"><abbr title="Fluorure d'hydrogène">HF</abbr></a></th>
+        <th><a href="#section-so2"><abbr title="Dioxyde de soufre">SO<sub>2</sub></abbr></a></th>
+        <th><a href="#section-nox"><abbr title="Oxyde d'azote">NOX</abbr></a></th>
+        <th><a href="#section-nh3"><abbr title="Ammoniac">NH<sub>3</sub></abbr></a></th>
         <th>Total</th>
       </tr>
     </thead>
     <tbody>
-      {{ s.ligneTableau(lineReport, "Dépassement VLE article 10 (h)",'compt_art10_mensuel') }}
+      <td>Dépassement VLE article 10 (h)</td>
+      {% for component in lineReport.tableCompteurs.colonnes %}
+      <td class="{% if lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] > 60 %}compteur-invalide{%elseif lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] > 0 and lineReport.tableCompteurs.measures['compt_art10_mensuel'][component] < 60%}compteur-warning{%endif%}">{{ lineReport.tableCompteurs.measures["compt_art10_mensuel"][component] }}</td>
+      {% endfor %}
       {{ s.ligneTableau(lineReport, "Nombre de dépassements de la concentration moyenne journalière (j)",'nb_dep_c_moy_24h_mensuel') }}
       {{ s.ligneTableau(lineReport, "Nombre de dépassements du flux journalier (j)",'nb_dep_f_24h_mensuel') }}
       {{ s.ligneTableau(lineReport, "Nombre de dépassements > 4h",'nb_dep_4h_mensuel') }}
@@ -84,25 +87,24 @@ Aeris - Synthèse ligne {{ ligneId }} - {{ incinerateur.name }}
 
   <h5 class="title is-5" id="section-poussieres">Poussières <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'psr_c_24h_moy') }}
-  <h5 class="title is-5" id="section-co">CO <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-co">CO<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'co_c_24h_moy') }}
-  <h5 class="title is-5" id="section-cot">COT <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-cot">COT<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'cot_c_24h_moy') }}
-  <h5 class="title is-5" id="section-hcl">HCL <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-hcl">HCl<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'hcl_c_24h_moy') }}
-  <h5 class="title is-5" id="section-hf">HF <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-hf">HF<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'hf_c_24h_moy') }}
-  <h5 class="title is-5" id="section-so2">SO2 <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-so2">SO<sub>2</sub><a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'so2_c_24h_moy') }}
-  <h5 class="title is-5" id="section-nox">NOX <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-nox">NOX<a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nox_c_24h_moy') }}
-  <h5 class="title is-5" id="section-nh3">NH3 <a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
+  <h5 class="title is-5" id="section-nh3">NH<sub>3</sub><a href="#table-summary"><i class="fas fa-level-up-alt"></i></a></h5>
   {{ s.canvasContinu(ligneId, 'nh3_c_24h_moy') }}
-
 </div>
 
 
-<h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes</h3>
+<h3 class="title is-3" id="section-dioxines">Déclarations de dioxines et furannes  <a href="#titre-synthese"><i class="fas fa-level-up-alt"></i></a></h3>
 
 <div class="modal" id="depassement-modal">
    <div class="modal-background"></div>

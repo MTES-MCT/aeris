@@ -13,6 +13,7 @@ class GraphQuantitesIncinerees {
         // We want to display 6 months of data
         $this->firstDate = new \DateTime('-5 months');
         $this->firstDate->modify('first day of this month');
+        $this->firstDate->setTime(0, 0, 0);
 
         $this->prepareListOfMonths();
         $this->prepareData($incinerateur);
@@ -43,7 +44,7 @@ class GraphQuantitesIncinerees {
         $now = new \DateTime;
         foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
             $dateDeclaration = $currDeclaration->getDeclarationMonth();
-            if($dateDeclaration > $this->firstDate && $dateDeclaration < $now) {
+            if($dateDeclaration >= $this->firstDate && $dateDeclaration < $now) {
                 $dechets = $currDeclaration->getDeclarationDechets();
                 $declarationMonth = $this->formatDate($dateDeclaration);
                 $timeDifference = $dateDeclaration->diff($this->firstDate);

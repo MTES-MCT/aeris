@@ -83,7 +83,7 @@ function addDioxinesChart(ligneId) {
                 },
                 scaleLabel:{
                   display:true,
-                    labelString: "Concentration (nb/m^3)"
+                    labelString: "Concentration (ng/m^3)"
 
                 }
             }]
