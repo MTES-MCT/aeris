@@ -6,11 +6,11 @@ use Aeris\Component\Report\DateUtils;
 
 class TableDioxinesCompteurs60 {
     public $dioxinesDernierMois;
-    public $dioxinesAnnuel;
+    public $nbDepassementDioxinesAnnee;
 
     public function __construct($incinerateur, $ligneId) {
         $this->dioxinesDernierMois = 0;
-        $this->dioxinesAnnuel = 0;
+        $this->nbDepassementDioxinesAnnee = 0;
         $this->analyzeDeclarations($incinerateur, $ligneId);
     }
 
@@ -25,7 +25,9 @@ class TableDioxinesCompteurs60 {
 
         foreach($measures as $measure) {
             if($measure->getDateDebut() >= $firstValidDate){
-                $this->dioxinesAnnuel += $measure->getValue();
+                if($measure->getValue() > 0.2) {
+                    $this->nbDepassementDioxinesAnnee++;
+                }
             }
         }
     }
