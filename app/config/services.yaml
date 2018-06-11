@@ -67,6 +67,12 @@ services:
         class: App\Command\ValidateReportCommand
         arguments:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
+    
+    app.command.SendMailCommand:
+        class: App\Command\SendMailCommand
+        arguments:
+            - "@App\\Repository\\DeclarationIncinerateurRepository"
+            - "@app.mailservice"
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
@@ -82,3 +88,14 @@ services:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+
+    mailjet.client:
+        class: Mailjet\Client
+        arguments:
+            - "%env(MAILJET_API_KEY)%"
+            - "%env(MAILJET_SECRET_KEY)%"
+
+    app.mailservice:
+        class: Aeris\Component\Mail\MailService
+        arguments:
+            - "@mailjet.client"
