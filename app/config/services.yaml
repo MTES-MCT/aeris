@@ -73,6 +73,7 @@ services:
         arguments:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
             - "@app.mailservice"
+            - "@app.mailfactory"
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
@@ -99,3 +100,9 @@ services:
         class: Aeris\Component\Mail\MailService
         arguments:
             - "@mailjet.client"
+
+    app.mailfactory:
+        class: Aeris\Component\Mail\MailFactory
+        arguments:
+            - "@templating"
+            - "@App\\Repository\\DeclarationIncinerateurRepository"

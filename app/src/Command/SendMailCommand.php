@@ -14,12 +14,17 @@ class SendMailCommand extends Command
 
     private $mailer;
 
+    private $mailFactory;
+
     public function __construct(
         DeclarationIncinerateurRepository $declarationRepository,
-        $mailer
+        $mailer,
+        $mailFactory
     ) {
         $this->declarationRepository = $declarationRepository;
         $this->mailer = $mailer;
+        $this->mailFactory = $mailFactory;
+
         parent::__construct();
     }
 
@@ -38,8 +43,13 @@ class SendMailCommand extends Command
         
         $declaration = $this->declarationRepository
             ->find($declarationId);
-        if($declaration != null) {
-            
+        if ($declaration != null) {
+            $mail = $this->mailFactory->createNewDeclarationInspecteurMessage($declarationId);
+
+            $response = $this->mailer->send($mail);
+            // if ($response->success()) {
+            //     var_dump($response->getData());
+            // }
         }
         else {
             $output->writeln(sprintf('No declaration %s', $declarationId));
