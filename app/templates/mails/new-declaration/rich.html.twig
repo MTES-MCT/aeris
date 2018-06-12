@@ -1,8 +1,12 @@
-Bonjour,
+<!DOCTYPE html>
+<html>
+<body>
+    <p>Bonjour,</p>
 
-{{ declaration.incinerateur.name }} vient d'effectuer une déclaration de rejets dans l'air concernant la période {{ declaration.declarationMonth|date("m/Y") }}.
+    <p>{{ declaration.incinerateur.name }} vient d'effectuer une déclaration de rejets dans l'air concernant {{ declaration.declarationMonth|monthfr|raw }}.<br>
+    Une fois connecté à Aeris via <a href="{{ url('fos_user_security_login') }}">{{ url('fos_user_security_login') }}</a>, vous pourrez la consulter <a href="{{ url('route_cr_declaration', {declarationId: declaration.id }) }}">à cette adresse</a>.</p>
 
-Vous pouvez la consulter sur https://aeris.beta.gouv.fr
-
-Bonne journée,
-l'équipe Aeris.
+    <p>Bonne journée,<br />
+    l'équipe Aeris.</p> 
+</body>
+</html>

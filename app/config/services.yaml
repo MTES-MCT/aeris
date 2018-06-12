@@ -2,6 +2,11 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    # We need those settings for when we generate URLs from the CLI
+    router.request_context.host: aeris.beta.gouv.fr
+    router.request_context.scheme: https
+    asset.request_context.base_path: %router.request_context.base_url%
+    asset.request_context.secure: true
 
 services:
     # default configuration for services in *this* file
@@ -100,9 +105,11 @@ services:
         class: Aeris\Component\Mail\MailService
         arguments:
             - "@mailjet.client"
+        public: true
 
     app.mailfactory:
         class: Aeris\Component\Mail\MailFactory
         arguments:
             - "@templating"
             - "@App\\Repository\\DeclarationIncinerateurRepository"
+        public: true
