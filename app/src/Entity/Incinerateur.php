@@ -174,4 +174,12 @@ class Incinerateur
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getInspecteur()
+    {
+        return $this->inspecteur;
+    }
 }

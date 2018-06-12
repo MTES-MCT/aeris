@@ -18,18 +18,27 @@ class MailFactory {
         $rawBody = $this->templating->render('mails/new-declaration/raw.txt.twig', [
             'declaration' => $declaration
         ]);
+        $richBody = $this->templating->render('mails/new-declaration/rich.html.twig', [
+            'declaration' => $declaration
+        ]);
+
+        $inspecteur = $declaration
+                        ->getIncinerateur()
+                        ->getInspecteur();
+        $recipients = [
+            [ 'Email' => "clement.camin@beta.gouv.fr" ],
+        ];
+        if($inspecteur) {
+            $recipients[] = [ 'Email' => $inspecteur->getEmail() ];
+        }
 
         $body = [
             'FromEmail' => "clement.camin@beta.gouv.fr",
             'FromName' => "Aeris",
             'Subject' => "Aeris - Nouvelle déclaration de rejets dans l'air",
             'Text-part' => $rawBody,
-            'Html-part' => "<h3>Dear passenger, welcome to Mailjet!</h3><br/>May the delivery force be with you!",
-            'Recipients' => [
-                [
-                    'Email' => "keirua+mj@gmail.com"
-                ]
-            ]
+            'Html-part' => $richBody,
+            'Recipients' => $recipients
         ];
 
         return $body;

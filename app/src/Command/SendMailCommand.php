@@ -47,9 +47,9 @@ class SendMailCommand extends Command
             $mail = $this->mailFactory->createNewDeclarationInspecteurMessage($declarationId);
 
             $response = $this->mailer->send($mail);
-            // if ($response->success()) {
-            //     var_dump($response->getData());
-            // }
+            if ($response->success()) {
+                var_dump($response->getData());
+            }
         }
         else {
             $output->writeln(sprintf('No declaration %s', $declarationId));

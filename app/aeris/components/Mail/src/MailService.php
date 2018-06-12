@@ -15,8 +15,7 @@ class MailService {
     }
 
     public function send($body) {
-        var_dump($body);
-        // $response = $this->client->post(Resources::$Email, ['body' => $body]);
-        // return $response;
+        $response = $this->client->post(Resources::$Email, ['body' => $body]);
+        return $response;
     }
 }
