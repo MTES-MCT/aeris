@@ -80,6 +80,12 @@ services:
             - "@app.mailservice"
             - "@app.mailfactory"
 
+    app.command.LoadReportsCommand:
+        class: App\Command\LoadReportsCommand
+        arguments:
+            - "@App\\Repository\\DeclarationIncinerateurRepository"
+            - "@app.services.declaration_importer"
+
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags:
