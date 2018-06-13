@@ -3,8 +3,14 @@
 # Local installation
 
  - clone this git repository
+```
+git clone https://github.com/MTES-MCT/aeris
+```
  - add a `aeris.local` mapping to your /etc/hosts file
- - install `docker` and `docker-compose`, then launche the containers:
+```
+127.0.0.2 aeris.local  # will map http://aeris.local to http://127.0.0.2
+```
+ - install `docker` and `docker-compose`, then launch the containers:
 
 ```bash
 $ docker-compose up
