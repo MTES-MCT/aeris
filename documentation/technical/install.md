@@ -1,16 +1,17 @@
-
 # Installing Aeris
 
 There are a lot of steps, but it's not that complicated: they should work right away. You need to :
+
  - Run the code inside containers
  - Fetch the PHP and JS dependencies
  - Build and deploy the CSS/JS files
+ - Import the database schema (the PostgreSQL tables) and a few sample data
 
 ## Running the code inside containers
 
  - clone this git repository
 ```
-git clone https://github.com/MTES-MCT/aeris
+git clone git@github.com:MTES-MCT/aeris.git
 ```
  - add a `aeris.local` mapping to your /etc/hosts file
 ```
@@ -102,17 +103,9 @@ This will execute all the migrations inside app/src/Migrations: they create the 
 
 When you run the migrations, one of them creates 2 default users:
 
- - incinerateur-demo / aeris
  - inspecteur-demo / aeris
+ - incinerateur-demo / aeris
 
-You can try to login in with those users in the application. You are done !
+(if you need more users, have a look inside the [users documentation](./users.md))
 
-## Creating users and incinerateurs
-
-This is an optionnal step, if you need more users than what running the migrations did.
-
-### Creating an inspecteur
-
-
-
-### Creating an incinerateur owner
+You can now try to login in with those users in the application. Good job, you are done !
