@@ -38,4 +38,5 @@ It starts in the same way as before: first We create a user, and we add him the 
     Please choose a role:ROLE_INCINERATEUR
     Role "ROLE_INCINERATEUR" has been added to user "incinerateur-demo". This change will not apply until the user logs out and back in again.
 
-Then, we need to create and incinerateur, and attach it to the corresponding user and inspecteur.
+Then, we need to create and incinerateur, and attach it to the corresponding user and inspecteur. If you don't have created an inspecteur already, create one now. Then, you can use the following command:
+

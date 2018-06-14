@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use App\Entity\Declaration\DeclarationIncinerateur;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\IncinerateurRepository")
  * @ORM\Table(name="incinerateur")
@@ -56,6 +58,34 @@ class Incinerateur
      * @ORM\OneToMany(targetEntity="App\Entity\IncinerateurLigne", mappedBy="incinerateur")
      */
     private $lignes;
+
+    public function __construct(){
+        $this->lignes = new ArrayCollection();
+    }
+
+    /**
+     * @var string $name
+     * @var int $nbLines
+     * @var int $nbOvens
+     */
+    public static function create($name, $nbLines, $nbOvens, User $owner, user $inspecteur) {
+        $incinerateur = new Incinerateur();
+        $incinerateur->setName($name);
+        $incinerateur->setNbLignes($nbLines);
+        $incinerateur->setOwner($owner);
+        $incinerateur->setInspecteur($inspecteur);
+
+        for($i = 0; $i < $nbLines; ++$i) {
+            $ligne = new IncinerateurLigne();
+            $ligne->setNumero($i+1);
+            $ligne->setNbFours($nbOvens);
+            $ligne->setIncinerateur($incinerateur);
+
+            $incinerateur->addLigne($ligne);
+        }
+
+        return $incinerateur;
+    }
 
     /**
      * @return int
@@ -122,9 +152,9 @@ class Incinerateur
         return $this->owner;
     }
 
-    public function setOwner(User $user)
+    public function setOwner(User $owner)
     {
-        $this->user = $user;
+        $this->owner = $owner;
     }
 
     /**
@@ -141,6 +171,13 @@ class Incinerateur
     public function getLignes()
     {
         return $this->lignes;
+    }
+
+    public function addLigne($ligne)
+    {
+        $this->lignes[] = $ligne;
+
+        return $this;
     }
 
     /**
@@ -181,5 +218,17 @@ class Incinerateur
     public function getInspecteur()
     {
         return $this->inspecteur;
+    }
+
+    /**
+     * @param mixed $inspecteur
+     *
+     * @return self
+     */
+    public function setInspecteur($inspecteur)
+    {
+        $this->inspecteur = $inspecteur;
+
+        return $this;
     }
 }

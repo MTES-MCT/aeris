@@ -56,22 +56,11 @@ services:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
             - "@app.services.declaration_importer"
 
-    app.command.LoadCounterReportsCommand:
-        class: App\Command\LoadCounterReportsCommand
-        arguments:
-            - "@App\\Repository\\DeclarationIncinerateurRepository"
-            - "@app.services.declaration_importer"
-
     app.services.declaration_importer:
         class: Aeris\Component\ReportParser\DeclarationImporter
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@vich_uploader.property_mapping_factory"
-
-    app.command.ValidateReportCommand:
-        class: App\Command\ValidateReportCommand
-        arguments:
-            - "@App\\Repository\\DeclarationIncinerateurRepository"
     
     app.command.SendMailCommand:
         class: App\Command\SendMailCommand
@@ -80,11 +69,11 @@ services:
             - "@app.mailservice"
             - "@app.mailfactory"
 
-    app.command.LoadReportsCommand:
-        class: App\Command\LoadReportsCommand
+    app.command.CreateIncinerateurCommand:
+        class: App\Command\CreateIncinerateurCommand
         arguments:
-            - "@App\\Repository\\DeclarationIncinerateurRepository"
-            - "@app.services.declaration_importer"
+            - "@fos_user.user_manager"
+            - "@doctrine.orm.entity_manager"
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
