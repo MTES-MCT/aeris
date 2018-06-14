@@ -1,8 +1,8 @@
 Bonjour,
 
-{{ declaration.incinerateur.name }} vient d'effectuer une déclaration de rejets dans l'air concernant la période {{ declaration.declarationMonth|date("m/Y") }}.
+{{ declaration.incinerateur.name }} vient d'effectuer une déclaration de rejets dans l'air concernant {{ declaration.declarationMonth|monthfr|raw }}.
 
-Vous pouvez la consulter sur https://aeris.beta.gouv.fr
+Une fois connecté à Aeris via {{ url('fos_user_security_login') }}, vous pourrez la consulter à l'adresse suivante : {{ url('route_cr_declaration', {declarationId: declaration.id }) }}.
 
 Bonne journée,
 l'équipe Aeris.

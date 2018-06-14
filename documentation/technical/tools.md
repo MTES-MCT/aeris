@@ -31,7 +31,7 @@ You can build the assets for dev and production with the following parameters:
 
 ```bash
 $ yarn run encore dev --watch
-$ yarn run encore sproduction
+$ yarn run encore production
 ```
 
 ## CSS

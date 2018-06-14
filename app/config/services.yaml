@@ -2,6 +2,11 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    # We need those settings for when we generate URLs from the CLI
+    router.request_context.host: aeris.beta.gouv.fr
+    router.request_context.scheme: https
+    asset.request_context.base_path: %router.request_context.base_url%
+    asset.request_context.secure: true
 
 services:
     # default configuration for services in *this* file
@@ -51,22 +56,11 @@ services:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
             - "@app.services.declaration_importer"
 
-    app.command.LoadCounterReportsCommand:
-        class: App\Command\LoadCounterReportsCommand
-        arguments:
-            - "@App\\Repository\\DeclarationIncinerateurRepository"
-            - "@app.services.declaration_importer"
-
     app.services.declaration_importer:
         class: Aeris\Component\ReportParser\DeclarationImporter
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@vich_uploader.property_mapping_factory"
-
-    app.command.ValidateReportCommand:
-        class: App\Command\ValidateReportCommand
-        arguments:
-            - "@App\\Repository\\DeclarationIncinerateurRepository"
     
     app.command.SendMailCommand:
         class: App\Command\SendMailCommand
@@ -74,6 +68,12 @@ services:
             - "@App\\Repository\\DeclarationIncinerateurRepository"
             - "@app.mailservice"
             - "@app.mailfactory"
+
+    app.command.CreateIncinerateurCommand:
+        class: App\Command\CreateIncinerateurCommand
+        arguments:
+            - "@fos_user.user_manager"
+            - "@doctrine.orm.entity_manager"
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
@@ -100,9 +100,11 @@ services:
         class: Aeris\Component\Mail\MailService
         arguments:
             - "@mailjet.client"
+        public: true
 
     app.mailfactory:
         class: Aeris\Component\Mail\MailFactory
         arguments:
             - "@templating"
             - "@App\\Repository\\DeclarationIncinerateurRepository"
+        public: true

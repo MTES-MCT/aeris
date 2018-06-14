@@ -95,8 +95,7 @@ class OwnerController extends AerisController
             $this->addFlash(
                 'declaration',
                 $declaration->getId()
-            );
-
+            );            
 
             return $response->send();
         }
@@ -144,6 +143,11 @@ class OwnerController extends AerisController
                 'declaration',
                 $declaration->getId()
             );
+
+            $mailFactory = $this->get('app.mailfactory');
+            $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
+            $mailService = $this->get('app.mailservice');
+            $mailService->send($message);
 
             return $response->send();
         }
