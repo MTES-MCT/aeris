@@ -142,6 +142,7 @@ class OwnerController extends AerisController
             if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
                 $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
             }
+
             $this->addFlash(
                 'declaration',
                 $declaration->getId()
