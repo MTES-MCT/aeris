@@ -19,6 +19,9 @@ class DeclarationIncinerateur
     const METHOD_MEAC = 'meac300';
     const METHOD_WEX = 'wex';
 
+    const STATUS_DRAFT = 'draft';
+    const STATUS_VALIDATED = 'validated';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -65,6 +68,13 @@ class DeclarationIncinerateur
      * @var string
      */
     private $methodeDeclaration;
+
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     *
+     * @var string
+     */
+    private $status;
 
     public function __construct(){
         $this->declarationsFonctionnementLigne = new ArrayCollection();
@@ -233,6 +243,26 @@ class DeclarationIncinerateur
     public function setMethodeDeclaration($methodeDeclaration)
     {
         $this->methodeDeclaration = $methodeDeclaration;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
