@@ -36,6 +36,13 @@ route_declaration_mesures_continues:
     path: /declarer-mesures-continues
     defaults: { _controller: 'App\Controller\OwnerController::declarationMesuresContinues' }
 
+route_review_declaration_mesures_continues:
+    path: /verification-declaration-mesures-continues/{declarationId}
+    defaults: { _controller: 'App\Controller\OwnerController::reviewDeclarationMesuresContinues' }
+
+route_end_declaration_mesures_continues:
+    path: /fin-declaration-mesures-continues/{declarationId}
+    defaults: { _controller: 'App\Controller\OwnerController::declarationMesuresContinues' }
 
 route_download_asset:
     path: /telecharger-ressource

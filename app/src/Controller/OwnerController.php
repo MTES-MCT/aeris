@@ -134,24 +134,10 @@ class OwnerController extends AerisController
             $entityManager->persist($declaration);
             $entityManager->flush();
 
-            $response = new RedirectResponse($this->generateUrl('route_history', [
+            $response = new RedirectResponse($this->generateUrl('route_review_declaration_incinerateur', [
                 'incinerateurId' => $mainIncinerateur->getId()
             ]));
             $response->prepare($request);
-
-            if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
-                $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
-            }
-
-            $this->addFlash(
-                'declaration',
-                $declaration->getId()
-            );
-
-            $mailFactory = $this->get('app.mailfactory');
-            $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
-            $mailService = $this->get('app.mailservice');
-            $mailService->send($message);
 
             return $response->send();
         }
@@ -160,6 +146,25 @@ class OwnerController extends AerisController
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView()
         ]);
+    }
+
+    public function reviewDeclarationMesuresContinues(){
+/*
+        if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
+            $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
+        }
+
+        $this->addFlash(
+            'declaration',
+            $declaration->getId()
+        );
+
+        $mailFactory = $this->get('app.mailfactory');
+        $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
+        $mailService = $this->get('app.mailservice');
+        $mailService->send($message);
+
+*/
     }
 
     private function createDeclarationMesuresContinues(){

@@ -79,6 +79,7 @@ class DeclarationIncinerateur
     public function __construct(){
         $this->declarationsFonctionnementLigne = new ArrayCollection();
         $this->methodeDeclaration = self::METHOD_DREAL;
+        $this->status = self::STATUS_DRAFT;
     }
 
     /**

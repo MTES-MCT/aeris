@@ -5,7 +5,7 @@ parameters:
     # We need those settings for when we generate URLs from the CLI
     router.request_context.host: aeris.beta.gouv.fr
     router.request_context.scheme: https
-    asset.request_context.base_path: %router.request_context.base_url%
+    asset.request_context.base_path: "%router.request_context.base_url%"
     asset.request_context.secure: true
 
 services:
