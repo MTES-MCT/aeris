@@ -105,7 +105,7 @@ class OwnerController extends AerisController
             'form' => $form->createView()
         ]);
     }
-    public function declarationMesuresContinues()
+    public function declarationMesuresContinues(Request $request)
     {
         if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
@@ -122,8 +122,6 @@ class OwnerController extends AerisController
         );
         $form = $formBuilderDeclarationIncinerateur->getForm();
 
-        $request = Request::createFromGlobals();
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -134,8 +132,8 @@ class OwnerController extends AerisController
             $entityManager->persist($declaration);
             $entityManager->flush();
 
-            $response = new RedirectResponse($this->generateUrl('route_review_declaration_incinerateur', [
-                'incinerateurId' => $mainIncinerateur->getId()
+            $response = new RedirectResponse($this->generateUrl('route_review_declaration_mesures_continues', [
+                'declarationId' => $declaration->getId()
             ]));
             $response->prepare($request);
 
@@ -148,7 +146,26 @@ class OwnerController extends AerisController
         ]);
     }
 
-    public function reviewDeclarationMesuresContinues(){
+    public function reviewDeclarationMesuresContinues($declarationId){
+        if(!$this->get('app.security.helper')->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declaration = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class)
+            ->find($declarationId);
+
+        if (!$declaration) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
+        return $this->render("owner/review-declaration-mesures-continues.html.twig", [
+            'incinerateur' =>  $mainIncinerateur,
+            'declaration' =>  $declaration,
+        ]);
+
+
 /*
         if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
             $this->get('app.services.declaration_importer')->loadDeclaration($declaration);

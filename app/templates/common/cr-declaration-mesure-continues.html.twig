@@ -1,0 +1,131 @@
+{% macro displayZeroIfNull(v) %}
+    {% if v != null %}
+      {{ v }}
+    {% else%}
+      0
+    {% endif %}
+{% endmacro %}
+
+{% import _self as s %}
+
+
+{% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+body{
+  overflow-x: scroll !important;
+}
+    </style>
+{% endblock %}
+
+  {% if declaration.declarationMonth %}
+    <h2 class="title is-2">Rejets air - {{ declaration.declarationMonth|date('m/Y') }} </h2>
+    Déclaration effectuée le {{ declaration.createdAt|date('d/m/Y') }}
+  {% else %}
+    <h2 class="title is-2">Déclaration du {{ declaration.createdAt|date('d/m/Y') }} </h2>
+  {% endif %}
+
+    <div class="recap-declaration-dechets">
+        {% if declaration.declarationDechets %}
+          <h3 class="title is-3">Quantité de déchets incinérés</h3>
+          <ul>
+              <li>
+              <strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeTotale) }}</strong> T de déchets incinérés, dont:
+
+              <ul>
+                  <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsDasri) }}</strong> T DASRI</li>
+                  <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsDangereux ) }}</strong> T de déchets dangereux</li>
+                  <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereux) }}</strong> T de déchets non dangereux, dont
+                      <ul>
+                          <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxMenagers) }}</strong> T de déchets ménagers
+                          </li>
+                          <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxRefusTri) }}</strong> T de refus de tri
+                          </li>
+                          <li><strong>{{ s.displayZeroIfNull(declaration.declarationDechets.qtiteIncinereeDechetsNonDangereuxDae) }}</strong> T de déchets DAE non dangereux</li>
+                      </ul>
+                  </li>
+              </ul>
+              </li>
+          </ul>
+        {% endif %}
+
+
+        {% if not declaration.declarationsFonctionnementLigne is empty %}
+          {% for declarationLigne in declaration.declarationsFonctionnementLigne %}
+          <h3 class="title is-3">Ligne n° {{ declarationLigne.ligne.numero }}</h3>
+          
+              <h4 class="title is-4">Déclaration générale</h4>
+
+              <table class="table" >
+                <tbody>
+                  {#<tr>
+                    <td>Nombre d'heures de fonctionnement théoriques</td>
+                    <td>{{ declarationLigne.nbHeuresFonctionnementTh }}</td>
+                  </tr>#}
+                  <tr>
+                    <td>Nombre d'heures de fonctionnement réelles</td>
+                    <td>{{ declarationLigne.nbHeuresFonctionnementReel }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4 class="title is-4">Mesures continues</h3>
+              
+              <table class="table">
+                <tbody>
+                  {% if declarationLigne.declarationCompteursFilename != null %}
+                  <tr>
+                    <td>Compteurs</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationCompteursFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationFluxFilename != null %}
+                  <tr>
+                    <td>Flux</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationFluxFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                  {% if declarationLigne.declarationConcentrationsFilename != null %}
+                  <tr>
+                    <td>Concentrations et températures</td>
+                    <td><a href="{{ vich_uploader_asset(declarationLigne, 'declarationConcentrationsFile') }}" alt="" >Télécharger</a></td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+
+              {#
+              {% if reports[declarationLigne.ligne.numero] != null %}
+                
+                <table class="table">
+                <thead>
+                <tr>
+                  <th>Jour</th>
+                  {% for k,v in reports[declarationLigne.ligne.numero].dailyData[1] %}
+                  <th>{{ k }}</th>
+                  {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                  
+                {% for day,report in reports[declarationLigne.ligne.numero].dailyData %}
+                  <tr>
+                    <td>{{ day }}</td>
+                    {% for v in report %}
+                    <td>{{ v }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+
+                </tbody>
+                </table>
+              {% endif %}
+              #}
+
+          {% endfor %}
+        {% endif %}
+    </div>
