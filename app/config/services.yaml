@@ -61,6 +61,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@vich_uploader.property_mapping_factory"
+        public: true
     
     app.command.SendMailCommand:
         class: App\Command\SendMailCommand

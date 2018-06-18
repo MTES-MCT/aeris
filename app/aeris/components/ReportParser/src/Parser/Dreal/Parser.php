@@ -7,8 +7,14 @@ use Aeris\Component\ReportParser\DataPoint;
 
 class Parser extends FileParser {
     public function parseFile($filename) {
-        $spreadsheet = $this->loadSpreadsheet($filename);
-
+        try {
+            $spreadsheet = $this->loadSpreadsheet($filename);
+        }
+        catch(\Exception $e){
+            // We did not manage to read the file
+            return [];
+        }
+ 
         $dates = $this->getDates($spreadsheet);
         $dataPoints = [];
         foreach ($this->fields as $currentField) {

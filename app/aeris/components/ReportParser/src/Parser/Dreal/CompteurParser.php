@@ -31,7 +31,13 @@ class CompteurParser extends FileParser {
 
     public function parseFile($filename) {
         $datapoints = [];
-        $spreadsheet = $this->loadSpreadsheet($filename);
+        try {
+            $spreadsheet = $this->loadSpreadsheet($filename);
+        }
+        catch(\Exception $e){
+            // We did not manage to read the file
+            return [];
+        }
         
         for($col = 0; $col < count($this->cols); $col += 1) {
             for($row = 0; $row < count($this->rows); $row += 1) {

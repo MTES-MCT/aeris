@@ -138,7 +138,11 @@ class OwnerController extends AerisController
                 'incinerateurId' => $mainIncinerateur->getId()
             ]));
             $response->prepare($request);
-            $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
+
+            if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
+                $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
+            }
+
             $this->addFlash(
                 'declaration',
                 $declaration->getId()
