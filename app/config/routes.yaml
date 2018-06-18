@@ -13,7 +13,7 @@ route_history:
 
 route_cr_declaration:
     path: /historique/declaration-mesures-continues/{declarationId}
-    defaults: { _controller: 'App\Controller\IncinerateurController::cr' }
+    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::compteRendu' }
 
 route_cr_declaration_dioxine:
     path: /historique/declaration-dioxine/{declarationId}
@@ -34,15 +34,19 @@ route_declaration_dioxines:
 
 route_declaration_mesures_continues:
     path: /declarer-mesures-continues
-    defaults: { _controller: 'App\Controller\OwnerController::declarationMesuresContinues' }
+    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::declare' }
 
 route_review_declaration_mesures_continues:
     path: /verification-declaration-mesures-continues/{declarationId}
-    defaults: { _controller: 'App\Controller\OwnerController::reviewDeclarationMesuresContinues' }
+    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::review' }
 
-route_end_declaration_mesures_continues:
+route_edit_declaration_mesures_continues:
+    path: /modification-declaration-mesures-continues/{declarationId}
+    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::modify' }
+
+route_validate_declaration_mesures_continues:
     path: /fin-declaration-mesures-continues/{declarationId}
-    defaults: { _controller: 'App\Controller\OwnerController::declarationMesuresContinues' }
+    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::validate' }
 
 route_download_asset:
     path: /telecharger-ressource

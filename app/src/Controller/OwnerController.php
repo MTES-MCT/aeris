@@ -49,7 +49,7 @@ class OwnerController extends AerisController
             "Le fichier $asset n'est pas disponible"
         );
     }
-
+    
     public function declarationChoice(){
         if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
@@ -104,98 +104,6 @@ class OwnerController extends AerisController
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView()
         ]);
-    }
-    public function declarationMesuresContinues(Request $request)
-    {
-        if(!$this->get('app.security.helper')->isOwner()){
-            return $this->redirect($this->generateUrl("route_index"));
-        }
-        // This method (especially, others are no better) is terrible and should be split ASAP
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationIncinerateur = $this->createDeclarationMesuresContinues();
-
-        $formFactory = $this->get('form.factory');
-
-        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(
-            DeclarationIncinerateurType::class,
-            $declarationIncinerateur
-        );
-        $form = $formBuilderDeclarationIncinerateur->getForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $declaration = $form->getData();
-
-            $declaration->setIncinerateur($mainIncinerateur);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($declaration);
-            $entityManager->flush();
-
-            $response = new RedirectResponse($this->generateUrl('route_review_declaration_mesures_continues', [
-                'declarationId' => $declaration->getId()
-            ]));
-            $response->prepare($request);
-
-            return $response->send();
-        }
-
-        return $this->render("owner/declaration-mesures-continues.html.twig", [
-            'mainIncinerateur' => $mainIncinerateur,
-            'form' => $form->createView()
-        ]);
-    }
-
-    public function reviewDeclarationMesuresContinues($declarationId){
-        if(!$this->get('app.security.helper')->isOwner()){
-            return $this->redirect($this->generateUrl("route_index"));
-        }
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
-            ->find($declarationId);
-
-        if (!$declaration) {
-            throw $this->createNotFoundException(
-                "Pas de declaration pour l' id ".$declarationId
-            );
-        }
-        return $this->render("owner/review-declaration-mesures-continues.html.twig", [
-            'incinerateur' =>  $mainIncinerateur,
-            'declaration' =>  $declaration,
-        ]);
-
-
-/*
-        if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
-            $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
-        }
-
-        $this->addFlash(
-            'declaration',
-            $declaration->getId()
-        );
-
-        $mailFactory = $this->get('app.mailfactory');
-        $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
-        $mailService = $this->get('app.mailservice');
-        $mailService->send($message);
-
-*/
-    }
-
-    private function createDeclarationMesuresContinues(){
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationIncinerateur = new DeclarationIncinerateur();
-
-        foreach($mainIncinerateur->getLignes() as $currLine)
-        {
-            $fonctionnementLigne = new DeclarationFonctionnementLigne();
-            $fonctionnementLigne->setLigne($currLine);
-            $declarationIncinerateur->addDeclarationFonctionnementLigne($fonctionnementLigne);
-        }
-
-        return $declarationIncinerateur;
     }
 
     private function createDeclarationDioxine(){

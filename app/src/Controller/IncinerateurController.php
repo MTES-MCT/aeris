@@ -32,37 +32,6 @@ class IncinerateurController extends AerisController
         ]);
     }
 
-    public function cr($declarationId)
-    {
-        $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
-            ->find($declarationId);
-
-        if (!$declaration) {
-            throw $this->createNotFoundException(
-                "Pas de declaration pour l' id ".$declarationId
-            );
-        }
-        if(!$this->get('app.security.helper')->canAccessIncinerateur($declaration->getIncinerateur())) {
-            return $this->redirect($this->generateUrl("route_index"));
-        }
-
-        $rules = new AppliableRules();
-
-        $reports = [];
-        foreach($declaration->getDeclarationsFonctionnementLigne() as $declarationLigne) {
-            $report = new MonthlyReport($declaration->getDeclarationMonth(), $rules);
-            $report->fillWithMeasures($declarationLigne->getMesures());
-        
-            $reports[$declarationLigne->getLigne()->getNumero()] = $report;
-        }
-
-        return $this->render("user/compte-rendu-declaration.html.twig", [
-            'declaration' => $declaration,
-            'reports' => $reports,
-        ]);
-    }
-
     public function crDioxine($declarationId)
     {
         return $this->generateCRIfAllowed(
