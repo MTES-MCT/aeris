@@ -92,6 +92,9 @@ class DashboardController extends AerisController
         $incinerateur,
         $ligneId
     ){
+        $declarationRepository = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class);
+
         $dioxines = [];
         $listOfMonths = $this->createListOfMonths();
         $output = [
@@ -144,7 +147,11 @@ class DashboardController extends AerisController
             'ligneId' => $ligneId,
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,
-            'lineReport' => new LineReport($incinerateur, $ligneId),
+            'lineReport' => new LineReport(
+                $incinerateur,
+                $ligneId,
+                $declarationRepository
+            ),
             'expectedGraphs' => LineReport::graphMapping
         ];
     }

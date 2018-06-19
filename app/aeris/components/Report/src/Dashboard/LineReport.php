@@ -6,6 +6,8 @@ use Aeris\Component\Report\GraphMetadata;
 use Aeris\Component\Report\GraphData;
 use Aeris\Component\Report\Table\TableCompteursAnnuel;
 use Aeris\Component\Report\Table\TableDioxinesCompteurs60;
+use App\Entity\Incinerateur;
+use App\Repository\DeclarationIncinerateurRepository;
 
 
 class LineReport {
@@ -25,12 +27,21 @@ class LineReport {
         'nh3_c_24h_moy'
     ];
 
-    public function __construct($incinerateur, $ligneId) {
+    public function __construct(
+        Incinerateur $incinerateur,
+        $ligneId,
+        DeclarationIncinerateurRepository $declarationRepository
+    ) {
+        $this->declarationRepository = $declarationRepository;
         $this->graphs = [];
         $measuresByLine = [];
         $this->configureMetadata();
         $this->buildGraphs($incinerateur);        
-        $this->tableCompteurs = new TableCompteursAnnuel($incinerateur, $ligneId);
+        $this->tableCompteurs = new TableCompteursAnnuel(
+            $incinerateur,
+            $ligneId,
+            $this->declarationRepository
+        );
         $this->tableDioxinesCompteurs60 = new TableDioxinesCompteurs60($incinerateur, $ligneId);
     }
 
@@ -42,7 +53,10 @@ class LineReport {
         }
 
         // Preparation of the data
-        foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
+        $declarations = $this->declarationRepository
+            ->findValidatedDeclarations($incinerateur);
+
+        foreach($declarations as $currDeclaration) {
             foreach ($currDeclaration->getDeclarationsFonctionnementLigne() as $currDeclarationFonctionnement) {
                 $offset = (string)$currDeclarationFonctionnement->getLigne()->getNumero();
                 $measuresByLine[$offset] = array_merge(

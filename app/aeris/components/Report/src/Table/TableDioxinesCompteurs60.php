@@ -3,12 +3,15 @@
 namespace Aeris\Component\Report\Table;
 
 use Aeris\Component\Report\DateUtils;
+use App\Entity\Incinerateur;
+use App\Repository\DeclarationIncinerateurRepository;
 
 class TableDioxinesCompteurs60 {
     public $dioxinesDernierMois;
     public $nbDepassementDioxinesAnnee;
 
-    public function __construct($incinerateur, $ligneId) {
+    public function __construct(
+        Incinerateur $incinerateur, $ligneId) {
         $this->dioxinesDernierMois = 0;
         $this->nbDepassementDioxinesAnnee = 0;
         $this->analyzeDeclarations($incinerateur, $ligneId);

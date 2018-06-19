@@ -2,6 +2,8 @@
 
 namespace Aeris\Component\Report\Table;
 use Aeris\Component\Report\AppliableRules;
+use App\Entity\Incinerateur;
+use App\Repository\DeclarationIncinerateurRepository;
 
 class TableCompteursAnnuel {
     public $measures;
@@ -9,7 +11,12 @@ class TableCompteursAnnuel {
     public $lignes;
     public $colonnes;
 
-    public function __construct($incinerateur, $ligneId) {
+    public function __construct(
+        Incinerateur $incinerateur,
+        $ligneId,
+        DeclarationIncinerateurRepository $declarationRepository
+    ) {
+        $this->declarationRepository = $declarationRepository;
         $this->setup();
         $this->analyzeDeclarations($incinerateur, $ligneId);
     }
@@ -29,7 +36,10 @@ class TableCompteursAnnuel {
     }
 
     private function analyzeDeclarations($incinerateur, $ligneId) {
-        foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
+        $declarations = $this->declarationRepository
+            ->findValidatedDeclarations($incinerateur);
+
+        foreach($declarations as $currDeclaration) {
             $dateDeclaration = $currDeclaration->getDeclarationMonth();
             
             foreach($currDeclaration->getDeclarationsFonctionnementLigne() as $declLigne) {
