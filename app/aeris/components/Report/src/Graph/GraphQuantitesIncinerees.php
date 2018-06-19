@@ -2,14 +2,23 @@
 
 namespace Aeris\Component\Report\Graph;
 
+use App\Entity\Incinerateur;
+use App\Repository\DeclarationIncinerateurRepository;
+
 class GraphQuantitesIncinerees {
     public $months;
     public $data;
     public $measures;
 
     private $firstDate;
+    
+    private $declarationRepository;
 
-    public function __construct($incinerateur) {
+    public function __construct(
+        Incinerateur $incinerateur,
+        DeclarationIncinerateurRepository $declarationRepository
+    ) {
+        $this->declarationRepository = $declarationRepository;
         // We want to display 6 months of data
         $this->firstDate = new \DateTime('-5 months');
         $this->firstDate->modify('first day of this month');
@@ -42,7 +51,10 @@ class GraphQuantitesIncinerees {
 
     private function prepareData($incinerateur) {
         $now = new \DateTime;
-        foreach($incinerateur->getDeclarationsIncinerateur() as $currDeclaration) {
+        $declarations = $this->declarationRepository
+            ->findValidatedDeclarations($incinerateur);
+
+        foreach($declarations as $currDeclaration) {
             $dateDeclaration = $currDeclaration->getDeclarationMonth();
             if($dateDeclaration >= $this->firstDate && $dateDeclaration < $now) {
                 $dechets = $currDeclaration->getDeclarationDechets();

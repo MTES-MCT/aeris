@@ -24,8 +24,14 @@ class GeneralReport {
         $this->declarationRepository = $declarationRepository;
         $this->dateDebutAnnee = DateUtils::getFirstOfJanuaryThisYear();
 
-        $this->graphQtitesIncinerees = new GraphQuantitesIncinerees($incinerateur);
-        $this->graphHeuresFonctionnement = new GraphHeuresFonctionnement($incinerateur);
+        $this->graphQtitesIncinerees = new GraphQuantitesIncinerees(
+                $incinerateur,
+                $this->declarationRepository
+            );
+        $this->graphHeuresFonctionnement = new GraphHeuresFonctionnement(
+            $incinerateur,
+            $this->declarationRepository
+        );
         $this->extraireCumulDepuisDebutAnnee($incinerateur);
     }
 
