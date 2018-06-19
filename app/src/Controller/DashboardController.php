@@ -34,8 +34,11 @@ class DashboardController extends AerisController
 
     public function dashboard_incinerateur(Request $request, $incinerateurId)
     {
-        $incinerateur = $this->getDoctrine()
-            ->getRepository(Incinerateur::class)
+        $incinerateurRepository = $this->getDoctrine()
+            ->getRepository(Incinerateur::class);
+        $declarationRepository = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class);
+        $incinerateur = $incinerateurRepository
             ->find($incinerateurId);
 
         if (!$incinerateur) {
@@ -47,7 +50,10 @@ class DashboardController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        $dashboardData = new GeneralReport($incinerateur);
+        $dashboardData = new GeneralReport(
+            $declarationRepository,
+            $incinerateur
+        );
 
         return $this->render("dashboard/dashboard-incinerateur.html.twig", [
             'incinerateur' =>  $incinerateur,

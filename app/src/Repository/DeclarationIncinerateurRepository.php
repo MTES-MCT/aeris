@@ -18,6 +18,20 @@ class DeclarationIncinerateurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, DeclarationIncinerateur::class);
     }
+
+    public function findValidatedDeclarations($incinerateur)
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.incinerateur = :incinerateur')
+            ->andWhere('d.status = :status')
+            ->setParameter('incinerateur', $incinerateur)
+            ->setParameter('status', DeclarationIncinerateur::STATUS_VALIDATED)
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findBySomething($value)
     {

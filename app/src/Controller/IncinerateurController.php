@@ -7,9 +7,6 @@ use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationIncinerateur;
 use App\Entity\Declaration\DeclarationDioxine;
 
-use Aeris\Component\Report\AppliableRules;
-use Aeris\Component\Report\MonthlyReport;
-
 class IncinerateurController extends AerisController
 {
     public function historique($incinerateurId)
@@ -26,9 +23,13 @@ class IncinerateurController extends AerisController
         if(!$this->get('app.security.helper')->canAccessIncinerateur($incinerateur)) {
             return $this->redirect($this->generateUrl("route_index"));
         }
+        $declarations = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class)
+            ->findValidatedDeclarations($incinerateur);
 
         return $this->render("user/historique.html.twig", [
-            'incinerateur' =>  $incinerateur
+            'incinerateur' =>  $incinerateur,
+            'declarations' =>  $declarations,
         ]);
     }
 

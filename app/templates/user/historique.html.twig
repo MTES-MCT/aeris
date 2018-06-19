@@ -24,7 +24,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
 
       <h3 class="title is-3">Mesures continues</h3>
 
-      {% if not incinerateur.declarationsIncinerateur is empty %}
+      {% if not declarations is empty %}
       <table class="table">
           <thead>
             <tr>
@@ -35,7 +35,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
             </tr>
           </thead>
           <tbody>
-            {% for declaration in incinerateur.declarationsIncinerateur|sortbyfield('createdAt')|reverse %}
+            {% for declaration in declarations %}
             <tr>
               <td>
                 <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">{{ declaration.declarationMonth|monthfr|raw }} </a>
