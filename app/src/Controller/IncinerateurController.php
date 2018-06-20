@@ -26,42 +26,14 @@ class IncinerateurController extends AerisController
         $declarations = $this->getDoctrine()
             ->getRepository(DeclarationIncinerateur::class)
             ->findValidatedDeclarations($incinerateur);
+        $declarationsDioxines = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class)
+            ->findValidatedDeclarations($incinerateur);
 
         return $this->render("user/historique.html.twig", [
             'incinerateur' =>  $incinerateur,
             'declarations' =>  $declarations,
-        ]);
-    }
-
-    public function crDioxine($declarationId)
-    {
-        return $this->generateCRIfAllowed(
-            $declarationId,
-            DeclarationDioxine::class,
-            "user/compte-rendu-declaration-dioxine.html.twig"
-        );
-    }
-
-    private function generateCRIfAllowed(
-        $declarationId,
-        $type,
-        $template)
-    {
-        $declaration = $this->getDoctrine()
-            ->getRepository($type)
-            ->find($declarationId);
-
-        if (!$declaration) {
-            throw $this->createNotFoundException(
-                "Pas de declaration pour l' id ".$declarationId
-            );
-        }
-        if(!$this->get('app.security.helper')->canAccessIncinerateur($declaration->getIncinerateur())) {
-            return $this->redirect($this->generateUrl("route_index"));
-        }
-
-        return $this->render($template, [
-            'declaration' => $declaration
+            'declarationsDioxines' =>  $declarationsDioxines,
         ]);
     }
 } 

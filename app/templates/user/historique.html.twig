@@ -61,7 +61,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
       {% endif %}
 
       <h3 class="title is-3">Dioxines</h3>
-      {% if not incinerateur.declarationsDioxine is empty %}
+      {% if not declarationsDioxines is empty %}
       <table class="table">
           <thead>
             <tr>
@@ -72,7 +72,7 @@ Votre déclaration de dioxines et furannes a bien été prise en compte. Vous po
             </tr>
           </thead>
           <tbody>
-            {% for declaration in incinerateur.declarationsDioxine  |sortbyfield('createdAt')|reverse %}
+            {% for declaration in declarationsDioxines %}
             <tr>
               <td>
                 <a href="{{ path('route_cr_declaration_dioxine', {declarationId: declaration.id}) }}">

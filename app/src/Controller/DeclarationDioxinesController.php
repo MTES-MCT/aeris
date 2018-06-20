@@ -26,21 +26,14 @@ class DeclarationDioxinesController extends AerisController
         if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
+        $request = Request::createFromGlobals();
         // This method (especially, others are no better) is terrible and should be split ASAP
         $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationIncinerateur = $this->createDeclarationDioxine();
-
-        $formFactory = $this->get('form.factory');
-
-        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(
-            DeclarationDioxineType::class,
-            $declarationIncinerateur
+        $declarationDioxines = $this->createDeclarationDioxine();
+        $form = $this->createDeclarationForm(
+            $declarationDioxines,
+            $request
         );
-        $form = $formBuilderDeclarationIncinerateur->getForm();
-
-        $request = Request::createFromGlobals();
-
-        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $declaration = $form->getData();
@@ -50,58 +43,143 @@ class DeclarationDioxinesController extends AerisController
             $entityManager->persist($declaration);
             $entityManager->flush();
 
-            $response = new RedirectResponse($this->generateUrl('route_history', [
-                'incinerateurId' => $mainIncinerateur->getId()
+            $response = new RedirectResponse($this->generateUrl('route_review_declaration_dioxines', [
+                'declarationId' => $declaration->getId()
             ]));
             $response->prepare($request);
-
-            $this->addFlash(
-                'declaration',
-                $declaration->getId()
-            );            
 
             return $response->send();
         }
 
-        return $this->render("owner/declaration-dioxines.html.twig", [
+        return $this->render("dioxines/declaration.html.twig", [
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView()
         ]);
     }
 
-    private function createDeclarationDioxine(){
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationDioxines = new DeclarationDioxine();
+    public function modify(Request $request){
+        $declarationId = $request->get('declarationId');
 
-        foreach($mainIncinerateur->getLignes() as $currLine)
-        {
-            $mesureDioxine = new MesureDioxine();
-            $mesureDioxine->setLigne($currLine);
-            $declarationDioxines->addMesuresDioxines($mesureDioxine);
+        if(!$this->get('app.security.helper')->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationDioxines = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class)
+            ->find($declarationId);
+
+        if (!$declarationDioxines) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
+        $form = $this->createDeclarationForm(
+            $declarationDioxines,
+            $request
+        );
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $declaration = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($declaration);
+            $entityManager->flush();
+
+            $response = new RedirectResponse($this->generateUrl('route_review_declaration_dioxines', [
+                'declarationId' => $declaration->getId()
+            ]));
+            $response->prepare($request);
+
+            return $response->send();
         }
 
-        return $declarationDioxines;
+        return $this->render("dioxines/declaration.html.twig", [
+            'mainIncinerateur' => $mainIncinerateur,
+            'form' => $form->createView()
+        ]);
     }
 
+    private function createDeclarationForm($declaration, $request){
+        $formFactory = $this->get('form.factory');
 
-    public function modify(Request $request){
-        
+        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(
+            DeclarationDioxineType::class,
+            $declaration
+        );
+        $form = $formBuilderDeclarationIncinerateur->getForm();
+
+        $form->handleRequest($request);
+        return $form;
     }
-
 
     public function review($declarationId){
-        
+        if(!$this->get('app.security.helper')->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declaration = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class)
+            ->find($declarationId);
+
+        if (!$declaration) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
+
+        return $this->render("dioxines/review.html.twig", [
+            'incinerateur' =>  $mainIncinerateur,
+            'declaration' =>  $declaration,
+        ]);
     }
+
 
 
     public function validate($declarationId){
+        if(!$this->get('app.security.helper')->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declaration = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class)
+            ->find($declarationId);
+
+        if (!$declaration) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
         
+        /*
+        $mailFactory = $this->get('app.mailfactory');
+        $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
+        $mailService = $this->get('app.mailservice');
+        $mailService->send($message);
+        */
+
+        return $this->render("dioxines/validate.html.twig", [
+            'incinerateur' =>  $mainIncinerateur,
+            'declaration' =>  $declaration,
+        ]);
     }
 
     public function compteRendu($declarationId)
     {
+        return $this->generateCRIfAllowed(
+            $declarationId,
+            DeclarationDioxine::class,
+            "dioxines/compte-rendu-declaration-dioxine.html.twig"
+        );
+    }
+
+    private function generateCRIfAllowed(
+        $declarationId,
+        $type,
+        $template)
+    {
         $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
+            ->getRepository($type)
             ->find($declarationId);
 
         if (!$declaration) {
@@ -113,19 +191,21 @@ class DeclarationDioxinesController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        $rules = new AppliableRules();
+        return $this->render($template, [
+            'declaration' => $declaration
+        ]);
+    }
 
-        $reports = [];
-        foreach($declaration->getDeclarationsFonctionnementLigne() as $declarationLigne) {
-            $report = new MonthlyReport($declaration->getDeclarationMonth(), $rules);
-            $report->fillWithMeasures($declarationLigne->getMesures());
-        
-            $reports[$declarationLigne->getLigne()->getNumero()] = $report;
+    private function createDeclarationDioxine(){
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationDioxines = new DeclarationDioxine();
+
+        foreach($mainIncinerateur->getLignes() as $currLine) {
+            $mesureDioxine = new MesureDioxine();
+            $mesureDioxine->setLigne($currLine);
+            $declarationDioxines->addMesuresDioxines($mesureDioxine);
         }
 
-        return $this->render("user/compte-rendu-declaration.html.twig", [
-            'declaration' => $declaration,
-            'reports' => $reports,
-        ]);
+        return $declarationDioxines;
     }
 } 

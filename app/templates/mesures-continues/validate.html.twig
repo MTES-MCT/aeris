@@ -1,0 +1,23 @@
+{% extends "common/base_inside.html.twig" %}
+
+{% block title %}
+Aeris - Fin de déclaration de mesures continues
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container" >   
+    {% include 'common/declaration-timeline.html.twig' with {step:3} %}
+    <p>Merci d'avoir effectué votre déclaration de mesures continues. Voici ce qui se passe :
+    </p>
+
+    <ul>
+      <li>Vous pouvez dès à présent la consulter <a href="{{ path('route_cr_declaration', {declarationId: declaration.id}) }}">ici</a>.</li>
+      <li>Elle apparait dans votre <a href="{{ path('route_history', {incinerateurId: app.user.incinerateurs[0].id }) }}"></i>historique de déclarations</a>.</li>
+      <li>Les chiffres fournis alimentent votre tableau de bord, partagé avec l'inspecteur qui effectue le suivi du site</li>
+      <li>L'inspecteur va recevoir sous peu une notification l'invitant à consulter votre déclaration.</li>
+    </ul>
+
+    </div>
+  </section>
+{% endblock %}

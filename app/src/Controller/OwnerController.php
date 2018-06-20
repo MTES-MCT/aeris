@@ -55,6 +55,6 @@ class OwnerController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        return $this->render("owner/declaration.html.twig", []);
+        return $this->render("owner/choix-type-declaration.html.twig", []);
     }
 } 

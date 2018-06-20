@@ -50,7 +50,7 @@ class DeclarationMesuresContinuesController extends AerisController
             return $response->send();
         }
 
-        return $this->render("owner/declaration-mesures-continues.html.twig", [
+        return $this->render("mesures-continues/declaration.html.twig", [
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView()
         ]);
@@ -96,7 +96,7 @@ class DeclarationMesuresContinuesController extends AerisController
             return $response->send();
         }
 
-        return $this->render("owner/declaration-mesures-continues.html.twig", [
+        return $this->render("mesures-continues/declaration.html.twig", [
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView()
         ]);
@@ -133,7 +133,7 @@ class DeclarationMesuresContinuesController extends AerisController
             );
         }
 
-        return $this->render("owner/review-declaration-mesures-continues.html.twig", [
+        return $this->render("mesures-continues/review.html.twig", [
             'incinerateur' =>  $mainIncinerateur,
             'declaration' =>  $declaration,
         ]);
@@ -171,7 +171,7 @@ class DeclarationMesuresContinuesController extends AerisController
         $mailService->send($message);
         */
 
-        return $this->render("owner/validate-declaration-mesures-continues.html.twig", [
+        return $this->render("mesures-continues/validate.html.twig", [
             'incinerateur' =>  $mainIncinerateur,
             'declaration' =>  $declaration,
         ]);
@@ -216,7 +216,7 @@ class DeclarationMesuresContinuesController extends AerisController
             $reports[$declarationLigne->getLigne()->getNumero()] = $report;
         }
 
-        return $this->render("user/compte-rendu-declaration.html.twig", [
+        return $this->render("mesures-continues/compte-rendu.html.twig", [
             'declaration' => $declaration,
             'reports' => $reports,
         ]);

@@ -1,0 +1,26 @@
+{% extends "common/base_inside.html.twig" %}
+{% block title %}
+Aeris - Compte rendu de déclaration de dioxines
+{% endblock %}
+
+
+{% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+    </style>
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container">
+      <a class="button is-primary button-goback" href="{{ path('route_history', {incinerateurId: declaration.incinerateur.id }) }}">Retour à l'historique</a>
+    
+    {% include 'dioxines/_compte-rendu.html.twig' with {'declaration' : declaration} %}
+
+    </div>
+  </section>
+{% endblock %}

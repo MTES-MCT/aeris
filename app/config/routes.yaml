@@ -11,14 +11,6 @@ route_history:
     path: /historique/{incinerateurId}
     defaults: { _controller: 'App\Controller\IncinerateurController::historique' }
 
-route_cr_declaration:
-    path: /historique/declaration-mesures-continues/{declarationId}
-    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::compteRendu' }
-
-route_cr_declaration_dioxine:
-    path: /historique/declaration-dioxine/{declarationId}
-    defaults: { _controller: 'App\Controller\DeclarationDioxinesController::crDioxine' }
-
 ### Owner
 route_download_asset:
     path: /telecharger-ressource
@@ -45,6 +37,9 @@ route_validate_declaration_dioxines:
     path: /fin-declaration-dioxines/{declarationId}
     defaults: { _controller: 'App\Controller\DeclarationDioxinesController::validate' }
 
+route_cr_declaration_dioxine:
+    path: /historique/declaration-dioxine/{declarationId}
+    defaults: { _controller: 'App\Controller\DeclarationDioxinesController::compteRendu' }
 
 # Mesures continues
 route_declaration_mesures_continues:
@@ -63,6 +58,9 @@ route_validate_declaration_mesures_continues:
     path: /fin-declaration-mesures-continues/{declarationId}
     defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::validate' }
 
+route_cr_declaration:
+    path: /historique/declaration-mesures-continues/{declarationId}
+    defaults: { _controller: 'App\Controller\DeclarationMesuresContinuesController::compteRendu' }
 
 ### Inspecteur
 route_liste_incinerateurs:
