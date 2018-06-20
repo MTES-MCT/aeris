@@ -5,7 +5,10 @@ Aeris - Déclaration mensuelle de mesures continues
 
 {% block body %}
   <section class="section">
+
     <div class="container declaration-mesures-continues">
+        {% include 'common/declaration-timeline.html.twig' with {step: 1} %}
+        
         <h2 class="title is-2">Déclaration mensuelle de mesures continues</h2>
         {{ form_start(form, {'attr': {'class':'dropzone', 'id': "declaration-upload"}}) }}
 
@@ -46,9 +49,7 @@ Aeris - Déclaration mensuelle de mesures continues
             </ul>
         </div>
 
-
         <h3 class="title is-3">Declaration de mesures continues</h3>
-
 
         <div class="upload-info">
           <p>

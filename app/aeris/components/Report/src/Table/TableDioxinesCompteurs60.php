@@ -3,19 +3,32 @@
 namespace Aeris\Component\Report\Table;
 
 use Aeris\Component\Report\DateUtils;
+use App\Entity\Incinerateur;
+use App\Repository\DeclarationIncinerateurRepository;
+use App\Repository\DeclarationDioxineRepository;
 
 class TableDioxinesCompteurs60 {
     public $dioxinesDernierMois;
     public $nbDepassementDioxinesAnnee;
 
-    public function __construct($incinerateur, $ligneId) {
+    private $declarationDioxineRepository;
+
+    public function __construct(
+        Incinerateur $incinerateur,
+        $ligneId,
+        DeclarationDioxineRepository $repository
+    ) {
         $this->dioxinesDernierMois = 0;
         $this->nbDepassementDioxinesAnnee = 0;
+        $this->declarationDioxineRepository = $repository;
         $this->analyzeDeclarations($incinerateur, $ligneId);
     }
 
     private function analyzeDeclarations($incinerateur, $ligneId) {
-        foreach($incinerateur->getDeclarationsDioxine() as $currDeclaration) {
+        $declarations = $this->declarationDioxineRepository
+            ->findValidatedDeclarations($incinerateur);
+
+        foreach($declarations as $currDeclaration) {
             $this->extractDioxinesValues($currDeclaration->getMesuresDioxine(), $ligneId);
         }
     }

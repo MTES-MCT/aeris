@@ -1,0 +1,42 @@
+{% extends "common/base_inside.html.twig" %}
+
+{% macro displayZeroIfNull(v) %}
+    {% if v != null %}
+      {{ v }}
+    {% else%}
+      0
+    {% endif %}
+{% endmacro %}
+
+{% import _self as s %}
+
+{% block title %}
+Aeris - Relecture de déclaration de rejets dans l'air
+{% endblock %}
+
+{% block stylesheets %}
+<style type="text/css">
+
+.recap-declaration-dechets ul {
+    list-style: square;
+    padding-left: 2em;
+}
+body{
+  overflow-x: scroll !important;
+}
+    </style>
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container" >   
+    {% include 'common/declaration-timeline.html.twig' with {step:2} %}
+
+    {% include 'mesures-continues/_cr-declaration-mesure-continues.html.twig' with {declaration: declaration } %}
+
+      <a class="button is-warning" href="{{ path('route_edit_declaration_mesures_continues', {declarationId: declaration.id }) }}">Modifier cette déclaration</a>
+      <a class="button is-primary" href="{{ path('route_validate_declaration_mesures_continues', {declarationId: declaration.id }) }}">Terminer et envoyer cette déclaration à l'inspecteur</a>
+
+    </div>
+  </section>
+{% endblock %}

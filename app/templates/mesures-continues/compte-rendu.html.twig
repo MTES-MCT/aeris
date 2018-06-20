@@ -1,0 +1,15 @@
+{% extends "common/base_inside.html.twig" %}
+
+{% block title %}
+Aeris - Compte rendu de déclaration de rejets dans l'air
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container" >
+      <a class="button is-primary button-goback" href="{{ path('route_history', {incinerateurId: declaration.incinerateur.id }) }}">Retour à l'historique</a>
+    {% include 'mesures-continues/_cr-declaration-mesure-continues.html.twig' with {declaration: declaration } %}
+
+    </div>
+  </section>
+{% endblock %}

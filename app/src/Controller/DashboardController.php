@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationDioxine;
 use App\Entity\Declaration\MesureDioxine;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Aeris\Component\Report\Dashboard\GeneralReport;
@@ -34,8 +35,11 @@ class DashboardController extends AerisController
 
     public function dashboard_incinerateur(Request $request, $incinerateurId)
     {
-        $incinerateur = $this->getDoctrine()
-            ->getRepository(Incinerateur::class)
+        $incinerateurRepository = $this->getDoctrine()
+            ->getRepository(Incinerateur::class);
+        $declarationRepository = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class);
+        $incinerateur = $incinerateurRepository
             ->find($incinerateurId);
 
         if (!$incinerateur) {
@@ -47,7 +51,10 @@ class DashboardController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        $dashboardData = new GeneralReport($incinerateur);
+        $dashboardData = new GeneralReport(
+            $declarationRepository,
+            $incinerateur
+        );
 
         return $this->render("dashboard/dashboard-incinerateur.html.twig", [
             'incinerateur' =>  $incinerateur,
@@ -86,6 +93,10 @@ class DashboardController extends AerisController
         $incinerateur,
         $ligneId
     ){
+        $declarationRepository = $this->getDoctrine()
+            ->getRepository(DeclarationIncinerateur::class);
+        $declarationDioxineRepository = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class);
         $dioxines = [];
         $listOfMonths = $this->createListOfMonths();
         $output = [
@@ -107,11 +118,13 @@ class DashboardController extends AerisController
             }
         }
 
-        foreach ($incinerateur->getDeclarationsDioxine() as $declaration) {
+        $declarationDioxines = $declarationDioxineRepository->findValidatedDeclarations($incinerateur);
 
-           $declarationsDioxines = $declaration->getMesuresDioxine();
-           if ($declarationsDioxines) {
-            foreach ($declarationsDioxines as $currDeclarationDioxines) {
+        foreach ($declarationDioxines as $declaration) {
+
+           $mesuresDioxines = $declaration->getMesuresDioxine();
+           if ($mesuresDioxines) {
+            foreach ($mesuresDioxines as $currDeclarationDioxines) {
                 $ligne = $currDeclarationDioxines->getLigne();
                 if ($ligne != null) {
                     $result = [
@@ -138,7 +151,12 @@ class DashboardController extends AerisController
             'ligneId' => $ligneId,
             'dioxineGraphData' => $output,
             'dioxines' => $dioxines,
-            'lineReport' => new LineReport($incinerateur, $ligneId),
+            'lineReport' => new LineReport(
+                $incinerateur,
+                $ligneId,
+                $declarationRepository,
+                $declarationDioxineRepository
+            ),
             'expectedGraphs' => LineReport::graphMapping
         ];
     }

@@ -17,6 +17,9 @@ use Doctrine\Common\Collections\Collection;
  */
 class DeclarationDioxine
 {
+    const STATUS_DRAFT = 'draft';
+    const STATUS_VALIDATED = 'validated';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -47,8 +50,16 @@ class DeclarationDioxine
      */
     private $mesuresDioxine;
 
+    /**
+     * @ORM\Column(type="string", length=32, nullable=true)
+     *
+     * @var string
+     */
+    private $status;
+
     public function __construct(){
         $this->mesuresDioxine = new ArrayCollection();
+        $this->status = self::STATUS_DRAFT;
     }
 
     /**
@@ -153,6 +164,26 @@ class DeclarationDioxine
     {
         $this->mesuresDioxine[] = $mesureDioxine;
         $mesureDioxine->setDeclarationDioxine($this);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
         return $this;
     }
 }

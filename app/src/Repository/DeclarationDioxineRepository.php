@@ -18,6 +18,20 @@ class DeclarationDioxineRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, DeclarationDioxine::class);
     }
+
+    public function findValidatedDeclarations($incinerateur)
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.incinerateur = :incinerateur')
+            ->andWhere('d.status = :status')
+            ->setParameter('incinerateur', $incinerateur)
+            ->setParameter('status', DeclarationDioxine::STATUS_VALIDATED)
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findBySomething($value)
     {
