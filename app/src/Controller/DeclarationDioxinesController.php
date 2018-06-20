@@ -151,6 +151,11 @@ class DeclarationDioxinesController extends AerisController
             );
         }
         
+        $declaration->setStatus(DeclarationDioxine::STATUS_VALIDATED);    
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($declaration);
+        $entityManager->flush();
+
         /*
         $mailFactory = $this->get('app.mailfactory');
         $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());

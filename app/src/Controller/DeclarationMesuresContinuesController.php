@@ -155,7 +155,11 @@ class DeclarationMesuresContinuesController extends AerisController
             );
         }
         
-        /*
+        $declaration->setStatus(DeclarationIncinerateur::STATUS_VALIDATED);    
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($declaration);
+        $entityManager->flush();
+    
         if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
             $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
         }
@@ -169,7 +173,6 @@ class DeclarationMesuresContinuesController extends AerisController
         $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
         $mailService = $this->get('app.mailservice');
         $mailService->send($message);
-        */
 
         return $this->render("mesures-continues/validate.html.twig", [
             'incinerateur' =>  $mainIncinerateur,
