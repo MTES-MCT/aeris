@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Incinerateur;
 use App\Entity\Declaration\DeclarationDechets;
 use App\Entity\Declaration\DeclarationIncinerateur;
+use App\Entity\Declaration\DeclarationDioxine;
 use App\Entity\Declaration\MesureDioxine;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Aeris\Component\Report\Dashboard\GeneralReport;
@@ -94,7 +95,9 @@ class DashboardController extends AerisController
     ){
         $declarationRepository = $this->getDoctrine()
             ->getRepository(DeclarationIncinerateur::class);
-
+        $declarationDioxineRepository = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class);
+        dump($declarationDioxineRepository);
         $dioxines = [];
         $listOfMonths = $this->createListOfMonths();
         $output = [
@@ -150,7 +153,8 @@ class DashboardController extends AerisController
             'lineReport' => new LineReport(
                 $incinerateur,
                 $ligneId,
-                $declarationRepository
+                $declarationRepository,
+                $declarationDioxineRepository
             ),
             'expectedGraphs' => LineReport::graphMapping
         ];
