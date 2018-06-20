@@ -1,6 +1,6 @@
 {% macro displayZeroIfNull(v) %}
     {% if v != null %}
-      {{ v }}
+      {{ v |number_format(3,'.', '') }}
     {% else%}
       0
     {% endif %}
