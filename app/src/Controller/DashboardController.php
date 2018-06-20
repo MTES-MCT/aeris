@@ -97,7 +97,6 @@ class DashboardController extends AerisController
             ->getRepository(DeclarationIncinerateur::class);
         $declarationDioxineRepository = $this->getDoctrine()
             ->getRepository(DeclarationDioxine::class);
-        dump($declarationDioxineRepository);
         $dioxines = [];
         $listOfMonths = $this->createListOfMonths();
         $output = [
@@ -119,11 +118,13 @@ class DashboardController extends AerisController
             }
         }
 
-        foreach ($incinerateur->getDeclarationsDioxine() as $declaration) {
+        $declarationDioxines = $declarationDioxineRepository->findValidatedDeclarations($incinerateur);
 
-           $declarationsDioxines = $declaration->getMesuresDioxine();
-           if ($declarationsDioxines) {
-            foreach ($declarationsDioxines as $currDeclarationDioxines) {
+        foreach ($declarationDioxines as $declaration) {
+
+           $mesuresDioxines = $declaration->getMesuresDioxine();
+           if ($mesuresDioxines) {
+            foreach ($mesuresDioxines as $currDeclarationDioxines) {
                 $ligne = $currDeclarationDioxines->getLigne();
                 if ($ligne != null) {
                     $result = [
