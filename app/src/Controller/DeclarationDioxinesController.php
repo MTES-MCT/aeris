@@ -19,64 +19,19 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Aeris\Component\Report\AppliableRules;
 use Aeris\Component\Report\MonthlyReport;
 
-class DeclarationMesuresContinuesController extends AerisController
+class DeclarationDioxinesController extends AerisController
 {
-    public function declare(Request $request)
+    public function declarer()
     {
         if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
-        $declarationIncinerateur = $this->createDeclarationMesuresContinues();
+        $request = Request::createFromGlobals();
+        // This method (especially, others are no better) is terrible and should be split ASAP
         $mainIncinerateur = $this->getMainIncinerateur();
-
+        $declarationDioxines = $this->createDeclarationDioxine();
         $form = $this->createDeclarationForm(
-            $declarationIncinerateur,
-            $request
-        );       
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $declaration = $form->getData();
-
-            $declaration->setIncinerateur($mainIncinerateur);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($declaration);
-            $entityManager->flush();
-
-            $response = new RedirectResponse($this->generateUrl('route_review_declaration_mesures_continues', [
-                'declarationId' => $declaration->getId()
-            ]));
-            $response->prepare($request);
-
-            return $response->send();
-        }
-
-        return $this->render("mesures-continues/declaration.html.twig", [
-            'mainIncinerateur' => $mainIncinerateur,
-            'form' => $form->createView()
-        ]);
-    }
-
-
-    public function modify(Request $request){
-        $declarationId = $request->get('declarationId');
-
-        if(!$this->get('app.security.helper')->isOwner()){
-            return $this->redirect($this->generateUrl("route_index"));
-        }
-        $declarationIncinerateur = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
-            ->find($declarationId);
-
-        if (!$declarationIncinerateur) {
-            throw $this->createNotFoundException(
-                "Pas de declaration pour l' id ".$declarationId
-            );
-        }
-
-        $mainIncinerateur = $this->getMainIncinerateur();
-
-        $form = $this->createDeclarationForm(
-            $declarationIncinerateur,
+            $declarationDioxines,
             $request
         );
 
@@ -88,7 +43,7 @@ class DeclarationMesuresContinuesController extends AerisController
             $entityManager->persist($declaration);
             $entityManager->flush();
 
-            $response = new RedirectResponse($this->generateUrl('route_review_declaration_mesures_continues', [
+            $response = new RedirectResponse($this->generateUrl('route_review_declaration_dioxines', [
                 'declarationId' => $declaration->getId()
             ]));
             $response->prepare($request);
@@ -96,21 +51,60 @@ class DeclarationMesuresContinuesController extends AerisController
             return $response->send();
         }
 
-        return $this->render("mesures-continues/declaration.html.twig", [
+        return $this->render("dioxines/declaration.html.twig", [
             'mainIncinerateur' => $mainIncinerateur,
             'form' => $form->createView()
         ]);
     }
 
-    private function createDeclarationForm(
-        DeclarationIncinerateur $declarationIncinerateur,
-        Request $request
-    ){
+    public function modify(Request $request){
+        $declarationId = $request->get('declarationId');
+
+        if(!$this->get('app.security.helper')->isOwner()){
+            return $this->redirect($this->generateUrl("route_index"));
+        }
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationDioxines = $this->getDoctrine()
+            ->getRepository(DeclarationDioxine::class)
+            ->find($declarationId);
+
+        if (!$declarationDioxines) {
+            throw $this->createNotFoundException(
+                "Pas de declaration pour l' id ".$declarationId
+            );
+        }
+        $form = $this->createDeclarationForm(
+            $declarationDioxines,
+            $request
+        );
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $declaration = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($declaration);
+            $entityManager->flush();
+
+            $response = new RedirectResponse($this->generateUrl('route_review_declaration_dioxines', [
+                'declarationId' => $declaration->getId()
+            ]));
+            $response->prepare($request);
+
+            return $response->send();
+        }
+
+        return $this->render("dioxines/declaration.html.twig", [
+            'mainIncinerateur' => $mainIncinerateur,
+            'form' => $form->createView()
+        ]);
+    }
+
+    private function createDeclarationForm($declaration, $request){
         $formFactory = $this->get('form.factory');
 
         $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(
-            DeclarationIncinerateurType::class,
-            $declarationIncinerateur
+            DeclarationDioxineType::class,
+            $declaration
         );
         $form = $formBuilderDeclarationIncinerateur->getForm();
 
@@ -122,9 +116,10 @@ class DeclarationMesuresContinuesController extends AerisController
         if(!$this->get('app.security.helper')->isOwner()){
             return $this->redirect($this->generateUrl("route_index"));
         }
+
         $mainIncinerateur = $this->getMainIncinerateur();
         $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
+            ->getRepository(DeclarationDioxine::class)
             ->find($declarationId);
 
         if (!$declaration) {
@@ -133,11 +128,12 @@ class DeclarationMesuresContinuesController extends AerisController
             );
         }
 
-        return $this->render("mesures-continues/review.html.twig", [
+        return $this->render("dioxines/review.html.twig", [
             'incinerateur' =>  $mainIncinerateur,
             'declaration' =>  $declaration,
         ]);
     }
+
 
 
     public function validate($declarationId){
@@ -146,7 +142,7 @@ class DeclarationMesuresContinuesController extends AerisController
         }
         $mainIncinerateur = $this->getMainIncinerateur();
         $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
+            ->getRepository(DeclarationDioxine::class)
             ->find($declarationId);
 
         if (!$declaration) {
@@ -155,49 +151,40 @@ class DeclarationMesuresContinuesController extends AerisController
             );
         }
         
-        $declaration->setStatus(DeclarationIncinerateur::STATUS_VALIDATED);    
+        $declaration->setStatus(DeclarationDioxine::STATUS_VALIDATED);    
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($declaration);
         $entityManager->flush();
-    
-        if ($declaration->getMethodeDeclaration() === DeclarationIncinerateur::METHOD_DREAL) {
-            $this->get('app.services.declaration_importer')->loadDeclaration($declaration);
-        }
 
-        $this->addFlash(
-            'declaration',
-            $declaration->getId()
-        );
-
+        /*
         $mailFactory = $this->get('app.mailfactory');
         $message = $mailFactory->createNewDeclarationInspecteurMessage($declaration->getId());
         $mailService = $this->get('app.mailservice');
         $mailService->send($message);
+        */
 
-        return $this->render("mesures-continues/validate.html.twig", [
+        return $this->render("dioxines/validate.html.twig", [
             'incinerateur' =>  $mainIncinerateur,
             'declaration' =>  $declaration,
         ]);
     }
 
-    private function createDeclarationMesuresContinues(){
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationIncinerateur = new DeclarationIncinerateur();
-
-        foreach($mainIncinerateur->getLignes() as $currLine)
-        {
-            $fonctionnementLigne = new DeclarationFonctionnementLigne();
-            $fonctionnementLigne->setLigne($currLine);
-            $declarationIncinerateur->addDeclarationFonctionnementLigne($fonctionnementLigne);
-        }
-
-        return $declarationIncinerateur;
-    }
-
     public function compteRendu($declarationId)
     {
+        return $this->generateCRIfAllowed(
+            $declarationId,
+            DeclarationDioxine::class,
+            "dioxines/compte-rendu-declaration-dioxine.html.twig"
+        );
+    }
+
+    private function generateCRIfAllowed(
+        $declarationId,
+        $type,
+        $template)
+    {
         $declaration = $this->getDoctrine()
-            ->getRepository(DeclarationIncinerateur::class)
+            ->getRepository($type)
             ->find($declarationId);
 
         if (!$declaration) {
@@ -209,19 +196,21 @@ class DeclarationMesuresContinuesController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        $rules = new AppliableRules();
+        return $this->render($template, [
+            'declaration' => $declaration
+        ]);
+    }
 
-        $reports = [];
-        foreach($declaration->getDeclarationsFonctionnementLigne() as $declarationLigne) {
-            $report = new MonthlyReport($declaration->getDeclarationMonth(), $rules);
-            $report->fillWithMeasures($declarationLigne->getMesures());
-        
-            $reports[$declarationLigne->getLigne()->getNumero()] = $report;
+    private function createDeclarationDioxine(){
+        $mainIncinerateur = $this->getMainIncinerateur();
+        $declarationDioxines = new DeclarationDioxine();
+
+        foreach($mainIncinerateur->getLignes() as $currLine) {
+            $mesureDioxine = new MesureDioxine();
+            $mesureDioxine->setLigne($currLine);
+            $declarationDioxines->addMesuresDioxines($mesureDioxine);
         }
 
-        return $this->render("mesures-continues/compte-rendu.html.twig", [
-            'declaration' => $declaration,
-            'reports' => $reports,
-        ]);
+        return $declarationDioxines;
     }
 } 

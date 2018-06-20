@@ -1,0 +1,49 @@
+<h2 class="title is-2">Rejets dioxines</h2>
+{% if not declaration.mesuresDioxine is empty %}
+  {% for mesureDioxine in declaration.mesuresDioxine %}
+      {% if mesureDioxine.ligne %}
+      <h3 class="title is-3">Ligne n° {{ mesureDioxine.ligne.numero }}</h3>
+      {% else %}
+      <h3 class="title is-3">ligne</h3>
+      {% endif %}
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Nom du laboratoire</td>
+            <td>{{ mesureDioxine.nomLaboratoire }}</td>
+          </tr>
+          <tr>
+            <td>Date de début des mesures</td>
+            <td>{{ mesureDioxine.dateDebut|date("d/m/Y") }}</td>
+          </tr>
+          <tr>
+            <td>Date de fin des mesures</td>
+            <td>{{ mesureDioxine.dateFin|date("d/m/Y") }}</td>
+          </tr>
+          <tr>
+            <td>Numéro du cartouche</td>
+            <td>{{ mesureDioxine.numeroCartouche }}</td>
+          </tr>
+          <tr>
+            <td>Disponibilité de la ligne sur la période (%) </td>
+            <td>{{ mesureDioxine.disponibiliteLigne }}</td>
+          </tr>
+          <tr>
+            <td>Disponibilité de l'analyseur sur la période (%) </td>
+            <td>{{ mesureDioxine.disponibiliteAnalyseur }}</td>
+          </tr>
+          <tr>
+            <td>Concentration des PCDD/PCDF<br/>
+            (ng NATO I-TEQ/Nm<sup>3</sup> à O<sub>2réf</sub> sur gaz sec)</td>
+            <td style="background-color:#C7DBD0">{{ mesureDioxine.concentration | number_format(5) }}</td>
+          </tr>
+          <tr>
+            <td>Remarques</td>
+            <td>{{ mesureDioxine.commentaire }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+  {% endfor %}
+{% endif %}

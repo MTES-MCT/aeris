@@ -30,9 +30,9 @@ body{
 {% block body %}
   <section class="section">
     <div class="container" >   
-    {% include 'common/declaration-mesure-continues-timeline.html.twig' with {step:2} %}
+    {% include 'common/declaration-timeline.html.twig' with {step:2} %}
 
-    {% include 'common/cr-declaration-mesure-continues.html.twig' with {declaration: declaration } %}
+    {% include 'mesures-continues/_cr-declaration-mesure-continues.html.twig' with {declaration: declaration } %}
 
       <a class="button is-warning" href="{{ path('route_edit_declaration_mesures_continues', {declarationId: declaration.id }) }}">Modifier cette déclaration</a>
       <a class="button is-primary" href="{{ path('route_validate_declaration_mesures_continues', {declarationId: declaration.id }) }}">Terminer et envoyer cette déclaration à l'inspecteur</a>

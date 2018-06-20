@@ -55,68 +55,6 @@ class OwnerController extends AerisController
             return $this->redirect($this->generateUrl("route_index"));
         }
 
-        return $this->render("owner/declaration.html.twig", []);
-    }
-
-    public function declarationDioxines()
-    {
-        if(!$this->get('app.security.helper')->isOwner()){
-            return $this->redirect($this->generateUrl("route_index"));
-        }
-        // This method (especially, others are no better) is terrible and should be split ASAP
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationIncinerateur = $this->createDeclarationDioxine();
-
-        $formFactory = $this->get('form.factory');
-
-        $formBuilderDeclarationIncinerateur = $formFactory->createBuilder(
-            DeclarationDioxineType::class,
-            $declarationIncinerateur
-        );
-        $form = $formBuilderDeclarationIncinerateur->getForm();
-
-        $request = Request::createFromGlobals();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $declaration = $form->getData();
-
-            $declaration->setIncinerateur($mainIncinerateur);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($declaration);
-            $entityManager->flush();
-
-            $response = new RedirectResponse($this->generateUrl('route_history', [
-                'incinerateurId' => $mainIncinerateur->getId()
-            ]));
-            $response->prepare($request);
-
-            $this->addFlash(
-                'declaration',
-                $declaration->getId()
-            );            
-
-            return $response->send();
-        }
-
-        return $this->render("owner/declaration-dioxines.html.twig", [
-            'mainIncinerateur' => $mainIncinerateur,
-            'form' => $form->createView()
-        ]);
-    }
-
-    private function createDeclarationDioxine(){
-        $mainIncinerateur = $this->getMainIncinerateur();
-        $declarationDioxines = new DeclarationDioxine();
-
-        foreach($mainIncinerateur->getLignes() as $currLine)
-        {
-            $mesureDioxine = new MesureDioxine();
-            $mesureDioxine->setLigne($currLine);
-            $declarationDioxines->addMesuresDioxines($mesureDioxine);
-        }
-
-        return $declarationDioxines;
+        return $this->render("owner/choix-type-declaration.html.twig", []);
     }
 } 

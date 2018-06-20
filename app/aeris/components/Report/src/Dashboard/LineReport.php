@@ -8,6 +8,7 @@ use Aeris\Component\Report\Table\TableCompteursAnnuel;
 use Aeris\Component\Report\Table\TableDioxinesCompteurs60;
 use App\Entity\Incinerateur;
 use App\Repository\DeclarationIncinerateurRepository;
+use App\Repository\DeclarationDioxineRepository;
 
 
 class LineReport {
@@ -30,7 +31,8 @@ class LineReport {
     public function __construct(
         Incinerateur $incinerateur,
         $ligneId,
-        DeclarationIncinerateurRepository $declarationRepository
+        DeclarationIncinerateurRepository $declarationRepository,
+        DeclarationDioxineRepository $declarationDioxineRepository
     ) {
         $this->declarationRepository = $declarationRepository;
         $this->graphs = [];
@@ -42,7 +44,11 @@ class LineReport {
             $ligneId,
             $this->declarationRepository
         );
-        $this->tableDioxinesCompteurs60 = new TableDioxinesCompteurs60($incinerateur, $ligneId);
+        $this->tableDioxinesCompteurs60 = new TableDioxinesCompteurs60(
+            $incinerateur,
+            $ligneId,
+            $declarationDioxineRepository
+        );
     }
 
     private function buildGraphs($incinerateur){
