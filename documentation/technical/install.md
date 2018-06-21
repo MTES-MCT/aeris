@@ -14,7 +14,7 @@ Then, you can proceed to the next steps:
 git clone git@github.com:MTES-MCT/aeris.git
 ```
 
-## Add a local DNS entry
+## Add a local DNS entry
 
 You need to add a `aeris.local` mapping to your /etc/hosts file:
 
@@ -81,6 +81,6 @@ When you run the migrations, one of them creates 2 default users:
  - inspecteur-demo / aeris
  - incinerateur-demo / aeris
 
-(if you need more users, have a look inside the [users documentation](./users.md))
+(if you need more users, have a look inside the [users documentation](./creating-users.md))
 
 You can now try to login in with those users in the application. Good job, you are done !
