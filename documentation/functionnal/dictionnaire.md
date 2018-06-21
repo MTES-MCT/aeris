@@ -1,4 +1,6 @@
-Dictionnaire
+# Dictionnaire
+
+En démarrant ce projet, j'ai été un peu perdu avec les nombreux acronymes; voici de quoi s'y retrouver.
 
  - [AASQA](https://fr.wikipedia.org/wiki/Association_agr%C3%A9%C3%A9e_de_surveillance_de_la_qualit%C3%A9_de_l%27air): Association Agréé de Surveillance de la Qualité de l'Air
  - AMS: Système de surveillance continu des émissions (Automatic Measuring System)

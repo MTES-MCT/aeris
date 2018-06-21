@@ -1,23 +1,50 @@
-# Installing Aeris
+# Installation
 
-There are a lot of steps, but it's not that complicated: they should work right away. You need to :
+In order to run Aeris, you need to have installed:
 
- - Run the code inside containers
- - Fetch the PHP and JS dependencies
- - Build and deploy the CSS/JS files
- - Import the database schema (the PostgreSQL tables) and a few sample data
+ - [docker](https://docs.docker.com/install/)
+ - [composer](https://getcomposer.org/)
+ - [yarn](https://yarnpkg.com/en/)
 
-## Running the code inside containers
+Then, you can proceed to the next steps:
 
- - clone this git repository
+## Clone this git repository
+
 ```
 git clone git@github.com:MTES-MCT/aeris.git
 ```
- - add a `aeris.local` mapping to your /etc/hosts file
+
+## Add a local DNS entry
+
+You need to add a `aeris.local` mapping to your /etc/hosts file:
+
 ```
 127.0.0.1 aeris.local  # will map http://aeris.local to http://127.0.0.1
 ```
- - install `docker` and `docker-compose`, then launch the containers with `docker-compose up`:
+
+## Install dependencies
+
+**From the `app` directory** we need to run `composer` and `yarn`:
+
+    $ cd app
+    $ composer install
+    $ yarn install
+
+`composer` is PHP dependency manager, `yarn` is a JS dependency manager. They will fetch the external libraries we need in order to run Aeris. The php library will be written in the app/vendor directory, and the js libraries will land in app/node_modules.
+
+## Building assets
+
+Still **from the `app` directory**, **run `yarn`** again:
+
+    $ yarn run encore dev
+
+Yarn is also the tool we use to build assets. Yarn will compile the javascript and CSS developpement files that you can find in app/assets and put them in the `app/public/` directory, so that they can be accessed from the web server.
+
+At this point, the homepage should run without error, with CSS styling, but you can't get inside the database... since the database is empty.
+
+## Launching the containers
+
+**Launch the containers** with `docker-compose up`. For more details regarding the containers, have a look at [the containers documentation](./containers.md)
 
 ```bash
 $ docker-compose up
@@ -35,63 +62,11 @@ db_1     | LOG:  autovacuum launcher started
 
 ```
 
-The first step is done : you can visit your Symfony application on the following URL: `http://aeris.local`.
-
-But there may be some errors on the page since we don't have the dependencies, there is no JS/CSS and the database is empty !
-
-## Understanding the containers
-
-In docker-compose.yml, you'll find the following containers:
-
-* `database`: This is the PostgreSQL database container,
-* `php`: This is the PHP-FPM container including the application volume mounted on,
-* `nginx`: This is the Nginx webserver container in which php volumes are mounted too,
-
-You can rebuild all Docker images by running:
-
-```bash
-$ docker-compose build
-```
-and you can watch the running containers using
-
-```bash
-$ docker-compose ps
-```
-
-## Installing dependencies
-
-Now, **from the `app` directory** we need to run `composer` and `npm`:
-
-    $ composer install
-    $ npm install
-
-`composer` is PHP dependency manager, `npm` is JS' dependency manager. They will fetch the external libraries we need in order to run Aeris. The php library will be written in the app/vendor directory, and the js libraries will land in app/node_module.
-
-At this point, the homepage should run without error, but without CSS styling.
-
-## Building assets
-
-Again, **from the `app` directory**, run `yarn`:
-
-    $ yarn run encore dev
-
-Yarn is the tool we use to build assets. Yarn will compile the javascript and CSS developpement files that you can find in app/assets and put them in the `app/public/` directory, so that they can be accessed from the web server.
-
-At this point, the homepage should run without error, with CSS styling, but you can't get inside the database... since the database is empty.
-
 ## Importing the database
 
-Ok, this time we need to run a command inside the php container. Find your php container using `docker ps`:
+Ok, this time we need to run a command inside the php container. 
 
-    $ docker ps
-    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                         NAMES
-    0e53d067a08c        aeris_nginx         "nginx"                  17 hours ago        Up 12 minutes       0.0.0.0:80->80/tcp, 443/tcp   aeris_nginx_1
-    ca190317e64d        aeris_php           "php-fpm7 -F"            17 hours ago        Up 12 minutes       0.0.0.0:9000->9000/tcp        aeris_php_1
-    fd74a0aab7b7        postgres:9.6        "docker-entrypoint.s…"   40 hours ago        Up 12 minutes       0.0.0.0:5432->5432/tcp        aeris_db_1
-
-Our php container, aeris_php, has an id which is ca190317e64d. We need to get inside the container using:
-
-$ docker exec -it ca190317e64d /bin/sh
+    $ docker exec -it $(docker ps -aqf "name=aeris_php") /bin/sh
 
 The prompt will change: you'll be inside the container, not on your local machine. For this prompt, you can execute the SQL migrations:
 
@@ -106,6 +81,6 @@ When you run the migrations, one of them creates 2 default users:
  - inspecteur-demo / aeris
  - incinerateur-demo / aeris
 
-(if you need more users, have a look inside the [users documentation](./users.md))
+(if you need more users, have a look inside the [users documentation](./creating-users.md))
 
 You can now try to login in with those users in the application. Good job, you are done !

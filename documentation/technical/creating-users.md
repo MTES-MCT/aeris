@@ -1,9 +1,8 @@
+# Creating users and incinerateurs
 
-## Bonus : Creating users and incinerateurs
+At times, you may need more users than what running the migrations did.
 
-This is an optionnal step, if you need more users than what running the migrations did.
-
-### Creating an inspecteur
+## Creating an inspecteur
 
 In order to create an inspecteur, you need to do 2 things:
 
@@ -24,7 +23,7 @@ Here is an example below:
 
 You should be now be able to login with this user and password.
 
-### Creating an incinerateur
+## Creating an incinerateur
 
 It starts in the same way as before: first We create a user, and we add him the role ROLE_PROPRIETAIRE.
 

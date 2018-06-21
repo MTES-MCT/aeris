@@ -48,5 +48,5 @@ The idea is as follow:
 
  - /var/www/aeris-[env-name] is a symlink to a release, stored in /var/www/[env-name]/releases
  - each release has a timestamp, and contains the complete project
- - shared information (like environment variables), are stored in /var/www/[env]/shared. During deployment, they are copied in the release directory 
+ - shared information (like environment variables), are stored in the .env file in /var/www/[env]/shared. During deployment, they are copied in the release directory. The production .env file is NOT included in this repository, since it contains database information. Instead, a sample .env.dist file is present, and shows the expected information that should be provided.
 
