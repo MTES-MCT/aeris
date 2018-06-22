@@ -1,21 +1,33 @@
 {% extends "common/base.html.twig" %}
 {% block body%}
 
-  <div class="hero">
-    <div class="hero__container cheminee">
-      <h1 class="hero__white-background">Aeris</h1>
-      <p class="hero__white-background">Suivre les rejets dans l'air des ICPE</p>
-    </div>
-  </div>
-
-  <section class="section-dark" id="aeris-quoi">
+  <section class="section-grey" id="aeris-quoi">
     <div class="container">
-      <h2 class="section__title">Aeris, c'est quoi ?</h2>
+      <h2 class="section__title">Aeris</h2>
+      <p class="section__subtitle">Les déclarations de rejet dans l'air et de dioxines sont désormais simples et en ligne</p>
+
       <div class="row">
-        <p class="column">Aeris vise à <strong>faciliter la déclaration</strong> et <strong>harmoniser le suivi</strong> des rejets dans l'air des installations classées pour la protection de l'environnement.</p>
-        <p class="column">Industriels, inspecteurs, vous souhaitez participer à l'élaboration du service ? Laissez-nous vos coordonnées pour rester informé !</p>
+        <div class="column">
+          <p>Aeris est un service dédié aux exploitant et inspecteurs d'incinérateurs français. Il est déjà utilisé par les incinérateurs du Grand-Est.
+          </p>
+          <p>
+            <b>Vous aussi, commencez à utiliser Aeris !</b>
+          </p>
+          <p>
+            <div style="text-align:center">
+              <a href="mailto:jacob.carbonnel@beta.gouv.fr" class="button large" style="margin:0 auto">Demander un accès</a>
+            </div>
+          </p>
+        </div>
+
+
+        </p>
+        <p class="column">
+          <a data-fancybox="gallery" href="{{ asset('build/static/images/aeris-graphs.png')}}">      <img src="{{ asset('build/static/images/aeris-graphs-small.png')}}" /></a>
+        </p>
       </div>
     </div>
+  
   </section>
 
   <section id="aeris-color" style="background-color: #e8b00b">
@@ -25,7 +37,7 @@
         Effectuez en ligne vos déclarations de rejets dans l'air et vos émissions de dioxines.
       </p>
       <p style="text-align:center">
-                <a data-fancybox="gallery" href="{{ asset('build/static/images/declaration-dioxine.png')}}">      <img src="{{ asset('build/static/images/declaration-dioxine-small.png')}}" /></a>
+                <a data-fancybox="gallery" href="{{ asset('build/static/images/aeris-declaration.png')}}">      <img src="{{ asset('build/static/images/aeris-declaration-small.png')}}" /></a>
       </p>
     </div>
   </section>
@@ -62,29 +74,4 @@
 <!--End mc_embed_signup-->
 
   </section>
-
-      
-<footer class="footer">
-  <div class="container">
-    
-    {#
-    <div class="footer__logo">
-      <img src="images/etalab.svg" alt="Logo Etalab">
-      <ul class="footer__social">
-        <li><a href="https://twitter.com/etalab" title="Twitter"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg></a></li>
-        <li><a href="https://github.com/etalab" title="Github"><svg class="icon icon-github"><use xlink:href="#icon-github"></use></svg></a></li>
-        <li><a href="https://www.facebook.com/etalab" title="Facebook"><svg class="icon icon-fb"><use xlink:href="#icon-fb"></use></svg></a></li>
-        <li><a href="mailto:info@data.gouv.fr" title="Nous écrire un mail"><svg class="icon icon-mail"><use xlink:href="#icon-mail"></use></svg></a></li>
-      </ul>
-    </div>
-    <ul class="footer__links">
-      <li><h2>template.data.gouv.fr</h2></li>
-      <li><a href="https://www.data.gouv.fr/reference">Données de référence</a></li>
-      <li><a href="https://www.data.gouv.fr/terms">Conditions générales d'utilisation</a></li>
-      <li><a href="https://www.data.gouv.fr/api">API</a></li>
-    </ul>
-  <ul class="footer__links"></ul>
-        #}
-</div>
-</footer>
 {% endblock%}
