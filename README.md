@@ -24,8 +24,6 @@ Here are all the command you'll need to run Aeris right now:
 ```
 # Download the code
 git clone git@github.com:MTES-MCT/aeris.git
-# Add a DNS entry
-sudo echo "127.0.0.1 aeris.local" > /etc/hosts
 # Fetch the PHP and JS dependencies
 cd app
 composer install
@@ -40,7 +38,7 @@ docker exec -it $(docker ps -aqf "name=aeris_php") /bin/sh
 /var/www/symfony # bin/console doctrine:migrations:migrate --no-interaction
 ```
 
-At the end, you should be able to access aeris at `http://aeris.local`. Two default users are created, you an use them to log inside the application:
+At the end, you should be able to access aeris at `http://127.0.0.1`. Two default users are created, you an use them to log inside the application:
 
  - inspecteur-demo / aeris
  - incinerateur-demo / aeris

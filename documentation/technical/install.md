@@ -14,14 +14,6 @@ Then, you can proceed to the next steps:
 git clone git@github.com:MTES-MCT/aeris.git
 ```
 
-## Add a local DNS entry
-
-You need to add a `aeris.local` mapping to your /etc/hosts file:
-
-```
-127.0.0.1 aeris.local  # will map http://aeris.local to http://127.0.0.1
-```
-
 ## Install dependencies
 
 **From the `app` directory** we need to run `composer` and `yarn`:
@@ -74,13 +66,15 @@ The prompt will change: you'll be inside the container, not on your local machin
 /var/www/symfony # bin/console doctrine:migrations:migrate --no-interaction
 ```
 
-This will execute all the migrations inside app/src/Migrations: they create the tables, and set the appropriate indices.
+This will execute all the migrations inside app/src/Migrations: they create the tables, and set the necessary indices.
 
-When you run the migrations, one of them creates 2 default users:
+When you run the migrations, one of them creates 2 default users with the following login / password:
 
  - inspecteur-demo / aeris
  - incinerateur-demo / aeris
 
 (if you need more users, have a look inside the [users documentation](./creating-users.md))
 
-You can now try to login in with those users in the application. Good job, you are done !
+You can now open the application (its located at `http://127.0.0.1`) and log in with those credentials in the application.
+
+Good job, you are done !

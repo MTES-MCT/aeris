@@ -5,6 +5,7 @@ MAINTAINER Clement Camin <clement@keiruaprod.fr>
 RUN apk add --update nginx
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
+RUN rm /etc/nginx/conf.d/default.conf
 ADD nginx.conf /etc/nginx/
 ADD symfony.conf /etc/nginx/conf.d/
 
