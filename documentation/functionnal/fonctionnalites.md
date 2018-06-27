@@ -1,6 +1,12 @@
 # Fonctionnalites
 
-Ce qu'on cherche à avoir pour le MVP
+Aeris est composé de 3 parties :
+
+ - une zone publique, accessible à tous (la page d'accueil)
+ - un backoffice pour les exploitants d'incinérateurs
+ - un backoffice pour les inspecteurs
+
+L'accès aux backoffice se fait à l'aide d'un couple identifiant/mot de passe, fournis aux inspecteurs et exploitants qui ont participé à l'expérience, et pour lesquels nous avions créé les comptes et donnée nécessaires en base de donnée (utilisateurs, incinérateurs, etc.).
 
 ## Proprietaire
 
